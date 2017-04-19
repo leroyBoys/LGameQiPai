@@ -11,6 +11,18 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../LCommPack/LBaseTool" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../../LCommPack/LBaseTool/src/main/java" />
+          <root url="file://$MODULE_DIR$/../../LCommPack/LBaseTool/src/test/java" />
+        </SOURCES>
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-access:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.3" level="project" />
@@ -46,17 +58,5 @@
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP-java7:2.4.11" level="project" />
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.mina:mina-core:2.0.16" level="project" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../LCommPack/LBaseTool" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/../../LCommPack/LBaseTool/src/main/java" />
-          <root url="file://$MODULE_DIR$/../../LCommPack/LBaseTool/src/test/java" />
-        </SOURCES>
-      </library>
-    </orderEntry>
   </component>
 </module>
