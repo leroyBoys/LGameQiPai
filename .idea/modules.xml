@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/LCommModule/LCommModule.iml" filepath="$PROJECT_DIR$/LCommModule/LCommModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LGame/LGame.iml" filepath="$PROJECT_DIR$/LGame/LGame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LGameQiPai.iml" filepath="$PROJECT_DIR$/LGameQiPai.iml" />
+    </modules>
+  </component>
+</project>
