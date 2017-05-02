@@ -6,7 +6,8 @@
 package com.module.config;
 
 
-import com.lgame.util.load.config.BaseXml;
+import com.config.annotation.Id;
+import com.config.annotation.Resource;
 import com.module.ConditionData;
 import com.module.ItemData;
 
@@ -16,8 +17,10 @@ import java.util.List;
  *
  * @author leroy_boy
  */
-public class StaticAchievement implements BaseXml {
+@Resource
+public class StaticAchievement {
 
+    @Id
     private int id;
     private String name;
     private String icon_id;
@@ -84,9 +87,4 @@ public class StaticAchievement implements BaseXml {
         this.rewardItems = rewardItems;
     }
 
-
-    @Override
-    public boolean isTheSame(Object obj) {
-        return false;
-    }
 }

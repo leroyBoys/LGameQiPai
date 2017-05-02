@@ -5,7 +5,7 @@
  */
 package com.module.config;
 
-import com.lgame.util.load.config.BaseXml;
+import com.config.annotation.Resource;
 import com.module.EffectData;
 import com.module.Quality;
 import com.module.Type;
@@ -17,7 +17,8 @@ import java.util.List;
  *
  * @author leroy_boy
  */
-public class StaticItem implements BaseXml {
+@Resource
+public class StaticItem {
 
     private int id;
     private String name;
@@ -148,12 +149,6 @@ public class StaticItem implements BaseXml {
 
     public void setQuality(Quality quality) {
         this.quality = quality;
-    }
-
-    @Override
-    public boolean isTheSame(Object obj) {
-        StaticItem item = (StaticItem) obj;
-        return item.getId() == this.getId() && item.getItemDesc().equals(this.getItemDesc());
     }
 
 }

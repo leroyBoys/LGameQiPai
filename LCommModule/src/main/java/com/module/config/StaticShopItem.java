@@ -5,7 +5,8 @@
  */
 package com.module.config;
 
-import com.lgame.util.load.config.BaseXml;
+import com.config.annotation.Id;
+import com.config.annotation.Resource;
 import com.module.Type;
 
 import java.util.ArrayList;
@@ -16,8 +17,10 @@ import java.util.List;
  *
  * @author leroy
  */
-public class StaticShopItem implements BaseXml {
+@Resource
+public class StaticShopItem {
 
+    @Id
     private int id;
     private int itemId;
     private String name;
@@ -185,11 +188,6 @@ public class StaticShopItem implements BaseXml {
                 return true;
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean isTheSame(Object obj) {
         return false;
     }
 

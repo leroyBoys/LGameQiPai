@@ -5,7 +5,8 @@
  */
 package com.module.config;
 
-import com.lgame.util.load.config.BaseXml;
+import com.config.annotation.Id;
+import com.config.annotation.Resource;
 import com.module.QuestItem;
 import com.module.QuestionType;
 
@@ -16,8 +17,10 @@ import java.util.List;
  *
  * @author leroy
  */
-public class StaticQuestion implements BaseXml {
+@Resource
+public class StaticQuestion {
 
+    @Id
     private int id;
     private QuestionType questionType;
     private String questDesc;//题目描述
@@ -81,11 +84,6 @@ public class StaticQuestion implements BaseXml {
 
     public void setRightAnswer(String rightAnswer) {
         this.rightAnswer = rightAnswer;
-    }
-
-    @Override
-    public boolean isTheSame(Object obj) {
-        return false;
     }
 
 }

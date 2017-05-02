@@ -5,13 +5,17 @@
  */
 package com.module.config;
 
-import com.lgame.util.load.config.BaseXml;
+
+import com.config.annotation.Id;
+import com.config.annotation.Resource;
 
 /**
  *
  */
-public class ActivityCenter implements BaseXml {
+@Resource
+public class ActivityCenter{
 
+    @Id
     private int id;
     private String name;
     private String title;
@@ -83,12 +87,6 @@ public class ActivityCenter implements BaseXml {
 
     public void setSkip(String skip) {
         this.skip = skip;
-    }
-
-    @Override
-    public boolean isTheSame(Object obj) {
-        ActivityCenter other = (ActivityCenter) obj;
-        return other.getId() == this.getId() && other.getName().equals(this.getName());
     }
 
 }

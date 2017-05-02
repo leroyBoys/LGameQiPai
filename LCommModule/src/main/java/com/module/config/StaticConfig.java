@@ -5,13 +5,15 @@
  */
 package com.module.config;
 
-import com.lgame.util.load.config.BaseXml;
+
+import com.config.annotation.Resource;
 
 /**
  * 杂表
  * @author leroy
  */
-public class StaticConfig implements BaseXml {
+@Resource
+public class StaticConfig {
     
     private ZabiaoConfigType type;
     
@@ -31,17 +33,6 @@ public class StaticConfig implements BaseXml {
 
     public void setContent(String content) {
         this.content = content;
-    }
-    
-    
-    
-    @Override
-    public boolean isTheSame(Object obj) {
-        if(obj == null){
-            return false;
-        }
-        StaticConfig _obj = (StaticConfig)obj;
-        return _obj.getType() == this.getType();
     }
     
 }

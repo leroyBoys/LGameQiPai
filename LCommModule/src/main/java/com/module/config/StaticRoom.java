@@ -5,15 +5,18 @@
  */
 package com.module.config;
 
-import com.lgame.util.load.config.BaseXml;
+import com.config.annotation.Id;
+import com.config.annotation.Resource;
 
 /**
  * 副本房间
  *
  * @author leroy
  */
-public class StaticRoom implements BaseXml {
+@Resource
+public class StaticRoom {
 
+    @Id
     private int id;
     private BattleFieldType battleFieldType;//副本题目类型????
     private String desc;
@@ -68,11 +71,6 @@ public class StaticRoom implements BaseXml {
 //    public void setIsRandom(boolean isRandom) {
 //        this.isRandom = isRandom;
 //    }
-
-    @Override
-    public boolean isTheSame(Object obj) {
-        return false;
-    }
 
     public static enum BattleFieldType {
         /**

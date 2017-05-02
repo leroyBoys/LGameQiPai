@@ -5,14 +5,18 @@
  */
 package com.module.config;
 
-import com.lgame.util.load.config.BaseXml;
+
+import com.config.annotation.Id;
+import com.config.annotation.Resource;
 
 /**
  * 技能
  * @author leroy
  */
-public class StaticSkill  implements BaseXml {
+@Resource
+public class StaticSkill{
 
+    @Id
     private int id;
     private String name;
     private String desc;
@@ -78,10 +82,6 @@ public class StaticSkill  implements BaseXml {
         this.skillQuestLimit = skillQuestLimit;
     }
 
-    @Override
-    public boolean isTheSame(Object obj) {
-        return false;
-    }
     /**
      * 技能类型
      */

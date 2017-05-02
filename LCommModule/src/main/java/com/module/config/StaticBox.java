@@ -5,7 +5,8 @@
  */
 package com.module.config;
 
-import com.lgame.util.load.config.BaseXml;
+import com.config.annotation.Id;
+import com.config.annotation.Resource;
 import com.module.ItemData;
 import com.module.Type;
 import com.module.VirtualItemData;
@@ -17,8 +18,10 @@ import java.util.List;
  *
  * @author leroy_boy
  */
-public class StaticBox implements BaseXml {
+@Resource
+public class StaticBox{
 
+    @Id
     private int id;
     private String name;
     private String desc;
@@ -28,12 +31,6 @@ public class StaticBox implements BaseXml {
 
     private List<BoxItemData> boxItems;
 
-    @Override
-    public boolean isTheSame(Object obj) {
-        return false;
-    }
-
-    
     public static class BoxItemData  extends VirtualItemData {
 
 

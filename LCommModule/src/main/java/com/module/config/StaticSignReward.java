@@ -5,7 +5,8 @@
  */
 package com.module.config;
 
-import com.lgame.util.load.config.BaseXml;
+import com.config.annotation.Id;
+import com.config.annotation.Resource;
 import com.module.ItemData;
 
 import java.util.List;
@@ -14,12 +15,22 @@ import java.util.List;
  * 每日签到
  * @author leroy
  */
-public class StaticSignReward implements BaseXml {
-
+@Resource
+public class StaticSignReward{
+    @Id
+    private int id;
     private String icon;
     private String dateTime;
     private String desc;
     private List<ItemData> datas;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getDateTime() {
         return dateTime;
@@ -35,11 +46,6 @@ public class StaticSignReward implements BaseXml {
 
     public void setDatas(List<ItemData> datas) {
         this.datas = datas;
-    }
-
-    @Override
-    public boolean isTheSame(Object obj) {
-        return false;
     }
 
     public String getIcon() {

@@ -5,7 +5,8 @@
  */
 package com.module.config;
 
-import com.lgame.util.load.config.BaseXml;
+import com.config.annotation.Id;
+import com.config.annotation.Resource;
 
 import java.util.List;
 
@@ -13,7 +14,9 @@ import java.util.List;
  * 题库
  * @author leroy
  */
-public class StaticQuestionCollection implements BaseXml {
+@Resource
+public class StaticQuestionCollection{
+    @Id
     private int  id;//题库id
     private List<Integer> questIds;
 
@@ -33,9 +36,4 @@ public class StaticQuestionCollection implements BaseXml {
         this.questIds = questIds;
     }
 
-    @Override
-    public boolean isTheSame(Object obj) {
-        return false;
-    }
-    
 }

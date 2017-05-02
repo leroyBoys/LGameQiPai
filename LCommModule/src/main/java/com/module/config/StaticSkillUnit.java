@@ -5,7 +5,8 @@
  */
 package com.module.config;
 
-import com.lgame.util.load.config.BaseXml;
+import com.config.annotation.Id;
+import com.config.annotation.Resource;
 import com.module.EffectData;
 import com.module.ItemData;
 
@@ -15,8 +16,10 @@ import java.util.List;
  *
  * @author leroy
  */
-public class StaticSkillUnit implements BaseXml {
+@Resource
+public class StaticSkillUnit {
 
+    @Id
     private int id;
     private int skillId;//技能等id
     private int level;//技能等级
@@ -121,10 +124,5 @@ public class StaticSkillUnit implements BaseXml {
 
     public void setOpenNeedItem(List<ItemData> openNeedItem) {
         this.openNeedItem = openNeedItem;
-    }
-
-    @Override
-    public boolean isTheSame(Object obj) {
-        return false;
     }
 }

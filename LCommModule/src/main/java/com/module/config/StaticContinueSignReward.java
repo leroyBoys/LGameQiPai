@@ -5,7 +5,8 @@
  */
 package com.module.config;
 
-import com.lgame.util.load.config.BaseXml;
+import com.config.annotation.Id;
+import com.config.annotation.Resource;
 import com.module.ItemData;
 
 import java.util.List;
@@ -14,8 +15,9 @@ import java.util.List;
  * 连续签到
  * @author leroy
  */
-public class StaticContinueSignReward implements BaseXml {
-
+@Resource
+public class StaticContinueSignReward{
+    @Id
     private String icon;
     private String num;
     private String desc;
@@ -35,11 +37,6 @@ public class StaticContinueSignReward implements BaseXml {
 
     public void setDatas(List<ItemData> datas) {
         this.datas = datas;
-    }
-
-    @Override
-    public boolean isTheSame(Object obj) {
-        return false;
     }
 
     public String getIcon() {
