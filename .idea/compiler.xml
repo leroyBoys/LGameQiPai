@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="CoreGame" />
         <module name="LCommModule" />
-        <module name="LGame" />
         <module name="MjGame" />
       </profile>
     </annotationProcessing>
