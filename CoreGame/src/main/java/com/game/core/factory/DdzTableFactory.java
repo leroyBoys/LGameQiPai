@@ -1,5 +1,6 @@
 package com.game.core.factory;
 
+import com.game.core.config.RoomSetting;
 import com.game.core.room.ddz.DDzTable;
 
 /**
@@ -7,8 +8,14 @@ import com.game.core.room.ddz.DDzTable;
  * 2017/4/19.
  */
 public class DdzTableFactory implements TableProducer<DDzTable> {
+    private RoomSetting gen;
     @Override
     public DDzTable create(int tableId,int ownerId) {
-        return new DDzTable(ownerId,3,tableId);
+        return new DDzTable(ownerId,gen.getPlayerNum(),tableId,gen.getGameId());
+    }
+
+    @Override
+    public void setRoomSetting(RoomSetting gen) {
+        this.gen = gen;
     }
 }

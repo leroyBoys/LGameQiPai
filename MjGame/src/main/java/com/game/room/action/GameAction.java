@@ -2,7 +2,7 @@ package com.game.room.action;
 
 import com.game.core.UserVistor;
 import com.game.core.action.BaseAction;
-import com.game.core.room.mj.MjTable;
+import com.game.room.MjTable;
 import com.lsocket.message.Response;
 import com.module.net.NetCommon;
 
@@ -25,7 +25,6 @@ public class GameAction extends BaseAction<MjTable> {
     @Override
     public void doAction(MjTable table, Response response, UserVistor visitor, NetCommon.NetOprateData netOprateData) {
         GameStatusData statusData = (GameStatusData) table.getStatusData();
-
     }
 
     @Override

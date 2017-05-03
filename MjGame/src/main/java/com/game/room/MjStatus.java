@@ -1,9 +1,9 @@
 package com.game.room;
 
 import com.game.core.action.BaseAction;
-import com.game.core.action.mj.*;
 import com.game.core.room.BaseGameStatus;
 import com.game.core.room.BaseStatusData;
+import com.game.room.action.*;
 
 import static com.game.core.room.SuperCreateNew.CreateNewCache.create;
 

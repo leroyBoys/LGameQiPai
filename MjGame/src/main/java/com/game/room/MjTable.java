@@ -18,8 +18,8 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
     private int nextBankerUid;
 
-    public MjTable(int ownerId,int maxSize,int id) {
-        super(ownerId,maxSize,id, MjStatus.Idle,2);
+    public MjTable(int ownerId,int maxSize,int id,int gameId) {
+        super(ownerId,maxSize,id, MjStatus.Idle,gameId);
     }
 
     @Override

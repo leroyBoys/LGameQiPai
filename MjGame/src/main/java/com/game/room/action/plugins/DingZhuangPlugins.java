@@ -1,9 +1,9 @@
 package com.game.room.action.plugins;
 
 import com.game.core.config.IOptPlugin;
-import com.game.core.room.mj.MjTable;
 import com.lsocket.message.Response;
 import com.module.net.NetCommon;
+import com.game.room.MjTable;
 
 /**
  * Created by leroy:656515489@qq.com

@@ -1,8 +1,8 @@
 package com.game.room.action;
 
 import com.game.core.action.IdleAction;
-import com.game.core.room.mj.MjChairStatus;
-import com.game.core.room.mj.MjTable;
+import com.game.room.MjChairStatus;
+import com.game.room.MjTable;
 
 /**
  * Created by leroy:656515489@qq.com

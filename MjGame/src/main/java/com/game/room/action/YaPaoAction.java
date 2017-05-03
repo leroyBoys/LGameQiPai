@@ -1,12 +1,12 @@
 package com.game.room.action;
 
 import com.game.core.UserVistor;
-import com.game.core.action.BaseAction;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
-import com.game.core.room.mj.MjTable;
 import com.lsocket.message.Response;
 import com.module.net.NetCommon;
+import com.game.core.action.BaseAction;
+import com.game.room.MjTable;
 
 /**
  * Created by leroy:656515489@qq.com

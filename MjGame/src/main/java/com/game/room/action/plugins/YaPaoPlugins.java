@@ -2,8 +2,8 @@ package com.game.room.action.plugins;
 
 import com.game.core.config.IOptPlugin;
 import com.game.core.room.BaseStatusData;
-import com.game.core.room.mj.MjChairInfo;
-import com.game.core.room.mj.MjTable;
+import com.game.room.MjChairInfo;
+import com.game.room.MjTable;
 import com.lsocket.message.Response;
 import com.module.net.NetCommon;
 

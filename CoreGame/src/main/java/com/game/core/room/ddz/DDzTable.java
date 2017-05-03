@@ -12,8 +12,8 @@ import com.game.core.room.BaseTableVo;
 public class DDzTable extends BaseTableVo<DdzStatus,BaseChairInfo> {
     private int guildUid;
 
-    public DDzTable(int ownerId,int maxSize,int id) {
-        super(ownerId,maxSize,id, DdzStatus.Idle,1);
+    public DDzTable(int ownerId,int maxSize,int id,int gameId) {
+        super(ownerId,maxSize,id, DdzStatus.Idle,gameId);
     }
 
     @Override

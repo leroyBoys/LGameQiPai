@@ -3,7 +3,7 @@ package com.game.room.action;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
 import com.game.core.room.BaseStatusData;
-import com.game.core.room.mj.MjTable;
+import com.game.room.MjTable;
 
 import java.util.ArrayList;
 

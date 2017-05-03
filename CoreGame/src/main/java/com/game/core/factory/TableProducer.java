@@ -1,5 +1,6 @@
 package com.game.core.factory;
 
+import com.game.core.config.RoomSetting;
 import com.game.core.room.BaseTableVo;
 
 /**
@@ -8,4 +9,5 @@ import com.game.core.room.BaseTableVo;
  */
 public interface TableProducer<T extends BaseTableVo> {
     public T create(int tableId, int ownerId);
+    public void setRoomSetting(RoomSetting gen);
 }

@@ -1,7 +1,7 @@
 package com.game.room.action;
 
 import com.game.core.action.BaseAction;
-import com.game.core.room.mj.MjTable;
+import com.game.room.MjTable;
 
 /**
  * Created by leroy:656515489@qq.com

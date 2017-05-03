@@ -1,11 +1,13 @@
 package com.game.core;
 
-import com.game.core.factory.DdzTableFactory;
-import com.game.core.factory.MjTableFactory;
+import com.game.core.config.RoomSetting;
 import com.game.core.factory.TableProducer;
 import com.game.core.room.BaseTableVo;
+import com.lgame.util.PrintTool;
 import com.lgame.util.comm.RandomTool;
+import com.lgame.util.load.ResourceServiceImpl;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -29,8 +31,16 @@ public class TableFactory  implements Runnable{
 
 
     private TableFactory() {
-        tableFactory.put(1,new DdzTableFactory());
-        tableFactory.put(2,new MjTableFactory());
+        List<RoomSetting> roomSettingTemplateGens = (List<RoomSetting>) ResourceServiceImpl.getInstance("resources").listAll(RoomSetting.class);
+        try {
+            for(RoomSetting gen:roomSettingTemplateGens){
+                PrintTool.info("begin load TableFactory:"+gen.getRoomFactory());
+                tableFactory.put(gen.getGameId(), (TableProducer) Class.forName(gen.getRoomFactory()).newInstance());
+                PrintTool.info("end load TableFactory:"+gen.getRoomFactory()+"  suc!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         new Thread(this).start();
     }
