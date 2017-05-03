@@ -4,6 +4,7 @@ import com.game.codec.RequestDecoderRemote;
 import com.game.codec.ResponseEncoderRemote;
 import com.game.control.CoreDispatcherRmote;
 import com.game.listen.GameHeartLinster;
+import com.game.socket.module.UserVistor;
 import com.game.util.GateVisitor;
 import com.lsocket.codec.RequestDecoder;
 import com.lsocket.codec.ResponseEncoder;
@@ -21,7 +22,7 @@ import java.util.List;
  * Created by leroy:656515489@qq.com
  * 2017/4/6.
  */
-public class GameSocket extends SocketServer<Visitor>{
+public class GameSocket extends SocketServer<UserVistor>{
     public final static GameSocket gameSocket = new GameSocket();
 
     private GameSocket(){
@@ -35,8 +36,8 @@ public class GameSocket extends SocketServer<Visitor>{
     }
 
     @Override
-    public Visitor createVistor(IoSession session, SocketServer socketServer, long timeOutTime) {
-        return new GateVisitor(socketServer,session,timeOutTime);
+    public UserVistor createVistor(IoSession session, long timeOutTime) {
+        return new UserVistor(this,session,timeOutTime);
     }
 
     @Override

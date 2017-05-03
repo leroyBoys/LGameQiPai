@@ -1,6 +1,6 @@
 package com.game.core.action;
 
-import com.game.core.UserVistor;
+import com.game.socket.module.UserVistor;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseChairStatus;
 import com.game.core.room.BaseTableVo;

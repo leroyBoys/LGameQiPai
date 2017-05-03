@@ -1,7 +1,7 @@
 package com.game.core.room;
 
 import com.game.core.TableManager;
-import com.game.core.UserVistor;
+import com.game.socket.module.UserVistor;
 import com.game.core.action.BaseAction;
 import com.lsocket.message.Response;
 import com.module.net.NetCommon;

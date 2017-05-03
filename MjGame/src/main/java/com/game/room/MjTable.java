@@ -1,6 +1,6 @@
 package com.game.room;
 
-import com.game.core.UserVistor;
+import com.game.socket.module.UserVistor;
 import com.game.core.room.BaseStepHistory;
 import com.game.core.room.BaseTableVo;
 import com.lgame.util.comm.RandomTool;

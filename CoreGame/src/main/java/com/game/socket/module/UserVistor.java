@@ -1,5 +1,6 @@
-package com.game.core;
+package com.game.socket.module;
 
+import com.game.socket.GameSocket;
 import com.lsocket.message.ErrorCode;
 import com.lsocket.message.Response;
 import com.lsocket.module.SocketSystemCode;
@@ -11,9 +12,9 @@ import com.lsocket.module.Visitor;
  */
 public class UserVistor extends Visitor {
     private int roomId;
-   /* public UserVistor(SocketServer socketServer, org.apache.mina.core.session.IoSession ioSession, long timeOutTime) {
+    public UserVistor(GameSocket socketServer, org.apache.mina.core.session.IoSession ioSession, long timeOutTime) {
         super(socketServer, ioSession, timeOutTime);
-    }*/
+    }
 
     public UserVistor() {
         super(null, null, 0);

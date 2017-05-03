@@ -1,6 +1,6 @@
 package com.game.core.action;
 
-import com.game.core.UserVistor;
+import com.game.socket.module.UserVistor;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
 import com.game.core.room.BaseTableVo;

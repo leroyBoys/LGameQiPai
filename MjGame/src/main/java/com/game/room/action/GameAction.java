@@ -1,6 +1,6 @@
 package com.game.room.action;
 
-import com.game.core.UserVistor;
+import com.game.socket.module.UserVistor;
 import com.game.core.action.BaseAction;
 import com.game.room.MjTable;
 import com.lsocket.message.Response;

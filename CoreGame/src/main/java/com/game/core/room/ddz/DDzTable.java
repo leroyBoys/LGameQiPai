@@ -1,6 +1,6 @@
 package com.game.core.room.ddz;
 
-import com.game.core.UserVistor;
+import com.game.socket.module.UserVistor;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseStepHistory;
 import com.game.core.room.BaseTableVo;
