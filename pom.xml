@@ -12,6 +12,7 @@
         <module>LCommModule</module>
         <module>LGame</module>
         <module>CoreGame</module>
+        <module>MjGame</module>
     </modules>
     <properties>
         <junit.version>4.12</junit.version>

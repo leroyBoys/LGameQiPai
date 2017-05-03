@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/LCommModule/LCommModule.iml" filepath="$PROJECT_DIR$/LCommModule/LCommModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/LGame/LGame.iml" filepath="$PROJECT_DIR$/LGame/LGame.iml" />
       <module fileurl="file://$PROJECT_DIR$/LGameQiPai.iml" filepath="$PROJECT_DIR$/LGameQiPai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MjGame/MjGame.iml" filepath="$PROJECT_DIR$/MjGame/MjGame.iml" />
     </modules>
   </component>
 </project>

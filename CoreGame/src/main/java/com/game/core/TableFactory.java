@@ -1,0 +1,135 @@
+package com.game.core;
+
+import com.game.core.factory.DdzTableFactory;
+import com.game.core.factory.MjTableFactory;
+import com.game.core.factory.TableProducer;
+import com.game.core.room.BaseTableVo;
+import com.lgame.util.comm.RandomTool;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.LinkedBlockingQueue;
+
+/**
+ * Created by leroy:656515489@qq.com
+ * 2017/4/20.
+ */
+public class TableFactory  implements Runnable{
+    private final static TableFactory factory = new TableFactory();
+
+    private Map<Integer,TableProducer> tableFactory = new ConcurrentHashMap<>(10);
+
+    private final int minTableId = 10000000;
+    private final int maxTableId = 90000000;
+    private final int queMaxCount = 200;
+    private LinkedBlockingQueue<Integer> tableIdPool = new LinkedBlockingQueue(queMaxCount);
+    private LinkedBlockingQueue<Integer> goodTableIdPool = new LinkedBlockingQueue();
+    /** tableId-是否是好号码 */
+    private ConcurrentHashMap<Integer,Boolean> curTablePoolMap = new ConcurrentHashMap<>(10);
+
+
+    private TableFactory() {
+        tableFactory.put(1,new DdzTableFactory());
+        tableFactory.put(2,new MjTableFactory());
+
+        new Thread(this).start();
+    }
+
+
+    public static TableFactory getInstance() {
+        return factory;
+    }
+
+    /**
+     * 初始化比较好的数字
+     * @param goodNum
+     */
+    public void initGoodNum(String goodNum){
+        if(goodNum == null || goodNum.trim().isEmpty()){
+            return;
+        }
+
+        try {
+            String[] goodNumArray = goodNum.split(",");
+            for(int i = 0;i<goodNumArray.length;i++){
+                goodTableIdPool.put(Integer.valueOf(goodNumArray[i]));
+                curTablePoolMap.put(Integer.valueOf(goodNumArray[i]),true);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int produceNewTableId(){
+        try {
+            return tableIdPool.take();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return createSpecialTable(e);
+        }finally {
+        }
+    }
+
+    private int createSpecialTable(Exception e){
+        System.out.println("==>error：房间id创建池为空，创建过慢或者算法出错");
+        return RandomTool.getRandom().nextInt(10000)+maxTableId;
+    }
+
+    public <T extends BaseTableVo> T createTable(int ownerId, int type){
+        TableProducer tableProducer =  tableFactory.get(type);
+        BaseTableVo table = tableProducer.create(produceNewTableId(),ownerId);
+        TableManager.getInstance().addTable(table);
+
+        System.out.println("===create from pool:"+table.getId());
+        return (T)table;
+    }
+
+    public <T extends BaseTableVo> T createGoodTable(int ownerId,int type){
+        TableProducer tableProducer =  tableFactory.get(type);
+        Integer goodNum = produceGoodTableId();
+        boolean isGoodNum = true;
+        if(goodNum == null){
+            goodNum = produceNewTableId();
+            isGoodNum = false;
+        }
+
+        BaseTableVo table = tableProducer.create(goodNum,ownerId);
+        table.setGoodId(isGoodNum);
+        TableManager.getInstance().addTable(table);
+        return (T) table;
+    }
+
+    private Integer produceGoodTableId(){
+        return goodTableIdPool.poll();
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (true){
+                tableIdPool.put(poolFindNewTableId());
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int poolFindNewTableId(){
+        int randoZone = maxTableId - minTableId;
+
+        int newTableId;
+        while (true){
+            newTableId = RandomTool.getRandom().nextInt(randoZone)+minTableId;
+            if(curTablePoolMap.containsKey(newTableId)){
+                continue;
+            }
+
+            if(TableManager.getInstance().getTable(newTableId) != null){
+                continue;
+            }
+
+            System.out.println("===create to pool:"+newTableId);
+            return newTableId;
+        }
+    }
+}

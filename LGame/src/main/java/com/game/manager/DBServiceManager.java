@@ -4,7 +4,6 @@ import com.game.action.dao.mysql.ServerService;
 import com.module.GameServer;
 import com.module.ServerGroup;
 import com.mysql.impl.SqlPool;
-import com.redis.RedisConnectionManager;
 
 import java.util.List;
 import java.util.Properties;
@@ -22,7 +21,7 @@ public class DBServiceManager {
     }
 
     public void init(Properties properties){
-        SqlPool sqlPool = new SqlPool();
+        SqlPool sqlPool = new SqlPool(properties);
         ServerService serverService = new ServerService(sqlPool);
         ServerConnection serverConnection = serverService.getServerById(Integer.valueOf(properties.getProperty("server.id")));
         if(serverConnection == null){

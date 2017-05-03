@@ -2,32 +2,134 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bedc4f3-1a3d-4782-abd8-99410af2310a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/Comment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/ResponseCode.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/ShowTip.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/resources/RoomSetting.xls" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/resources/RoomSetting.xls" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/Main.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/action/ServerRedis.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/action/dao/dao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/action/dao/mysql/ServerService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/action/dao/mysql/template/ServerTemplate.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/action/dao/redis/RedisService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/action/dao/redis/ServerRedis.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/action/handler/LoginGateModuleHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/codec/RequestDecoderLocal.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/codec/RequestDecoderRemote.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/codec/ResponseEncoderLocal.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/codec/ResponseEncoderRemote.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/config/CoreSettings.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/config/GateConfig.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/config/IConfigurator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/config/ServerSetting.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/config/ServerSettings.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/config/SocketConfigRemote.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/control/CoreDispatcherRmote.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/CheckOutStatus.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/TableFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/TableManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/UserVistor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/BaseAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/IdleAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/AddRateAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/DdzIdleAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/FaPaiAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/GameAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/ScorePaiAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/DaAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/DingZhuangAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/FaPaiAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/GameAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/GameStatusData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/MjIdleAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/YaPaoAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/plugins/DingZhuangPlugins.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/plugins/YaPaoPlugins.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/config/IOptPlugin.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/config/RoomSetting.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/config/TablePluginManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/config/pluginGen.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/constant/CardPoolConst.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/constant/TableConst.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/factory/DdzTableFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/factory/MjTableFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/factory/TableProducer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/handler/RoomHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/BaseCardPoolEngine.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/BaseChairInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/BaseChairStatus.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/BaseGameStatus.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/BaseHandCardsContainer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/BaseStatusData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/BaseStepHistory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/BaseTableVo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/GameStatus.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/ICardPoolEngine.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/SuperCreateNew.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/ddz/DDzTable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/ddz/DdzChairStatus.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/ddz/DdzStatus.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/mj/MjCardPoolEngine.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/mj/MjChairInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/mj/MjChairStatus.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/mj/MjHandCardsContainer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/mj/MjStatus.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/mj/MjTable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/manager/CoreServiceManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/manager/DBServiceManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/manager/OnlineManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/manager/ServerManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/manager/ServerSession.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/manager/TimeCacheManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/socket/GameSocket.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/socket/module/GateVistor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/util/GateVisitor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/util/IService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/util/TaskScheduler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/net/NetParent.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/resources/dispater.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/resources/hikari_db.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/resources/server.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/net/NetCommon.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LGame/src/main/java/com/socket/SocketManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/MjGame.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/pom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/factory/MjTableFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/MjCardPoolEngine.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/MjChairInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/MjChairStatus.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/MjHandCardsContainer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/MjStatus.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/MjTable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/DaAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/DingZhuangAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/FaPaiAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/GameAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/GameStatusData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/MjIdleAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/YaPaoAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/plugins/DingZhuangPlugins.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/plugins/YaPaoPlugins.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/java/com/game/sds.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/resources/dispater.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/resources/hikari_db.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MjGame/src/main/resources/server.properties" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CoreGame/src/main/java/com/core/dd.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CoreGame/src/main/java/com/core/s.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CoreGame/CoreGame.iml" afterPath="$PROJECT_DIR$/CoreGame/CoreGame.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LCommModule/LCommModule.iml" afterPath="$PROJECT_DIR$/LCommModule/LCommModule.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/ActivityCenter.java" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/ActivityCenter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticAchievement.java" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticAchievement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticBox.java" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticConfig.java" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticContinueSignReward.java" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticContinueSignReward.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticItem.java" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticQuestion.java" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticQuestion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticQuestionCollection.java" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticQuestionCollection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticRoom.java" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticRoom.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticShopItem.java" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticShopItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSignReward.java" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSignReward.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSkill.java" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSkill.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSkillUnit.java" afterPath="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSkillUnit.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LGame/LGame.iml" afterPath="$PROJECT_DIR$/LGame/LGame.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LGame/src/main/java/com/game/manager/DBServiceManager.java" afterPath="$PROJECT_DIR$/LGame/src/main/java/com/game/manager/DBServiceManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/LCommModule/target/" />
     <ignored path="$PROJECT_DIR$/LGame/target/" />
     <ignored path="$PROJECT_DIR$/CoreGame/target/" />
+    <ignored path="$PROJECT_DIR$/MjGame/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,102 +143,71 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="StaticEquipment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticEquipment.java">
+      <file leaf-file-name="FaPaiAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/FaPaiAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="11" column="41" lean-forward="false" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+            <state relative-caret-position="216">
+              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ShowTip.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/ShowTip.java">
+      <file leaf-file-name="GameAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/GameAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="18" column="18" lean-forward="false" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+            <state relative-caret-position="216">
+              <caret line="12" column="40" lean-forward="false" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ResponseCode.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/ResponseCode.java">
+      <file leaf-file-name="MjIdleAction.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/MjIdleAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2214">
-              <caret line="92" column="44" lean-forward="false" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="44" />
+            <state relative-caret-position="216">
+              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Comment.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/Comment.java">
+      <file leaf-file-name="DingZhuangPlugins.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/plugins/DingZhuangPlugins.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="13" column="5" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+            <state relative-caret-position="196">
+              <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StaticShopItem.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticShopItem.java">
+      <file leaf-file-name="YaPaoPlugins.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/plugins/YaPaoPlugins.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3132">
-              <caret line="192" column="0" lean-forward="false" selection-start-line="192" selection-start-column="0" selection-end-line="192" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="196">
+              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StaticSignReward.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSignReward.java">
+      <file leaf-file-name="DaAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/DaAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="26" column="24" lean-forward="false" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#602#603#0" expanded="true" />
-                <element signature="e#635#636#0" expanded="true" />
-                <element signature="e#663#664#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="196">
+              <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StaticSkill.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSkill.java">
+      <file leaf-file-name="DingZhuangAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/DingZhuangAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1377">
-              <caret line="84" column="7" lean-forward="false" selection-start-line="84" selection-start-column="7" selection-end-line="84" selection-end-column="7" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StaticSkillUnit.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSkillUnit.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1998">
-              <caret line="127" column="0" lean-forward="false" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ZabiaoConfigType.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/ZabiaoConfigType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+            <state relative-caret-position="212">
+              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -177,23 +248,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticAchievement.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/ActivityCenter.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticBox.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticConfig.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticContinueSignReward.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticItem.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticQuestion.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticQuestionCollection.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticRoom.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticShopItem.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSignReward.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSkill.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSkillUnit.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/config/d.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/ResponseCode.java" />
-        <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/Comment.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/config/ServerSettings.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/socket/GameSocket.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/codec/RequestDecoderRemote.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/codec/RequestDecoderLocal.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/UserVistor.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/BaseAction.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/SuperCreateNew.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/BaseCardPoolEngine.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/BaseGameStatus.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/BaseTableVo.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/CheckOutStatus.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/factory/TableProducer.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/TableManager.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/TableFactory.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/mj/MjCardPoolEngine.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/mj/MjChairInfo.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/mj/MjChairStatus.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/mj/MjHandCardsContainer.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/BaseGameStatus.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/SuperCreateNew.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/mj/MjStatus.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/BaseStatusData.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/mj/MjTable.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/IdleAction.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/YaPaoAction.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/DingZhuangAction.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/FaPaiAction.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/GameStatusData.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/GameAction.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/MjIdleAction.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/plugins/YaPaoPlugins.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/AddRateAction.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/ddz/DdzStatus.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/DdzIdleAction.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/FaPaiAction.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/ddz/DdzChairStatus.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/config/IOptPlugin.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/config/pluginGen.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/GameAction.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/ScorePaiAction.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/plugins/DingZhuangPlugins.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/DaAction.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/factory/DdzTableFactory.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/factory/MjTableFactory.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/BaseTableVo.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/ddz/DDzTable.java" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/config/RoomSetting.java" />
+        <option value="$PROJECT_DIR$/MjGame/pom.xml" />
+        <option value="$PROJECT_DIR$/MjGame/src/main/java/com/game/factory/MjTableFactory.java" />
+        <option value="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/MjTable.java" />
+        <option value="$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/GameAction.java" />
       </list>
     </option>
   </component>
@@ -208,6 +313,11 @@
       <MavenGeneralSettings>
         <option name="mavenHome" value="D:/work/apache-maven-3.3.9" />
       </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
     </option>
   </component>
   <component name="ProjectFrameBounds">
@@ -243,100 +353,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LGameQiPai" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LGameQiPai" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LGame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LGameQiPai" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LGameQiPai" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LGame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LGameQiPai" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LGameQiPai" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="doc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LGameQiPai" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LGameQiPai" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CoreGame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LGameQiPai" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LGameQiPai" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CoreGame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -345,7 +361,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LCommPack/LConfigLoad" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LCommPack/LSocket" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -355,10 +371,15 @@
     <property name="js.eslint.eslintPackage" value="" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.game.factory" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\workspace\LGameQiPai\LCommModule\src\main\java\com\module\core" />
-      <recent name="E:\workspace\LGameQiPai\LCommModule" />
-      <recent name="E:\workspace\LGameQiPai" />
+      <recent name="E:\workspace\LGameQiPai\MjGame\src\main\java\com\game\room\action" />
+      <recent name="E:\workspace\LGameQiPai\MjGame\src\main\java\com\game\room" />
+      <recent name="E:\workspace\LGameQiPai\MjGame\src\main\resources" />
+      <recent name="E:\workspace\LGameQiPai\CoreGame\src\main\resources" />
+      <recent name="E:\workspace\LGameQiPai\LCommModule\src\main\java\com\module\net" />
     </key>
   </component>
   <component name="RunManager">
@@ -758,7 +779,7 @@
       <workItem from="1492686619127" duration="616000" />
       <workItem from="1492746721868" duration="1852000" />
       <workItem from="1493342629742" duration="2714000" />
-      <workItem from="1493724228517" duration="650000" />
+      <workItem from="1493724228517" duration="7624000" />
     </task>
     <task id="LOCAL-00001" summary="sssssssssssss">
       <created>1492572646571</created>
@@ -781,11 +802,18 @@
       <option name="project" value="LOCAL" />
       <updated>1492686632743</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="sssssssssssss">
+      <created>1493724888875</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1493724888875</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7792000" />
+    <option name="totallyTimeSpent" value="14766000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
@@ -799,7 +827,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -807,6 +835,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26332623" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -818,7 +847,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -835,361 +863,466 @@
     <breakpoint-manager />
     <watches-manager />
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticEquipment.java">
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/AddRateAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="11" column="41" lean-forward="false" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/ShowTip.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="18" column="18" lean-forward="false" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/ResponseCode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2214">
-          <caret line="92" column="44" lean-forward="false" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/Comment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticShopItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3132">
-          <caret line="192" column="0" lean-forward="false" selection-start-line="192" selection-start-column="0" selection-end-line="192" selection-end-column="0" />
+        <state relative-caret-position="230">
+          <caret line="12" column="50" lean-forward="false" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSignReward.java">
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/DdzIdleAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="26" column="24" lean-forward="false" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
+        <state relative-caret-position="340">
+          <caret line="14" column="22" lean-forward="false" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#602#603#0" expanded="true" />
-            <element signature="e#635#636#0" expanded="true" />
-            <element signature="e#663#664#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#341#342#0" expanded="false" />
+            <element signature="e#384#385#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSkill.java">
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/FaPaiAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1377">
-          <caret line="84" column="7" lean-forward="false" selection-start-line="84" selection-start-column="7" selection-end-line="84" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSkillUnit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1998">
-          <caret line="127" column="0" lean-forward="false" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/ZabiaoConfigType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticAchievement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="44" lean-forward="false" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/ActivityCenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
+        <state relative-caret-position="196">
           <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticAchievement.java">
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/GameAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="44" lean-forward="false" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+        <state relative-caret-position="220">
+          <caret line="12" column="39" lean-forward="false" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticBox.java">
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/ddz/ScorePaiAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="360">
+          <caret line="19" column="62" lean-forward="false" selection-start-line="19" selection-start-column="62" selection-end-line="19" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/ActivityCenter.java">
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/plugins/DingZhuangPlugins.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
+        <state relative-caret-position="54">
+          <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/plugins/YaPaoPlugins.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="25" column="20" lean-forward="false" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/DaAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="6" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/DingZhuangAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/FaPaiAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/GameAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
           <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticAchievement.java">
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/GameStatusData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="44" lean-forward="false" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+        <state relative-caret-position="255">
+          <caret line="17" column="108" lean-forward="false" selection-start-line="17" selection-start-column="108" selection-end-line="17" selection-end-column="108" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticBox.java">
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/YaPaoAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="196">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/ActivityCenter.java">
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/IdleAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/config/IOptPlugin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="7" column="64" lean-forward="false" selection-start-line="7" selection-start-column="64" selection-end-line="7" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/config/pluginGen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticAchievement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LGame/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/sql/user_center.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/db/UserDev.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/CustomKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/db/GameNotice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2542">
-          <caret line="98" column="13" lean-forward="false" selection-start-line="98" selection-start-column="13" selection-end-line="98" selection-end-column="13" />
+          <caret line="8" column="2" lean-forward="false" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/pom.xml">
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/constant/CardPoolConst.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="13" lean-forward="true" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/LCommModule.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/ActivityCenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="90" column="0" lean-forward="true" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticAchievement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="37" column="1" lean-forward="true" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticContinueSignReward.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticQuestion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticQuestionCollection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticRoom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticShopItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3132">
-          <caret line="192" column="0" lean-forward="false" selection-start-line="192" selection-start-column="0" selection-end-line="192" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSignReward.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="26" column="24" lean-forward="false" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#602#603#0" expanded="true" />
-            <element signature="e#635#636#0" expanded="true" />
-            <element signature="e#663#664#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSkill.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1377">
-          <caret line="84" column="7" lean-forward="false" selection-start-line="84" selection-start-column="7" selection-end-line="84" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticSkillUnit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1998">
-          <caret line="127" column="0" lean-forward="false" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/ZabiaoConfigType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+        <state relative-caret-position="196">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/config/StaticEquipment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="11" column="41" lean-forward="false" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/GameServer.java" />
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/d.java" />
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/ShowTip.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="18" column="18" lean-forward="false" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/ResponseCode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2214">
-          <caret line="92" column="44" lean-forward="false" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LCommModule/src/main/java/com/module/core/Comment.java">
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/constant/TableConst.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
-          <caret line="13" column="5" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/handler/RoomHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/ddz/DdzChairStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/ddz/DdzStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="17" column="25" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/TableFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="95" column="42" lean-forward="false" selection-start-line="95" selection-start-column="42" selection-end-line="95" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/BaseTableVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="48" column="24" lean-forward="false" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/codec/RequestDecoderLocal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="23" column="8" lean-forward="false" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/net/NetParent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="5" column="28" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/factory/MjTableFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="8" column="27" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/config/RoomSetting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="10" column="24" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1455#1456#0" expanded="true" />
+            <element signature="e#1489#1490#0" expanded="true" />
+            <element signature="e#1543#1544#0" expanded="true" />
+            <element signature="e#1589#1590#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/factory/TableProducer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="8" column="46" lean-forward="false" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/room/ddz/DDzTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-634">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#397#398#0" expanded="true" />
+            <element signature="e#456#457#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/factory/DdzTableFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="11" column="22" lean-forward="false" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+          <folding>
+            <element signature="e#264#265#0" expanded="true" />
+            <element signature="e#318#319#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/resources/dispater.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="2" column="35" lean-forward="false" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/sds.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="16" lean-forward="false" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/factory/MjTableFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="10" column="4" lean-forward="false" selection-start-line="10" selection-start-column="4" selection-end-line="13" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/MjChairInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/MjChairStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/MjHandCardsContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/MjCardPoolEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/MjTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="60" column="41" lean-forward="false" selection-start-line="60" selection-start-column="41" selection-end-line="60" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/MjStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/mj/MjIdleAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/GameStatusData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/YaPaoAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/action/BaseAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="23" column="76" lean-forward="false" selection-start-line="23" selection-start-column="76" selection-end-line="23" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/plugins/DingZhuangPlugins.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/DingZhuangAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/plugins/YaPaoPlugins.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/DaAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/FaPaiAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/GameAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="40" lean-forward="false" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MjGame/src/main/java/com/game/room/action/MjIdleAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1246,7 +1379,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>LCommModule</last-edited>
+          <last-edited>CoreGame</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
