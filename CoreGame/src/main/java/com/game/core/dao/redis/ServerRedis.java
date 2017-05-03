@@ -1,14 +1,16 @@
-package com.game.action.dao.redis;
+package com.game.core.dao.redis;
 
 import com.redis.RedisConnectionManager;
 
 /**
  * Created by Administrator on 2017/4/15.
  */
-public class RedisService {
+public class ServerRedis{
     protected RedisConnectionManager redisConnectionManager;
 
-    public RedisService(RedisConnectionManager redisConnectionManager){
+    public ServerRedis(RedisConnectionManager redisConnectionManager){
         this.redisConnectionManager = redisConnectionManager;
     }
+
+
 }

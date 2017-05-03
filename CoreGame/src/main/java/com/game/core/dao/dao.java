@@ -1,4 +1,4 @@
-package com.game.action.dao;
+package com.game.core.dao;
 
 /**
  * Created by Administrator on 2017/4/15.

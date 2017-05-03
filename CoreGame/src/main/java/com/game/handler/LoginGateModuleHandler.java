@@ -1,4 +1,4 @@
-package com.game.action.handler;
+package com.game.handler;
 
 import com.game.socket.GameSocket;
 import com.lsocket.control.impl.CoreDispatcher;

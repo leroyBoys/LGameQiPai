@@ -1,6 +1,6 @@
 package com.game.manager;
 
-import com.game.action.dao.mysql.ServerService;
+import com.game.core.dao.mysql.ServerService;
 import com.lgame.util.comm.StringTool;
 import com.lgame.util.file.PropertiesTool;
 import com.lsocket.core.ICommon;
@@ -86,8 +86,6 @@ public class DBServiceManager extends ICommon {
 
     @Override
     protected void check() {
-        List<ServerConnection> servers = serverService.getServerByGroup(serverGroup.getGroup());
-        ServerManager.getIntance().init(servers);
     }
 
 

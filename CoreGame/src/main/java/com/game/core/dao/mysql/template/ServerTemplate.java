@@ -1,4 +1,4 @@
-package com.game.action.dao.mysql.template;
+package com.game.core.dao.mysql.template;
 
 /**
  * Created by Administrator on 2017/4/15.

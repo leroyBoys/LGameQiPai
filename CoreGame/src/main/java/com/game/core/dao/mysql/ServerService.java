@@ -1,7 +1,6 @@
-package com.game.action.dao.mysql;
+package com.game.core.dao.mysql;
 
-import com.game.action.dao.mysql.template.ServerTemplate;
-import com.game.manager.ServerConnection;
+import com.game.core.dao.mysql.template.ServerTemplate;
 import com.module.GameServer;
 import com.module.ServerGroup;
 import com.mysql.impl.SqlPool;
@@ -18,8 +17,8 @@ public class ServerService {
         this.sqlPool = sqlPool;
     }
 
-    public List<ServerConnection> getServerByGroup(int group){
-        List<ServerConnection> ret = this.sqlPool.ExecuteQuery(new ServerConnection(), ServerTemplate.GET_SERVER_BY_GROUP,group);
+    public List<GameServer> getServerByGroup(int group){
+        List<GameServer> ret = this.sqlPool.ExecuteQuery(new GameServer(), ServerTemplate.GET_SERVER_BY_GROUP,group);
         return ret;
     }
 

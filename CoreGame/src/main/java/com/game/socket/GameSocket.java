@@ -3,7 +3,7 @@ package com.game.socket;
 import com.game.codec.RequestDecoderRemote;
 import com.game.codec.ResponseEncoderRemote;
 import com.game.control.CoreDispatcherRmote;
-import com.game.listen.GameHeartLinste;
+import com.game.listen.GameHeartLinster;
 import com.game.util.GateVisitor;
 import com.lsocket.codec.RequestDecoder;
 import com.lsocket.codec.ResponseEncoder;
@@ -51,7 +51,7 @@ public class GameSocket extends SocketServer<Visitor>{
 
     @Override
     public HeartListen initHeartListen() {
-        return new GameHeartLinste();
+        return new GameHeartLinster();
     }
 
     @Override
@@ -63,7 +63,7 @@ public class GameSocket extends SocketServer<Visitor>{
     public ModuleDispaterInstance getInnerModuleDispaterConfig() {
         ModuleDispaterInstance ins = new ModuleDispaterInstance();
         List<ModuleDispaterInstance.Obj> objs = new LinkedList<>();
-        objs.add(new ModuleDispaterInstance.Obj("com.game.action.handler"));
+        objs.add(new ModuleDispaterInstance.Obj("com.game.handler"));
         ins.setObjList(objs);
         return ins;
     }
