@@ -5,6 +5,9 @@
  */
 package com.module.core;
 
+import com.lsocket.message.ErrorCode;
+import com.lsocket.message.Response;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +18,7 @@ import java.util.Map;
  */
 public class ResponseCode {
 
-    public static enum Error {
+    public static enum Error implements ErrorCode<Response>{
         succ(0),
         @Comment("玩家不存在")
         player_no_exit(1),
@@ -66,7 +69,7 @@ public class ResponseCode {
             this.code = code;
         }
 
-        public Integer value() {
+        Integer value() {
             return code;
         }
 
@@ -79,6 +82,10 @@ public class ResponseCode {
             return null;
         }
 
+        @Override
+        public Response getMsg() {
+            return Response.defaultResponse(getCodeValue(this));
+        }
     }
     public final static Map<Integer, Integer> codevalues = new HashMap<>();
 

@@ -4,6 +4,7 @@ import com.lsocket.module.Visitor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -11,7 +12,7 @@ import java.util.Map;
  */
 public class OnlineManager{
     private final static OnlineManager serverManager = new OnlineManager();
-    private Map<Integer,Visitor> onLines = new HashMap<>();
+    private Map<Integer,Visitor> onLines = new ConcurrentHashMap<>();
 
     private OnlineManager(){}
     public static OnlineManager getIntance(){
