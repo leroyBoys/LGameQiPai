@@ -10,7 +10,6 @@
     <version>1.0</version>
     <modules>
         <module>LCommModule</module>
-        <module>LGame</module>
         <module>CoreGame</module>
         <module>MjGame</module>
     </modules>
