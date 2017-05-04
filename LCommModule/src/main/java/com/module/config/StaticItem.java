@@ -5,7 +5,8 @@
  */
 package com.module.config;
 
-import com.config.annotation.Resource;
+import com.lgame.util.load.annotation.Id;
+import com.lgame.util.load.annotation.Resource;
 import com.module.EffectData;
 import com.module.Quality;
 import com.module.Type;
@@ -20,6 +21,7 @@ import java.util.List;
 @Resource
 public class StaticItem {
 
+    @Id
     private int id;
     private String name;
     private String icon_id;//道具icon

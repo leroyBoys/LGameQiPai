@@ -6,7 +6,8 @@
 package com.module.config;
 
 
-import com.config.annotation.Resource;
+import com.lgame.util.load.annotation.Id;
+import com.lgame.util.load.annotation.Resource;
 
 /**
  * 杂表
@@ -14,7 +15,8 @@ import com.config.annotation.Resource;
  */
 @Resource
 public class StaticConfig {
-    
+
+    @Id
     private ZabiaoConfigType type;
     
     private String content;

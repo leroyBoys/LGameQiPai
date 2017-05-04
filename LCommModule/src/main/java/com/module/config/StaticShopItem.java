@@ -5,8 +5,8 @@
  */
 package com.module.config;
 
-import com.config.annotation.Id;
-import com.config.annotation.Resource;
+import com.lgame.util.load.annotation.Id;
+import com.lgame.util.load.annotation.Resource;
 import com.module.Type;
 
 import java.util.ArrayList;
