@@ -15,6 +15,7 @@ import com.module.core.ResponseCode;
  */
 public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
     private int roomId;
+    private int module;
     public UserVistor(GameSocket socketServer, org.apache.mina.core.session.IoSession ioSession, long timeOutTime) {
         super(socketServer, ioSession, timeOutTime);
     }
@@ -44,5 +45,13 @@ public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
 
     public int getRoomId() {
         return roomId;
+    }
+
+    public int getModule() {
+        return module;
+    }
+
+    public void setModule(int module) {
+        this.module = module;
     }
 }

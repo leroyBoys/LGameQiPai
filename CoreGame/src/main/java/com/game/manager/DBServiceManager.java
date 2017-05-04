@@ -1,14 +1,18 @@
 package com.game.manager;
 
 import com.game.core.dao.mysql.ServerService;
+import com.game.core.dao.mysql.UserDao;
+import com.game.core.dao.redis.UserRedis;
+import com.game.core.service.UserService;
+import com.game.core.service.impl.UserServiceImpl;
 import com.lgame.util.comm.StringTool;
 import com.lgame.util.file.PropertiesTool;
 import com.lsocket.core.ICommon;
 import com.module.GameServer;
 import com.module.ServerGroup;
 import com.mysql.impl.SqlPool;
+import com.redis.impl.RedisConnectionManager;
 
-import java.util.List;
 import java.util.Properties;
 
 /**
@@ -16,16 +20,14 @@ import java.util.Properties;
  */
 public class DBServiceManager extends ICommon {
     private static DBServiceManager dbServiceManager = null;
-    private Properties properties;
     private DBServiceManager(){
     }
 
-    public synchronized static DBServiceManager getInstance(Properties properties){
+    public synchronized static DBServiceManager getInstance(){
         if(dbServiceManager != null){
             return dbServiceManager;
         }
         dbServiceManager = new DBServiceManager();
-        dbServiceManager.properties = properties;
         return dbServiceManager;
     }
 
@@ -34,6 +36,10 @@ public class DBServiceManager extends ICommon {
     private GameServer gameServer;
     private ServerGroup serverGroup;
     private ServerService serverService;
+
+   // private UserRedis userRedis;
+    private UserService userService;
+  //  private UserDao userDao;
 
     private Properties getProperties(SqlPool.DataSourceType sourceType){
         if(sourceType == SqlPool.DataSourceType.Druid){
@@ -80,8 +86,16 @@ public class DBServiceManager extends ICommon {
     }
 
     protected void initService(){
-        loadConfig(properties);
-        // RedisConnectionManager redisConnectionManager = new RedisConnectionManager(properties);
+        loadConfig(PropertiesTool.loadProperty("server.properties"));
+        //RedisConnectionManager redisConnectionManager = new RedisConnectionManager(properties);
+
+        Properties redisProperties = PropertiesTool.loadProperty("redis.properties");
+        Properties masterProperties = new Properties();
+
+        RedisConnectionManager redisConnectionManager = new RedisConnectionManager(masterProperties);
+        this.userService = new UserServiceImpl(new UserDao(commUserPool,commGamePool),new UserRedis(redisConnectionManager));
+
+
     }
 
     @Override
@@ -111,5 +125,9 @@ public class DBServiceManager extends ICommon {
 
     public ServerService getServerService() {
         return serverService;
+    }
+
+    public UserService getUserService() {
+        return userService;
     }
 }

@@ -4,15 +4,16 @@ import com.game.codec.RequestDecoderRemote;
 import com.game.codec.ResponseEncoderRemote;
 import com.game.control.CoreDispatcherRmote;
 import com.game.listen.GameHeartLinster;
+import com.game.manager.CoreServiceManager;
+import com.game.manager.DBServiceManager;
 import com.game.socket.module.UserVistor;
-import com.game.util.GateVisitor;
+import com.lgame.util.file.PropertiesTool;
 import com.lsocket.codec.RequestDecoder;
 import com.lsocket.codec.ResponseEncoder;
 import com.lsocket.config.SocketConfig;
 import com.lsocket.core.SocketServer;
 import com.lsocket.listen.HeartListen;
 import com.lsocket.module.ModuleDispaterInstance;
-import com.lsocket.module.Visitor;
 import org.apache.mina.core.session.IoSession;
 
 import java.util.LinkedList;
@@ -27,8 +28,8 @@ public class GameSocket extends SocketServer<UserVistor>{
 
     private GameSocket(){
         super(new CoreDispatcherRmote());
-       // DBServiceManager.getInstance(PropertiesTool.loadProperty("server.properties")).load();
-        //CoreServiceManager.getIntance().load();
+       DBServiceManager.getInstance().load();
+       CoreServiceManager.getIntance().load();
     }
 
     public static GameSocket getIntance(){

@@ -26,25 +26,25 @@ public final class NetParentOld {
     com.google.protobuf.ByteString
         getSnBytes();
 
-    // required bytes obj = 2;
+    // required int32 cmd = 2;
     /**
-     * <code>required bytes obj = 2;</code>
-     */
-    boolean hasObj();
-    /**
-     * <code>required bytes obj = 2;</code>
-     */
-    com.google.protobuf.ByteString getObj();
-
-    // required int32 cmd = 3;
-    /**
-     * <code>required int32 cmd = 3;</code>
+     * <code>required int32 cmd = 2;</code>
      */
     boolean hasCmd();
     /**
-     * <code>required int32 cmd = 3;</code>
+     * <code>required int32 cmd = 2;</code>
      */
     int getCmd();
+
+    // required int32 status = 3;
+    /**
+     * <code>required int32 status = 3;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>required int32 status = 3;</code>
+     */
+    int getStatus();
 
     // required int32 time = 4;
     /**
@@ -56,13 +56,33 @@ public final class NetParentOld {
      */
     int getTime();
 
-    // required int32 seq = 5;
+    // required bytes obj = 5;
     /**
-     * <code>required int32 seq = 5;</code>
+     * <code>required bytes obj = 5;</code>
+     */
+    boolean hasObj();
+    /**
+     * <code>required bytes obj = 5;</code>
+     */
+    com.google.protobuf.ByteString getObj();
+
+    // required int32 uid = 6;
+    /**
+     * <code>required int32 uid = 6;</code>
+     */
+    boolean hasUid();
+    /**
+     * <code>required int32 uid = 6;</code>
+     */
+    int getUid();
+
+    // required int32 seq = 7;
+    /**
+     * <code>required int32 seq = 7;</code>
      */
     boolean hasSeq();
     /**
-     * <code>required int32 seq = 5;</code>
+     * <code>required int32 seq = 7;</code>
      */
     int getSeq();
   }
@@ -122,14 +142,14 @@ public final class NetParentOld {
               sn_ = input.readBytes();
               break;
             }
-            case 18: {
+            case 16: {
               bitField0_ |= 0x00000002;
-              obj_ = input.readBytes();
+              cmd_ = input.readInt32();
               break;
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              cmd_ = input.readInt32();
+              status_ = input.readInt32();
               break;
             }
             case 32: {
@@ -137,8 +157,18 @@ public final class NetParentOld {
               time_ = input.readInt32();
               break;
             }
-            case 40: {
+            case 42: {
               bitField0_ |= 0x00000010;
+              obj_ = input.readBytes();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              uid_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
               seq_ = input.readInt32();
               break;
             }
@@ -225,36 +255,36 @@ public final class NetParentOld {
       }
     }
 
-    // required bytes obj = 2;
-    public static final int OBJ_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString obj_;
+    // required int32 cmd = 2;
+    public static final int CMD_FIELD_NUMBER = 2;
+    private int cmd_;
     /**
-     * <code>required bytes obj = 2;</code>
+     * <code>required int32 cmd = 2;</code>
      */
-    public boolean hasObj() {
+    public boolean hasCmd() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required bytes obj = 2;</code>
-     */
-    public com.google.protobuf.ByteString getObj() {
-      return obj_;
-    }
-
-    // required int32 cmd = 3;
-    public static final int CMD_FIELD_NUMBER = 3;
-    private int cmd_;
-    /**
-     * <code>required int32 cmd = 3;</code>
-     */
-    public boolean hasCmd() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required int32 cmd = 3;</code>
+     * <code>required int32 cmd = 2;</code>
      */
     public int getCmd() {
       return cmd_;
+    }
+
+    // required int32 status = 3;
+    public static final int STATUS_FIELD_NUMBER = 3;
+    private int status_;
+    /**
+     * <code>required int32 status = 3;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int32 status = 3;</code>
+     */
+    public int getStatus() {
+      return status_;
     }
 
     // required int32 time = 4;
@@ -273,17 +303,49 @@ public final class NetParentOld {
       return time_;
     }
 
-    // required int32 seq = 5;
-    public static final int SEQ_FIELD_NUMBER = 5;
-    private int seq_;
+    // required bytes obj = 5;
+    public static final int OBJ_FIELD_NUMBER = 5;
+    private com.google.protobuf.ByteString obj_;
     /**
-     * <code>required int32 seq = 5;</code>
+     * <code>required bytes obj = 5;</code>
      */
-    public boolean hasSeq() {
+    public boolean hasObj() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required int32 seq = 5;</code>
+     * <code>required bytes obj = 5;</code>
+     */
+    public com.google.protobuf.ByteString getObj() {
+      return obj_;
+    }
+
+    // required int32 uid = 6;
+    public static final int UID_FIELD_NUMBER = 6;
+    private int uid_;
+    /**
+     * <code>required int32 uid = 6;</code>
+     */
+    public boolean hasUid() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required int32 uid = 6;</code>
+     */
+    public int getUid() {
+      return uid_;
+    }
+
+    // required int32 seq = 7;
+    public static final int SEQ_FIELD_NUMBER = 7;
+    private int seq_;
+    /**
+     * <code>required int32 seq = 7;</code>
+     */
+    public boolean hasSeq() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>required int32 seq = 7;</code>
      */
     public int getSeq() {
       return seq_;
@@ -291,9 +353,11 @@ public final class NetParentOld {
 
     private void initFields() {
       sn_ = "";
-      obj_ = com.google.protobuf.ByteString.EMPTY;
       cmd_ = 0;
+      status_ = 0;
       time_ = 0;
+      obj_ = com.google.protobuf.ByteString.EMPTY;
+      uid_ = 0;
       seq_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -305,15 +369,23 @@ public final class NetParentOld {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasObj()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       if (!hasCmd()) {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasStatus()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       if (!hasTime()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasObj()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasUid()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -332,16 +404,22 @@ public final class NetParentOld {
         output.writeBytes(1, getSnBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, obj_);
+        output.writeInt32(2, cmd_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, cmd_);
+        output.writeInt32(3, status_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, time_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, seq_);
+        output.writeBytes(5, obj_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, uid_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, seq_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -358,11 +436,11 @@ public final class NetParentOld {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, obj_);
+          .computeInt32Size(2, cmd_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, cmd_);
+          .computeInt32Size(3, status_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -370,7 +448,15 @@ public final class NetParentOld {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, seq_);
+          .computeBytesSize(5, obj_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, uid_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, seq_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -490,14 +576,18 @@ public final class NetParentOld {
         super.clear();
         sn_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        obj_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
         cmd_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
         time_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        seq_ = 0;
+        obj_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000010);
+        uid_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        seq_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -533,17 +623,25 @@ public final class NetParentOld {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.obj_ = obj_;
+        result.cmd_ = cmd_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.cmd_ = cmd_;
+        result.status_ = status_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
         result.time_ = time_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
+        }
+        result.obj_ = obj_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.uid_ = uid_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
         }
         result.seq_ = seq_;
         result.bitField0_ = to_bitField0_;
@@ -567,14 +665,20 @@ public final class NetParentOld {
           sn_ = other.sn_;
           onChanged();
         }
-        if (other.hasObj()) {
-          setObj(other.getObj());
-        }
         if (other.hasCmd()) {
           setCmd(other.getCmd());
         }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
         if (other.hasTime()) {
           setTime(other.getTime());
+        }
+        if (other.hasObj()) {
+          setObj(other.getObj());
+        }
+        if (other.hasUid()) {
+          setUid(other.getUid());
         }
         if (other.hasSeq()) {
           setSeq(other.getSeq());
@@ -588,15 +692,23 @@ public final class NetParentOld {
           
           return false;
         }
-        if (!hasObj()) {
-          
-          return false;
-        }
         if (!hasCmd()) {
           
           return false;
         }
+        if (!hasStatus()) {
+          
+          return false;
+        }
         if (!hasTime()) {
+          
+          return false;
+        }
+        if (!hasObj()) {
+          
+          return false;
+        }
+        if (!hasUid()) {
           
           return false;
         }
@@ -700,71 +812,68 @@ public final class NetParentOld {
         return this;
       }
 
-      // required bytes obj = 2;
-      private com.google.protobuf.ByteString obj_ = com.google.protobuf.ByteString.EMPTY;
+      // required int32 cmd = 2;
+      private int cmd_ ;
       /**
-       * <code>required bytes obj = 2;</code>
+       * <code>required int32 cmd = 2;</code>
        */
-      public boolean hasObj() {
+      public boolean hasCmd() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required bytes obj = 2;</code>
-       */
-      public com.google.protobuf.ByteString getObj() {
-        return obj_;
-      }
-      /**
-       * <code>required bytes obj = 2;</code>
-       */
-      public Builder setObj(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        obj_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required bytes obj = 2;</code>
-       */
-      public Builder clearObj() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        obj_ = getDefaultInstance().getObj();
-        onChanged();
-        return this;
-      }
-
-      // required int32 cmd = 3;
-      private int cmd_ ;
-      /**
-       * <code>required int32 cmd = 3;</code>
-       */
-      public boolean hasCmd() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>required int32 cmd = 3;</code>
+       * <code>required int32 cmd = 2;</code>
        */
       public int getCmd() {
         return cmd_;
       }
       /**
-       * <code>required int32 cmd = 3;</code>
+       * <code>required int32 cmd = 2;</code>
        */
       public Builder setCmd(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         cmd_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 cmd = 3;</code>
+       * <code>required int32 cmd = 2;</code>
        */
       public Builder clearCmd() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         cmd_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 status = 3;
+      private int status_ ;
+      /**
+       * <code>required int32 status = 3;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 status = 3;</code>
+       */
+      public int getStatus() {
+        return status_;
+      }
+      /**
+       * <code>required int32 status = 3;</code>
+       */
+      public Builder setStatus(int value) {
+        bitField0_ |= 0x00000004;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 status = 3;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        status_ = 0;
         onChanged();
         return this;
       }
@@ -802,34 +911,103 @@ public final class NetParentOld {
         return this;
       }
 
-      // required int32 seq = 5;
-      private int seq_ ;
+      // required bytes obj = 5;
+      private com.google.protobuf.ByteString obj_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required int32 seq = 5;</code>
+       * <code>required bytes obj = 5;</code>
        */
-      public boolean hasSeq() {
+      public boolean hasObj() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required int32 seq = 5;</code>
+       * <code>required bytes obj = 5;</code>
+       */
+      public com.google.protobuf.ByteString getObj() {
+        return obj_;
+      }
+      /**
+       * <code>required bytes obj = 5;</code>
+       */
+      public Builder setObj(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        obj_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes obj = 5;</code>
+       */
+      public Builder clearObj() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        obj_ = getDefaultInstance().getObj();
+        onChanged();
+        return this;
+      }
+
+      // required int32 uid = 6;
+      private int uid_ ;
+      /**
+       * <code>required int32 uid = 6;</code>
+       */
+      public boolean hasUid() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>required int32 uid = 6;</code>
+       */
+      public int getUid() {
+        return uid_;
+      }
+      /**
+       * <code>required int32 uid = 6;</code>
+       */
+      public Builder setUid(int value) {
+        bitField0_ |= 0x00000020;
+        uid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 uid = 6;</code>
+       */
+      public Builder clearUid() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        uid_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 seq = 7;
+      private int seq_ ;
+      /**
+       * <code>required int32 seq = 7;</code>
+       */
+      public boolean hasSeq() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>required int32 seq = 7;</code>
        */
       public int getSeq() {
         return seq_;
       }
       /**
-       * <code>required int32 seq = 5;</code>
+       * <code>required int32 seq = 7;</code>
        */
       public Builder setSeq(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000040;
         seq_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 seq = 5;</code>
+       * <code>required int32 seq = 7;</code>
        */
       public Builder clearSeq() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000040);
         seq_ = 0;
         onChanged();
         return this;
@@ -860,10 +1038,11 @@ public final class NetParentOld {
       descriptor;
   static {
     String[] descriptorData = {
-      "\n\030proto/NetParentOld.proto\"M\n\nNetCommond" +
-      "\022\n\n\002sn\030\001 \002(\t\022\013\n\003obj\030\002 \002(\014\022\013\n\003cmd\030\003 \002(\005\022\014" +
-      "\n\004time\030\004 \002(\005\022\013\n\003seq\030\005 \002(\005B\036\n\016com.module." +
-      "netB\014NetParentOld"
+      "\n\030proto/NetParentOld.proto\"j\n\nNetCommond" +
+      "\022\n\n\002sn\030\001 \002(\t\022\013\n\003cmd\030\002 \002(\005\022\016\n\006status\030\003 \002(" +
+      "\005\022\014\n\004time\030\004 \002(\005\022\013\n\003obj\030\005 \002(\014\022\013\n\003uid\030\006 \002(" +
+      "\005\022\013\n\003seq\030\007 \002(\005B\036\n\016com.module.netB\014NetPar" +
+      "entOld"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -875,7 +1054,7 @@ public final class NetParentOld {
           internal_static_NetCommond_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_NetCommond_descriptor,
-              new String[] { "Sn", "Obj", "Cmd", "Time", "Seq", });
+              new String[] { "Sn", "Cmd", "Status", "Time", "Obj", "Uid", "Seq", });
           return null;
         }
       };

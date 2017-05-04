@@ -1,11 +1,14 @@
 package com.game.codec;
 
+import com.game.core.service.UserService;
+import com.game.manager.DBServiceManager;
 import com.game.manager.OnlineKeyManager;
 import com.game.manager.OnlineManager;
 import com.game.socket.module.UserVistor;
 import com.lgame.util.PrintTool;
 import com.lgame.util.comm.Tools;
 import com.lgame.util.encry.MD5Tool;
+import com.lgame.util.encry.ZipTool;
 import com.lsocket.codec.RequestDecoder;
 import com.lsocket.handler.CmdModule;
 import com.lsocket.manager.CMDManager;
@@ -14,6 +17,7 @@ import com.lsocket.message.Response;
 import com.lsocket.util.ReceiveData;
 import com.lsocket.util.SocketConstant;
 import com.module.core.ResponseCode;
+import com.module.net.DB;
 import com.module.net.NetParentOld;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
@@ -61,14 +65,11 @@ public class RequestDecoderRemote extends RequestDecoder {
             byte[] b = new byte[size];
             input.get(b);
             NetParentOld.NetCommond commond = NetParentOld.NetCommond.parseFrom(b);
-            int cmd_c_old = commond.getCmd();
-            int mod = cmd_c_old / 1000;
-            int cmd = cmd_c_old - mod * 1000;
+            int cmd_c = commond.getCmd();
 
-            int cmd_c = CMDManager.getCmd_M(mod,cmd);
             CmdModule cmdModule = CMDManager.getIntance().getCmdModule(cmd_c);
             if(cmdModule == null){
-                PrintTool.error("not find module:"+mod+"  cmd:"+cmd);
+                PrintTool.error("not find module:"+CMDManager.getModule(cmd_c)+"  cmd:"+CMDManager.getCmd(cmd_c));
                 return input.hasRemaining();
             }
 
@@ -79,23 +80,32 @@ public class RequestDecoderRemote extends RequestDecoder {
             }
 
             if(vistor.getUid() <= 0){
-                PrintTool.error("not find module:"+mod+"  cmd:"+cmd);
-                session.write(getError(ResponseCode.Error.login_timeout,commond.getSeq(),cmd_c_old));
+                session.write(getError(ResponseCode.Error.login_timeout,commond.getSeq(),cmd_c));
                 session.closeNow();
                 return false;//父类接收新数据
             }
-            byte[] data = commond.getObj().toByteArray();
-            Request request = cmdModule.getRequset(data,cmd_c,commond.getSeq());
+
 
             //检验是否正确
-            String key = OnlineKeyManager.getIntance().getUserById(vistor.getUid());
-            if(key == null || !MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.getBytes())).equals(commond.getSn())){
-                PrintTool.error("can not find uid:"+vistor.getUid()+" 的 Key:"+key);
-                session.write(getError(ResponseCode.Error.key_error,commond.getSeq(),cmd_c_old));
-                session.closeNow();
-                return false;//父类接收新数据
+            UserService userService = DBServiceManager.getDbServiceManager().getUserService();
+            DB.UK key = userService.getUserKey(vistor.getUid(),false);
+
+            byte[] data = null;
+            if(commond.getObj() != null){//秘钥验证
+
+                data = commond.getObj().toByteArray();
+                if(key == null || !MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.toByteArray())).equals(commond.getSn())){
+                    PrintTool.error("can not find uid:"+vistor.getUid()+" 的 Key:"+(key==null?"null":key.toString()));
+                    session.write(getError(ResponseCode.Error.key_error,commond.getSeq(),cmd_c));
+                    session.closeNow();
+                    return false;//父类接收新数据
+                }
+
+                data = ZipTool.uncompressBytes(data);//解压缩
             }
 
+            vistor.setModule(CMDManager.getModule(cmd_c));
+            Request request = cmdModule.getRequset(data,cmd_c,commond.getSeq());
             out.write(request);
             return input.hasRemaining();
         }
