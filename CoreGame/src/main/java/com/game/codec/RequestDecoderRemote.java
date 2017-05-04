@@ -4,6 +4,7 @@ import com.game.core.service.UserService;
 import com.game.manager.DBServiceManager;
 import com.game.manager.OnlineKeyManager;
 import com.game.manager.OnlineManager;
+import com.game.manager.TimeCacheManager;
 import com.game.socket.module.UserVistor;
 import com.lgame.util.PrintTool;
 import com.lgame.util.comm.Tools;
@@ -57,6 +58,7 @@ public class RequestDecoderRemote extends RequestDecoder {
                 return input.hasRemaining();
             }
 
+            TimeCacheManager.getInstance().setCurTime(System.currentTimeMillis());
             UserVistor vistor = (UserVistor) session.getAttribute(SocketConstant.SessionKey.vistorKey);
             if(!cmdModule.isRequireOnline()){
                 Request request = cmdModule.getRequset(commond.getObj().toByteArray(),cmd_c,commond.getSeq());

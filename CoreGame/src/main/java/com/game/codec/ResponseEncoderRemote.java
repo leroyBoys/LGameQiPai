@@ -2,6 +2,7 @@ package com.game.codec;
 
 import com.game.core.service.UserService;
 import com.game.manager.DBServiceManager;
+import com.game.manager.TimeCacheManager;
 import com.game.socket.module.UserVistor;
 import com.google.protobuf.ByteString;
 import com.lgame.util.PrintTool;
@@ -74,7 +75,7 @@ public class ResponseEncoderRemote extends ResponseEncoder {
         NetParentOld.NetCommond.Builder com = NetParentOld.NetCommond.newBuilder();
 
         com.setCmd(response.getM_cmd());
-        com.setTime((int) (new Date().getTime() / 1000));
+        com.setTime((int) (TimeCacheManager.getInstance().getCurTime() / 1000));
         com.setStatus(response.getStatus());
         int seq = response.getSeq();
         com.setSeq(seq);
