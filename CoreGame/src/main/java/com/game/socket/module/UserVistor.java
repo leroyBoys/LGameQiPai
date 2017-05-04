@@ -16,6 +16,9 @@ import com.module.core.ResponseCode;
 public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
     private int roomId;
     private int module;
+    private long heartTime;
+    private int heartNum;
+
     public UserVistor(GameSocket socketServer, org.apache.mina.core.session.IoSession ioSession, long timeOutTime) {
         super(socketServer, ioSession, timeOutTime);
     }
@@ -53,5 +56,21 @@ public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
 
     public void setModule(int module) {
         this.module = module;
+    }
+
+    public long getHeartTime() {
+        return heartTime;
+    }
+
+    public void setHeartTime(long heartTime) {
+        this.heartTime = heartTime;
+    }
+
+    public int getHeartNum() {
+        return heartNum;
+    }
+
+    public void setHeartNum(int heartNum) {
+        this.heartNum = heartNum;
     }
 }

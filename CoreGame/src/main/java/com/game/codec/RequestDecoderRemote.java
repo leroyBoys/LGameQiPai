@@ -14,6 +14,7 @@ import com.lsocket.handler.CmdModule;
 import com.lsocket.manager.CMDManager;
 import com.lsocket.message.Request;
 import com.lsocket.message.Response;
+import com.lsocket.util.DefaultSocketPackage;
 import com.lsocket.util.ReceiveData;
 import com.lsocket.util.SocketConstant;
 import com.module.core.ResponseCode;
@@ -30,26 +31,9 @@ import java.io.IOException;
  */
 public class RequestDecoderRemote extends RequestDecoder {
 
-    protected void sendHeard(IoSession session){
-
-    }
-
     protected boolean doDecode(IoSession session, IoBuffer input, ProtocolDecoderOutput out) throws Exception {
         int remainSize = input.remaining();
         if (remainSize > 0) {
-            input.mark();// 标记当前位置，以便reset
-            byte header = input.get();
-            if((header&1) == 1){
-                if(socketServer.getHeartListen() != null && !socketServer.getHeartListen().checkHeart(session)){//是否合法
-                    session.closeNow();
-                    return false;//父类接收新数据
-                }else {
-                    sendHeard(session);
-                }
-                return input.hasRemaining();
-            }
-
-            input.reset();
             if (input.remaining() <= 4) {
                 return true;
             }
@@ -75,7 +59,9 @@ public class RequestDecoderRemote extends RequestDecoder {
 
             UserVistor vistor = (UserVistor) session.getAttribute(SocketConstant.SessionKey.vistorKey);
             if(!cmdModule.isRequireOnline()){
-                out.write(cmdModule.getRequset(commond.getObj().toByteArray(),cmd_c,commond.getSeq()));
+                Request request = cmdModule.getRequset(commond.getObj().toByteArray(),cmd_c,commond.getSeq());
+                request.addAttribute("sn",commond.getSn());
+                out.write(request);
                 return input.hasRemaining();
             }
 
@@ -84,7 +70,6 @@ public class RequestDecoderRemote extends RequestDecoder {
                 session.closeNow();
                 return false;//父类接收新数据
             }
-
 
             //检验是否正确
             UserService userService = DBServiceManager.getDbServiceManager().getUserService();

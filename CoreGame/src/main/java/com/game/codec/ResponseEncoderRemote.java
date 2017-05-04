@@ -55,7 +55,7 @@ public class ResponseEncoderRemote extends ResponseEncoder {
     }
 
 
-    public IoBuffer transformByteArray(byte[] bytes) {
+    public static IoBuffer transformByteArray(byte[] bytes) {
         if ((bytes == null) || (bytes.length == 0)) {
             return null;
         }

@@ -11,6 +11,13 @@
 
     <artifactId>CoreGame</artifactId>
     <version>1.0</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.lqipai</groupId>
+            <artifactId>LCommModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 
 
 </project>
