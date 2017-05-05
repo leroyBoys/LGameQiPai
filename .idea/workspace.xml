@@ -2,35 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bedc4f3-1a3d-4782-abd8-99410af2310a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__LCommPack_LBaseLog_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__LCommPack_LBaseTool_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__LCommPack_LDBConnection_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__LCommPack_LSocket_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_2_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_rhcloud_mongodb_mongo_api_0_2_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_5.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_ant_ant_1_8_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_ant_ant_launcher_1_8_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_3_9.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_excelant_3_9.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_3_9.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_schemas_3_9.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_2_3_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongo_java_driver_2_10_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__stax_stax_api_1_0_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/util/DbTraceData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/util/GameConst.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/util/MethodCacheTime.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/dao/mysql/UserDao.java" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/dao/mysql/UserDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/service/UserService.java" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/service/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/service/impl/UserServiceImpl.java" afterPath="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/service/impl/UserServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LGameQiPai.iml" afterPath="$PROJECT_DIR$/LGameQiPai.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MjGame/MjGame.iml" afterPath="$PROJECT_DIR$/MjGame/MjGame.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MjGame/pom.xml" afterPath="$PROJECT_DIR$/MjGame/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -62,8 +35,8 @@
       <file leaf-file-name="UserDao.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/dao/mysql/UserDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="41" column="20" lean-forward="false" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+            <state relative-caret-position="54">
+              <caret line="2" column="3" lean-forward="false" selection-start-line="2" selection-start-column="3" selection-end-line="9" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -74,11 +47,9 @@
       <file leaf-file-name="UserService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/service/UserService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1603">
-              <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="189">
+              <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -202,12 +173,12 @@
         <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/db/UserInfo.java" />
         <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/db/RoleInfo.java" />
         <option value="$PROJECT_DIR$/LCommModule/src/main/java/com/module/db/UserSet.java" />
-        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/dao/mysql/UserDao.java" />
         <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/service/BaseItemService.java" />
         <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/service/impl/BaseItemServiceImpl.java" />
         <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/service/UserService.java" />
         <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/service/impl/UserServiceImpl.java" />
         <option value="$PROJECT_DIR$/ssssssssssss.patch" />
+        <option value="$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/dao/mysql/UserDao.java" />
       </list>
     </option>
   </component>
@@ -794,7 +765,7 @@
       <workItem from="1492686619127" duration="616000" />
       <workItem from="1492746721868" duration="1852000" />
       <workItem from="1493342629742" duration="2714000" />
-      <workItem from="1493724228517" duration="53936000" />
+      <workItem from="1493724228517" duration="54011000" />
     </task>
     <task id="LOCAL-00001" summary="sssssssssssss">
       <created>1492572646571</created>
@@ -922,11 +893,18 @@
       <option name="project" value="LOCAL" />
       <updated>1493963771836</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="chushihua222222222">
+      <created>1493963799397</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1493963799397</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61078000" />
+    <option name="totallyTimeSpent" value="61153000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1417,10 +1395,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ssssssssssss.patch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/dao/mysql/UserDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="41" column="20" lean-forward="false" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+        <state relative-caret-position="54">
+          <caret line="2" column="3" lean-forward="false" selection-start-line="2" selection-start-column="3" selection-end-line="9" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1429,18 +1415,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CoreGame/src/main/java/com/game/core/service/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1603">
-          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ssssssssssss.patch">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="189">
+          <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
           <folding />
         </state>
       </provider>
