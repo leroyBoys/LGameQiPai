@@ -69,12 +69,6 @@ public interface UserService {
 
     public int getMoney(int uid);
 
-    public int getGold(int uid);
-
     public int addMoney(int uid, int needMoney, LogType logFrom,int logId);
-
-    public int addGold(int uid, int needGold, LogType logFrom,int logId);
-
-    public void setSkillPoint(int roleId, int skillPoint);
 
 }

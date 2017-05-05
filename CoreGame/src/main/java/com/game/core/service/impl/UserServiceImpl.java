@@ -4,6 +4,7 @@ import com.game.core.dao.mysql.UserDao;
 import com.game.core.dao.redis.UserRedis;
 import com.game.core.service.UserService;
 import com.game.manager.OnlineKeyManager;
+import com.game.manager.OnlineManager;
 import com.logger.type.LogType;
 import com.module.CustomKey;
 import com.module.ItemData;
@@ -50,107 +51,123 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isOnline(int uid) {
-        return false;
+        return OnlineManager.getIntance().getUserById(uid) != null;
     }
 
     @Override
     public UserInfo getUserInfo(String userName, String pwd) {
-        return null;
+        UserInfo userInfo = userDao.getUserInfo(userName);
+        if(userInfo == null || !pwd.equals(userInfo.getUserPwd())){
+            return null;
+        }
+        return userInfo;
     }
 
     @Override
     public UserInfo getUserInfo(String userName) {
-        return null;
+        return userDao.getUserInfo(userName);
     }
 
     @Override
     public UserInfo getUserInfoFromId(int fromId) {
-        return null;
+        return userDao.getUserInfoFromId(fromId);
     }
 
     @Override
     public UserInfo getUserInfo(int uid) {
-        return null;
+        return userDao.getUserInfo(uid);
     }
 
     @Override
     public boolean updateUserToken(int uid, String key, String ip) {
+        userRedis.setUserKey(uid,ip,key);
         return false;
     }
 
     @Override
     public UserInfo insertUserInfo(UserInfo info) {
-        return null;
+        return userDao.insertUserInfo(info);
     }
 
     @Override
     public UserDev insertDev(String device_info, String device_name, String device_mac, String udid, int os_id) {
-        return null;
+        int devId = findDevId(device_mac, udid);
+        UserDev dev = new UserDev();
+        dev.setCreateDate(new Date());
+        dev.setDeviceInfo(device_info);
+        dev.setDeviceMac(device_mac);
+        dev.setDeviceName(device_name);
+        dev.setOsId(os_id);
+        dev.setUdid(udid);
+        dev.setId(devId);
+        if (devId > 0) {
+            return dev;
+        }
+        return userDao.insertDev(dev);
     }
 
     @Override
     public int findDevId(String device_mc, String udid) {
-        return 0;
+        return userDao.findDevId(device_mc, udid);
     }
 
     @Override
     public UserFrom insertFrom(UserFrom from) {
-        return null;
+        return userDao.insertFrom(from);
     }
 
     @Override
     public boolean updateUserInfoStatus(int uid, Status.UserStatus status, Date endTime) {
-        return false;
+        return userDao.updateUserInfoStatus(uid, status, endTime);
     }
 
     @Override
     public boolean updateUserInfoStatus(int uid, String userName, String pwd, String invite_code) {
-        return false;
+        return userDao.updateUserInfoStatus(uid, userName, pwd, invite_code);
     }
 
     @Override
     public boolean updateUserInfoLastDev(int uid, int devId) {
-        return false;
+        return userDao.updateUserInfoLastDev(uid, devId);
     }
 
     @Override
     public boolean updateUserInfoLoginStatus(int uid, boolean isOnline, Date updateTime) {
-        return false;
+        return userDao.updateUserInfoLoginStatus(uid, isOnline, updateTime);
     }
 
     @Override
     public RoleInfo getRoleInfoByUid(int uid) {
-        return null;
+        return userDao.getRoleInfoByUid(uid);
     }
 
     @Override
     public RoleInfo getRoleInfoById(int id) {
-        return null;
+        return userDao.getRoleInfoById(id);
     }
 
     @Override
     public int createRoleInfo(int uid, String alise, String headImage, byte[] head, int sex, int iv, int exp, int vip) {
-        return 0;
+        return userDao.createRoleInfo(uid, alise, headImage, head, sex, iv, exp, vip);
     }
 
     @Override
     public void updateRoleInfo(RoleInfo info) {
-
     }
 
     @Override
     public boolean updatepwd(int uid, String oldPwd, String newpwd) {
-        return false;
+        return userDao.updatepwd(uid, oldPwd, newpwd);
     }
 
     @Override
     public String getCustom(int uid, CustomKey ck) {
-        return null;
+        return userDao.getCustom(uid, ck);
     }
 
     @Override
     public boolean setCustom(int uid, CustomKey ck, String val) {
-        return false;
+        return userDao.setCustom(uid, ck, val);
     }
 
     @Override
@@ -165,7 +182,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String getAutoName(int sex) {
-        return null;
+        return "tome" + sex;
     }
 
     @Override
@@ -174,22 +191,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int getGold(int uid) {
-        return 0;
-    }
-
-    @Override
     public int addMoney(int uid, int needMoney, LogType logFrom, int logId) {
-        return 0;
-    }
-
-    @Override
-    public int addGold(int uid, int needGold, LogType logFrom, int logId) {
-        return 0;
-    }
-
-    @Override
-    public void setSkillPoint(int roleId, int skillPoint) {
-
+        return getMoney(uid);
     }
 }
