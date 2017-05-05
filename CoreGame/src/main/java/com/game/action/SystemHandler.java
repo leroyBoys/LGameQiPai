@@ -4,17 +4,21 @@ import com.game.codec.ResponseEncoderRemote;
 import com.game.core.constant.GameConst;
 import com.game.core.service.UserService;
 import com.game.manager.DBServiceManager;
+import com.game.manager.OnlineManager;
 import com.game.manager.TimeCacheManager;
 import com.game.socket.GameSocket;
 import com.game.socket.module.UserVistor;
 import com.lgame.util.PrintTool;
 import com.lgame.util.comm.Tools;
 import com.lgame.util.encry.MD5Tool;
+import com.lgame.util.exception.AppException;
 import com.lsocket.control.impl.CoreDispatcher;
 import com.lsocket.handler.ModuleHandler;
 import com.lsocket.message.Request;
 import com.lsocket.message.Response;
+import com.module.Status;
 import com.module.core.ResponseCode;
+import com.module.db.RoleInfo;
 import com.module.db.UserInfo;
 import com.module.net.Com;
 import com.module.net.DB;
@@ -112,7 +116,7 @@ public class SystemHandler extends ModuleHandler {
             return;
         }
 
-        UserInfo userInfo = userService.getUserInfo(vistor.getUid());
+        UserInfo userInfo = userService.getUserInfo(obj.getUid());
         if(userInfo == null){
             vistor.sendError(ResponseCode.Error.user_exit);
             PrintTool.error("cant find uid:"+obj.getUid());
@@ -120,10 +124,45 @@ public class SystemHandler extends ModuleHandler {
             return;
         }
 
-        vistor.setUid(userInfo.getId());
+        connectNow(request,userInfo,vistor,response);
+    }
 
+    private void connectNow(Request request, UserInfo userInfo, UserVistor vistor, Response response) {
+        if (userInfo.getUserStatus() - Status.UserStatus.freeze.getValue() == 0) {
+            if (userInfo.getStatusEndTime() == null || System.currentTimeMillis() - userInfo.getStatusEndTime().getTime() < 0) {
+                vistor.sendError(ResponseCode.Error.free_now);
+                return;
+            }
+        }
+
+        UserService userService = DBServiceManager.getDbServiceManager().getUserService();
+        //发送连接成功
+        RoleInfo info = userService.getRoleInfoByUid(userInfo.getId());
+        if (info == null) {
+            //如果多角色则返回选择页面
+            //如果不是自动初始化
+            info = initRole(userInfo.getId());
+
+            ///初始化创建角色奖励
+            initLoginReward(info);
+        }
+        OnlineManager.getIntance().putOnlineList(userInfo.getId(), info.getId(), vistor);
+        vistor.setCard(info.getCard());
+
+        userService.updateUserInfoLoginStatus(userInfo.getId(), true, new Date());
         //发送登陆成功消息
         vistor.sendMsg(Response.defaultResponse(request.getM_cmd(),request.getSeq()));
     }
 
+    private RoleInfo initRole(int uid) {
+        int sex = -1;
+        RoleInfo info = new RoleInfo(uid, "", "", sex, "");
+        int id = DBServiceManager.getDbServiceManager().getUserService().createRoleInfo(uid, info.getUserAlise(), info.getHeadImage(), info.getUserHead(), sex, info.getUserLv(), (int) info.getUserExp(), info.getVipLevel());
+        info.setId(id);
+        return info;
+    }
+
+    private void initLoginReward(RoleInfo info) {
+
+    }
 }

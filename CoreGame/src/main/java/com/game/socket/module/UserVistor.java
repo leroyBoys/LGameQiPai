@@ -1,8 +1,6 @@
 package com.game.socket.module;
 
 import com.game.socket.GameSocket;
-import com.lsocket.core.SocketServer;
-import com.lsocket.message.ErrorCode;
 import com.lsocket.message.Request;
 import com.lsocket.message.Response;
 import com.lsocket.module.SocketSystemCode;
@@ -14,10 +12,14 @@ import com.module.core.ResponseCode;
  * 2017/4/25.
  */
 public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
+    private int roleId;//roleId
     private int roomId;
     private int module;
     private long heartTime;
     private int heartNum;
+    private int connectErrorCount;
+
+    private int card;
 
     public UserVistor(GameSocket socketServer, org.apache.mina.core.session.IoSession ioSession, long timeOutTime) {
         super(socketServer, ioSession, timeOutTime);
@@ -54,6 +56,14 @@ public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
         return module;
     }
 
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
     public void setModule(int module) {
         this.module = module;
     }
@@ -72,5 +82,21 @@ public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
 
     public void setHeartNum(int heartNum) {
         this.heartNum = heartNum;
+    }
+
+    public int getConnectErrorCount() {
+        return connectErrorCount;
+    }
+
+    public int getCard() {
+        return card;
+    }
+
+    public void setCard(int card) {
+        this.card = card;
+    }
+
+    public void setConnectErrorCount(int connectErrorCount) {
+        this.connectErrorCount = connectErrorCount;
     }
 }
