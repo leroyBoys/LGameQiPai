@@ -5,13 +5,18 @@
  */
 package com.module.db;
 
+import com.mysql.impl.DbFactory;
+
+import java.sql.ResultSet;
 import java.util.Date;
 
 /**
  *
  * @author leroy_boy
  */
-public class UserInfo implements java.io.Serializable {
+public class UserInfo extends DbFactory implements java.io.Serializable {
+    public static final UserInfo instance = new UserInfo();
+
     private int id;
     private int deviceId;
     private int userFromId;
@@ -140,5 +145,29 @@ public class UserInfo implements java.io.Serializable {
 
     public void setLoginOffTime(Date loginOffTime) {
         this.loginOffTime = loginOffTime;
+    }
+
+    @Override
+    public UserInfo create(ResultSet rs) throws Exception {
+        UserInfo userInfo = createNew();
+        userInfo.setCreateDate(rs.getDate("create_date"));
+        userInfo.setDeviceId(rs.getInt("device_id"));
+        userInfo.setId(rs.getInt("id"));
+        userInfo.setInviteCode(rs.getString("invite_code"));
+        userInfo.setIsOnline(rs.getBoolean("is_online"));
+        userInfo.setLoginOffTime(rs.getDate("login_off_time"));
+        userInfo.setLoginTime(rs.getDate("login_time"));
+        userInfo.setRole(rs.getByte("role"));
+        userInfo.setStatusEndTime(rs.getDate("status_endtime"));
+        userInfo.setUserFromId(rs.getInt("user_from_id"));
+        userInfo.setUserName(rs.getString("user_name"));
+        userInfo.setUserStatus(rs.getByte("user_status"));
+
+        return userInfo;
+    }
+
+    @Override
+    protected UserInfo createNew() {
+        return new UserInfo();
     }
 }

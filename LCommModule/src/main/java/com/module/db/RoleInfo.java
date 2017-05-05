@@ -6,14 +6,17 @@
 package com.module.db;
 
 import com.module.Status;
+import com.mysql.impl.DbFactory;
 
+import java.sql.ResultSet;
 import java.util.Date;
 
 /**
  *
  * @author leroy
  */
-public class RoleInfo {
+public class RoleInfo extends DbFactory{
+    public static final RoleInfo instance = new RoleInfo();
 
     private int id;
     private int uid;
@@ -36,6 +39,29 @@ public class RoleInfo {
     private int skillPoint;//技能点
 
     public RoleInfo() {
+    }
+
+    @Override
+    public RoleInfo create(ResultSet rs) throws Exception {
+        RoleInfo role = createNew();
+        role.setCreateDate(rs.getDate("create_date"));
+        role.setHeadImage(rs.getString("head_image"));
+        role.setId(rs.getInt("id"));
+        role.setUid(rs.getInt("uid"));
+        role.setUserAlise(rs.getString("user_alise"));
+        role.setUserExp(rs.getLong("user_exp"));
+        role.setUserHead(rs.getBytes("user_head"));
+        role.setUserLv(rs.getInt("user_lv"));
+        role.setUserSex(rs.getInt("user_sex"));
+        role.setUserStatus(Status.UserStatus.indexOf(rs.getInt("user_status")));
+        role.setVipEndTime(rs.getLong("vip_end_time"));
+        role.setVipLevel(rs.getInt("vip_level"));
+        return role;
+    }
+
+    @Override
+    protected RoleInfo createNew() {
+        return new RoleInfo();
     }
 
     public RoleInfo(int uid, String userAlise, String headImage, int userSex, String signature,int strength) {

@@ -11,31 +11,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../LCommPack/LBaseTool" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/../../LCommPack/LBaseTool/src/main/java" />
-          <root url="file://$MODULE_DIR$/../../LCommPack/LBaseTool/src/test/java" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../LCommPack/LSocket" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/../../LCommPack/LSocket/doc/protoBufAuto/proto/java" />
-          <root url="file://$MODULE_DIR$/../../LCommPack/LSocket/src/main/java" />
-          <root url="file://$MODULE_DIR$/../../LCommPack/LSocket/src/test/java" />
-        </SOURCES>
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-access:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.3" level="project" />
@@ -71,5 +46,20 @@
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP-java7:2.4.11" level="project" />
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.mina:mina-core:2.0.16" level="project" />
+    <orderEntry type="library" name="Maven: LCommPack:LBaseTool:1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi-excelant:3.9" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi:3.9" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.5" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml:3.9" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml-schemas:3.9" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.xmlbeans:xmlbeans:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
+    <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.0.b2" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.ant:ant:1.8.2" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.ant:ant-launcher:1.8.2" level="project" />
+    <orderEntry type="library" name="Maven: LCommPack:LSocket:1.0" level="project" />
+    <orderEntry type="library" name="Maven: LCommPack:LBaseLog:1.0" level="project" />
+    <orderEntry type="library" name="Maven: LCommPack:LDBConnection:1.0" level="project" />
   </component>
 </module>

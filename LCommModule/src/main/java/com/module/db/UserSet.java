@@ -6,12 +6,16 @@
 package com.module.db;
 
 import com.module.SetKey;
+import com.mysql.impl.DbFactory;
+
+import java.sql.ResultSet;
 
 /**
  *
  * @author leroy
  */
-public class UserSet {
+public class UserSet extends DbFactory {
+    public static final UserSet instance = new UserSet();
 
     private int uid;
     private SetKey setKey;
@@ -51,4 +55,17 @@ public class UserSet {
         this.val = val;
     }
 
+    @Override
+    public UserSet create(ResultSet rs) throws Exception {
+        UserSet ut = createNew();
+        ut.setCid(rs.getInt("cid"));
+        ut.setSetKey(SetKey.parse(rs.getInt("pid")));
+        ut.setVal(rs.getString("val"));
+        return ut;
+    }
+
+    @Override
+    protected UserSet createNew() {
+        return new UserSet();
+    }
 }
