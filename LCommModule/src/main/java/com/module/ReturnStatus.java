@@ -33,5 +33,4 @@ public class ReturnStatus {
         this.codeParatrs = codeParatrs;
     }
     
-    
 }
