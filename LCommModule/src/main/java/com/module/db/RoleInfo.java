@@ -9,6 +9,7 @@ import com.module.Status;
 import com.mysql.impl.DbFactory;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -34,9 +35,8 @@ public class RoleInfo extends DbFactory{
     private Date createDate;
     private Status.UserStatus userStatus;//Status.userStatus
 
-    private int strength;//体力
     private String signature;//签名
-    private int skillPoint;//技能点
+    private int card;//0: card
 
     public RoleInfo() {
     }
@@ -56,6 +56,7 @@ public class RoleInfo extends DbFactory{
         role.setUserStatus(Status.UserStatus.indexOf(rs.getInt("user_status")));
         role.setVipEndTime(rs.getLong("vip_end_time"));
         role.setVipLevel(rs.getInt("vip_level"));
+        role.setCard(rs.getInt("card"));
         return role;
     }
 
@@ -64,7 +65,7 @@ public class RoleInfo extends DbFactory{
         return new RoleInfo();
     }
 
-    public RoleInfo(int uid, String userAlise, String headImage, int userSex, String signature,int strength) {
+    public RoleInfo(int uid, String userAlise, String headImage, int userSex, String signature) {
         this.uid = uid;
         this.userAlise = userAlise;
         this.headImage = headImage;
@@ -73,7 +74,6 @@ public class RoleInfo extends DbFactory{
         this.signature = signature;
         this.createDate = new Date();
         this.userStatus = Status.UserStatus.not_create;
-        this.strength = strength;
     }
 
     public String getSignature() {
@@ -188,20 +188,11 @@ public class RoleInfo extends DbFactory{
         this.uid = uid;
     }
 
-    public int getStrength() {
-        return strength;
+    public int getCard() {
+        return card;
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
+    public void setCard(int card) {
+        this.card = card;
     }
-
-    public int getSkillPoint() {
-        return skillPoint;
-    }
-
-    public void setSkillPoint(int skillPoint) {
-        this.skillPoint = skillPoint;
-    }
-
 }
