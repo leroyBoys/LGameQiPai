@@ -5,11 +5,16 @@
  */
 package com.module.db;
 
+import com.mysql.impl.DbFactory;
+
+import java.sql.ResultSet;
+
 /**
  *
  * @author leroy_boy
  */
-public class Version implements java.io.Serializable{
+public class Version extends DbFactory implements java.io.Serializable{
+    public final static Version intance = new Version();
 
     private int id;
     private int src_id;
@@ -100,5 +105,27 @@ public class Version implements java.io.Serializable{
 
     public void setF_ids(String f_ids) {
         this.f_ids = f_ids;
+    }
+
+    @Override
+    public Version create(ResultSet rs) throws Exception {
+        Version v = createNew();
+
+        v.setDown_url(rs.getString("down_url"));
+        v.setF_ids(rs.getString("f_ids"));
+        v.setGame_id(rs.getInt("game_id"));
+        v.setId(rs.getInt("id"));
+        v.setRes_url(rs.getString("res_url"));
+        v.setSever_status(rs.getInt("server_status"));
+        v.setSrc_id(rs.getInt("src_id"));
+        v.setTest_ip(rs.getString("test_ip"));
+        v.setVersion(rs.getString("version"));
+        v.setVersion_test(rs.getString("version_test"));
+        return v;
+    }
+
+    @Override
+    protected Version createNew() {
+        return new Version();
     }
 }

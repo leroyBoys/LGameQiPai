@@ -5,11 +5,17 @@
  */
 package com.module.db;
 
+import com.mysql.impl.DbFactory;
+
+import java.sql.ResultSet;
+
 /**
  *
  * @author leroy_boy
  */
-public class GameNotice implements java.io.Serializable{
+public class GameNotice extends DbFactory implements java.io.Serializable{
+    public static final GameNotice instance = new GameNotice();
+
     private int id;
     private int type;
     private String titleName;
@@ -66,5 +72,21 @@ public class GameNotice implements java.io.Serializable{
         this.endTime = endTime;
     }
 
-    
+
+    @Override
+    public GameNotice create(ResultSet rs) throws Exception {
+        GameNotice g = createNew();
+        g.setEndTime(rs.getString("end_time"));
+        g.setId(rs.getInt("id"));
+        g.setStartTime(rs.getString("start_time"));
+        g.setTitleDesc(rs.getString("title_desc"));
+        g.setTitleName(rs.getString("title_name"));
+        g.setType(rs.getInt("type"));
+        return g;
+    }
+
+    @Override
+    protected GameNotice createNew() {
+        return new GameNotice();
+    }
 }

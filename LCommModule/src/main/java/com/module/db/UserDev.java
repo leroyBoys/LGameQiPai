@@ -5,13 +5,17 @@
  */
 package com.module.db;
 
+import com.mysql.impl.DbFactory;
+
+import java.sql.ResultSet;
 import java.util.Date;
 
 /**
  *
  * @author leroy_boy
  */
-public class UserDev implements java.io.Serializable {
+public class UserDev extends DbFactory implements java.io.Serializable {
+    public static final UserDev instance = new UserDev();
 
     private int id;
     private String deviceInfo;
@@ -75,5 +79,17 @@ public class UserDev implements java.io.Serializable {
 
     public void setUdid(String udid) {
         this.udid = udid;
+    }
+
+    @Override
+    public UserDev create(ResultSet rs) throws Exception {
+        UserDev userDev = createNew();
+
+        return userDev;
+    }
+
+    @Override
+    protected UserDev createNew() {
+        return new UserDev();
     }
 }

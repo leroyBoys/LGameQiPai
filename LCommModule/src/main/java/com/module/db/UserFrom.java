@@ -5,13 +5,17 @@
  */
 package com.module.db;
 
+import com.mysql.impl.DbFactory;
+
+import java.sql.ResultSet;
 import java.util.Date;
 
 /**
  *
  * @author leroy_boy
  */
-public class UserFrom implements java.io.Serializable {
+public class UserFrom extends DbFactory implements java.io.Serializable {
+    public static final UserFrom intance = new UserFrom();
 
     private int id;
     private String userSrc;
@@ -20,6 +24,16 @@ public class UserFrom implements java.io.Serializable {
     private Date createDate;
 
     public UserFrom() {
+    }
+
+    @Override
+    public <T extends DbFactory> T create(ResultSet resultSet) throws Exception {
+        return null;
+    }
+
+    @Override
+    protected <T extends DbFactory> T createNew() {
+        return null;
     }
 
     public UserFrom(int id, String userSrc, String serialNum, String info, Date createDate) {

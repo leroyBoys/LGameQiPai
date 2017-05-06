@@ -5,11 +5,17 @@
  */
 package com.module.db;
 
+import com.mysql.impl.DbFactory;
+
+import java.sql.ResultSet;
+
 /**
  *
  * @author leroy_boy
  */
-public class GameZone implements java.io.Serializable{
+public class GameZone extends DbFactory implements java.io.Serializable{
+    public static final GameZone instance = new GameZone();
+
     private int id;
     private int version_id;
     private String zoneName;
@@ -118,5 +124,27 @@ public class GameZone implements java.io.Serializable{
     public void setUdp_port(int udp_port) {
         this.udp_port = udp_port;
     }
-    
+
+    @Override
+    public GameZone create(ResultSet rs) throws Exception {
+        GameZone v = new GameZone();
+        v.setCuCount(rs.getInt("cur_count"));
+        v.setId(rs.getInt("id"));
+        v.setIp(rs.getString("ip"));
+        v.setMaxCount(rs.getInt("max_count"));
+        v.setPort(rs.getInt("port"));
+        v.setUdp_port(rs.getInt("udp_port"));
+        v.setServerStatus(rs.getByte("server_status"));
+        v.setVersion_id(rs.getInt("g_v_id"));
+        v.setZoneDesc(rs.getString("zone_desc"));
+        v.setZoneIcon(rs.getString("zone_icon"));
+        v.setZoneName(rs.getString("zone_name"));
+        v.setZoneNum(rs.getInt("zone_num"));
+        return v;
+    }
+
+    @Override
+    protected GameZone createNew() {
+        return new GameZone();
+    }
 }
