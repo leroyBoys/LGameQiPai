@@ -5,6 +5,8 @@
  */
 package com.module;
 
+import com.module.core.ResponseCode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class BoxItemReturnData extends ReturnStatus {
     public BoxItemReturnData() {
     }
 
-    public BoxItemReturnData(ResponseCode.Error statuscode,int... paraters) {
+    public BoxItemReturnData(ResponseCode.Error statuscode, int... paraters) {
         super.setStatusCode(statuscode);
         super.setCodeParatrs(paraters);
     }
