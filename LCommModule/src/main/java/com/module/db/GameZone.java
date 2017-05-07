@@ -5,6 +5,7 @@
  */
 package com.module.db;
 
+import com.module.GameServer;
 import com.mysql.impl.DbFactory;
 
 import java.sql.ResultSet;
@@ -28,6 +29,7 @@ public class GameZone extends DbFactory implements java.io.Serializable{
     private int maxCount;
     private int cuCount;
     private byte serverStatus;
+    private GameServer.ServerType serverType;
 
     public int getId() {
         return id;
@@ -121,6 +123,14 @@ public class GameZone extends DbFactory implements java.io.Serializable{
         return udp_port;
     }
 
+    public GameServer.ServerType getServerType() {
+        return serverType;
+    }
+
+    public void setServerType(GameServer.ServerType serverType) {
+        this.serverType = serverType;
+    }
+
     public void setUdp_port(int udp_port) {
         this.udp_port = udp_port;
     }
@@ -128,7 +138,8 @@ public class GameZone extends DbFactory implements java.io.Serializable{
     @Override
     public GameZone create(ResultSet rs) throws Exception {
         GameZone v = new GameZone();
-        v.setCuCount(rs.getInt("cur_count"));
+        //v.setCuCount(rs.getInt("cur_count"));
+        v.setServerType(GameServer.ServerType.valueOf(rs.getString("server_type")));
         v.setId(rs.getInt("id"));
         v.setIp(rs.getString("ip"));
         v.setMaxCount(rs.getInt("max_count"));
