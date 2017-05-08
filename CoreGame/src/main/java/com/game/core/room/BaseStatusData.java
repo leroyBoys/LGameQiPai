@@ -39,6 +39,10 @@ public class BaseStatusData implements SuperCreateNew{
             return getDoneSize();
         }
 
+        public boolean contains(int uid){
+            return doneUids.contains(uid);
+        }
+
         public int getDoneSize(){
             return doneUids.size();
         }

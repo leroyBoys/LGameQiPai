@@ -5,7 +5,7 @@ import com.game.core.TableManager;
 import com.game.core.action.BaseAction;
 import com.game.core.constant.GameConst;
 import com.game.core.factory.TableProducer;
-import com.game.manager.OnlineManager;
+import com.game.manager.DBServiceManager;
 import com.game.manager.TimeCacheManager;
 import com.game.socket.module.UserVistor;
 import com.logger.log.SystemLogger;
@@ -86,10 +86,17 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         addRemoveLock.lock();
         try{
             if(chairMap.size() == chairs.length){
+                visitor.sendError(ResponseCode.Error.room_is_full);
+                return false;
+            }
+
+            if(chairMap.containsKey(visitor.getRoleId())){
                 return false;
             }
 
             Chair chair = createChair(visitor);
+            visitor.setRoomId(this.getId());
+            DBServiceManager.getInstance().getUserService().updateRoleInfoRoomid(visitor.getRoleId(),this.getId());
             chairMap.put(chair.getId(),chair);
             chairs[chairMap.size()-1] = chair;
             chair.setIdx(chairMap.size()-1);
@@ -286,7 +293,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         rqCreateRoom.setOwnerId(this.getOwnerId());
         rqCreateRoom.setGameStatus(this.status.getValue());
         rqCreateRoom.addAllType(typeList);
-        NetGame.NetExtraData.Builder extra = this.getExtra();
+        NetGame.NetExtraData.Builder extra = this.getTableExtrData();
         if(extra != null){
             rqCreateRoom.setExtra(extra);
         }
@@ -303,15 +310,6 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
             }
             netUserDatas.add(getOtherNetUserData(chairs[i]));
         }
-
-        for(int i = 0;i<chairs.length;i++){
-            if(chairs[i] == null || roleid == chairs[i].getId()){
-                continue;
-            }
-            //给其他人发送
-            OnlineManager.getIntance().getUserById(chairs[i].getId()).sendMsg(Response.defaultResponse(GameCommCmd.CREATE_TABLE.getModule(),GameCommCmd.CREATE_TABLE.getValue(),0,me));
-        }
-
         netUserDatas.add(me);
         rqCreateRoom.addAllUsers(netUserDatas);
         return rqCreateRoom.build();
@@ -321,9 +319,9 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
      * 牌局额外数据
      * @return
      */
-    public abstract NetGame.NetExtraData.Builder getExtra();
+    protected abstract NetGame.NetExtraData.Builder getTableExtrData();
 
-    private NetGame.NetUserData getOtherNetUserData(Chair chair){
+    public NetGame.NetUserData getOtherNetUserData(Chair chair){
         NetGame.NetUserData.Builder netUserData = getNetUserData(chair);
         NetGame.NetExtraData extra = getOtherNetExtraData(chair);
         if(extra != null){
@@ -332,7 +330,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         return netUserData.build();
     }
 
-    private NetGame.NetUserData getSelfNetUserData(Chair chair){
+    public NetGame.NetUserData getSelfNetUserData(Chair chair){
         NetGame.NetUserData.Builder netUserData = getNetUserData(chair);
         NetGame.NetExtraData extra = getSelfNetExtraData(chair);
         if(extra != null){
@@ -349,10 +347,24 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         NetGame.NetUserData.Builder netUserData = NetGame.NetUserData.newBuilder();
         netUserData.setUid(chair.getId());
         netUserData.setImage(chair.getImage());
-        netUserData.setStatus(chair.getStatus().getVal());
+        netUserData.setStatus(getChairStatusToClient(chair));
         netUserData.setIdex(chair.getIdx());
         return netUserData;
     }
+
+    public int getChairStatusToClient(Chair chair){
+        int stats = 0 | (chair.isOnline?1:0);
+        stats = stats | (chair.isAuto?1>>1:0);
+
+        boolean isReady = true;
+        if(status.getValue() == 0 && !((BaseStatusData.DefaultStatusData)getStatusData()).contains(chair.getId())){
+            isReady = false;
+        }
+
+        stats = stats | (isReady?1>>2:0);
+        return stats;
+    }
+
     /**
      * 设置房间设置信息
      * @param typeList:0:局数,1:最大番数,2:玩法位集合

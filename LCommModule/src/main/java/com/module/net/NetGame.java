@@ -8750,6 +8750,513 @@ public final class NetGame {
     // @@protoc_insertion_point(class_scope:NetMjUserResult)
   }
 
+  public interface RQEnterRoomOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional .NetUserData user = 1;
+    /**
+     * <code>optional .NetUserData user = 1;</code>
+     */
+    boolean hasUser();
+    /**
+     * <code>optional .NetUserData user = 1;</code>
+     */
+    NetUserData getUser();
+    /**
+     * <code>optional .NetUserData user = 1;</code>
+     */
+    NetUserDataOrBuilder getUserOrBuilder();
+  }
+  /**
+   * Protobuf type {@code RQEnterRoom}
+   */
+  public static final class RQEnterRoom extends
+      com.google.protobuf.GeneratedMessage
+      implements RQEnterRoomOrBuilder {
+    // Use RQEnterRoom.newBuilder() to construct.
+    private RQEnterRoom(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private RQEnterRoom(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RQEnterRoom defaultInstance;
+    public static RQEnterRoom getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public RQEnterRoom getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RQEnterRoom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              NetUserData.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = user_.toBuilder();
+              }
+              user_ = input.readMessage(NetUserData.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(user_);
+                user_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return NetGame.internal_static_RQEnterRoom_descriptor;
+    }
+
+    protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return NetGame.internal_static_RQEnterRoom_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              RQEnterRoom.class, Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<RQEnterRoom> PARSER =
+        new com.google.protobuf.AbstractParser<RQEnterRoom>() {
+      public RQEnterRoom parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RQEnterRoom(input, extensionRegistry);
+      }
+    };
+
+    @Override
+    public com.google.protobuf.Parser<RQEnterRoom> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional .NetUserData user = 1;
+    public static final int USER_FIELD_NUMBER = 1;
+    private NetUserData user_;
+    /**
+     * <code>optional .NetUserData user = 1;</code>
+     */
+    public boolean hasUser() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .NetUserData user = 1;</code>
+     */
+    public NetUserData getUser() {
+      return user_;
+    }
+    /**
+     * <code>optional .NetUserData user = 1;</code>
+     */
+    public NetUserDataOrBuilder getUserOrBuilder() {
+      return user_;
+    }
+
+    private void initFields() {
+      user_ = NetUserData.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, user_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, user_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @Override
+    protected Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static RQEnterRoom parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static RQEnterRoom parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static RQEnterRoom parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static RQEnterRoom parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static RQEnterRoom parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static RQEnterRoom parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static RQEnterRoom parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static RQEnterRoom parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static RQEnterRoom parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static RQEnterRoom parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(RQEnterRoom prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @Override
+    protected Builder newBuilderForType(
+        BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code RQEnterRoom}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements RQEnterRoomOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return NetGame.internal_static_RQEnterRoom_descriptor;
+      }
+
+      protected FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return NetGame.internal_static_RQEnterRoom_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                RQEnterRoom.class, Builder.class);
+      }
+
+      // Construct using com.module.net.NetGame.RQEnterRoom.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getUserFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (userBuilder_ == null) {
+          user_ = NetUserData.getDefaultInstance();
+        } else {
+          userBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return NetGame.internal_static_RQEnterRoom_descriptor;
+      }
+
+      public RQEnterRoom getDefaultInstanceForType() {
+        return RQEnterRoom.getDefaultInstance();
+      }
+
+      public RQEnterRoom build() {
+        RQEnterRoom result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public RQEnterRoom buildPartial() {
+        RQEnterRoom result = new RQEnterRoom(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (userBuilder_ == null) {
+          result.user_ = user_;
+        } else {
+          result.user_ = userBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof RQEnterRoom) {
+          return mergeFrom((RQEnterRoom)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(RQEnterRoom other) {
+        if (other == RQEnterRoom.getDefaultInstance()) return this;
+        if (other.hasUser()) {
+          mergeUser(other.getUser());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        RQEnterRoom parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (RQEnterRoom) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional .NetUserData user = 1;
+      private NetUserData user_ = NetUserData.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          NetUserData, NetUserData.Builder, NetUserDataOrBuilder> userBuilder_;
+      /**
+       * <code>optional .NetUserData user = 1;</code>
+       */
+      public boolean hasUser() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .NetUserData user = 1;</code>
+       */
+      public NetUserData getUser() {
+        if (userBuilder_ == null) {
+          return user_;
+        } else {
+          return userBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .NetUserData user = 1;</code>
+       */
+      public Builder setUser(NetUserData value) {
+        if (userBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          user_ = value;
+          onChanged();
+        } else {
+          userBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .NetUserData user = 1;</code>
+       */
+      public Builder setUser(
+          NetUserData.Builder builderForValue) {
+        if (userBuilder_ == null) {
+          user_ = builderForValue.build();
+          onChanged();
+        } else {
+          userBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .NetUserData user = 1;</code>
+       */
+      public Builder mergeUser(NetUserData value) {
+        if (userBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              user_ != NetUserData.getDefaultInstance()) {
+            user_ =
+              NetUserData.newBuilder(user_).mergeFrom(value).buildPartial();
+          } else {
+            user_ = value;
+          }
+          onChanged();
+        } else {
+          userBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .NetUserData user = 1;</code>
+       */
+      public Builder clearUser() {
+        if (userBuilder_ == null) {
+          user_ = NetUserData.getDefaultInstance();
+          onChanged();
+        } else {
+          userBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .NetUserData user = 1;</code>
+       */
+      public NetUserData.Builder getUserBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getUserFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .NetUserData user = 1;</code>
+       */
+      public NetUserDataOrBuilder getUserOrBuilder() {
+        if (userBuilder_ != null) {
+          return userBuilder_.getMessageOrBuilder();
+        } else {
+          return user_;
+        }
+      }
+      /**
+       * <code>optional .NetUserData user = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          NetUserData, NetUserData.Builder, NetUserDataOrBuilder>
+          getUserFieldBuilder() {
+        if (userBuilder_ == null) {
+          userBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              NetUserData, NetUserData.Builder, NetUserDataOrBuilder>(
+                  user_,
+                  getParentForChildren(),
+                  isClean());
+          user_ = null;
+        }
+        return userBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:RQEnterRoom)
+    }
+
+    static {
+      defaultInstance = new RQEnterRoom(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:RQEnterRoom)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_NetUserData_descriptor;
   private static
@@ -8800,6 +9307,11 @@ public final class NetGame {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_NetMjUserResult_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_RQEnterRoom_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_RQEnterRoom_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -8830,8 +9342,9 @@ public final class NetGame {
       "\001 \001(\005\022\037\n\005users\030\002 \003(\0132\020.NetMjUserResult\"_" +
       "\n\017NetMjUserResult\022\032\n\006scores\030\001 \003(\0132\n.NetK",
       "vData\022\020\n\010showType\030\002 \001(\005\022\017\n\007winType\030\003 \001(\005" +
-      "\022\r\n\005score\030\004 \001(\005B\031\n\016com.module.netB\007NetGa" +
-      "me"
+      "\022\r\n\005score\030\004 \001(\005\")\n\013RQEnterRoom\022\032\n\004user\030\001" +
+      " \001(\0132\014.NetUserDataB\031\n\016com.module.netB\007Ne" +
+      "tGame"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8898,6 +9411,12 @@ public final class NetGame {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_NetMjUserResult_descriptor,
               new String[] { "Scores", "ShowType", "WinType", "Score", });
+          internal_static_RQEnterRoom_descriptor =
+            getDescriptor().getMessageTypes().get(10);
+          internal_static_RQEnterRoom_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_RQEnterRoom_descriptor,
+              new String[] { "User", });
           return null;
         }
       };

@@ -34,7 +34,7 @@ public class DDzTable extends BaseTableVo<DdzStatus,BaseChairInfo> {
     }
 
     @Override
-    public NetGame.NetExtraData.Builder getExtra() {
+    public NetGame.NetExtraData.Builder getTableExtrData() {
         return null;
     }
 

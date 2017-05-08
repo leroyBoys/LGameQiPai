@@ -50,7 +50,7 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     }
 
     @Override
-    public NetGame.NetExtraData.Builder getExtra() {
+    protected NetGame.NetExtraData.Builder getTableExtrData() {
         NetGame.NetExtraData.Builder extra = NetGame.NetExtraData.newBuilder();
         extra.addList(this.getBankId());
         extra.addList(this.getCardPool().getRemainCount());

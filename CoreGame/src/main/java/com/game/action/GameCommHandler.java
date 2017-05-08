@@ -4,6 +4,7 @@ import com.game.core.TableFactory;
 import com.game.core.TableManager;
 import com.game.core.constant.GameConst;
 import com.game.core.room.BaseTableVo;
+import com.game.manager.OnlineManager;
 import com.game.socket.GameSocket;
 import com.game.socket.module.UserVistor;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -47,10 +48,10 @@ public class GameCommHandler extends ModuleHandler {
                     return;
                 }
 
-                if(!baseTableVo.addChair(vistor)){
-                    vistor.sendError(ResponseCode.Error.room_is_full);
+                if(baseTableVo.addChair(vistor)){
                     return;
                 }
+
                 response.setObj(baseTableVo.sendEnterRoom(vistor.getRoleId()));
                 vistor.sendMsg(response);
             }
@@ -75,10 +76,13 @@ public class GameCommHandler extends ModuleHandler {
                 if(tableVo == null){
                     vistor.sendError(ResponseCode.Error.room_not_exit);
                     return;
+                }else if(tableVo.getChairByUid(vistor.getRoleId()) != null){
+                    //中途加入
+                    middleJoin(tableVo,vistor,request,response);
+                    return;
                 }
 
-             /*   NetGame.RQCreateRoom rqCreateRoom = tableVo.enterRoom(vistor.getRoleId());
-                vistor.sendMsg(Response.defaultResponse(request.getM_cmd(),request.getSeq(),rqCreateRoom));*/
+                joinTable(tableVo,vistor,request,response);
             }
 
             @Override
@@ -147,6 +151,47 @@ public class GameCommHandler extends ModuleHandler {
             }
         });
 
+    }
+
+    private void middleJoin(BaseTableVo baseTableVo, UserVistor vistor, Request request, Response response) {
+        baseTableVo.getChairByUid(vistor.getRoleId()).setOnline(true);
+
+        NetGame.RQUserStatus.Builder rpEnterRoom = NetGame.RQUserStatus.newBuilder();
+        rpEnterRoom.setStatus(baseTableVo.getChairStatusToClient(baseTableVo.getChairByUid(vistor.getRoleId())));
+
+        for(int i = 0;i<baseTableVo.getChairs().length;i++){
+            if(baseTableVo.getChairs()[i] == null || vistor.getRoleId() == baseTableVo.getChairs()[i].getId()){
+                continue;
+            }
+            //给其他人发送
+            OnlineManager.getIntance().getUserById(baseTableVo.getChairs()[i].getId()).sendMsg(Response.defaultResponse(GameCommCmd.CREATE_TABLE.getModule(),GameCommCmd.CREATE_TABLE.getValue(),0,rpEnterRoom.build()));
+        }
+
+        response.setObj(baseTableVo.sendEnterRoom(vistor.getRoleId()));
+        vistor.sendMsg(response);
+    }
+
+    private void joinTable(BaseTableVo baseTableVo, UserVistor vistor, Request request, Response response) {
+        if(baseTableVo.addChair(vistor)){
+            return;
+        }
+
+        NetGame.NetUserData netUserData = baseTableVo.getOtherNetUserData(baseTableVo.getChairByUid(vistor.getRoleId()));
+        NetGame.RQEnterRoom.Builder rpEnterRoom = NetGame.RQEnterRoom.newBuilder();
+        rpEnterRoom.setUser(netUserData);
+
+        for(int i = 0;i<baseTableVo.getChairs().length;i++){
+            if(baseTableVo.getChairs()[i] == null || vistor.getRoleId() == baseTableVo.getChairs()[i].getId()){
+                continue;
+            }
+            //给其他人发送
+            OnlineManager.getIntance().getUserById(baseTableVo.getChairs()[i].getId()).sendMsg(Response.defaultResponse(this.getModule(),GameCommCmd.ENTER_GAME.getValue(),0,rpEnterRoom.build()));
+        }
+
+        response.setModule(this.getModule());
+        response.setCmd(GameCommCmd.CREATE_TABLE.getValue());
+        response.setObj(baseTableVo.sendEnterRoom(vistor.getRoleId()));
+        vistor.sendMsg(response);
     }
 
     @Override

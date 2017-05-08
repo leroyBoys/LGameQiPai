@@ -179,4 +179,9 @@ public class UserServiceImpl implements UserService {
     public int addMoney(int uid, int needMoney, LogType logFrom, int logId) {
         return getMoney(uid);
     }
+
+    @Override
+    public void updateRoleInfoRoomid(int roleId, int id) {
+
+    }
 }
