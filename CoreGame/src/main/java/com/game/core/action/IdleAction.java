@@ -21,7 +21,7 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
 
     @Override
     public void doAction(T table, Response response, UserVistor visitor, NetCommon.NetOprateData netOprateData) {
-        BaseChairInfo chairInfo = table.getChairByUid(visitor.getUid());
+        BaseChairInfo chairInfo = table.getChairByUid(visitor.getRoleId());
         if(chairInfo.getStatus().getVal() == getReadyStatus().getVal()){
             return;
         }

@@ -95,7 +95,7 @@ public class SystemHandler extends ModuleHandler {
         //低于8秒则直接关闭链接
         if(vistor.getHeartNum() >= 10 && TimeCacheManager.getInstance().getCurTime() - vistor.getHeartTime() <= (vistor.getHeartNum()>>13)){
             vistor.sendError(ResponseCode.Error.server_busy);
-            PrintTool.log("heat is too fast !"+vistor.getUid());
+            PrintTool.log("heat is too fast !"+vistor.getRoleId());
             vistor.getIoSession().closeNow();
             return;
         }
@@ -112,12 +112,13 @@ public class SystemHandler extends ModuleHandler {
 
         UserService userService = DBServiceManager.getDbServiceManager().getUserService();
 
-        DB.UK key = userService.getUserKey(vistor.getUid());//从redis取key
-        if(!MD5Tool.GetMD5Code(Tools.getByteJoin(obj.toByteArray(), key.toByteArray())).equals(sn)){
+        DB.UK key = userService.getUserKey(obj.getUid());//从redis取key
+        if(!MD5Tool.GetMD5Code(Tools.getByteJoin(obj.toByteArray(), key.getKey().getBytes())).equals(sn)){
             vistor.getIoSession().closeNow();
             return;
         }
 
+        vistor.setUk(key);
         UserInfo userInfo = userService.getUserInfo(obj.getUid());
         if(userInfo == null){
             vistor.sendError(ResponseCode.Error.user_exit);

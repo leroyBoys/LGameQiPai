@@ -79,7 +79,7 @@ public class RequestDecoderRemote extends RequestDecoder {
             if(commond.getObj() != null){//秘钥验证
 
                 data = commond.getObj().toByteArray();
-                if(key == null || !MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.toByteArray())).equals(commond.getSn())){
+                if(key == null || !MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.getKey().getBytes())).equals(commond.getSn())){
                     PrintTool.error("can not find uid:"+vistor.getUid()+" 的 Key:"+(key==null?"null":key.toString()));
                     session.write(getError(ResponseCode.Error.key_error,commond.getSeq(),module,cmd));
                     session.closeNow();
