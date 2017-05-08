@@ -1,9 +1,11 @@
 package com.game.core.room;
 
+import com.game.action.GameCommCmd;
 import com.game.core.TableManager;
 import com.game.core.action.BaseAction;
 import com.game.core.constant.GameConst;
 import com.game.core.factory.TableProducer;
+import com.game.manager.OnlineManager;
 import com.game.manager.TimeCacheManager;
 import com.game.socket.module.UserVistor;
 import com.logger.log.SystemLogger;
@@ -307,7 +309,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
                 continue;
             }
             //给其他人发送
-        //    OnlineManager.getIntance().getUserById(chairs[i].getId()).sendMsg(Response.defaultResponse());
+            OnlineManager.getIntance().getUserById(chairs[i].getId()).sendMsg(Response.defaultResponse(GameCommCmd.CREATE_TABLE.getModule(),GameCommCmd.CREATE_TABLE.getValue(),0,me));
         }
 
         netUserDatas.add(me);

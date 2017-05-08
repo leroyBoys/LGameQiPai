@@ -8,7 +8,6 @@ package com.game.action;
 
 import com.game.core.constant.GameConst;
 import com.lsocket.handler.ModuleCmd;
-import com.lsocket.manager.CMDManager;
 import com.lsocket.module.HttpRequestType;
 
 /**
