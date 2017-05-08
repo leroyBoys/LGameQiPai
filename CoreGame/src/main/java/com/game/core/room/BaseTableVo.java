@@ -188,6 +188,10 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         return chairMap.get(uid);
     }
 
+    public int getCurChirCount(){
+        return chairMap.size();
+    }
+
     public void addAttribute(AttributeKey key,Object value){
         attributeMap.put(key,value);
     }
@@ -456,5 +460,9 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
     public enum AttributeKey{
         /** 总局数 */
         AllRount,
+        /**
+         * 投票数据
+         */
+        VoteData
     }
 }

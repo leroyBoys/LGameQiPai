@@ -36,6 +36,10 @@ public enum GameCommCmd implements ModuleCmd {
      * 开始游戏前的准备
      */
     READY_NOW(5, true,HttpRequestType.tcp),
+    /**
+     * 投票解散
+     */
+    VoteDestroy(6, true,HttpRequestType.tcp),
     ;
 
     private final int value;

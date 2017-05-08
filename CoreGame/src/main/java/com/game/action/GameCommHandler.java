@@ -3,6 +3,7 @@ package com.game.action;
 import com.game.core.TableFactory;
 import com.game.core.TableManager;
 import com.game.core.constant.GameConst;
+import com.game.core.room.BaseGameStatus;
 import com.game.core.room.BaseTableVo;
 import com.game.manager.OnlineManager;
 import com.game.socket.GameSocket;
@@ -87,7 +88,7 @@ public class GameCommHandler extends ModuleHandler {
 
             @Override
             public Request getRequset(byte[] bytes, int module,int cmd, int sq) throws InvalidProtocolBufferException {
-                return null;
+                return Request.valueOf(module,cmd,NetGame.RPEnterRoom.parseFrom(bytes),sq);
             }
 
         });
@@ -102,12 +103,16 @@ public class GameCommHandler extends ModuleHandler {
             }
             @Override
             public void invoke(UserVistor vistor, Request request, Response response) {
+               if(vistor.getRoomId() == 0){
+                   return;
+               }
 
+               exitTable(vistor,request,response);
             }
 
             @Override
             public Request getRequset(byte[] bytes, int module,int cmd, int sq) throws InvalidProtocolBufferException {
-                return null;
+                return Request.valueOf(module,cmd,null,sq);
             }
         });
 
@@ -150,6 +155,38 @@ public class GameCommHandler extends ModuleHandler {
                 return GameCommCmd.READY_NOW;
             }
         });
+
+        putInvoker(new GameCmdModule() {
+            @Override
+            public void invoke(UserVistor vistor, Request request, Response response) {
+
+
+            }
+
+            @Override
+            public Request getRequset(byte[] bytes, int module,int cmd, int sq) throws InvalidProtocolBufferException {
+                return Request.valueOf(module,cmd,null,sq);
+            }
+
+            @Override
+            public ModuleCmd getModuleCmd() {
+                return GameCommCmd.VoteDestroy;
+            }
+        });
+
+    }
+
+    private void exitTable(UserVistor vistor, Request request, Response response) {
+        BaseTableVo table = TableManager.getInstance().getTable(vistor.getRoomId());
+
+        if(table == null){
+            return;
+        }
+
+        if(table.getStatus().getValue() != 0){//需要投票
+            return;
+        }
+
 
     }
 
