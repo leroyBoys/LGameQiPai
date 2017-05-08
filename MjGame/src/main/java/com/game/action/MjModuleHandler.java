@@ -22,57 +22,6 @@ public class MjModuleHandler extends ModuleHandler {
 
     @Override
     protected void inititialize() {
-        putInvoker(1, new CmdModule() {
-            @Override
-            public void invoke(Visitor vistor, Request request, Response response) {
-
-            }
-
-            @Override
-            public Request getRequset(byte[] bytes, int cmd_m, int sq) {
-                return null;
-            }
-
-            @Override
-            public HttpRequestType requetType() {
-                return HttpRequestType.tcp;
-            }
-        });
-
-        putInvoker(2, new CmdModule() {
-            @Override
-            public void invoke(Visitor vistor, Request request, Response response) {
-
-            }
-
-            @Override
-            public Request getRequset(byte[] bytes, int cmd_m, int sq) {
-                return null;
-            }
-
-            @Override
-            public HttpRequestType requetType() {
-                return HttpRequestType.tcp;
-            }
-        });
-
-        putInvoker(3, new CmdModule() {
-            @Override
-            public void invoke(Visitor vistor, Request request, Response response) {
-
-            }
-
-            @Override
-            public Request getRequset(byte[] bytes, int cmd_m, int sq) {
-                return null;
-            }
-
-            @Override
-            public HttpRequestType requetType() {
-                return HttpRequestType.tcp;
-            }
-        });
-
     }
 
     @Override

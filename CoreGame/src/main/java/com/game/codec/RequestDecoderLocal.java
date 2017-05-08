@@ -25,7 +25,7 @@ public class RequestDecoderLocal extends RequestDecoder {
         int cmd_c = CMDManager.getCmd_M(receiveData.getModule(),receiveData.getCmd());
         CmdModule cmdModule = CMDManager.getIntance().getCmdModule(cmd_c);
         try {
-            out.write(cmdModule.getRequset(netCommond.getObj().toByteArray(),cmd_c,netCommond.getSeq()));
+            out.write(cmdModule.getRequset(netCommond.getObj().toByteArray(),receiveData.getModule(),receiveData.getCmd(),netCommond.getSeq()));
         } catch (Exception e) {
             e.printStackTrace();
         }

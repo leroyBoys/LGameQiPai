@@ -24,11 +24,12 @@ public class GameAction extends BaseAction<MjTable> {
 
     @Override
     public void doAction(MjTable table, Response response, UserVistor visitor, NetCommon.NetOprateData netOprateData) {
-        GameStatusData statusData = (GameStatusData) table.getStatusData();
+        GameStatusData statusData = table.getStatusData();
+        statusData.moPai(table,table.getBankId());
     }
 
     @Override
     public void overAction(MjTable table) {
-
+        table.addRound(); //局数加一
     }
 }

@@ -1,7 +1,11 @@
 package com.game.core.config;
 
+import com.lgame.util.comm.StringTool;
 import com.lgame.util.load.annotation.Id;
 import com.lgame.util.load.annotation.Resource;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -22,6 +26,8 @@ public class RoomSetting {
 
     /**总局数:消耗房卡数 如 4:3,8:5*/
     private String cardSet;
+
+    private Map<Integer,Integer> cardSetMap = new HashMap<>();
 
     private short baseScore;
 
@@ -63,6 +69,16 @@ public class RoomSetting {
 
     public void setCardSet(String cardSet) {
         this.cardSet = cardSet;
+
+        if(cardSet == null){
+            return;
+        }
+        String[] arrays = cardSet.split(StringTool.SIGN4);
+        for(String strs:arrays){
+            String[] cardsSetArray = strs.split(StringTool.SIGN3);
+            cardSetMap.put(Integer.valueOf(cardsSetArray[0]),Integer.valueOf(cardsSetArray[1]));
+        }
+
     }
 
     public short getBaseScore() {
@@ -79,5 +95,9 @@ public class RoomSetting {
 
     public void setBaseScore(short baseScore) {
         this.baseScore = baseScore;
+    }
+
+    public Map<Integer, Integer> getCardSetMap() {
+        return cardSetMap;
     }
 }

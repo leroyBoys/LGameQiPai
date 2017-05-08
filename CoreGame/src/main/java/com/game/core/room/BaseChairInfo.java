@@ -8,6 +8,7 @@ public abstract class BaseChairInfo<Status extends BaseChairStatus,Hands extends
     protected Status status;
     protected int id;
     protected int idx;
+    protected String image;
     protected boolean isOnline = true;
     protected String ip;
     protected Hands handsContainer;
@@ -77,4 +78,11 @@ public abstract class BaseChairInfo<Status extends BaseChairStatus,Hands extends
         this.robot = robot;
     }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
 }

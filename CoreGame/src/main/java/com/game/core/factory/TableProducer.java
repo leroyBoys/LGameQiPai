@@ -10,4 +10,5 @@ import com.game.core.room.BaseTableVo;
 public interface TableProducer<T extends BaseTableVo> {
     public T create(int tableId, int ownerId);
     public void setRoomSetting(RoomSetting gen);
+    public RoomSetting getGen();
 }

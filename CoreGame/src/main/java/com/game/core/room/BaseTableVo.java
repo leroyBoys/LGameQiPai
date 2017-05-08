@@ -1,12 +1,19 @@
 package com.game.core.room;
 
 import com.game.core.TableManager;
-import com.game.socket.module.UserVistor;
 import com.game.core.action.BaseAction;
+import com.game.core.constant.GameConst;
+import com.game.core.factory.TableProducer;
+import com.game.manager.TimeCacheManager;
+import com.game.socket.module.UserVistor;
+import com.logger.log.SystemLogger;
 import com.lsocket.message.Response;
+import com.module.core.ResponseCode;
 import com.module.net.NetCommon;
+import com.module.net.NetGame;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
@@ -40,20 +47,25 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
     private ICardPoolEngine cardPoolEngine;
     /** 当前局数 */
     private int curRount = 1;
+    private TableProducer tableProducer;
 
     private final ReentrantLock tableLock = new ReentrantLock();
     private final ReentrantLock statusLock = new ReentrantLock();
     private final ReentrantLock addRemoveLock = new ReentrantLock();
     private volatile boolean isRun = false;
 
-    public BaseTableVo(int ownerId,int maxSize,int id,TStatus status,int gameId){
+    private List<Integer> typeList;
+
+    public BaseTableVo(int ownerId,int maxSize,int id,TStatus status,int gameId,TableProducer tableProducer){
         this.setStatus(status);
         this.id = id;
         this.ownerId = ownerId;
         this.gameId = gameId;
+        this.tableProducer = tableProducer;
         initStatus();
         initCardPoolEngine();
         initChair(maxSize);
+       // lockKey = Tools.getCharacterAndNumber(6);
     }
 
     protected abstract void initStatus();
@@ -242,6 +254,11 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         return all>= curRount;
     }
 
+    public int nextFocusIndex(int focsIndex) {
+        focsIndex = ++focsIndex == this.getChairs().length ? 0 : focsIndex;
+        return focsIndex;
+    }
+
     public NetCommon.NetResponse getNetRespose(List<NetCommon.NetOprateData> operdata) {
         NetCommon.NetResponse.Builder response = NetCommon.NetResponse.newBuilder();
         if(operdata != null){
@@ -254,9 +271,111 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         return response.build();
     }
 
-    public int nextFocusIndex(int focsIndex) {
-        focsIndex = ++focsIndex == this.getChairs().length ? 0 : focsIndex;
-        return focsIndex;
+    /**
+     *
+     * @param roleid
+     * @return
+     */
+    public NetGame.RQCreateRoom sendEnterRoom(int roleid){
+        NetGame.RQCreateRoom.Builder rqCreateRoom = NetGame.RQCreateRoom.newBuilder();
+        rqCreateRoom.setRoomId(this.getId());
+        rqCreateRoom.setGameId(this.getGameId());
+        rqCreateRoom.setCurRount(this.curRount);
+        rqCreateRoom.setOwnerId(this.getOwnerId());
+        rqCreateRoom.setGameStatus(this.status.getValue());
+        rqCreateRoom.addAllType(typeList);
+        NetGame.NetExtraData.Builder extra = this.getExtra();
+        if(extra != null){
+            rqCreateRoom.setExtra(extra);
+        }
+
+        List<NetGame.NetUserData> netUserDatas = new LinkedList<>();
+        NetGame.NetUserData me = null;
+        for(int i = 0;i<chairs.length;i++){
+            if(chairs[i] == null){
+                continue;
+            }
+            if(roleid == chairs[i].getId()){
+                me = getSelfNetUserData(chairs[i]);
+                continue;
+            }
+            netUserDatas.add(getOtherNetUserData(chairs[i]));
+        }
+
+        for(int i = 0;i<chairs.length;i++){
+            if(chairs[i] == null || roleid == chairs[i].getId()){
+                continue;
+            }
+            //给其他人发送
+        //    OnlineManager.getIntance().getUserById(chairs[i].getId()).sendMsg(Response.defaultResponse());
+        }
+
+        netUserDatas.add(me);
+        rqCreateRoom.addAllUsers(netUserDatas);
+        return rqCreateRoom.build();
+    }
+
+    /**
+     * 牌局额外数据
+     * @return
+     */
+    public abstract NetGame.NetExtraData.Builder getExtra();
+
+    private NetGame.NetUserData getOtherNetUserData(Chair chair){
+        NetGame.NetUserData.Builder netUserData = getNetUserData(chair);
+        NetGame.NetExtraData extra = getOtherNetExtraData(chair);
+        if(extra != null){
+            netUserData.setExtra(extra);
+        }
+        return netUserData.build();
+    }
+
+    private NetGame.NetUserData getSelfNetUserData(Chair chair){
+        NetGame.NetUserData.Builder netUserData = getNetUserData(chair);
+        NetGame.NetExtraData extra = getSelfNetExtraData(chair);
+        if(extra != null){
+            netUserData.setExtra(extra);
+        }
+        return netUserData.build();
+    }
+
+    protected abstract NetGame.NetExtraData getOtherNetExtraData(Chair chair);
+
+    protected abstract NetGame.NetExtraData getSelfNetExtraData(Chair chair);
+
+    private NetGame.NetUserData.Builder getNetUserData(Chair chair){
+        NetGame.NetUserData.Builder netUserData = NetGame.NetUserData.newBuilder();
+        netUserData.setUid(chair.getId());
+        netUserData.setImage(chair.getImage());
+        netUserData.setStatus(chair.getStatus().getVal());
+        netUserData.setIdex(chair.getIdx());
+        return netUserData;
+    }
+    /**
+     * 设置房间设置信息
+     * @param typeList:0:局数,1:最大番数,2:玩法位集合
+     * @return
+     */
+    public ResponseCode.Error setSelected(List<Integer> typeList) {
+        this.setTypeList(typeList);
+        int roundMax = typeList.get(0);
+        if(!tableProducer.getGen().getCardSetMap().containsKey(roundMax)){
+            SystemLogger.error(this.getClass(),"config not have rount:"+roundMax);
+            return ResponseCode.Error.parmter_error;
+        }
+        return ResponseCode.Error.succ;
+    }
+
+    protected final NetGame.NetOprateData getTurnData(){
+        NetGame.NetOprateData.Builder netKvData = NetGame.NetOprateData.newBuilder();
+        netKvData.setUid(focusIdex < 0 ? 0:this.chairs[this.focusIdex].getId());
+        netKvData.setOtype(GameConst.ACTION_TYPE_TURN);
+        netKvData.setDval(Math.max(0,(int) ((timeOutTime - TimeCacheManager.getInstance().getCurTime())/1000)));
+        return netKvData.build();
+    }
+
+    public void Join(UserVistor vistor){
+        addChair(vistor);
     }
 
     ////////////////////////发消息//////////////////////////////////////
@@ -302,6 +421,14 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
 
     public int getGameId() {
         return gameId;
+    }
+
+    public List<Integer> getTypeList() {
+        return typeList;
+    }
+
+    public void setTypeList(List<Integer> typeList) {
+        this.typeList = typeList;
     }
 
     public int getFocusIdex() {

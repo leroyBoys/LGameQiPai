@@ -14,11 +14,16 @@ public class MjTableFactory implements TableProducer<MjTable> {
 
     @Override
     public MjTable create(int tableId,int ownerId) {
-        return new MjTable(ownerId,gen.getPlayerNum(),tableId,gen.getGameId());
+        return new MjTable(ownerId,gen.getPlayerNum(),tableId,gen.getGameId(),this);
     }
 
     @Override
     public void setRoomSetting(RoomSetting gen) {
         this.gen = gen;
+    }
+
+    @Override
+    public RoomSetting getGen() {
+        return gen;
     }
 }

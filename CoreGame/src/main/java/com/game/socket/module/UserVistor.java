@@ -6,6 +6,7 @@ import com.lsocket.message.Response;
 import com.lsocket.module.SocketSystemCode;
 import com.lsocket.module.Visitor;
 import com.module.core.ResponseCode;
+import com.module.net.DB;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -19,6 +20,7 @@ public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
     private int heartNum;
     private int connectErrorCount;
 
+    private DB.UK uk;
     private int card;
 
     public UserVistor(GameSocket socketServer, org.apache.mina.core.session.IoSession ioSession, long timeOutTime) {
@@ -90,6 +92,14 @@ public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
 
     public int getCard() {
         return card;
+    }
+
+    public DB.UK getUk() {
+        return uk;
+    }
+
+    public void setUk(DB.UK uk) {
+        this.uk = uk;
     }
 
     public void setCard(int card) {

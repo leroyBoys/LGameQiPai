@@ -7,6 +7,7 @@ import com.game.core.room.BaseChairInfo;
  * 2017/4/21.
  */
 public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContainer> {
+    private int score;
     /** 数值均减一即0为初始值，1位不压跑 */
     private int yapaoNum = 0;
 
@@ -29,6 +30,14 @@ public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContaine
 
     public boolean isCanYaPao() {
         return yapaoNum==0;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public void setYapaoNum(int yapaoNum) {

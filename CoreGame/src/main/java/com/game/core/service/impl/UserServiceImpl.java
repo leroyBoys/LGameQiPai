@@ -3,7 +3,6 @@ package com.game.core.service.impl;
 import com.game.core.dao.mysql.UserDao;
 import com.game.core.dao.redis.UserRedis;
 import com.game.core.service.UserService;
-import com.game.manager.OnlineKeyManager;
 import com.game.manager.OnlineManager;
 import com.logger.type.LogType;
 import com.module.CustomKey;
@@ -31,22 +30,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public DB.UK getUserKey(int uid, boolean isFromDb) {
-        DB.UK uk;
-        if(!isFromDb){
-            uk = OnlineKeyManager.getIntance().getUserById(uid);
-            if(uk != null){
-                return uk;
-            }
-        }
-
-        uk = userRedis.getUserKey(uid);
-        if(uk == null){
-            OnlineKeyManager.getIntance().clearKey(uid);
-            return null;
-        }
-        OnlineKeyManager.getIntance().putKey(uid,uk);
-        return uk;
+    public DB.UK getUserKey(int uid) {
+        return userRedis.getUserKey(uid);
     }
 
     @Override

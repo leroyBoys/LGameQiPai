@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface UserService {
 
-    public DB.UK getUserKey(int uid, boolean isFromDb);
+    public DB.UK getUserKey(int uid);
 
     public boolean isOnline(int uid);
 

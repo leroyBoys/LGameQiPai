@@ -1,9 +1,12 @@
 package com.game.room;
 
-import com.game.socket.module.UserVistor;
+import com.game.core.factory.TableProducer;
 import com.game.core.room.BaseStepHistory;
 import com.game.core.room.BaseTableVo;
+import com.game.socket.module.UserVistor;
 import com.lgame.util.comm.RandomTool;
+import com.module.core.ResponseCode;
+import com.module.net.NetGame;
 
 import java.util.*;
 
@@ -18,8 +21,12 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
     private int nextBankerUid;
 
-    public MjTable(int ownerId,int maxSize,int id,int gameId) {
-        super(ownerId,maxSize,id, MjStatus.Idle,gameId);
+    private final int defaultMaxRate = 10;
+    private int maxFan;
+    private int type;
+
+    public MjTable(int ownerId,int maxSize,int id,int gameId, TableProducer tableProducer) {
+        super(ownerId,maxSize,id, MjStatus.Idle,gameId,tableProducer);
     }
 
     @Override
@@ -43,8 +50,87 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     }
 
     @Override
+    public NetGame.NetExtraData.Builder getExtra() {
+        NetGame.NetExtraData.Builder extra = NetGame.NetExtraData.newBuilder();
+        extra.addList(this.getBankId());
+        extra.addList(this.getCardPool().getRemainCount());
+        extra.addList(this.getCardPool().getAllSize());
+
+        extra.addOperates(this.getTurnData());
+        return extra;
+    }
+
+    @Override
+    protected NetGame.NetExtraData getOtherNetExtraData(MjChairInfo mjChairInfo) {
+        NetGame.NetExtraData.Builder extra = getNetExtraData(mjChairInfo);
+        extra.addKvDatas(getHandCards(mjChairInfo,false));
+        return extra.build();
+    }
+
+    @Override
+    protected NetGame.NetExtraData getSelfNetExtraData(MjChairInfo mjChairInfo) {
+        NetGame.NetExtraData.Builder extra = getNetExtraData(mjChairInfo);
+        extra.addKvDatas(getHandCards(mjChairInfo,true));
+        return extra.build();
+    }
+
+    protected NetGame.NetExtraData.Builder getNetExtraData(MjChairInfo mjChairInfo) {
+        NetGame.NetExtraData.Builder extra = NetGame.NetExtraData.newBuilder();
+        extra.addKvDatas(getOutCard(mjChairInfo));
+        extra.addKvDatas(getHu(mjChairInfo));
+
+        List<GroupCard> groupCards = mjChairInfo.getHandsContainer().getChiGangList();
+        if(!groupCards.isEmpty()){
+            for(GroupCard groupCard:groupCards){
+                extra.addKvDatas(getPengChiGangCardType(groupCard));
+            }
+        }
+
+        groupCards = mjChairInfo.getHandsContainer().getPengList();
+        if(!groupCards.isEmpty()){
+            for(GroupCard groupCard:groupCards){
+                extra.addKvDatas(getPengChiGangCardType(groupCard));
+            }
+        }
+
+        extra.addList(mjChairInfo.getScore());
+        return extra;
+    }
+
+    protected final NetGame.NetKvData getOutCard(MjChairInfo mjChairInfo){
+        NetGame.NetKvData.Builder netKvData = NetGame.NetKvData.newBuilder();
+        netKvData.setK(1);
+        netKvData.addAllDlist(mjChairInfo.getHandsContainer().getOutCards());
+        return netKvData.build();
+    }
+
+    protected final NetGame.NetKvData getHandCards(MjChairInfo mjChairInfo,boolean isMySelf){
+        NetGame.NetKvData.Builder netKvData = NetGame.NetKvData.newBuilder();
+        netKvData.setK(2);
+        netKvData.setV(mjChairInfo.getHandsContainer().getHandCards().size());
+        if(isMySelf){
+            netKvData.addAllDlist(mjChairInfo.getHandsContainer().getHandCards());
+        }
+        return netKvData.build();
+    }
+
+    protected final NetGame.NetKvData getHu(MjChairInfo mjChairInfo){
+        NetGame.NetKvData.Builder netKvData = NetGame.NetKvData.newBuilder();
+        netKvData.setK(4);
+        netKvData.addAllDlist(mjChairInfo.getHandsContainer().getHuCards());
+        return netKvData.build();
+    }
+
+    protected final NetGame.NetKvData getPengChiGangCardType(GroupCard groupCard){
+        NetGame.NetKvData.Builder netKvData = NetGame.NetKvData.newBuilder();
+        netKvData.setK(groupCard.getType());
+        netKvData.addAllDlist(groupCard.getCards());
+        return netKvData.build();
+    }
+
+    @Override
     public MjChairInfo createChair(UserVistor visitor) {
-        MjChairInfo chairInfo = new MjChairInfo(visitor.getUid());
+        MjChairInfo chairInfo = new MjChairInfo(visitor.getRoleId());
         chairInfo.setIp(visitor.getIp().getIp());
         return chairInfo;
     }
@@ -83,7 +169,21 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     }
 
 
+    @Override
+    public ResponseCode.Error setSelected(List<Integer> typeList) {
+        ResponseCode.Error error = super.setSelected(typeList);
+        if(error != ResponseCode.Error.succ){
+            return error;
+        }
 
+        int maxRate = Math.min(typeList.get(1),defaultMaxRate);
+        int type = typeList.get(2);
+        this.setMaxFan(maxRate);
+        this.setType(type);
+
+
+        return ResponseCode.Error.succ;
+    }
 
     /////////////////////////////////////////////////////////////
     public int getBankId() {
@@ -97,6 +197,22 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
     public int getNextBankerUid() {
         return nextBankerUid;
+    }
+
+    public int getMaxFan() {
+        return maxFan;
+    }
+
+    public void setMaxFan(int maxFan) {
+        this.maxFan = maxFan;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public void setNextBankerUid(int nextBankerUid) {

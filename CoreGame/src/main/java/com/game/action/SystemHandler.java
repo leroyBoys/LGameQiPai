@@ -11,9 +11,10 @@ import com.game.socket.module.UserVistor;
 import com.lgame.util.PrintTool;
 import com.lgame.util.comm.Tools;
 import com.lgame.util.encry.MD5Tool;
-import com.lgame.util.exception.AppException;
 import com.lsocket.control.impl.CoreDispatcher;
+import com.lsocket.handler.ModuleCmd;
 import com.lsocket.handler.ModuleHandler;
+import com.lsocket.manager.CMDManager;
 import com.lsocket.message.Request;
 import com.lsocket.message.Response;
 import com.module.Status;
@@ -39,28 +40,29 @@ public class SystemHandler extends ModuleHandler {
     @Override
     protected void inititialize() {
         /** 心跳 */
-        putInvoker(0, new GameCmdModule() {
+        putInvoker(new GameCmdModule() {
+
             @Override
-            public boolean isRequireOnline() {
-                return true;
+            public ModuleCmd getModuleCmd() {
+                return SystemCmd.heart;
             }
 
             @Override
             public void invoke(UserVistor vistor, Request request, Response response) {
-                heart(vistor,request);
+                heart(vistor,request,response);
             }
 
             @Override
-            public Request getRequset(byte[] bytes, int cmd_m, int sq) throws Exception {
-                return Request.valueOf(cmd_m,null,sq);
+            public Request getRequset(byte[] bytes, int module,int cmd, int sq) throws Exception {
+                return Request.valueOf(module,cmd,null,sq);
             }
         });
 
         /** 第一个链接 */
-        putInvoker(1, new GameCmdModule() {
+        putInvoker(new GameCmdModule() {
             @Override
-            public boolean isRequireOnline() {
-                return false;
+            public ModuleCmd getModuleCmd() {
+                return SystemCmd.firstConnection;
             }
 
             @Override
@@ -69,8 +71,8 @@ public class SystemHandler extends ModuleHandler {
             }
 
             @Override
-            public Request getRequset(byte[] bytes, int cmd_m, int sq) throws Exception {
-                return Request.valueOf(cmd_m,Com.NetLoginConfirm.parseFrom(bytes),sq);
+            public Request getRequset(byte[] bytes, int module,int cmd, int sq) throws Exception {
+                return Request.valueOf(module,cmd,Com.NetLoginConfirm.parseFrom(bytes),sq);
             }
         });
 
@@ -82,7 +84,7 @@ public class SystemHandler extends ModuleHandler {
     }
 
 
-    private void heart(UserVistor vistor, Request request) {
+    private void heart(UserVistor vistor, Request request, Response response) {
         if(vistor.getHeartNum() >= 100 || vistor.getHeartTime() == 0){
             vistor.setHeartNum(0);
             vistor.setHeartTime(TimeCacheManager.getInstance().getCurTime());
@@ -100,7 +102,7 @@ public class SystemHandler extends ModuleHandler {
 
         //发送心跳
         NetParentOld.NetCommond.Builder commond = NetParentOld.NetCommond.newBuilder();
-        commond.setCmd(request.getM_cmd());
+        commond.setCmd(CMDManager.getCmd_M(request.getModule(),request.getCmd()));
         vistor.getIoSession().write(ResponseEncoderRemote.transformByteArray(commond.build().toByteArray()));
     }
 
@@ -110,7 +112,7 @@ public class SystemHandler extends ModuleHandler {
 
         UserService userService = DBServiceManager.getDbServiceManager().getUserService();
 
-        DB.UK key = userService.getUserKey(vistor.getUid(),true);//从redis取key
+        DB.UK key = userService.getUserKey(vistor.getUid());//从redis取key
         if(!MD5Tool.GetMD5Code(Tools.getByteJoin(obj.toByteArray(), key.toByteArray())).equals(sn)){
             vistor.getIoSession().closeNow();
             return;
@@ -151,7 +153,7 @@ public class SystemHandler extends ModuleHandler {
 
         userService.updateUserInfoLoginStatus(userInfo.getId(), true, new Date());
         //发送登陆成功消息
-        vistor.sendMsg(Response.defaultResponse(request.getM_cmd(),request.getSeq()));
+        vistor.sendMsg(response);
     }
 
     private RoleInfo initRole(int uid) {

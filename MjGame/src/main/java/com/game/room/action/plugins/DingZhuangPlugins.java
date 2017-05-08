@@ -17,8 +17,6 @@ public class DingZhuangPlugins implements IOptPlugin<MjTable> {
 
     @Override
     public Object doOperation(MjTable table, Response response,NetCommon.NetOprateData oprateData) {
-        table.addRound(); //局数加一
-
         if(table.getNextBankerUid() <= 0){
             table.setNextBankerUid(table.getChairs()[0].getId());
         }

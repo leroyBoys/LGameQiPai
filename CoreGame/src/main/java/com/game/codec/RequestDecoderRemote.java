@@ -2,8 +2,6 @@ package com.game.codec;
 
 import com.game.core.service.UserService;
 import com.game.manager.DBServiceManager;
-import com.game.manager.OnlineKeyManager;
-import com.game.manager.OnlineManager;
 import com.game.manager.TimeCacheManager;
 import com.game.socket.module.UserVistor;
 import com.lgame.util.PrintTool;
@@ -15,7 +13,6 @@ import com.lsocket.handler.CmdModule;
 import com.lsocket.manager.CMDManager;
 import com.lsocket.message.Request;
 import com.lsocket.message.Response;
-import com.lsocket.util.DefaultSocketPackage;
 import com.lsocket.util.ReceiveData;
 import com.lsocket.util.SocketConstant;
 import com.module.core.ResponseCode;
@@ -51,31 +48,32 @@ public class RequestDecoderRemote extends RequestDecoder {
             input.get(b);
             NetParentOld.NetCommond commond = NetParentOld.NetCommond.parseFrom(b);
             int cmd_c = commond.getCmd();
+            int module = CMDManager.getModule(cmd_c);
+            int cmd = CMDManager.getCmd(cmd_c);
 
             CmdModule cmdModule = CMDManager.getIntance().getCmdModule(cmd_c);
             if(cmdModule == null){
-                PrintTool.error("not find module:"+CMDManager.getModule(cmd_c)+"  cmd:"+CMDManager.getCmd(cmd_c));
+                PrintTool.error("not find cmd_c:"+module+"  cmd:"+cmd);
                 return input.hasRemaining();
             }
 
             TimeCacheManager.getInstance().setCurTime(System.currentTimeMillis());
             UserVistor vistor = (UserVistor) session.getAttribute(SocketConstant.SessionKey.vistorKey);
-            if(!cmdModule.isRequireOnline()){
-                Request request = cmdModule.getRequset(commond.getObj().toByteArray(),cmd_c,commond.getSeq());
+            if(!cmdModule.getModuleCmd().isRequireOnline()){
+                Request request = cmdModule.getRequset(commond.getObj().toByteArray(),module,cmd,commond.getSeq());
                 request.addAttribute("sn",commond.getSn());
                 out.write(request);
                 return input.hasRemaining();
             }
 
             if(vistor.getUid() <= 0){
-                session.write(getError(ResponseCode.Error.login_timeout,commond.getSeq(),cmd_c));
+                session.write(getError(ResponseCode.Error.login_timeout,commond.getSeq(),module,cmd));
                 session.closeNow();
                 return false;//父类接收新数据
             }
 
             //检验是否正确
-            UserService userService = DBServiceManager.getDbServiceManager().getUserService();
-            DB.UK key = userService.getUserKey(vistor.getUid(),false);
+            DB.UK key = vistor.getUk();
 
             byte[] data = null;
             if(commond.getObj() != null){//秘钥验证
@@ -83,7 +81,7 @@ public class RequestDecoderRemote extends RequestDecoder {
                 data = commond.getObj().toByteArray();
                 if(key == null || !MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.toByteArray())).equals(commond.getSn())){
                     PrintTool.error("can not find uid:"+vistor.getUid()+" 的 Key:"+(key==null?"null":key.toString()));
-                    session.write(getError(ResponseCode.Error.key_error,commond.getSeq(),cmd_c));
+                    session.write(getError(ResponseCode.Error.key_error,commond.getSeq(),module,cmd));
                     session.closeNow();
                     return false;//父类接收新数据
                 }
@@ -92,7 +90,7 @@ public class RequestDecoderRemote extends RequestDecoder {
             }
 
             vistor.setModule(CMDManager.getModule(cmd_c));
-            Request request = cmdModule.getRequset(data,cmd_c,commond.getSeq());
+            Request request = cmdModule.getRequset(data,module,cmd,commond.getSeq());
             out.write(request);
             return input.hasRemaining();
         }
@@ -104,10 +102,9 @@ public class RequestDecoderRemote extends RequestDecoder {
     }
 
 
-    private Response getError(ResponseCode.Error error,int seq,int cmd_c_old){
-        Response res = Response.defaultResponse(ResponseCode.getCodeValue(error));
-        res.setSeq(seq);
-        res.setM_cmd(cmd_c_old);
+    private Response getError(ResponseCode.Error error,int seq,int module,int cmd){
+        Response res = Response.defaultResponse(module,cmd,seq);
+        res.setStatus(ResponseCode.getCodeValue(error));
         return res;
     }
 }

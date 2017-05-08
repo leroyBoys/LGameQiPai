@@ -5,6 +5,8 @@ import com.game.manager.DBServiceManager;
 import com.game.manager.TimeCacheManager;
 import com.game.socket.module.UserVistor;
 import com.google.protobuf.ByteString;
+import com.google.protobuf.GeneratedMessage;
+import com.google.protobuf.Message;
 import com.lgame.util.PrintTool;
 import com.lgame.util.comm.Tools;
 import com.lgame.util.encry.MD5Tool;
@@ -39,8 +41,7 @@ public class ResponseEncoderRemote extends ResponseEncoder {
 
         try {
             UserVistor vistor = (UserVistor) session.getAttribute(SocketConstant.SessionKey.vistorKey);
-            UserService userService = DBServiceManager.getDbServiceManager().getUserService();
-            DB.UK key = userService.getUserKey(vistor.getUid(),false);
+            DB.UK key = vistor.getUk();
             
             byte[] t = getCommondMes((Response) message, key, session);
             // 定义一个发送消息协议格式：|--header:4 byte--|--content:10MB--|
@@ -74,16 +75,25 @@ public class ResponseEncoderRemote extends ResponseEncoder {
     public static byte[] getCommondMes(Response response, DB.UK key, IoSession session) throws Exception {
         NetParentOld.NetCommond.Builder com = NetParentOld.NetCommond.newBuilder();
 
-        com.setCmd(response.getM_cmd());
+        int cmdc = CMDManager.getCmd_M(response.getModule(),response.getCmd());
+        com.setCmd(cmdc);
         com.setTime((int) (TimeCacheManager.getInstance().getCurTime() / 1000));
         com.setStatus(response.getStatus());
         int seq = response.getSeq();
         com.setSeq(seq);
 
-        PrintTool.info(key.getUid()+"---Send---cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd()));
+        Message obj = response.getObj();
 
-        if(response.getValue() != null){
-            byte[] data = ZipTool.compressBytes(response.getValue());//压缩
+        byte[] datas = response.getValue();
+        if(datas == null && obj != null){
+            datas = obj.toByteArray();
+            PrintTool.info(key.getUid()+"---Send---cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd())+"  "+datas.toString());
+        }else {
+            PrintTool.info(key.getUid()+"---Send---cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd()));
+        }
+
+        if(datas != null){
+            byte[] data = ZipTool.compressBytes(datas);//压缩
             com.setObj(ByteString.copyFrom(data));
 
             String d = MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.toByteArray()));//加密

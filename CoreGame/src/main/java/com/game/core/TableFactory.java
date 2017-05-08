@@ -35,7 +35,10 @@ public class TableFactory  implements Runnable{
         try {
             for(RoomSetting gen:roomSettingTemplateGens){
                 PrintTool.info("begin load TableFactory:"+gen.getRoomFactory());
-                tableFactory.put(gen.getGameId(), (TableProducer) Class.forName(gen.getRoomFactory()).newInstance());
+
+                TableProducer tableProducer = (TableProducer) Class.forName(gen.getRoomFactory()).newInstance();
+                tableProducer.setRoomSetting(gen);
+                tableFactory.put(gen.getGameId(),tableProducer );
                 PrintTool.info("end load TableFactory:"+gen.getRoomFactory()+"  suc!");
             }
         } catch (Exception e) {
@@ -85,8 +88,8 @@ public class TableFactory  implements Runnable{
         return RandomTool.getRandom().nextInt(10000)+maxTableId;
     }
 
-    public <T extends BaseTableVo> T createTable(int ownerId, int type){
-        TableProducer tableProducer =  tableFactory.get(type);
+    public <T extends BaseTableVo> T createTable(int ownerId, int gameId){
+        TableProducer tableProducer =  tableFactory.get(gameId);
         BaseTableVo table = tableProducer.create(produceNewTableId(),ownerId);
         TableManager.getInstance().addTable(table);
 

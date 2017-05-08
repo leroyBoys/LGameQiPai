@@ -61,7 +61,11 @@ public class ResponseCode {
         user_exit(12),
 
         @Comment("对方不在线")
-        other_not_onLine(34),
+        other_not_onLine(13),
+        @Comment("房间不存在")
+        room_not_exit(14),
+        @Comment("人数已满")
+        room_is_full(15)
         ;
         private final int code;
 
