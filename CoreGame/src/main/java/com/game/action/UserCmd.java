@@ -8,7 +8,6 @@ package com.game.action;
 
 import com.game.core.constant.GameConst;
 import com.lsocket.handler.ModuleCmd;
-import com.lsocket.manager.CMDManager;
 import com.lsocket.module.HttpRequestType;
 
 /**
@@ -44,7 +43,7 @@ public enum UserCmd implements ModuleCmd {
     }
 
     @Override
-    public int getCmd_c() {
-        return CMDManager.getCmd_M(GameConst.MOUDLE_User,value);
+    public int getModule() {
+        return GameConst.MOUDLE_User;
     }
 }

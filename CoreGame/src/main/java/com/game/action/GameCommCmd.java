@@ -24,35 +24,19 @@ public enum GameCommCmd implements ModuleCmd {
     /**
      * 加入游戏（进入桌子）
      */
-    ENTER_GAME(1,true,HttpRequestType.tcp),
+    ENTER_GAME(2,true,HttpRequestType.tcp),
     /**
      * 退出游戏（退出桌子）
      */
-    EXIT_GAME(2, true,HttpRequestType.tcp),
-    /**
-     * 开始游戏前的准备
-     */
-    READY_NOW(4, true,HttpRequestType.tcp),
-    /**
-     * 出牌
-     */
-    CARDS_TURN(5, true,HttpRequestType.tcp),
+    EXIT_GAME(3, true,HttpRequestType.tcp),
     /**
      * 托管
      */
-    AUTO_PLAY(6, true,HttpRequestType.tcp),
+    AUTO_PLAY(4, true,HttpRequestType.tcp),
     /**
-     * 发牌
+     * 开始游戏前的准备
      */
-    DISTRIBUTECARD(8,true,HttpRequestType.tcp),
-    /**
-     * 倍数
-     */
-    MULTIPLEVALUE(9,true,HttpRequestType.tcp),
-    /**
-     * 加入游戏（中途进入桌子）
-     */
-    ENTER_GAME_MIDDLE(12, true,HttpRequestType.tcp),
+    READY_NOW(5, true,HttpRequestType.tcp),
     ;
 
     private final int value;
@@ -78,7 +62,7 @@ public enum GameCommCmd implements ModuleCmd {
     }
 
     @Override
-    public int getCmd_c() {
-        return CMDManager.getCmd_M(GameConst.MOUDLE_GameComm,value);
+    public int getModule() {
+        return GameConst.MOUDLE_GameComm;
     }
 }
