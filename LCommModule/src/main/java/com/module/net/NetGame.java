@@ -9257,6 +9257,1323 @@ public final class NetGame {
     // @@protoc_insertion_point(class_scope:RQEnterRoom)
   }
 
+  public interface RQExitOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional int32 uid = 1;
+    /**
+     * <code>optional int32 uid = 1;</code>
+     */
+    boolean hasUid();
+    /**
+     * <code>optional int32 uid = 1;</code>
+     */
+    int getUid();
+  }
+  /**
+   * Protobuf type {@code RQExit}
+   */
+  public static final class RQExit extends
+      com.google.protobuf.GeneratedMessage
+      implements RQExitOrBuilder {
+    // Use RQExit.newBuilder() to construct.
+    private RQExit(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private RQExit(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RQExit defaultInstance;
+    public static RQExit getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public RQExit getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RQExit(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              uid_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return NetGame.internal_static_RQExit_descriptor;
+    }
+
+    protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return NetGame.internal_static_RQExit_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              RQExit.class, Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<RQExit> PARSER =
+        new com.google.protobuf.AbstractParser<RQExit>() {
+      public RQExit parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RQExit(input, extensionRegistry);
+      }
+    };
+
+    @Override
+    public com.google.protobuf.Parser<RQExit> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional int32 uid = 1;
+    public static final int UID_FIELD_NUMBER = 1;
+    private int uid_;
+    /**
+     * <code>optional int32 uid = 1;</code>
+     */
+    public boolean hasUid() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 uid = 1;</code>
+     */
+    public int getUid() {
+      return uid_;
+    }
+
+    private void initFields() {
+      uid_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, uid_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, uid_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @Override
+    protected Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static RQExit parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static RQExit parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static RQExit parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static RQExit parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static RQExit parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static RQExit parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static RQExit parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static RQExit parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static RQExit parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static RQExit parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(RQExit prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @Override
+    protected Builder newBuilderForType(
+        BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code RQExit}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements RQExitOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return NetGame.internal_static_RQExit_descriptor;
+      }
+
+      protected FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return NetGame.internal_static_RQExit_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                RQExit.class, Builder.class);
+      }
+
+      // Construct using com.module.net.NetGame.RQExit.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        uid_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return NetGame.internal_static_RQExit_descriptor;
+      }
+
+      public RQExit getDefaultInstanceForType() {
+        return RQExit.getDefaultInstance();
+      }
+
+      public RQExit build() {
+        RQExit result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public RQExit buildPartial() {
+        RQExit result = new RQExit(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.uid_ = uid_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof RQExit) {
+          return mergeFrom((RQExit)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(RQExit other) {
+        if (other == RQExit.getDefaultInstance()) return this;
+        if (other.hasUid()) {
+          setUid(other.getUid());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        RQExit parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (RQExit) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional int32 uid = 1;
+      private int uid_ ;
+      /**
+       * <code>optional int32 uid = 1;</code>
+       */
+      public boolean hasUid() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 uid = 1;</code>
+       */
+      public int getUid() {
+        return uid_;
+      }
+      /**
+       * <code>optional int32 uid = 1;</code>
+       */
+      public Builder setUid(int value) {
+        bitField0_ |= 0x00000001;
+        uid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 uid = 1;</code>
+       */
+      public Builder clearUid() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        uid_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:RQExit)
+    }
+
+    static {
+      defaultInstance = new RQExit(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:RQExit)
+  }
+
+  public interface RPVoteOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional bool isagree = 1;
+    /**
+     * <code>optional bool isagree = 1;</code>
+     */
+    boolean hasIsagree();
+    /**
+     * <code>optional bool isagree = 1;</code>
+     */
+    boolean getIsagree();
+  }
+  /**
+   * Protobuf type {@code RPVote}
+   *
+   * <pre>
+   ** ͶƱ��ɢ 
+   * </pre>
+   */
+  public static final class RPVote extends
+      com.google.protobuf.GeneratedMessage
+      implements RPVoteOrBuilder {
+    // Use RPVote.newBuilder() to construct.
+    private RPVote(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private RPVote(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RPVote defaultInstance;
+    public static RPVote getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public RPVote getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RPVote(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              isagree_ = input.readBool();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return NetGame.internal_static_RPVote_descriptor;
+    }
+
+    protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return NetGame.internal_static_RPVote_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              RPVote.class, Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<RPVote> PARSER =
+        new com.google.protobuf.AbstractParser<RPVote>() {
+      public RPVote parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RPVote(input, extensionRegistry);
+      }
+    };
+
+    @Override
+    public com.google.protobuf.Parser<RPVote> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional bool isagree = 1;
+    public static final int ISAGREE_FIELD_NUMBER = 1;
+    private boolean isagree_;
+    /**
+     * <code>optional bool isagree = 1;</code>
+     */
+    public boolean hasIsagree() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional bool isagree = 1;</code>
+     */
+    public boolean getIsagree() {
+      return isagree_;
+    }
+
+    private void initFields() {
+      isagree_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBool(1, isagree_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, isagree_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @Override
+    protected Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static RPVote parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static RPVote parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static RPVote parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static RPVote parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static RPVote parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static RPVote parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static RPVote parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static RPVote parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static RPVote parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static RPVote parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(RPVote prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @Override
+    protected Builder newBuilderForType(
+        BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code RPVote}
+     *
+     * <pre>
+     ** ͶƱ��ɢ 
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements RPVoteOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return NetGame.internal_static_RPVote_descriptor;
+      }
+
+      protected FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return NetGame.internal_static_RPVote_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                RPVote.class, Builder.class);
+      }
+
+      // Construct using com.module.net.NetGame.RPVote.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        isagree_ = false;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return NetGame.internal_static_RPVote_descriptor;
+      }
+
+      public RPVote getDefaultInstanceForType() {
+        return RPVote.getDefaultInstance();
+      }
+
+      public RPVote build() {
+        RPVote result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public RPVote buildPartial() {
+        RPVote result = new RPVote(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.isagree_ = isagree_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof RPVote) {
+          return mergeFrom((RPVote)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(RPVote other) {
+        if (other == RPVote.getDefaultInstance()) return this;
+        if (other.hasIsagree()) {
+          setIsagree(other.getIsagree());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        RPVote parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (RPVote) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional bool isagree = 1;
+      private boolean isagree_ ;
+      /**
+       * <code>optional bool isagree = 1;</code>
+       */
+      public boolean hasIsagree() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional bool isagree = 1;</code>
+       */
+      public boolean getIsagree() {
+        return isagree_;
+      }
+      /**
+       * <code>optional bool isagree = 1;</code>
+       */
+      public Builder setIsagree(boolean value) {
+        bitField0_ |= 0x00000001;
+        isagree_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool isagree = 1;</code>
+       */
+      public Builder clearIsagree() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        isagree_ = false;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:RPVote)
+    }
+
+    static {
+      defaultInstance = new RPVote(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:RPVote)
+  }
+
+  public interface RQVoteOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional bool isagree = 1;
+    /**
+     * <code>optional bool isagree = 1;</code>
+     */
+    boolean hasIsagree();
+    /**
+     * <code>optional bool isagree = 1;</code>
+     */
+    boolean getIsagree();
+
+    // optional int32 uid = 2;
+    /**
+     * <code>optional int32 uid = 2;</code>
+     *
+     * <pre>
+     ** ���Ϊ0��ʾ����ͶƱ����ʾͬ��/�ܾ���ť,����Ϊ����ҵ�ѡ�� 
+     * </pre>
+     */
+    boolean hasUid();
+    /**
+     * <code>optional int32 uid = 2;</code>
+     *
+     * <pre>
+     ** ���Ϊ0��ʾ����ͶƱ����ʾͬ��/�ܾ���ť,����Ϊ����ҵ�ѡ�� 
+     * </pre>
+     */
+    int getUid();
+  }
+  /**
+   * Protobuf type {@code RQVote}
+   *
+   * <pre>
+   ** ͶƱ��ɢ 
+   * </pre>
+   */
+  public static final class RQVote extends
+      com.google.protobuf.GeneratedMessage
+      implements RQVoteOrBuilder {
+    // Use RQVote.newBuilder() to construct.
+    private RQVote(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private RQVote(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RQVote defaultInstance;
+    public static RQVote getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public RQVote getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RQVote(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              isagree_ = input.readBool();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              uid_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return NetGame.internal_static_RQVote_descriptor;
+    }
+
+    protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return NetGame.internal_static_RQVote_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              RQVote.class, Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<RQVote> PARSER =
+        new com.google.protobuf.AbstractParser<RQVote>() {
+      public RQVote parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RQVote(input, extensionRegistry);
+      }
+    };
+
+    @Override
+    public com.google.protobuf.Parser<RQVote> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional bool isagree = 1;
+    public static final int ISAGREE_FIELD_NUMBER = 1;
+    private boolean isagree_;
+    /**
+     * <code>optional bool isagree = 1;</code>
+     */
+    public boolean hasIsagree() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional bool isagree = 1;</code>
+     */
+    public boolean getIsagree() {
+      return isagree_;
+    }
+
+    // optional int32 uid = 2;
+    public static final int UID_FIELD_NUMBER = 2;
+    private int uid_;
+    /**
+     * <code>optional int32 uid = 2;</code>
+     *
+     * <pre>
+     ** ���Ϊ0��ʾ����ͶƱ����ʾͬ��/�ܾ���ť,����Ϊ����ҵ�ѡ�� 
+     * </pre>
+     */
+    public boolean hasUid() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 uid = 2;</code>
+     *
+     * <pre>
+     ** ���Ϊ0��ʾ����ͶƱ����ʾͬ��/�ܾ���ť,����Ϊ����ҵ�ѡ�� 
+     * </pre>
+     */
+    public int getUid() {
+      return uid_;
+    }
+
+    private void initFields() {
+      isagree_ = false;
+      uid_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBool(1, isagree_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, uid_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, isagree_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, uid_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @Override
+    protected Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static RQVote parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static RQVote parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static RQVote parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static RQVote parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static RQVote parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static RQVote parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static RQVote parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static RQVote parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static RQVote parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static RQVote parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(RQVote prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @Override
+    protected Builder newBuilderForType(
+        BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code RQVote}
+     *
+     * <pre>
+     ** ͶƱ��ɢ 
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements RQVoteOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return NetGame.internal_static_RQVote_descriptor;
+      }
+
+      protected FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return NetGame.internal_static_RQVote_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                RQVote.class, Builder.class);
+      }
+
+      // Construct using com.module.net.NetGame.RQVote.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        isagree_ = false;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        uid_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return NetGame.internal_static_RQVote_descriptor;
+      }
+
+      public RQVote getDefaultInstanceForType() {
+        return RQVote.getDefaultInstance();
+      }
+
+      public RQVote build() {
+        RQVote result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public RQVote buildPartial() {
+        RQVote result = new RQVote(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.isagree_ = isagree_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.uid_ = uid_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof RQVote) {
+          return mergeFrom((RQVote)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(RQVote other) {
+        if (other == RQVote.getDefaultInstance()) return this;
+        if (other.hasIsagree()) {
+          setIsagree(other.getIsagree());
+        }
+        if (other.hasUid()) {
+          setUid(other.getUid());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        RQVote parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (RQVote) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional bool isagree = 1;
+      private boolean isagree_ ;
+      /**
+       * <code>optional bool isagree = 1;</code>
+       */
+      public boolean hasIsagree() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional bool isagree = 1;</code>
+       */
+      public boolean getIsagree() {
+        return isagree_;
+      }
+      /**
+       * <code>optional bool isagree = 1;</code>
+       */
+      public Builder setIsagree(boolean value) {
+        bitField0_ |= 0x00000001;
+        isagree_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool isagree = 1;</code>
+       */
+      public Builder clearIsagree() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        isagree_ = false;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 uid = 2;
+      private int uid_ ;
+      /**
+       * <code>optional int32 uid = 2;</code>
+       *
+       * <pre>
+       ** ���Ϊ0��ʾ����ͶƱ����ʾͬ��/�ܾ���ť,����Ϊ����ҵ�ѡ�� 
+       * </pre>
+       */
+      public boolean hasUid() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 uid = 2;</code>
+       *
+       * <pre>
+       ** ���Ϊ0��ʾ����ͶƱ����ʾͬ��/�ܾ���ť,����Ϊ����ҵ�ѡ�� 
+       * </pre>
+       */
+      public int getUid() {
+        return uid_;
+      }
+      /**
+       * <code>optional int32 uid = 2;</code>
+       *
+       * <pre>
+       ** ���Ϊ0��ʾ����ͶƱ����ʾͬ��/�ܾ���ť,����Ϊ����ҵ�ѡ�� 
+       * </pre>
+       */
+      public Builder setUid(int value) {
+        bitField0_ |= 0x00000002;
+        uid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 uid = 2;</code>
+       *
+       * <pre>
+       ** ���Ϊ0��ʾ����ͶƱ����ʾͬ��/�ܾ���ť,����Ϊ����ҵ�ѡ�� 
+       * </pre>
+       */
+      public Builder clearUid() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        uid_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:RQVote)
+    }
+
+    static {
+      defaultInstance = new RQVote(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:RQVote)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_NetUserData_descriptor;
   private static
@@ -9312,6 +10629,21 @@ public final class NetGame {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_RQEnterRoom_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_RQExit_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_RQExit_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_RPVote_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_RPVote_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_RQVote_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_RQVote_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -9343,8 +10675,10 @@ public final class NetGame {
       "\n\017NetMjUserResult\022\032\n\006scores\030\001 \003(\0132\n.NetK",
       "vData\022\020\n\010showType\030\002 \001(\005\022\017\n\007winType\030\003 \001(\005" +
       "\022\r\n\005score\030\004 \001(\005\")\n\013RQEnterRoom\022\032\n\004user\030\001" +
-      " \001(\0132\014.NetUserDataB\031\n\016com.module.netB\007Ne" +
-      "tGame"
+      " \001(\0132\014.NetUserData\"\025\n\006RQExit\022\013\n\003uid\030\001 \001(" +
+      "\005\"\031\n\006RPVote\022\017\n\007isagree\030\001 \001(\010\"&\n\006RQVote\022\017" +
+      "\n\007isagree\030\001 \001(\010\022\013\n\003uid\030\002 \001(\005B\031\n\016com.modu" +
+      "le.netB\007NetGame"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9417,6 +10751,24 @@ public final class NetGame {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RQEnterRoom_descriptor,
               new String[] { "User", });
+          internal_static_RQExit_descriptor =
+            getDescriptor().getMessageTypes().get(11);
+          internal_static_RQExit_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_RQExit_descriptor,
+              new String[] { "Uid", });
+          internal_static_RPVote_descriptor =
+            getDescriptor().getMessageTypes().get(12);
+          internal_static_RPVote_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_RPVote_descriptor,
+              new String[] { "Isagree", });
+          internal_static_RQVote_descriptor =
+            getDescriptor().getMessageTypes().get(13);
+          internal_static_RQVote_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_RQVote_descriptor,
+              new String[] { "Isagree", "Uid", });
           return null;
         }
       };

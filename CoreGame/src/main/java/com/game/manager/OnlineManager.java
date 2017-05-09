@@ -19,15 +19,14 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class OnlineManager{
     private static final OnlineManager serverManager = new OnlineManager();
-    private Map<Integer,Visitor> onLines = new ConcurrentHashMap<>();
 
     private OnlineManager(){}
     public static OnlineManager getIntance(){
         return serverManager;
     }
 
-    public Visitor getUserById(int uid){
-        return onLines.get(uid);
+    public UserVistor getUserById(int uid){
+        return roleId_session.get(uid);
     }
 
     protected final int maxOnlineCount = 10000;

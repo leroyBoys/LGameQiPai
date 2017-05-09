@@ -3,20 +3,17 @@ package com.game.action;
 import com.game.core.TableFactory;
 import com.game.core.TableManager;
 import com.game.core.constant.GameConst;
-import com.game.core.room.BaseGameStatus;
 import com.game.core.room.BaseTableVo;
+import com.game.core.room.GameOverType;
 import com.game.manager.OnlineManager;
 import com.game.socket.GameSocket;
 import com.game.socket.module.UserVistor;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.Message;
-import com.lgame.util.comm.StringTool;
 import com.lsocket.control.impl.CoreDispatcher;
 import com.lsocket.handler.*;
 import com.lsocket.handler.ModuleCmd;
 import com.lsocket.message.Request;
 import com.lsocket.message.Response;
-import com.lsocket.module.HttpRequestType;
 import com.module.core.ResponseCode;
 import com.module.net.NetGame;
 
@@ -53,7 +50,7 @@ public class GameCommHandler extends ModuleHandler {
                     return;
                 }
 
-                response.setObj(baseTableVo.sendEnterRoom(vistor.getRoleId()));
+                response.setObj(baseTableVo.getEnterRoomMsg(vistor.getRoleId()));
                 vistor.sendMsg(response);
             }
             @Override
@@ -127,7 +124,7 @@ public class GameCommHandler extends ModuleHandler {
 
             @Override
             public Request getRequset(byte[] bytes, int module,int cmd, int sq) throws InvalidProtocolBufferException {
-                return null;
+                return Request.valueOf(module,cmd,null,sq);
             }
 
             @Override
@@ -142,12 +139,12 @@ public class GameCommHandler extends ModuleHandler {
         putInvoker(new GameCmdModule() {
             @Override
             public void invoke(UserVistor vistor, Request request, Response response) {
-
+                ready(vistor,request,response);
             }
 
             @Override
             public Request getRequset(byte[] bytes, int module,int cmd, int sq) throws InvalidProtocolBufferException {
-                return null;
+                return Request.valueOf(module,cmd,null,sq);
             }
 
             @Override
@@ -159,13 +156,19 @@ public class GameCommHandler extends ModuleHandler {
         putInvoker(new GameCmdModule() {
             @Override
             public void invoke(UserVistor vistor, Request request, Response response) {
-
-
+                BaseTableVo table = TableManager.getInstance().getTable(vistor.getRoomId());
+                if(table == null){
+                    return;
+                }
+                NetGame.RPVote rpVote = (NetGame.RPVote) request.getObj();
+                if(table.vote(vistor,rpVote.getIsagree())){//解散
+                    dissolution(vistor,table,response);
+                }
             }
 
             @Override
             public Request getRequset(byte[] bytes, int module,int cmd, int sq) throws InvalidProtocolBufferException {
-                return Request.valueOf(module,cmd,null,sq);
+                return Request.valueOf(module,cmd,NetGame.RPVote.parseFrom(bytes),sq);
             }
 
             @Override
@@ -183,12 +186,68 @@ public class GameCommHandler extends ModuleHandler {
             return;
         }
 
-        if(table.getStatus().getValue() != 0){//需要投票
+        if(table.getGameOverType() == GameOverType.AllOver){//个人退出
+            exitSelf(vistor,table,response);
+            return;
+        }else if(table.getCurChirCount() == table.getChairs().length){//投票
+            if(table.vote(vistor,true)){//解散
+                dissolution(vistor,table,response);
+            }
             return;
         }
 
+        if(vistor.getRoleId() == table.getOwnerId()){//解散
+            dissolution(vistor,table,response);
+            return;
+        }
 
+        exitSelf(vistor,table,response);
     }
+
+    private void exitSelf(UserVistor vistor, BaseTableVo tableVo, Response respons){
+        tableVo.removeChair(vistor.getRoleId());
+        //发送消息
+        NetGame.RQExit.Builder rqExit = NetGame.RQExit.newBuilder();
+        rqExit.setUid(vistor.getRoleId());
+
+        NetGame.RQExit rqExit1 = rqExit.build();
+        respons.setObj(rqExit1);
+        vistor.sendMsg(respons);
+        if(tableVo.getCurChirCount() == 0){
+            return;
+        }
+        tableVo.sendMsgWithOutUid(Response.defaultResponse(this.getModule(),GameCommCmd.EXIT_GAME.getValue(),0,rqExit1),vistor.getRoleId());
+    }
+
+    /**
+     * 解散
+     * @param vistor
+     * @param tableVo
+     * @param respons
+     */
+    private void dissolution(UserVistor vistor, BaseTableVo tableVo, Response respons){
+
+        //发送消息
+        NetGame.RQExit.Builder rqExit = NetGame.RQExit.newBuilder();
+        rqExit.setUid(0);
+        respons.setObj(rqExit.build());
+
+        for(int i = 0;i<tableVo.getChairs().length;i++){
+            if(tableVo.getChairs()[i] == null){
+                continue;
+            }
+
+            int chairId = tableVo.getChairs()[i].getId();
+            tableVo.removeChair(chairId);
+            //发送
+            UserVistor v = OnlineManager.getIntance().getUserById(chairId);
+            if(v == null){
+                continue;
+            }
+            v.sendMsg(respons);
+        }
+    }
+
 
     private void middleJoin(BaseTableVo baseTableVo, UserVistor vistor, Request request, Response response) {
         baseTableVo.getChairByUid(vistor.getRoleId()).setOnline(true);
@@ -201,10 +260,11 @@ public class GameCommHandler extends ModuleHandler {
                 continue;
             }
             //给其他人发送
-            OnlineManager.getIntance().getUserById(baseTableVo.getChairs()[i].getId()).sendMsg(Response.defaultResponse(GameCommCmd.CREATE_TABLE.getModule(),GameCommCmd.CREATE_TABLE.getValue(),0,rpEnterRoom.build()));
+            OnlineManager.getIntance().getUserById(baseTableVo.getChairs()[i].getId()).sendMsg(Response.defaultResponse(GameCommCmd.CREATE_TABLE.getModule(),GameCommCmd.UserStatus.getValue(),0,rpEnterRoom.build()));
         }
 
-        response.setObj(baseTableVo.sendEnterRoom(vistor.getRoleId()));
+        response.setCmd(GameCommCmd.CREATE_TABLE.getValue());
+        response.setObj(baseTableVo.getEnterRoomMsg(vistor.getRoleId()));
         vistor.sendMsg(response);
     }
 
@@ -227,8 +287,18 @@ public class GameCommHandler extends ModuleHandler {
 
         response.setModule(this.getModule());
         response.setCmd(GameCommCmd.CREATE_TABLE.getValue());
-        response.setObj(baseTableVo.sendEnterRoom(vistor.getRoleId()));
+        response.setObj(baseTableVo.getEnterRoomMsg(vistor.getRoleId()));
         vistor.sendMsg(response);
+    }
+
+    private void ready(UserVistor vistor, Request request, Response response) {
+        BaseTableVo table = TableManager.getInstance().getTable(vistor.getRoomId());
+
+        if(table == null){
+            vistor.sendError(ResponseCode.Error.key_error);
+            return;
+        }
+
     }
 
     @Override

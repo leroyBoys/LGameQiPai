@@ -6,6 +6,7 @@ import com.game.core.action.BaseAction;
 import com.game.core.constant.GameConst;
 import com.game.core.factory.TableProducer;
 import com.game.manager.DBServiceManager;
+import com.game.manager.OnlineManager;
 import com.game.manager.TimeCacheManager;
 import com.game.socket.module.UserVistor;
 import com.logger.log.SystemLogger;
@@ -14,10 +15,7 @@ import com.module.core.ResponseCode;
 import com.module.net.NetCommon;
 import com.module.net.NetGame;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -25,6 +23,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 2017/4/19.
  */
 public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends BaseChairInfo> implements Runnable{
+    private GameOverType gameOverType = GameOverType.NULL;
     private TStatus status;
     private Map<TStatus,BaseStatusData> statusDataMap = new HashMap<>(1);
     private int id;
@@ -118,7 +117,12 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
                 return;
             }
 
-            chairs[chair.getIdx()] = chair;
+            chairs[chair.getIdx()] = null;
+            //更新数据库
+
+            if(chairMap.isEmpty()){
+                TableManager.getInstance().destroyTable(this.getId());
+            }
         }catch (Exception e){}finally {
             addRemoveLock.unlock();
         }
@@ -289,7 +293,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
      * @param roleid
      * @return
      */
-    public NetGame.RQCreateRoom sendEnterRoom(int roleid){
+    public NetGame.RQCreateRoom getEnterRoomMsg(int roleid){
         NetGame.RQCreateRoom.Builder rqCreateRoom = NetGame.RQCreateRoom.newBuilder();
         rqCreateRoom.setRoomId(this.getId());
         rqCreateRoom.setGameId(this.getGameId());
@@ -392,19 +396,63 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         return netKvData.build();
     }
 
-    public void Join(UserVistor vistor){
-        addChair(vistor);
+    /**
+     * 投票解散，返回是否解散
+     * @param vistor
+     * @param isAgree
+     * @return
+     */
+    public synchronized boolean vote(UserVistor vistor, boolean isAgree){
+        Set<Integer> votes = getAttributeValue(BaseTableVo.AttributeKey.VoteData);
+        if(votes != null){
+            if(votes.contains(vistor.getRoleId())){
+                return false;
+            }
+
+            if(!isAgree){//拒绝
+                attributeMap.remove(BaseTableVo.AttributeKey.VoteData);
+
+                NetGame.RQVote.Builder netVote = NetGame.RQVote.newBuilder();
+                netVote.setIsagree(false);
+                netVote.setUid(vistor.getRoleId());
+                this.sendMsgWithOutUid(Response.defaultResponse(GameConst.MOUDLE_GameComm,GameCommCmd.VoteDestroy.getValue(),0,netVote.build()),0);
+                return false;
+            }
+        }else {
+            votes = new HashSet<>();
+            addAttribute(BaseTableVo.AttributeKey.VoteData,votes);
+
+            NetGame.RQVote.Builder netVote = NetGame.RQVote.newBuilder();//发起投票
+            netVote.setIsagree(true);
+            this.sendMsgWithOutUid(Response.defaultResponse(GameConst.MOUDLE_GameComm,GameCommCmd.VoteDestroy.getValue(),0,netVote.build()),vistor.getRoleId());
+        }
+
+        if(votes.size()-1 == this.getChairs().length){//解散
+            return true;
+        }
+        votes.add(vistor.getRoleId());
+
+        NetGame.RQVote.Builder netVote = NetGame.RQVote.newBuilder();
+        netVote.setIsagree(true);
+        netVote.setUid(vistor.getRoleId());
+        vistor.sendMsg(Response.defaultResponse(GameConst.MOUDLE_GameComm,GameCommCmd.VoteDestroy.getValue(),0,netVote.build()));
+        return false;
     }
 
     ////////////////////////发消息//////////////////////////////////////
 
-    public void sendMsgWithOutUid(Response otherResponse, int uid) {
+    public void sendMsgWithOutUid(Response otherResponse, int roleId) {
         for(int i = 0;i<chairs.length;i++){
-            if(chairs[i] == null || chairs[i].getId() == uid){
+            if(chairs[i] == null || chairs[i].getId() == roleId){
                 continue;
             }
             //发送
+            UserVistor vistor = OnlineManager.getIntance().getUserById(chairs[i].getId());
+            if(vistor == null){
+                continue;
+            }
 
+            vistor.sendMsg(otherResponse);
         }
     }
 
@@ -451,6 +499,14 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
 
     public int getFocusIdex() {
         return focusIdex;
+    }
+
+    public GameOverType getGameOverType() {
+        return gameOverType;
+    }
+
+    public void setGameOverType(GameOverType gameOverType) {
+        this.gameOverType = gameOverType;
     }
 
     public void setFocusIdex(int focusIdex) {

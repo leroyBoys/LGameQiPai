@@ -40,6 +40,11 @@ public enum GameCommCmd implements ModuleCmd {
      * 投票解散
      */
     VoteDestroy(6, true,HttpRequestType.tcp),
+    /**
+     * 玩家状态位1位：是否离线 2位：是否托管 3位:是否准备
+     */
+    UserStatus(7,true,HttpRequestType.tcp)
+
     ;
 
     private final int value;

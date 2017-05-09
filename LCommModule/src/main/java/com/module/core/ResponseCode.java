@@ -65,7 +65,9 @@ public class ResponseCode {
         @Comment("房间不存在")
         room_not_exit(14),
         @Comment("人数已满")
-        room_is_full(15)
+        room_is_full(15),
+        @Comment("桌子不存在")
+        table_not_exit(16)
         ;
         private final int code;
 
