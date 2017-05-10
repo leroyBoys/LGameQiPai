@@ -184,4 +184,9 @@ public class UserServiceImpl implements UserService {
     public void updateRoleInfoRoomid(int roleId, int id) {
 
     }
+
+    @Override
+    public void updateCard(int roleId, int card) {
+        userDao.updateCard(roleId, card);
+    }
 }

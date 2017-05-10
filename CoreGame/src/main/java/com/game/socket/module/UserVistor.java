@@ -6,6 +6,7 @@ import com.lsocket.message.Response;
 import com.lsocket.module.SocketSystemCode;
 import com.lsocket.module.Visitor;
 import com.module.core.ResponseCode;
+import com.module.db.RoleInfo;
 import com.module.net.DB;
 
 /**
@@ -14,14 +15,14 @@ import com.module.net.DB;
  */
 public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
     private int roleId;//roleId
-    private int roomId;
     private int module;
     private long heartTime;
     private int heartNum;
     private int connectErrorCount;
 
     private DB.UK uk;
-    private int card;
+    private GameRole gameRole;
+    private RoleInfo roleInfo;
 
     public UserVistor(GameSocket socketServer, org.apache.mina.core.session.IoSession ioSession, long timeOutTime) {
         super(socketServer, ioSession, timeOutTime);
@@ -44,14 +45,6 @@ public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
     @Override
     public void sendError(ResponseCode.Error code) {
         this.getIoSession().write(code.getMsg());
-    }
-
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
-    }
-
-    public int getRoomId() {
-        return roomId;
     }
 
     public int getModule() {
@@ -90,10 +83,6 @@ public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
         return connectErrorCount;
     }
 
-    public int getCard() {
-        return card;
-    }
-
     public DB.UK getUk() {
         return uk;
     }
@@ -102,8 +91,20 @@ public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
         this.uk = uk;
     }
 
-    public void setCard(int card) {
-        this.card = card;
+    public GameRole getGameRole() {
+        return gameRole;
+    }
+
+    public void setGameRole(GameRole gameRole) {
+        this.gameRole = gameRole;
+    }
+
+    public RoleInfo getRoleInfo() {
+        return roleInfo;
+    }
+
+    public void setRoleInfo(RoleInfo roleInfo) {
+        this.roleInfo = roleInfo;
     }
 
     public void setConnectErrorCount(int connectErrorCount) {

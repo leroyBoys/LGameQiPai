@@ -94,7 +94,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
             }
 
             Chair chair = createChair(visitor);
-            visitor.setRoomId(this.getId());
+            visitor.getGameRole().setRoomId(this.getId());
             DBServiceManager.getInstance().getUserService().updateRoleInfoRoomid(visitor.getRoleId(),this.getId());
             chairMap.put(chair.getId(),chair);
             chairs[chairMap.size()-1] = chair;

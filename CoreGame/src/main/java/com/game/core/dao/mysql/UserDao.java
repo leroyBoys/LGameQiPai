@@ -360,4 +360,14 @@ public class UserDao implements Base {
         return null;
     }
 
+    public void updateCard(int roleId, int card) {
+        MethodCacheTime ct = new MethodCacheTime();
+        try {
+            gamePool.Execute("CALL get_role_by_id(update user_info set card=? where id = ?)",roleId,card);
+        } catch (Exception ex) {
+            file.ErrorLog(ex, LogType.Error, "db");
+        } finally {
+            ct.dbTrace("updateCard");
+        }
+    }
 }

@@ -7,6 +7,7 @@ import com.game.manager.DBServiceManager;
 import com.game.manager.OnlineManager;
 import com.game.manager.TimeCacheManager;
 import com.game.socket.GameSocket;
+import com.game.socket.module.GameRole;
 import com.game.socket.module.UserVistor;
 import com.lgame.util.PrintTool;
 import com.lgame.util.comm.Tools;
@@ -23,6 +24,7 @@ import com.module.db.RoleInfo;
 import com.module.db.UserInfo;
 import com.module.net.Com;
 import com.module.net.DB;
+import com.module.net.NetGame;
 import com.module.net.NetParentOld;
 
 import java.util.Date;
@@ -149,11 +151,18 @@ public class SystemHandler extends ModuleHandler {
             ///初始化创建角色奖励
             initLoginReward(info);
         }
-        OnlineManager.getIntance().putOnlineList(userInfo.getId(), info.getId(), vistor);
-        vistor.setCard(info.getCard());
 
+        vistor.setRoleInfo(info);
+        OnlineManager.getIntance().putOnlineList(userInfo.getId(), info.getId(), vistor);
+
+        GameRole gameRole = DBServiceManager.getDbServiceManager().getGameRedis().getGameRole(info.getId());
+        vistor.setGameRole(gameRole);
         userService.updateUserInfoLoginStatus(userInfo.getId(), true, new Date());
         //发送登陆成功消息
+
+        NetGame.RQConnect.Builder connect = NetGame.RQConnect.newBuilder();
+        connect.setRoomId(gameRole.getRoomId());
+        response.setObj(connect.build());
         vistor.sendMsg(response);
     }
 

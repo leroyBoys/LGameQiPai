@@ -2,6 +2,7 @@ package com.game.manager;
 
 import com.game.core.dao.mysql.ServerService;
 import com.game.core.dao.mysql.UserDao;
+import com.game.core.dao.redis.GameRedis;
 import com.game.core.dao.redis.UserRedis;
 import com.game.core.service.UserService;
 import com.game.core.service.impl.UserServiceImpl;
@@ -37,7 +38,8 @@ public class DBServiceManager extends ICommon {
     private ServerGroup serverGroup;
     private ServerService serverService;
 
-   // private UserRedis userRedis;
+    private UserRedis userRedis;
+    private GameRedis gameRedis;
     private UserService userService;
   //  private UserDao userDao;
 
@@ -90,12 +92,15 @@ public class DBServiceManager extends ICommon {
         //RedisConnectionManager redisConnectionManager = new RedisConnectionManager(properties);
 
         Properties redisProperties = PropertiesTool.loadProperty("redis.properties");
-        Properties masterProperties = new Properties();
 
-        RedisConnectionManager redisConnectionManager = new RedisConnectionManager(masterProperties);
-        this.userService = new UserServiceImpl(new UserDao(commUserPool,commGamePool),new UserRedis(redisConnectionManager));
+        RedisConnectionManager redisUserConnectionManager = new RedisConnectionManager(redisProperties);
+        userRedis = new UserRedis(redisUserConnectionManager);
+        this.userService = new UserServiceImpl(new UserDao(commUserPool,commGamePool),userRedis);
 
-
+        Properties masterProperties = new Properties(redisProperties);
+        masterProperties.setProperty("url",serverGroup.getRedisUrl()+"/"+serverGroup.getRedisPwd());
+        RedisConnectionManager gameRedisConnectionManager = new RedisConnectionManager(masterProperties);
+        gameRedis = new GameRedis(gameRedisConnectionManager);
     }
 
     @Override
@@ -129,5 +134,13 @@ public class DBServiceManager extends ICommon {
 
     public UserService getUserService() {
         return userService;
+    }
+
+    public UserRedis getUserRedis() {
+        return userRedis;
+    }
+
+    public GameRedis getGameRedis() {
+        return gameRedis;
     }
 }

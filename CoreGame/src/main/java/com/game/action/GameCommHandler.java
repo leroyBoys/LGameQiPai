@@ -100,7 +100,7 @@ public class GameCommHandler extends ModuleHandler {
             }
             @Override
             public void invoke(UserVistor vistor, Request request, Response response) {
-               if(vistor.getRoomId() == 0){
+               if(vistor.getGameRole().getRoomId() == 0){
                    return;
                }
 
@@ -156,7 +156,7 @@ public class GameCommHandler extends ModuleHandler {
         putInvoker(new GameCmdModule() {
             @Override
             public void invoke(UserVistor vistor, Request request, Response response) {
-                BaseTableVo table = TableManager.getInstance().getTable(vistor.getRoomId());
+                BaseTableVo table = TableManager.getInstance().getTable(vistor.getGameRole().getRoomId());
                 if(table == null){
                     return;
                 }
@@ -180,7 +180,7 @@ public class GameCommHandler extends ModuleHandler {
     }
 
     private void exitTable(UserVistor vistor, Request request, Response response) {
-        BaseTableVo table = TableManager.getInstance().getTable(vistor.getRoomId());
+        BaseTableVo table = TableManager.getInstance().getTable(vistor.getGameRole().getRoomId());
 
         if(table == null){
             return;
@@ -292,7 +292,7 @@ public class GameCommHandler extends ModuleHandler {
     }
 
     private void ready(UserVistor vistor, Request request, Response response) {
-        BaseTableVo table = TableManager.getInstance().getTable(vistor.getRoomId());
+        BaseTableVo table = TableManager.getInstance().getTable(vistor.getGameRole().getRoomId());
 
         if(table == null){
             vistor.sendError(ResponseCode.Error.key_error);

@@ -29,7 +29,7 @@ public final class NetGame {
     /**
      * <code>optional string image = 2;</code>
      */
-    String getImage();
+    java.lang.String getImage();
     /**
      * <code>optional string image = 2;</code>
      */
@@ -64,11 +64,11 @@ public final class NetGame {
     /**
      * <code>optional .NetExtraData extra = 5;</code>
      */
-    NetExtraData getExtra();
+    com.module.net.NetGame.NetExtraData getExtra();
     /**
      * <code>optional .NetExtraData extra = 5;</code>
      */
-    NetExtraDataOrBuilder getExtraOrBuilder();
+    com.module.net.NetGame.NetExtraDataOrBuilder getExtraOrBuilder();
   }
   /**
    * Protobuf type {@code NetUserData}
@@ -93,7 +93,7 @@ public final class NetGame {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
@@ -142,11 +142,11 @@ public final class NetGame {
               break;
             }
             case 42: {
-              NetExtraData.Builder subBuilder = null;
+              com.module.net.NetGame.NetExtraData.Builder subBuilder = null;
               if (((bitField0_ & 0x00000010) == 0x00000010)) {
                 subBuilder = extra_.toBuilder();
               }
-              extra_ = input.readMessage(NetExtraData.PARSER, extensionRegistry);
+              extra_ = input.readMessage(com.module.net.NetGame.NetExtraData.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(extra_);
                 extra_ = subBuilder.buildPartial();
@@ -168,14 +168,14 @@ public final class NetGame {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return NetGame.internal_static_NetUserData_descriptor;
+      return com.module.net.NetGame.internal_static_NetUserData_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return NetGame.internal_static_NetUserData_fieldAccessorTable
+      return com.module.net.NetGame.internal_static_NetUserData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              NetUserData.class, Builder.class);
+              com.module.net.NetGame.NetUserData.class, com.module.net.NetGame.NetUserData.Builder.class);
     }
 
     public static com.google.protobuf.Parser<NetUserData> PARSER =
@@ -188,7 +188,7 @@ public final class NetGame {
       }
     };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<NetUserData> getParserForType() {
       return PARSER;
     }
@@ -212,7 +212,7 @@ public final class NetGame {
 
     // optional string image = 2;
     public static final int IMAGE_FIELD_NUMBER = 2;
-    private Object image_;
+    private java.lang.Object image_;
     /**
      * <code>optional string image = 2;</code>
      */
@@ -222,14 +222,14 @@ public final class NetGame {
     /**
      * <code>optional string image = 2;</code>
      */
-    public String getImage() {
-      Object ref = image_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getImage() {
+      java.lang.Object ref = image_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           image_ = s;
         }
@@ -241,11 +241,11 @@ public final class NetGame {
      */
     public com.google.protobuf.ByteString
         getImageBytes() {
-      Object ref = image_;
-      if (ref instanceof String) {
+      java.lang.Object ref = image_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         image_ = b;
         return b;
       } else {
@@ -287,7 +287,7 @@ public final class NetGame {
 
     // optional .NetExtraData extra = 5;
     public static final int EXTRA_FIELD_NUMBER = 5;
-    private NetExtraData extra_;
+    private com.module.net.NetGame.NetExtraData extra_;
     /**
      * <code>optional .NetExtraData extra = 5;</code>
      */
@@ -297,13 +297,13 @@ public final class NetGame {
     /**
      * <code>optional .NetExtraData extra = 5;</code>
      */
-    public NetExtraData getExtra() {
+    public com.module.net.NetGame.NetExtraData getExtra() {
       return extra_;
     }
     /**
      * <code>optional .NetExtraData extra = 5;</code>
      */
-    public NetExtraDataOrBuilder getExtraOrBuilder() {
+    public com.module.net.NetGame.NetExtraDataOrBuilder getExtraOrBuilder() {
       return extra_;
     }
 
@@ -312,7 +312,7 @@ public final class NetGame {
       image_ = "";
       idex_ = 0;
       status_ = 0;
-      extra_ = NetExtraData.getDefaultInstance();
+      extra_ = com.module.net.NetGame.NetExtraData.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -376,59 +376,59 @@ public final class NetGame {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static NetUserData parseFrom(
+    public static com.module.net.NetGame.NetUserData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static NetUserData parseFrom(
+    public static com.module.net.NetGame.NetUserData parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static NetUserData parseFrom(byte[] data)
+    public static com.module.net.NetGame.NetUserData parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static NetUserData parseFrom(
+    public static com.module.net.NetGame.NetUserData parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static NetUserData parseFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.NetUserData parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static NetUserData parseFrom(
+    public static com.module.net.NetGame.NetUserData parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static NetUserData parseDelimitedFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.NetUserData parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static NetUserData parseDelimitedFrom(
+    public static com.module.net.NetGame.NetUserData parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static NetUserData parseFrom(
+    public static com.module.net.NetGame.NetUserData parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static NetUserData parseFrom(
+    public static com.module.net.NetGame.NetUserData parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -437,14 +437,14 @@ public final class NetGame {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(NetUserData prototype) {
+    public static Builder newBuilder(com.module.net.NetGame.NetUserData prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -453,17 +453,17 @@ public final class NetGame {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements NetUserDataOrBuilder {
+       implements com.module.net.NetGame.NetUserDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return NetGame.internal_static_NetUserData_descriptor;
+        return com.module.net.NetGame.internal_static_NetUserData_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return NetGame.internal_static_NetUserData_fieldAccessorTable
+        return com.module.net.NetGame.internal_static_NetUserData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                NetUserData.class, Builder.class);
+                com.module.net.NetGame.NetUserData.class, com.module.net.NetGame.NetUserData.Builder.class);
       }
 
       // Construct using com.module.net.NetGame.NetUserData.newBuilder()
@@ -472,7 +472,7 @@ public final class NetGame {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -496,7 +496,7 @@ public final class NetGame {
         status_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
         if (extraBuilder_ == null) {
-          extra_ = NetExtraData.getDefaultInstance();
+          extra_ = com.module.net.NetGame.NetExtraData.getDefaultInstance();
         } else {
           extraBuilder_.clear();
         }
@@ -510,23 +510,23 @@ public final class NetGame {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return NetGame.internal_static_NetUserData_descriptor;
+        return com.module.net.NetGame.internal_static_NetUserData_descriptor;
       }
 
-      public NetUserData getDefaultInstanceForType() {
-        return NetUserData.getDefaultInstance();
+      public com.module.net.NetGame.NetUserData getDefaultInstanceForType() {
+        return com.module.net.NetGame.NetUserData.getDefaultInstance();
       }
 
-      public NetUserData build() {
-        NetUserData result = buildPartial();
+      public com.module.net.NetGame.NetUserData build() {
+        com.module.net.NetGame.NetUserData result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public NetUserData buildPartial() {
-        NetUserData result = new NetUserData(this);
+      public com.module.net.NetGame.NetUserData buildPartial() {
+        com.module.net.NetGame.NetUserData result = new com.module.net.NetGame.NetUserData(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -559,16 +559,16 @@ public final class NetGame {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof NetUserData) {
-          return mergeFrom((NetUserData)other);
+        if (other instanceof com.module.net.NetGame.NetUserData) {
+          return mergeFrom((com.module.net.NetGame.NetUserData)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(NetUserData other) {
-        if (other == NetUserData.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.module.net.NetGame.NetUserData other) {
+        if (other == com.module.net.NetGame.NetUserData.getDefaultInstance()) return this;
         if (other.hasUid()) {
           setUid(other.getUid());
         }
@@ -598,11 +598,11 @@ public final class NetGame {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        NetUserData parsedMessage = null;
+        com.module.net.NetGame.NetUserData parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (NetUserData) e.getUnfinishedMessage();
+          parsedMessage = (com.module.net.NetGame.NetUserData) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -647,7 +647,7 @@ public final class NetGame {
       }
 
       // optional string image = 2;
-      private Object image_ = "";
+      private java.lang.Object image_ = "";
       /**
        * <code>optional string image = 2;</code>
        */
@@ -657,15 +657,15 @@ public final class NetGame {
       /**
        * <code>optional string image = 2;</code>
        */
-      public String getImage() {
-        Object ref = image_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref)
+      public java.lang.String getImage() {
+        java.lang.Object ref = image_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
               .toStringUtf8();
           image_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -673,11 +673,11 @@ public final class NetGame {
        */
       public com.google.protobuf.ByteString
           getImageBytes() {
-        Object ref = image_;
+        java.lang.Object ref = image_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           image_ = b;
           return b;
         } else {
@@ -688,7 +688,7 @@ public final class NetGame {
        * <code>optional string image = 2;</code>
        */
       public Builder setImage(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -787,9 +787,9 @@ public final class NetGame {
       }
 
       // optional .NetExtraData extra = 5;
-      private NetExtraData extra_ = NetExtraData.getDefaultInstance();
+      private com.module.net.NetGame.NetExtraData extra_ = com.module.net.NetGame.NetExtraData.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          NetExtraData, NetExtraData.Builder, NetExtraDataOrBuilder> extraBuilder_;
+          com.module.net.NetGame.NetExtraData, com.module.net.NetGame.NetExtraData.Builder, com.module.net.NetGame.NetExtraDataOrBuilder> extraBuilder_;
       /**
        * <code>optional .NetExtraData extra = 5;</code>
        */
@@ -799,7 +799,7 @@ public final class NetGame {
       /**
        * <code>optional .NetExtraData extra = 5;</code>
        */
-      public NetExtraData getExtra() {
+      public com.module.net.NetGame.NetExtraData getExtra() {
         if (extraBuilder_ == null) {
           return extra_;
         } else {
@@ -809,7 +809,7 @@ public final class NetGame {
       /**
        * <code>optional .NetExtraData extra = 5;</code>
        */
-      public Builder setExtra(NetExtraData value) {
+      public Builder setExtra(com.module.net.NetGame.NetExtraData value) {
         if (extraBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -826,7 +826,7 @@ public final class NetGame {
        * <code>optional .NetExtraData extra = 5;</code>
        */
       public Builder setExtra(
-          NetExtraData.Builder builderForValue) {
+          com.module.net.NetGame.NetExtraData.Builder builderForValue) {
         if (extraBuilder_ == null) {
           extra_ = builderForValue.build();
           onChanged();
@@ -839,12 +839,12 @@ public final class NetGame {
       /**
        * <code>optional .NetExtraData extra = 5;</code>
        */
-      public Builder mergeExtra(NetExtraData value) {
+      public Builder mergeExtra(com.module.net.NetGame.NetExtraData value) {
         if (extraBuilder_ == null) {
           if (((bitField0_ & 0x00000010) == 0x00000010) &&
-              extra_ != NetExtraData.getDefaultInstance()) {
+              extra_ != com.module.net.NetGame.NetExtraData.getDefaultInstance()) {
             extra_ =
-              NetExtraData.newBuilder(extra_).mergeFrom(value).buildPartial();
+              com.module.net.NetGame.NetExtraData.newBuilder(extra_).mergeFrom(value).buildPartial();
           } else {
             extra_ = value;
           }
@@ -860,7 +860,7 @@ public final class NetGame {
        */
       public Builder clearExtra() {
         if (extraBuilder_ == null) {
-          extra_ = NetExtraData.getDefaultInstance();
+          extra_ = com.module.net.NetGame.NetExtraData.getDefaultInstance();
           onChanged();
         } else {
           extraBuilder_.clear();
@@ -871,7 +871,7 @@ public final class NetGame {
       /**
        * <code>optional .NetExtraData extra = 5;</code>
        */
-      public NetExtraData.Builder getExtraBuilder() {
+      public com.module.net.NetGame.NetExtraData.Builder getExtraBuilder() {
         bitField0_ |= 0x00000010;
         onChanged();
         return getExtraFieldBuilder().getBuilder();
@@ -879,7 +879,7 @@ public final class NetGame {
       /**
        * <code>optional .NetExtraData extra = 5;</code>
        */
-      public NetExtraDataOrBuilder getExtraOrBuilder() {
+      public com.module.net.NetGame.NetExtraDataOrBuilder getExtraOrBuilder() {
         if (extraBuilder_ != null) {
           return extraBuilder_.getMessageOrBuilder();
         } else {
@@ -890,11 +890,11 @@ public final class NetGame {
        * <code>optional .NetExtraData extra = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          NetExtraData, NetExtraData.Builder, NetExtraDataOrBuilder>
+          com.module.net.NetGame.NetExtraData, com.module.net.NetGame.NetExtraData.Builder, com.module.net.NetGame.NetExtraDataOrBuilder> 
           getExtraFieldBuilder() {
         if (extraBuilder_ == null) {
           extraBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              NetExtraData, NetExtraData.Builder, NetExtraDataOrBuilder>(
+              com.module.net.NetGame.NetExtraData, com.module.net.NetGame.NetExtraData.Builder, com.module.net.NetGame.NetExtraDataOrBuilder>(
                   extra_,
                   getParentForChildren(),
                   isClean());
@@ -921,7 +921,7 @@ public final class NetGame {
     /**
      * <code>repeated int32 list = 1;</code>
      */
-    java.util.List<Integer> getListList();
+    java.util.List<java.lang.Integer> getListList();
     /**
      * <code>repeated int32 list = 1;</code>
      */
@@ -935,12 +935,12 @@ public final class NetGame {
     /**
      * <code>repeated .NetKvData kvDatas = 2;</code>
      */
-    java.util.List<NetKvData>
+    java.util.List<com.module.net.NetGame.NetKvData> 
         getKvDatasList();
     /**
      * <code>repeated .NetKvData kvDatas = 2;</code>
      */
-    NetKvData getKvDatas(int index);
+    com.module.net.NetGame.NetKvData getKvDatas(int index);
     /**
      * <code>repeated .NetKvData kvDatas = 2;</code>
      */
@@ -948,24 +948,24 @@ public final class NetGame {
     /**
      * <code>repeated .NetKvData kvDatas = 2;</code>
      */
-    java.util.List<? extends NetKvDataOrBuilder>
+    java.util.List<? extends com.module.net.NetGame.NetKvDataOrBuilder> 
         getKvDatasOrBuilderList();
     /**
      * <code>repeated .NetKvData kvDatas = 2;</code>
      */
-    NetKvDataOrBuilder getKvDatasOrBuilder(
-            int index);
+    com.module.net.NetGame.NetKvDataOrBuilder getKvDatasOrBuilder(
+        int index);
 
     // repeated .NetOprateData operates = 3;
     /**
      * <code>repeated .NetOprateData operates = 3;</code>
      */
-    java.util.List<NetOprateData>
+    java.util.List<com.module.net.NetGame.NetOprateData> 
         getOperatesList();
     /**
      * <code>repeated .NetOprateData operates = 3;</code>
      */
-    NetOprateData getOperates(int index);
+    com.module.net.NetGame.NetOprateData getOperates(int index);
     /**
      * <code>repeated .NetOprateData operates = 3;</code>
      */
@@ -973,13 +973,13 @@ public final class NetGame {
     /**
      * <code>repeated .NetOprateData operates = 3;</code>
      */
-    java.util.List<? extends NetOprateDataOrBuilder>
+    java.util.List<? extends com.module.net.NetGame.NetOprateDataOrBuilder> 
         getOperatesOrBuilderList();
     /**
      * <code>repeated .NetOprateData operates = 3;</code>
      */
-    NetOprateDataOrBuilder getOperatesOrBuilder(
-            int index);
+    com.module.net.NetGame.NetOprateDataOrBuilder getOperatesOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code NetExtraData}
@@ -1004,7 +1004,7 @@ public final class NetGame {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
@@ -1034,7 +1034,7 @@ public final class NetGame {
             }
             case 8: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                list_ = new java.util.ArrayList<Integer>();
+                list_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000001;
               }
               list_.add(input.readInt32());
@@ -1044,7 +1044,7 @@ public final class NetGame {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
-                list_ = new java.util.ArrayList<Integer>();
+                list_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000001;
               }
               while (input.getBytesUntilLimit() > 0) {
@@ -1055,18 +1055,18 @@ public final class NetGame {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                kvDatas_ = new java.util.ArrayList<NetKvData>();
+                kvDatas_ = new java.util.ArrayList<com.module.net.NetGame.NetKvData>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              kvDatas_.add(input.readMessage(NetKvData.PARSER, extensionRegistry));
+              kvDatas_.add(input.readMessage(com.module.net.NetGame.NetKvData.PARSER, extensionRegistry));
               break;
             }
             case 26: {
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                operates_ = new java.util.ArrayList<NetOprateData>();
+                operates_ = new java.util.ArrayList<com.module.net.NetGame.NetOprateData>();
                 mutable_bitField0_ |= 0x00000004;
               }
-              operates_.add(input.readMessage(NetOprateData.PARSER, extensionRegistry));
+              operates_.add(input.readMessage(com.module.net.NetGame.NetOprateData.PARSER, extensionRegistry));
               break;
             }
           }
@@ -1092,14 +1092,14 @@ public final class NetGame {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return NetGame.internal_static_NetExtraData_descriptor;
+      return com.module.net.NetGame.internal_static_NetExtraData_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return NetGame.internal_static_NetExtraData_fieldAccessorTable
+      return com.module.net.NetGame.internal_static_NetExtraData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              NetExtraData.class, Builder.class);
+              com.module.net.NetGame.NetExtraData.class, com.module.net.NetGame.NetExtraData.Builder.class);
     }
 
     public static com.google.protobuf.Parser<NetExtraData> PARSER =
@@ -1112,18 +1112,18 @@ public final class NetGame {
       }
     };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<NetExtraData> getParserForType() {
       return PARSER;
     }
 
     // repeated int32 list = 1;
     public static final int LIST_FIELD_NUMBER = 1;
-    private java.util.List<Integer> list_;
+    private java.util.List<java.lang.Integer> list_;
     /**
      * <code>repeated int32 list = 1;</code>
      */
-    public java.util.List<Integer>
+    public java.util.List<java.lang.Integer>
         getListList() {
       return list_;
     }
@@ -1142,17 +1142,17 @@ public final class NetGame {
 
     // repeated .NetKvData kvDatas = 2;
     public static final int KVDATAS_FIELD_NUMBER = 2;
-    private java.util.List<NetKvData> kvDatas_;
+    private java.util.List<com.module.net.NetGame.NetKvData> kvDatas_;
     /**
      * <code>repeated .NetKvData kvDatas = 2;</code>
      */
-    public java.util.List<NetKvData> getKvDatasList() {
+    public java.util.List<com.module.net.NetGame.NetKvData> getKvDatasList() {
       return kvDatas_;
     }
     /**
      * <code>repeated .NetKvData kvDatas = 2;</code>
      */
-    public java.util.List<? extends NetKvDataOrBuilder>
+    public java.util.List<? extends com.module.net.NetGame.NetKvDataOrBuilder> 
         getKvDatasOrBuilderList() {
       return kvDatas_;
     }
@@ -1165,30 +1165,30 @@ public final class NetGame {
     /**
      * <code>repeated .NetKvData kvDatas = 2;</code>
      */
-    public NetKvData getKvDatas(int index) {
+    public com.module.net.NetGame.NetKvData getKvDatas(int index) {
       return kvDatas_.get(index);
     }
     /**
      * <code>repeated .NetKvData kvDatas = 2;</code>
      */
-    public NetKvDataOrBuilder getKvDatasOrBuilder(
+    public com.module.net.NetGame.NetKvDataOrBuilder getKvDatasOrBuilder(
         int index) {
       return kvDatas_.get(index);
     }
 
     // repeated .NetOprateData operates = 3;
     public static final int OPERATES_FIELD_NUMBER = 3;
-    private java.util.List<NetOprateData> operates_;
+    private java.util.List<com.module.net.NetGame.NetOprateData> operates_;
     /**
      * <code>repeated .NetOprateData operates = 3;</code>
      */
-    public java.util.List<NetOprateData> getOperatesList() {
+    public java.util.List<com.module.net.NetGame.NetOprateData> getOperatesList() {
       return operates_;
     }
     /**
      * <code>repeated .NetOprateData operates = 3;</code>
      */
-    public java.util.List<? extends NetOprateDataOrBuilder>
+    public java.util.List<? extends com.module.net.NetGame.NetOprateDataOrBuilder> 
         getOperatesOrBuilderList() {
       return operates_;
     }
@@ -1201,13 +1201,13 @@ public final class NetGame {
     /**
      * <code>repeated .NetOprateData operates = 3;</code>
      */
-    public NetOprateData getOperates(int index) {
+    public com.module.net.NetGame.NetOprateData getOperates(int index) {
       return operates_.get(index);
     }
     /**
      * <code>repeated .NetOprateData operates = 3;</code>
      */
-    public NetOprateDataOrBuilder getOperatesOrBuilder(
+    public com.module.net.NetGame.NetOprateDataOrBuilder getOperatesOrBuilder(
         int index) {
       return operates_.get(index);
     }
@@ -1270,59 +1270,59 @@ public final class NetGame {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static NetExtraData parseFrom(
+    public static com.module.net.NetGame.NetExtraData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static NetExtraData parseFrom(
+    public static com.module.net.NetGame.NetExtraData parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static NetExtraData parseFrom(byte[] data)
+    public static com.module.net.NetGame.NetExtraData parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static NetExtraData parseFrom(
+    public static com.module.net.NetGame.NetExtraData parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static NetExtraData parseFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.NetExtraData parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static NetExtraData parseFrom(
+    public static com.module.net.NetGame.NetExtraData parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static NetExtraData parseDelimitedFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.NetExtraData parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static NetExtraData parseDelimitedFrom(
+    public static com.module.net.NetGame.NetExtraData parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static NetExtraData parseFrom(
+    public static com.module.net.NetGame.NetExtraData parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static NetExtraData parseFrom(
+    public static com.module.net.NetGame.NetExtraData parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1331,14 +1331,14 @@ public final class NetGame {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(NetExtraData prototype) {
+    public static Builder newBuilder(com.module.net.NetGame.NetExtraData prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1347,17 +1347,17 @@ public final class NetGame {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements NetExtraDataOrBuilder {
+       implements com.module.net.NetGame.NetExtraDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return NetGame.internal_static_NetExtraData_descriptor;
+        return com.module.net.NetGame.internal_static_NetExtraData_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return NetGame.internal_static_NetExtraData_fieldAccessorTable
+        return com.module.net.NetGame.internal_static_NetExtraData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                NetExtraData.class, Builder.class);
+                com.module.net.NetGame.NetExtraData.class, com.module.net.NetGame.NetExtraData.Builder.class);
       }
 
       // Construct using com.module.net.NetGame.NetExtraData.newBuilder()
@@ -1366,7 +1366,7 @@ public final class NetGame {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1405,23 +1405,23 @@ public final class NetGame {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return NetGame.internal_static_NetExtraData_descriptor;
+        return com.module.net.NetGame.internal_static_NetExtraData_descriptor;
       }
 
-      public NetExtraData getDefaultInstanceForType() {
-        return NetExtraData.getDefaultInstance();
+      public com.module.net.NetGame.NetExtraData getDefaultInstanceForType() {
+        return com.module.net.NetGame.NetExtraData.getDefaultInstance();
       }
 
-      public NetExtraData build() {
-        NetExtraData result = buildPartial();
+      public com.module.net.NetGame.NetExtraData build() {
+        com.module.net.NetGame.NetExtraData result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public NetExtraData buildPartial() {
-        NetExtraData result = new NetExtraData(this);
+      public com.module.net.NetGame.NetExtraData buildPartial() {
+        com.module.net.NetGame.NetExtraData result = new com.module.net.NetGame.NetExtraData(this);
         int from_bitField0_ = bitField0_;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           list_ = java.util.Collections.unmodifiableList(list_);
@@ -1451,16 +1451,16 @@ public final class NetGame {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof NetExtraData) {
-          return mergeFrom((NetExtraData)other);
+        if (other instanceof com.module.net.NetGame.NetExtraData) {
+          return mergeFrom((com.module.net.NetGame.NetExtraData)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(NetExtraData other) {
-        if (other == NetExtraData.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.module.net.NetGame.NetExtraData other) {
+        if (other == com.module.net.NetGame.NetExtraData.getDefaultInstance()) return this;
         if (!other.list_.isEmpty()) {
           if (list_.isEmpty()) {
             list_ = other.list_;
@@ -1535,11 +1535,11 @@ public final class NetGame {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        NetExtraData parsedMessage = null;
+        com.module.net.NetGame.NetExtraData parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (NetExtraData) e.getUnfinishedMessage();
+          parsedMessage = (com.module.net.NetGame.NetExtraData) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -1551,17 +1551,17 @@ public final class NetGame {
       private int bitField0_;
 
       // repeated int32 list = 1;
-      private java.util.List<Integer> list_ = java.util.Collections.emptyList();
+      private java.util.List<java.lang.Integer> list_ = java.util.Collections.emptyList();
       private void ensureListIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          list_ = new java.util.ArrayList<Integer>(list_);
+          list_ = new java.util.ArrayList<java.lang.Integer>(list_);
           bitField0_ |= 0x00000001;
          }
       }
       /**
        * <code>repeated int32 list = 1;</code>
        */
-      public java.util.List<Integer>
+      public java.util.List<java.lang.Integer>
           getListList() {
         return java.util.Collections.unmodifiableList(list_);
       }
@@ -1600,7 +1600,7 @@ public final class NetGame {
        * <code>repeated int32 list = 1;</code>
        */
       public Builder addAllList(
-          Iterable<? extends Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureListIsMutable();
         super.addAll(values, list_);
         onChanged();
@@ -1617,22 +1617,22 @@ public final class NetGame {
       }
 
       // repeated .NetKvData kvDatas = 2;
-      private java.util.List<NetKvData> kvDatas_ =
+      private java.util.List<com.module.net.NetGame.NetKvData> kvDatas_ =
         java.util.Collections.emptyList();
       private void ensureKvDatasIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          kvDatas_ = new java.util.ArrayList<NetKvData>(kvDatas_);
+          kvDatas_ = new java.util.ArrayList<com.module.net.NetGame.NetKvData>(kvDatas_);
           bitField0_ |= 0x00000002;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          NetKvData, NetKvData.Builder, NetKvDataOrBuilder> kvDatasBuilder_;
+          com.module.net.NetGame.NetKvData, com.module.net.NetGame.NetKvData.Builder, com.module.net.NetGame.NetKvDataOrBuilder> kvDatasBuilder_;
 
       /**
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
-      public java.util.List<NetKvData> getKvDatasList() {
+      public java.util.List<com.module.net.NetGame.NetKvData> getKvDatasList() {
         if (kvDatasBuilder_ == null) {
           return java.util.Collections.unmodifiableList(kvDatas_);
         } else {
@@ -1652,7 +1652,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
-      public NetKvData getKvDatas(int index) {
+      public com.module.net.NetGame.NetKvData getKvDatas(int index) {
         if (kvDatasBuilder_ == null) {
           return kvDatas_.get(index);
         } else {
@@ -1663,7 +1663,7 @@ public final class NetGame {
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
       public Builder setKvDatas(
-          int index, NetKvData value) {
+          int index, com.module.net.NetGame.NetKvData value) {
         if (kvDatasBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1680,7 +1680,7 @@ public final class NetGame {
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
       public Builder setKvDatas(
-          int index, NetKvData.Builder builderForValue) {
+          int index, com.module.net.NetGame.NetKvData.Builder builderForValue) {
         if (kvDatasBuilder_ == null) {
           ensureKvDatasIsMutable();
           kvDatas_.set(index, builderForValue.build());
@@ -1693,7 +1693,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
-      public Builder addKvDatas(NetKvData value) {
+      public Builder addKvDatas(com.module.net.NetGame.NetKvData value) {
         if (kvDatasBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1710,7 +1710,7 @@ public final class NetGame {
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
       public Builder addKvDatas(
-          int index, NetKvData value) {
+          int index, com.module.net.NetGame.NetKvData value) {
         if (kvDatasBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1727,7 +1727,7 @@ public final class NetGame {
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
       public Builder addKvDatas(
-          NetKvData.Builder builderForValue) {
+          com.module.net.NetGame.NetKvData.Builder builderForValue) {
         if (kvDatasBuilder_ == null) {
           ensureKvDatasIsMutable();
           kvDatas_.add(builderForValue.build());
@@ -1741,7 +1741,7 @@ public final class NetGame {
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
       public Builder addKvDatas(
-          int index, NetKvData.Builder builderForValue) {
+          int index, com.module.net.NetGame.NetKvData.Builder builderForValue) {
         if (kvDatasBuilder_ == null) {
           ensureKvDatasIsMutable();
           kvDatas_.add(index, builderForValue.build());
@@ -1755,7 +1755,7 @@ public final class NetGame {
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
       public Builder addAllKvDatas(
-          Iterable<? extends NetKvData> values) {
+          java.lang.Iterable<? extends com.module.net.NetGame.NetKvData> values) {
         if (kvDatasBuilder_ == null) {
           ensureKvDatasIsMutable();
           super.addAll(values, kvDatas_);
@@ -1794,14 +1794,14 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
-      public NetKvData.Builder getKvDatasBuilder(
+      public com.module.net.NetGame.NetKvData.Builder getKvDatasBuilder(
           int index) {
         return getKvDatasFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
-      public NetKvDataOrBuilder getKvDatasOrBuilder(
+      public com.module.net.NetGame.NetKvDataOrBuilder getKvDatasOrBuilder(
           int index) {
         if (kvDatasBuilder_ == null) {
           return kvDatas_.get(index);  } else {
@@ -1811,7 +1811,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
-      public java.util.List<? extends NetKvDataOrBuilder>
+      public java.util.List<? extends com.module.net.NetGame.NetKvDataOrBuilder> 
            getKvDatasOrBuilderList() {
         if (kvDatasBuilder_ != null) {
           return kvDatasBuilder_.getMessageOrBuilderList();
@@ -1822,31 +1822,31 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
-      public NetKvData.Builder addKvDatasBuilder() {
+      public com.module.net.NetGame.NetKvData.Builder addKvDatasBuilder() {
         return getKvDatasFieldBuilder().addBuilder(
-            NetKvData.getDefaultInstance());
+            com.module.net.NetGame.NetKvData.getDefaultInstance());
       }
       /**
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
-      public NetKvData.Builder addKvDatasBuilder(
+      public com.module.net.NetGame.NetKvData.Builder addKvDatasBuilder(
           int index) {
         return getKvDatasFieldBuilder().addBuilder(
-            index, NetKvData.getDefaultInstance());
+            index, com.module.net.NetGame.NetKvData.getDefaultInstance());
       }
       /**
        * <code>repeated .NetKvData kvDatas = 2;</code>
        */
-      public java.util.List<NetKvData.Builder>
+      public java.util.List<com.module.net.NetGame.NetKvData.Builder> 
            getKvDatasBuilderList() {
         return getKvDatasFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          NetKvData, NetKvData.Builder, NetKvDataOrBuilder>
+          com.module.net.NetGame.NetKvData, com.module.net.NetGame.NetKvData.Builder, com.module.net.NetGame.NetKvDataOrBuilder> 
           getKvDatasFieldBuilder() {
         if (kvDatasBuilder_ == null) {
           kvDatasBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              NetKvData, NetKvData.Builder, NetKvDataOrBuilder>(
+              com.module.net.NetGame.NetKvData, com.module.net.NetGame.NetKvData.Builder, com.module.net.NetGame.NetKvDataOrBuilder>(
                   kvDatas_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
@@ -1857,22 +1857,22 @@ public final class NetGame {
       }
 
       // repeated .NetOprateData operates = 3;
-      private java.util.List<NetOprateData> operates_ =
+      private java.util.List<com.module.net.NetGame.NetOprateData> operates_ =
         java.util.Collections.emptyList();
       private void ensureOperatesIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          operates_ = new java.util.ArrayList<NetOprateData>(operates_);
+          operates_ = new java.util.ArrayList<com.module.net.NetGame.NetOprateData>(operates_);
           bitField0_ |= 0x00000004;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          NetOprateData, NetOprateData.Builder, NetOprateDataOrBuilder> operatesBuilder_;
+          com.module.net.NetGame.NetOprateData, com.module.net.NetGame.NetOprateData.Builder, com.module.net.NetGame.NetOprateDataOrBuilder> operatesBuilder_;
 
       /**
        * <code>repeated .NetOprateData operates = 3;</code>
        */
-      public java.util.List<NetOprateData> getOperatesList() {
+      public java.util.List<com.module.net.NetGame.NetOprateData> getOperatesList() {
         if (operatesBuilder_ == null) {
           return java.util.Collections.unmodifiableList(operates_);
         } else {
@@ -1892,7 +1892,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetOprateData operates = 3;</code>
        */
-      public NetOprateData getOperates(int index) {
+      public com.module.net.NetGame.NetOprateData getOperates(int index) {
         if (operatesBuilder_ == null) {
           return operates_.get(index);
         } else {
@@ -1903,7 +1903,7 @@ public final class NetGame {
        * <code>repeated .NetOprateData operates = 3;</code>
        */
       public Builder setOperates(
-          int index, NetOprateData value) {
+          int index, com.module.net.NetGame.NetOprateData value) {
         if (operatesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1920,7 +1920,7 @@ public final class NetGame {
        * <code>repeated .NetOprateData operates = 3;</code>
        */
       public Builder setOperates(
-          int index, NetOprateData.Builder builderForValue) {
+          int index, com.module.net.NetGame.NetOprateData.Builder builderForValue) {
         if (operatesBuilder_ == null) {
           ensureOperatesIsMutable();
           operates_.set(index, builderForValue.build());
@@ -1933,7 +1933,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetOprateData operates = 3;</code>
        */
-      public Builder addOperates(NetOprateData value) {
+      public Builder addOperates(com.module.net.NetGame.NetOprateData value) {
         if (operatesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1950,7 +1950,7 @@ public final class NetGame {
        * <code>repeated .NetOprateData operates = 3;</code>
        */
       public Builder addOperates(
-          int index, NetOprateData value) {
+          int index, com.module.net.NetGame.NetOprateData value) {
         if (operatesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1967,7 +1967,7 @@ public final class NetGame {
        * <code>repeated .NetOprateData operates = 3;</code>
        */
       public Builder addOperates(
-          NetOprateData.Builder builderForValue) {
+          com.module.net.NetGame.NetOprateData.Builder builderForValue) {
         if (operatesBuilder_ == null) {
           ensureOperatesIsMutable();
           operates_.add(builderForValue.build());
@@ -1981,7 +1981,7 @@ public final class NetGame {
        * <code>repeated .NetOprateData operates = 3;</code>
        */
       public Builder addOperates(
-          int index, NetOprateData.Builder builderForValue) {
+          int index, com.module.net.NetGame.NetOprateData.Builder builderForValue) {
         if (operatesBuilder_ == null) {
           ensureOperatesIsMutable();
           operates_.add(index, builderForValue.build());
@@ -1995,7 +1995,7 @@ public final class NetGame {
        * <code>repeated .NetOprateData operates = 3;</code>
        */
       public Builder addAllOperates(
-          Iterable<? extends NetOprateData> values) {
+          java.lang.Iterable<? extends com.module.net.NetGame.NetOprateData> values) {
         if (operatesBuilder_ == null) {
           ensureOperatesIsMutable();
           super.addAll(values, operates_);
@@ -2034,14 +2034,14 @@ public final class NetGame {
       /**
        * <code>repeated .NetOprateData operates = 3;</code>
        */
-      public NetOprateData.Builder getOperatesBuilder(
+      public com.module.net.NetGame.NetOprateData.Builder getOperatesBuilder(
           int index) {
         return getOperatesFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .NetOprateData operates = 3;</code>
        */
-      public NetOprateDataOrBuilder getOperatesOrBuilder(
+      public com.module.net.NetGame.NetOprateDataOrBuilder getOperatesOrBuilder(
           int index) {
         if (operatesBuilder_ == null) {
           return operates_.get(index);  } else {
@@ -2051,7 +2051,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetOprateData operates = 3;</code>
        */
-      public java.util.List<? extends NetOprateDataOrBuilder>
+      public java.util.List<? extends com.module.net.NetGame.NetOprateDataOrBuilder> 
            getOperatesOrBuilderList() {
         if (operatesBuilder_ != null) {
           return operatesBuilder_.getMessageOrBuilderList();
@@ -2062,31 +2062,31 @@ public final class NetGame {
       /**
        * <code>repeated .NetOprateData operates = 3;</code>
        */
-      public NetOprateData.Builder addOperatesBuilder() {
+      public com.module.net.NetGame.NetOprateData.Builder addOperatesBuilder() {
         return getOperatesFieldBuilder().addBuilder(
-            NetOprateData.getDefaultInstance());
+            com.module.net.NetGame.NetOprateData.getDefaultInstance());
       }
       /**
        * <code>repeated .NetOprateData operates = 3;</code>
        */
-      public NetOprateData.Builder addOperatesBuilder(
+      public com.module.net.NetGame.NetOprateData.Builder addOperatesBuilder(
           int index) {
         return getOperatesFieldBuilder().addBuilder(
-            index, NetOprateData.getDefaultInstance());
+            index, com.module.net.NetGame.NetOprateData.getDefaultInstance());
       }
       /**
        * <code>repeated .NetOprateData operates = 3;</code>
        */
-      public java.util.List<NetOprateData.Builder>
+      public java.util.List<com.module.net.NetGame.NetOprateData.Builder> 
            getOperatesBuilderList() {
         return getOperatesFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          NetOprateData, NetOprateData.Builder, NetOprateDataOrBuilder>
+          com.module.net.NetGame.NetOprateData, com.module.net.NetGame.NetOprateData.Builder, com.module.net.NetGame.NetOprateDataOrBuilder> 
           getOperatesFieldBuilder() {
         if (operatesBuilder_ == null) {
           operatesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              NetOprateData, NetOprateData.Builder, NetOprateDataOrBuilder>(
+              com.module.net.NetGame.NetOprateData, com.module.net.NetGame.NetOprateData.Builder, com.module.net.NetGame.NetOprateDataOrBuilder>(
                   operates_,
                   ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
@@ -2115,7 +2115,7 @@ public final class NetGame {
      * <code>optional int32 otype = 1;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+     ** ²Ù×÷ÀàÐÍ 
      * </pre>
      */
     boolean hasOtype();
@@ -2123,7 +2123,7 @@ public final class NetGame {
      * <code>optional int32 otype = 1;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+     ** ²Ù×÷ÀàÐÍ 
      * </pre>
      */
     int getOtype();
@@ -2143,7 +2143,7 @@ public final class NetGame {
      * <code>optional int32 dval = 3;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+     ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
      * </pre>
      */
     boolean hasDval();
@@ -2151,7 +2151,7 @@ public final class NetGame {
      * <code>optional int32 dval = 3;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+     ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
      * </pre>
      */
     int getDval();
@@ -2161,7 +2161,7 @@ public final class NetGame {
      * <code>optional int32 flag = 4;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+     ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
      * </pre>
      */
     boolean hasFlag();
@@ -2169,7 +2169,7 @@ public final class NetGame {
      * <code>optional int32 flag = 4;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+     ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
      * </pre>
      */
     int getFlag();
@@ -2178,7 +2178,7 @@ public final class NetGame {
     /**
      * <code>repeated int32 dlist = 5;</code>
      */
-    java.util.List<Integer> getDlistList();
+    java.util.List<java.lang.Integer> getDlistList();
     /**
      * <code>repeated int32 dlist = 5;</code>
      */
@@ -2192,12 +2192,12 @@ public final class NetGame {
     /**
      * <code>repeated .NetKvData kvDatas = 6;</code>
      */
-    java.util.List<NetKvData>
+    java.util.List<com.module.net.NetGame.NetKvData> 
         getKvDatasList();
     /**
      * <code>repeated .NetKvData kvDatas = 6;</code>
      */
-    NetKvData getKvDatas(int index);
+    com.module.net.NetGame.NetKvData getKvDatas(int index);
     /**
      * <code>repeated .NetKvData kvDatas = 6;</code>
      */
@@ -2205,13 +2205,13 @@ public final class NetGame {
     /**
      * <code>repeated .NetKvData kvDatas = 6;</code>
      */
-    java.util.List<? extends NetKvDataOrBuilder>
+    java.util.List<? extends com.module.net.NetGame.NetKvDataOrBuilder> 
         getKvDatasOrBuilderList();
     /**
      * <code>repeated .NetKvData kvDatas = 6;</code>
      */
-    NetKvDataOrBuilder getKvDatasOrBuilder(
-            int index);
+    com.module.net.NetGame.NetKvDataOrBuilder getKvDatasOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code NetOprateData}
@@ -2236,7 +2236,7 @@ public final class NetGame {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
@@ -2286,7 +2286,7 @@ public final class NetGame {
             }
             case 40: {
               if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-                dlist_ = new java.util.ArrayList<Integer>();
+                dlist_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000010;
               }
               dlist_.add(input.readInt32());
@@ -2296,7 +2296,7 @@ public final class NetGame {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               if (!((mutable_bitField0_ & 0x00000010) == 0x00000010) && input.getBytesUntilLimit() > 0) {
-                dlist_ = new java.util.ArrayList<Integer>();
+                dlist_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000010;
               }
               while (input.getBytesUntilLimit() > 0) {
@@ -2307,10 +2307,10 @@ public final class NetGame {
             }
             case 50: {
               if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-                kvDatas_ = new java.util.ArrayList<NetKvData>();
+                kvDatas_ = new java.util.ArrayList<com.module.net.NetGame.NetKvData>();
                 mutable_bitField0_ |= 0x00000020;
               }
-              kvDatas_.add(input.readMessage(NetKvData.PARSER, extensionRegistry));
+              kvDatas_.add(input.readMessage(com.module.net.NetGame.NetKvData.PARSER, extensionRegistry));
               break;
             }
           }
@@ -2333,14 +2333,14 @@ public final class NetGame {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return NetGame.internal_static_NetOprateData_descriptor;
+      return com.module.net.NetGame.internal_static_NetOprateData_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return NetGame.internal_static_NetOprateData_fieldAccessorTable
+      return com.module.net.NetGame.internal_static_NetOprateData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              NetOprateData.class, Builder.class);
+              com.module.net.NetGame.NetOprateData.class, com.module.net.NetGame.NetOprateData.Builder.class);
     }
 
     public static com.google.protobuf.Parser<NetOprateData> PARSER =
@@ -2353,7 +2353,7 @@ public final class NetGame {
       }
     };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<NetOprateData> getParserForType() {
       return PARSER;
     }
@@ -2366,7 +2366,7 @@ public final class NetGame {
      * <code>optional int32 otype = 1;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+     ** ²Ù×÷ÀàÐÍ 
      * </pre>
      */
     public boolean hasOtype() {
@@ -2376,7 +2376,7 @@ public final class NetGame {
      * <code>optional int32 otype = 1;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+     ** ²Ù×÷ÀàÐÍ 
      * </pre>
      */
     public int getOtype() {
@@ -2406,7 +2406,7 @@ public final class NetGame {
      * <code>optional int32 dval = 3;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+     ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
      * </pre>
      */
     public boolean hasDval() {
@@ -2416,7 +2416,7 @@ public final class NetGame {
      * <code>optional int32 dval = 3;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+     ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
      * </pre>
      */
     public int getDval() {
@@ -2430,7 +2430,7 @@ public final class NetGame {
      * <code>optional int32 flag = 4;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+     ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
      * </pre>
      */
     public boolean hasFlag() {
@@ -2440,7 +2440,7 @@ public final class NetGame {
      * <code>optional int32 flag = 4;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+     ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
      * </pre>
      */
     public int getFlag() {
@@ -2449,11 +2449,11 @@ public final class NetGame {
 
     // repeated int32 dlist = 5;
     public static final int DLIST_FIELD_NUMBER = 5;
-    private java.util.List<Integer> dlist_;
+    private java.util.List<java.lang.Integer> dlist_;
     /**
      * <code>repeated int32 dlist = 5;</code>
      */
-    public java.util.List<Integer>
+    public java.util.List<java.lang.Integer>
         getDlistList() {
       return dlist_;
     }
@@ -2472,17 +2472,17 @@ public final class NetGame {
 
     // repeated .NetKvData kvDatas = 6;
     public static final int KVDATAS_FIELD_NUMBER = 6;
-    private java.util.List<NetKvData> kvDatas_;
+    private java.util.List<com.module.net.NetGame.NetKvData> kvDatas_;
     /**
      * <code>repeated .NetKvData kvDatas = 6;</code>
      */
-    public java.util.List<NetKvData> getKvDatasList() {
+    public java.util.List<com.module.net.NetGame.NetKvData> getKvDatasList() {
       return kvDatas_;
     }
     /**
      * <code>repeated .NetKvData kvDatas = 6;</code>
      */
-    public java.util.List<? extends NetKvDataOrBuilder>
+    public java.util.List<? extends com.module.net.NetGame.NetKvDataOrBuilder> 
         getKvDatasOrBuilderList() {
       return kvDatas_;
     }
@@ -2495,13 +2495,13 @@ public final class NetGame {
     /**
      * <code>repeated .NetKvData kvDatas = 6;</code>
      */
-    public NetKvData getKvDatas(int index) {
+    public com.module.net.NetGame.NetKvData getKvDatas(int index) {
       return kvDatas_.get(index);
     }
     /**
      * <code>repeated .NetKvData kvDatas = 6;</code>
      */
-    public NetKvDataOrBuilder getKvDatasOrBuilder(
+    public com.module.net.NetGame.NetKvDataOrBuilder getKvDatasOrBuilder(
         int index) {
       return kvDatas_.get(index);
     }
@@ -2588,59 +2588,59 @@ public final class NetGame {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static NetOprateData parseFrom(
+    public static com.module.net.NetGame.NetOprateData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static NetOprateData parseFrom(
+    public static com.module.net.NetGame.NetOprateData parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static NetOprateData parseFrom(byte[] data)
+    public static com.module.net.NetGame.NetOprateData parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static NetOprateData parseFrom(
+    public static com.module.net.NetGame.NetOprateData parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static NetOprateData parseFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.NetOprateData parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static NetOprateData parseFrom(
+    public static com.module.net.NetGame.NetOprateData parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static NetOprateData parseDelimitedFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.NetOprateData parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static NetOprateData parseDelimitedFrom(
+    public static com.module.net.NetGame.NetOprateData parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static NetOprateData parseFrom(
+    public static com.module.net.NetGame.NetOprateData parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static NetOprateData parseFrom(
+    public static com.module.net.NetGame.NetOprateData parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2649,14 +2649,14 @@ public final class NetGame {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(NetOprateData prototype) {
+    public static Builder newBuilder(com.module.net.NetGame.NetOprateData prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -2665,17 +2665,17 @@ public final class NetGame {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements NetOprateDataOrBuilder {
+       implements com.module.net.NetGame.NetOprateDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return NetGame.internal_static_NetOprateData_descriptor;
+        return com.module.net.NetGame.internal_static_NetOprateData_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return NetGame.internal_static_NetOprateData_fieldAccessorTable
+        return com.module.net.NetGame.internal_static_NetOprateData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                NetOprateData.class, Builder.class);
+                com.module.net.NetGame.NetOprateData.class, com.module.net.NetGame.NetOprateData.Builder.class);
       }
 
       // Construct using com.module.net.NetGame.NetOprateData.newBuilder()
@@ -2684,7 +2684,7 @@ public final class NetGame {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -2724,23 +2724,23 @@ public final class NetGame {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return NetGame.internal_static_NetOprateData_descriptor;
+        return com.module.net.NetGame.internal_static_NetOprateData_descriptor;
       }
 
-      public NetOprateData getDefaultInstanceForType() {
-        return NetOprateData.getDefaultInstance();
+      public com.module.net.NetGame.NetOprateData getDefaultInstanceForType() {
+        return com.module.net.NetGame.NetOprateData.getDefaultInstance();
       }
 
-      public NetOprateData build() {
-        NetOprateData result = buildPartial();
+      public com.module.net.NetGame.NetOprateData build() {
+        com.module.net.NetGame.NetOprateData result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public NetOprateData buildPartial() {
-        NetOprateData result = new NetOprateData(this);
+      public com.module.net.NetGame.NetOprateData buildPartial() {
+        com.module.net.NetGame.NetOprateData result = new com.module.net.NetGame.NetOprateData(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -2779,16 +2779,16 @@ public final class NetGame {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof NetOprateData) {
-          return mergeFrom((NetOprateData)other);
+        if (other instanceof com.module.net.NetGame.NetOprateData) {
+          return mergeFrom((com.module.net.NetGame.NetOprateData)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(NetOprateData other) {
-        if (other == NetOprateData.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.module.net.NetGame.NetOprateData other) {
+        if (other == com.module.net.NetGame.NetOprateData.getDefaultInstance()) return this;
         if (other.hasOtype()) {
           setOtype(other.getOtype());
         }
@@ -2849,11 +2849,11 @@ public final class NetGame {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        NetOprateData parsedMessage = null;
+        com.module.net.NetGame.NetOprateData parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (NetOprateData) e.getUnfinishedMessage();
+          parsedMessage = (com.module.net.NetGame.NetOprateData) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -2870,7 +2870,7 @@ public final class NetGame {
        * <code>optional int32 otype = 1;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+       ** ²Ù×÷ÀàÐÍ 
        * </pre>
        */
       public boolean hasOtype() {
@@ -2880,7 +2880,7 @@ public final class NetGame {
        * <code>optional int32 otype = 1;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+       ** ²Ù×÷ÀàÐÍ 
        * </pre>
        */
       public int getOtype() {
@@ -2890,7 +2890,7 @@ public final class NetGame {
        * <code>optional int32 otype = 1;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+       ** ²Ù×÷ÀàÐÍ 
        * </pre>
        */
       public Builder setOtype(int value) {
@@ -2903,7 +2903,7 @@ public final class NetGame {
        * <code>optional int32 otype = 1;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+       ** ²Ù×÷ÀàÐÍ 
        * </pre>
        */
       public Builder clearOtype() {
@@ -2952,7 +2952,7 @@ public final class NetGame {
        * <code>optional int32 dval = 3;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+       ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
        * </pre>
        */
       public boolean hasDval() {
@@ -2962,7 +2962,7 @@ public final class NetGame {
        * <code>optional int32 dval = 3;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+       ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
        * </pre>
        */
       public int getDval() {
@@ -2972,7 +2972,7 @@ public final class NetGame {
        * <code>optional int32 dval = 3;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+       ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
        * </pre>
        */
       public Builder setDval(int value) {
@@ -2985,7 +2985,7 @@ public final class NetGame {
        * <code>optional int32 dval = 3;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+       ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
        * </pre>
        */
       public Builder clearDval() {
@@ -3001,7 +3001,7 @@ public final class NetGame {
        * <code>optional int32 flag = 4;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+       ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
        * </pre>
        */
       public boolean hasFlag() {
@@ -3011,7 +3011,7 @@ public final class NetGame {
        * <code>optional int32 flag = 4;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+       ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
        * </pre>
        */
       public int getFlag() {
@@ -3021,7 +3021,7 @@ public final class NetGame {
        * <code>optional int32 flag = 4;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+       ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
        * </pre>
        */
       public Builder setFlag(int value) {
@@ -3034,7 +3034,7 @@ public final class NetGame {
        * <code>optional int32 flag = 4;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Öµ0 
+       ** ¸½¼ÓÊý¾ÝÄ¬ÈÏÖµ0 
        * </pre>
        */
       public Builder clearFlag() {
@@ -3045,17 +3045,17 @@ public final class NetGame {
       }
 
       // repeated int32 dlist = 5;
-      private java.util.List<Integer> dlist_ = java.util.Collections.emptyList();
+      private java.util.List<java.lang.Integer> dlist_ = java.util.Collections.emptyList();
       private void ensureDlistIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          dlist_ = new java.util.ArrayList<Integer>(dlist_);
+          dlist_ = new java.util.ArrayList<java.lang.Integer>(dlist_);
           bitField0_ |= 0x00000010;
          }
       }
       /**
        * <code>repeated int32 dlist = 5;</code>
        */
-      public java.util.List<Integer>
+      public java.util.List<java.lang.Integer>
           getDlistList() {
         return java.util.Collections.unmodifiableList(dlist_);
       }
@@ -3094,7 +3094,7 @@ public final class NetGame {
        * <code>repeated int32 dlist = 5;</code>
        */
       public Builder addAllDlist(
-          Iterable<? extends Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureDlistIsMutable();
         super.addAll(values, dlist_);
         onChanged();
@@ -3111,22 +3111,22 @@ public final class NetGame {
       }
 
       // repeated .NetKvData kvDatas = 6;
-      private java.util.List<NetKvData> kvDatas_ =
+      private java.util.List<com.module.net.NetGame.NetKvData> kvDatas_ =
         java.util.Collections.emptyList();
       private void ensureKvDatasIsMutable() {
         if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          kvDatas_ = new java.util.ArrayList<NetKvData>(kvDatas_);
+          kvDatas_ = new java.util.ArrayList<com.module.net.NetGame.NetKvData>(kvDatas_);
           bitField0_ |= 0x00000020;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          NetKvData, NetKvData.Builder, NetKvDataOrBuilder> kvDatasBuilder_;
+          com.module.net.NetGame.NetKvData, com.module.net.NetGame.NetKvData.Builder, com.module.net.NetGame.NetKvDataOrBuilder> kvDatasBuilder_;
 
       /**
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
-      public java.util.List<NetKvData> getKvDatasList() {
+      public java.util.List<com.module.net.NetGame.NetKvData> getKvDatasList() {
         if (kvDatasBuilder_ == null) {
           return java.util.Collections.unmodifiableList(kvDatas_);
         } else {
@@ -3146,7 +3146,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
-      public NetKvData getKvDatas(int index) {
+      public com.module.net.NetGame.NetKvData getKvDatas(int index) {
         if (kvDatasBuilder_ == null) {
           return kvDatas_.get(index);
         } else {
@@ -3157,7 +3157,7 @@ public final class NetGame {
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
       public Builder setKvDatas(
-          int index, NetKvData value) {
+          int index, com.module.net.NetGame.NetKvData value) {
         if (kvDatasBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3174,7 +3174,7 @@ public final class NetGame {
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
       public Builder setKvDatas(
-          int index, NetKvData.Builder builderForValue) {
+          int index, com.module.net.NetGame.NetKvData.Builder builderForValue) {
         if (kvDatasBuilder_ == null) {
           ensureKvDatasIsMutable();
           kvDatas_.set(index, builderForValue.build());
@@ -3187,7 +3187,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
-      public Builder addKvDatas(NetKvData value) {
+      public Builder addKvDatas(com.module.net.NetGame.NetKvData value) {
         if (kvDatasBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3204,7 +3204,7 @@ public final class NetGame {
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
       public Builder addKvDatas(
-          int index, NetKvData value) {
+          int index, com.module.net.NetGame.NetKvData value) {
         if (kvDatasBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3221,7 +3221,7 @@ public final class NetGame {
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
       public Builder addKvDatas(
-          NetKvData.Builder builderForValue) {
+          com.module.net.NetGame.NetKvData.Builder builderForValue) {
         if (kvDatasBuilder_ == null) {
           ensureKvDatasIsMutable();
           kvDatas_.add(builderForValue.build());
@@ -3235,7 +3235,7 @@ public final class NetGame {
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
       public Builder addKvDatas(
-          int index, NetKvData.Builder builderForValue) {
+          int index, com.module.net.NetGame.NetKvData.Builder builderForValue) {
         if (kvDatasBuilder_ == null) {
           ensureKvDatasIsMutable();
           kvDatas_.add(index, builderForValue.build());
@@ -3249,7 +3249,7 @@ public final class NetGame {
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
       public Builder addAllKvDatas(
-          Iterable<? extends NetKvData> values) {
+          java.lang.Iterable<? extends com.module.net.NetGame.NetKvData> values) {
         if (kvDatasBuilder_ == null) {
           ensureKvDatasIsMutable();
           super.addAll(values, kvDatas_);
@@ -3288,14 +3288,14 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
-      public NetKvData.Builder getKvDatasBuilder(
+      public com.module.net.NetGame.NetKvData.Builder getKvDatasBuilder(
           int index) {
         return getKvDatasFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
-      public NetKvDataOrBuilder getKvDatasOrBuilder(
+      public com.module.net.NetGame.NetKvDataOrBuilder getKvDatasOrBuilder(
           int index) {
         if (kvDatasBuilder_ == null) {
           return kvDatas_.get(index);  } else {
@@ -3305,7 +3305,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
-      public java.util.List<? extends NetKvDataOrBuilder>
+      public java.util.List<? extends com.module.net.NetGame.NetKvDataOrBuilder> 
            getKvDatasOrBuilderList() {
         if (kvDatasBuilder_ != null) {
           return kvDatasBuilder_.getMessageOrBuilderList();
@@ -3316,31 +3316,31 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
-      public NetKvData.Builder addKvDatasBuilder() {
+      public com.module.net.NetGame.NetKvData.Builder addKvDatasBuilder() {
         return getKvDatasFieldBuilder().addBuilder(
-            NetKvData.getDefaultInstance());
+            com.module.net.NetGame.NetKvData.getDefaultInstance());
       }
       /**
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
-      public NetKvData.Builder addKvDatasBuilder(
+      public com.module.net.NetGame.NetKvData.Builder addKvDatasBuilder(
           int index) {
         return getKvDatasFieldBuilder().addBuilder(
-            index, NetKvData.getDefaultInstance());
+            index, com.module.net.NetGame.NetKvData.getDefaultInstance());
       }
       /**
        * <code>repeated .NetKvData kvDatas = 6;</code>
        */
-      public java.util.List<NetKvData.Builder>
+      public java.util.List<com.module.net.NetGame.NetKvData.Builder> 
            getKvDatasBuilderList() {
         return getKvDatasFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          NetKvData, NetKvData.Builder, NetKvDataOrBuilder>
+          com.module.net.NetGame.NetKvData, com.module.net.NetGame.NetKvData.Builder, com.module.net.NetGame.NetKvDataOrBuilder> 
           getKvDatasFieldBuilder() {
         if (kvDatasBuilder_ == null) {
           kvDatasBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              NetKvData, NetKvData.Builder, NetKvDataOrBuilder>(
+              com.module.net.NetGame.NetKvData, com.module.net.NetGame.NetKvData.Builder, com.module.net.NetGame.NetKvDataOrBuilder>(
                   kvDatas_,
                   ((bitField0_ & 0x00000020) == 0x00000020),
                   getParentForChildren(),
@@ -3388,7 +3388,7 @@ public final class NetGame {
     /**
      * <code>repeated int32 dlist = 3;</code>
      */
-    java.util.List<Integer> getDlistList();
+    java.util.List<java.lang.Integer> getDlistList();
     /**
      * <code>repeated int32 dlist = 3;</code>
      */
@@ -3421,7 +3421,7 @@ public final class NetGame {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
@@ -3461,7 +3461,7 @@ public final class NetGame {
             }
             case 24: {
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                dlist_ = new java.util.ArrayList<Integer>();
+                dlist_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000004;
               }
               dlist_.add(input.readInt32());
@@ -3471,7 +3471,7 @@ public final class NetGame {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
-                dlist_ = new java.util.ArrayList<Integer>();
+                dlist_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000004;
               }
               while (input.getBytesUntilLimit() > 0) {
@@ -3497,14 +3497,14 @@ public final class NetGame {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return NetGame.internal_static_NetKvData_descriptor;
+      return com.module.net.NetGame.internal_static_NetKvData_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return NetGame.internal_static_NetKvData_fieldAccessorTable
+      return com.module.net.NetGame.internal_static_NetKvData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              NetKvData.class, Builder.class);
+              com.module.net.NetGame.NetKvData.class, com.module.net.NetGame.NetKvData.Builder.class);
     }
 
     public static com.google.protobuf.Parser<NetKvData> PARSER =
@@ -3517,7 +3517,7 @@ public final class NetGame {
       }
     };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<NetKvData> getParserForType() {
       return PARSER;
     }
@@ -3557,11 +3557,11 @@ public final class NetGame {
 
     // repeated int32 dlist = 3;
     public static final int DLIST_FIELD_NUMBER = 3;
-    private java.util.List<Integer> dlist_;
+    private java.util.List<java.lang.Integer> dlist_;
     /**
      * <code>repeated int32 dlist = 3;</code>
      */
-    public java.util.List<Integer>
+    public java.util.List<java.lang.Integer>
         getDlistList() {
       return dlist_;
     }
@@ -3636,59 +3636,59 @@ public final class NetGame {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static NetKvData parseFrom(
+    public static com.module.net.NetGame.NetKvData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static NetKvData parseFrom(
+    public static com.module.net.NetGame.NetKvData parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static NetKvData parseFrom(byte[] data)
+    public static com.module.net.NetGame.NetKvData parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static NetKvData parseFrom(
+    public static com.module.net.NetGame.NetKvData parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static NetKvData parseFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.NetKvData parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static NetKvData parseFrom(
+    public static com.module.net.NetGame.NetKvData parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static NetKvData parseDelimitedFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.NetKvData parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static NetKvData parseDelimitedFrom(
+    public static com.module.net.NetGame.NetKvData parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static NetKvData parseFrom(
+    public static com.module.net.NetGame.NetKvData parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static NetKvData parseFrom(
+    public static com.module.net.NetGame.NetKvData parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3697,14 +3697,14 @@ public final class NetGame {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(NetKvData prototype) {
+    public static Builder newBuilder(com.module.net.NetGame.NetKvData prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3713,17 +3713,17 @@ public final class NetGame {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements NetKvDataOrBuilder {
+       implements com.module.net.NetGame.NetKvDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return NetGame.internal_static_NetKvData_descriptor;
+        return com.module.net.NetGame.internal_static_NetKvData_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return NetGame.internal_static_NetKvData_fieldAccessorTable
+        return com.module.net.NetGame.internal_static_NetKvData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                NetKvData.class, Builder.class);
+                com.module.net.NetGame.NetKvData.class, com.module.net.NetGame.NetKvData.Builder.class);
       }
 
       // Construct using com.module.net.NetGame.NetKvData.newBuilder()
@@ -3732,7 +3732,7 @@ public final class NetGame {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -3761,23 +3761,23 @@ public final class NetGame {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return NetGame.internal_static_NetKvData_descriptor;
+        return com.module.net.NetGame.internal_static_NetKvData_descriptor;
       }
 
-      public NetKvData getDefaultInstanceForType() {
-        return NetKvData.getDefaultInstance();
+      public com.module.net.NetGame.NetKvData getDefaultInstanceForType() {
+        return com.module.net.NetGame.NetKvData.getDefaultInstance();
       }
 
-      public NetKvData build() {
-        NetKvData result = buildPartial();
+      public com.module.net.NetGame.NetKvData build() {
+        com.module.net.NetGame.NetKvData result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public NetKvData buildPartial() {
-        NetKvData result = new NetKvData(this);
+      public com.module.net.NetGame.NetKvData buildPartial() {
+        com.module.net.NetGame.NetKvData result = new com.module.net.NetGame.NetKvData(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -3799,16 +3799,16 @@ public final class NetGame {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof NetKvData) {
-          return mergeFrom((NetKvData)other);
+        if (other instanceof com.module.net.NetGame.NetKvData) {
+          return mergeFrom((com.module.net.NetGame.NetKvData)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(NetKvData other) {
-        if (other == NetKvData.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.module.net.NetGame.NetKvData other) {
+        if (other == com.module.net.NetGame.NetKvData.getDefaultInstance()) return this;
         if (other.hasK()) {
           setK(other.getK());
         }
@@ -3837,11 +3837,11 @@ public final class NetGame {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        NetKvData parsedMessage = null;
+        com.module.net.NetGame.NetKvData parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (NetKvData) e.getUnfinishedMessage();
+          parsedMessage = (com.module.net.NetGame.NetKvData) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -3919,17 +3919,17 @@ public final class NetGame {
       }
 
       // repeated int32 dlist = 3;
-      private java.util.List<Integer> dlist_ = java.util.Collections.emptyList();
+      private java.util.List<java.lang.Integer> dlist_ = java.util.Collections.emptyList();
       private void ensureDlistIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          dlist_ = new java.util.ArrayList<Integer>(dlist_);
+          dlist_ = new java.util.ArrayList<java.lang.Integer>(dlist_);
           bitField0_ |= 0x00000004;
          }
       }
       /**
        * <code>repeated int32 dlist = 3;</code>
        */
-      public java.util.List<Integer>
+      public java.util.List<java.lang.Integer>
           getDlistList() {
         return java.util.Collections.unmodifiableList(dlist_);
       }
@@ -3968,7 +3968,7 @@ public final class NetGame {
        * <code>repeated int32 dlist = 3;</code>
        */
       public Builder addAllDlist(
-          Iterable<? extends Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureDlistIsMutable();
         super.addAll(values, dlist_);
         onChanged();
@@ -4022,7 +4022,7 @@ public final class NetGame {
     /**
      * <code>repeated int32 type = 3;</code>
      */
-    java.util.List<Integer> getTypeList();
+    java.util.List<java.lang.Integer> getTypeList();
     /**
      * <code>repeated int32 type = 3;</code>
      */
@@ -4055,7 +4055,7 @@ public final class NetGame {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
@@ -4095,7 +4095,7 @@ public final class NetGame {
             }
             case 24: {
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                type_ = new java.util.ArrayList<Integer>();
+                type_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000004;
               }
               type_.add(input.readInt32());
@@ -4105,7 +4105,7 @@ public final class NetGame {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
-                type_ = new java.util.ArrayList<Integer>();
+                type_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000004;
               }
               while (input.getBytesUntilLimit() > 0) {
@@ -4131,14 +4131,14 @@ public final class NetGame {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return NetGame.internal_static_RPCreateRoom_descriptor;
+      return com.module.net.NetGame.internal_static_RPCreateRoom_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return NetGame.internal_static_RPCreateRoom_fieldAccessorTable
+      return com.module.net.NetGame.internal_static_RPCreateRoom_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              RPCreateRoom.class, Builder.class);
+              com.module.net.NetGame.RPCreateRoom.class, com.module.net.NetGame.RPCreateRoom.Builder.class);
     }
 
     public static com.google.protobuf.Parser<RPCreateRoom> PARSER =
@@ -4151,7 +4151,7 @@ public final class NetGame {
       }
     };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<RPCreateRoom> getParserForType() {
       return PARSER;
     }
@@ -4191,11 +4191,11 @@ public final class NetGame {
 
     // repeated int32 type = 3;
     public static final int TYPE_FIELD_NUMBER = 3;
-    private java.util.List<Integer> type_;
+    private java.util.List<java.lang.Integer> type_;
     /**
      * <code>repeated int32 type = 3;</code>
      */
-    public java.util.List<Integer>
+    public java.util.List<java.lang.Integer>
         getTypeList() {
       return type_;
     }
@@ -4270,59 +4270,59 @@ public final class NetGame {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static RPCreateRoom parseFrom(
+    public static com.module.net.NetGame.RPCreateRoom parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RPCreateRoom parseFrom(
+    public static com.module.net.NetGame.RPCreateRoom parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RPCreateRoom parseFrom(byte[] data)
+    public static com.module.net.NetGame.RPCreateRoom parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RPCreateRoom parseFrom(
+    public static com.module.net.NetGame.RPCreateRoom parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RPCreateRoom parseFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RPCreateRoom parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RPCreateRoom parseFrom(
+    public static com.module.net.NetGame.RPCreateRoom parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static RPCreateRoom parseDelimitedFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RPCreateRoom parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static RPCreateRoom parseDelimitedFrom(
+    public static com.module.net.NetGame.RPCreateRoom parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static RPCreateRoom parseFrom(
+    public static com.module.net.NetGame.RPCreateRoom parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RPCreateRoom parseFrom(
+    public static com.module.net.NetGame.RPCreateRoom parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4331,14 +4331,14 @@ public final class NetGame {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(RPCreateRoom prototype) {
+    public static Builder newBuilder(com.module.net.NetGame.RPCreateRoom prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -4347,17 +4347,17 @@ public final class NetGame {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements RPCreateRoomOrBuilder {
+       implements com.module.net.NetGame.RPCreateRoomOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return NetGame.internal_static_RPCreateRoom_descriptor;
+        return com.module.net.NetGame.internal_static_RPCreateRoom_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return NetGame.internal_static_RPCreateRoom_fieldAccessorTable
+        return com.module.net.NetGame.internal_static_RPCreateRoom_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                RPCreateRoom.class, Builder.class);
+                com.module.net.NetGame.RPCreateRoom.class, com.module.net.NetGame.RPCreateRoom.Builder.class);
       }
 
       // Construct using com.module.net.NetGame.RPCreateRoom.newBuilder()
@@ -4366,7 +4366,7 @@ public final class NetGame {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -4395,23 +4395,23 @@ public final class NetGame {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return NetGame.internal_static_RPCreateRoom_descriptor;
+        return com.module.net.NetGame.internal_static_RPCreateRoom_descriptor;
       }
 
-      public RPCreateRoom getDefaultInstanceForType() {
-        return RPCreateRoom.getDefaultInstance();
+      public com.module.net.NetGame.RPCreateRoom getDefaultInstanceForType() {
+        return com.module.net.NetGame.RPCreateRoom.getDefaultInstance();
       }
 
-      public RPCreateRoom build() {
-        RPCreateRoom result = buildPartial();
+      public com.module.net.NetGame.RPCreateRoom build() {
+        com.module.net.NetGame.RPCreateRoom result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public RPCreateRoom buildPartial() {
-        RPCreateRoom result = new RPCreateRoom(this);
+      public com.module.net.NetGame.RPCreateRoom buildPartial() {
+        com.module.net.NetGame.RPCreateRoom result = new com.module.net.NetGame.RPCreateRoom(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -4433,16 +4433,16 @@ public final class NetGame {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof RPCreateRoom) {
-          return mergeFrom((RPCreateRoom)other);
+        if (other instanceof com.module.net.NetGame.RPCreateRoom) {
+          return mergeFrom((com.module.net.NetGame.RPCreateRoom)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(RPCreateRoom other) {
-        if (other == RPCreateRoom.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.module.net.NetGame.RPCreateRoom other) {
+        if (other == com.module.net.NetGame.RPCreateRoom.getDefaultInstance()) return this;
         if (other.hasRoomId()) {
           setRoomId(other.getRoomId());
         }
@@ -4471,11 +4471,11 @@ public final class NetGame {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        RPCreateRoom parsedMessage = null;
+        com.module.net.NetGame.RPCreateRoom parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (RPCreateRoom) e.getUnfinishedMessage();
+          parsedMessage = (com.module.net.NetGame.RPCreateRoom) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -4553,17 +4553,17 @@ public final class NetGame {
       }
 
       // repeated int32 type = 3;
-      private java.util.List<Integer> type_ = java.util.Collections.emptyList();
+      private java.util.List<java.lang.Integer> type_ = java.util.Collections.emptyList();
       private void ensureTypeIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          type_ = new java.util.ArrayList<Integer>(type_);
+          type_ = new java.util.ArrayList<java.lang.Integer>(type_);
           bitField0_ |= 0x00000004;
          }
       }
       /**
        * <code>repeated int32 type = 3;</code>
        */
-      public java.util.List<Integer>
+      public java.util.List<java.lang.Integer>
           getTypeList() {
         return java.util.Collections.unmodifiableList(type_);
       }
@@ -4602,7 +4602,7 @@ public final class NetGame {
        * <code>repeated int32 type = 3;</code>
        */
       public Builder addAllType(
-          Iterable<? extends Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureTypeIsMutable();
         super.addAll(values, type_);
         onChanged();
@@ -4656,12 +4656,12 @@ public final class NetGame {
     /**
      * <code>repeated .NetUserData users = 3;</code>
      */
-    java.util.List<NetUserData>
+    java.util.List<com.module.net.NetGame.NetUserData> 
         getUsersList();
     /**
      * <code>repeated .NetUserData users = 3;</code>
      */
-    NetUserData getUsers(int index);
+    com.module.net.NetGame.NetUserData getUsers(int index);
     /**
      * <code>repeated .NetUserData users = 3;</code>
      */
@@ -4669,19 +4669,19 @@ public final class NetGame {
     /**
      * <code>repeated .NetUserData users = 3;</code>
      */
-    java.util.List<? extends NetUserDataOrBuilder>
+    java.util.List<? extends com.module.net.NetGame.NetUserDataOrBuilder> 
         getUsersOrBuilderList();
     /**
      * <code>repeated .NetUserData users = 3;</code>
      */
-    NetUserDataOrBuilder getUsersOrBuilder(
-            int index);
+    com.module.net.NetGame.NetUserDataOrBuilder getUsersOrBuilder(
+        int index);
 
     // repeated int32 type = 4;
     /**
      * <code>repeated int32 type = 4;</code>
      */
-    java.util.List<Integer> getTypeList();
+    java.util.List<java.lang.Integer> getTypeList();
     /**
      * <code>repeated int32 type = 4;</code>
      */
@@ -4729,11 +4729,11 @@ public final class NetGame {
     /**
      * <code>optional .NetExtraData extra = 8;</code>
      */
-    NetExtraData getExtra();
+    com.module.net.NetGame.NetExtraData getExtra();
     /**
      * <code>optional .NetExtraData extra = 8;</code>
      */
-    NetExtraDataOrBuilder getExtraOrBuilder();
+    com.module.net.NetGame.NetExtraDataOrBuilder getExtraOrBuilder();
   }
   /**
    * Protobuf type {@code RQCreateRoom}
@@ -4758,7 +4758,7 @@ public final class NetGame {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
@@ -4798,15 +4798,15 @@ public final class NetGame {
             }
             case 26: {
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                users_ = new java.util.ArrayList<NetUserData>();
+                users_ = new java.util.ArrayList<com.module.net.NetGame.NetUserData>();
                 mutable_bitField0_ |= 0x00000004;
               }
-              users_.add(input.readMessage(NetUserData.PARSER, extensionRegistry));
+              users_.add(input.readMessage(com.module.net.NetGame.NetUserData.PARSER, extensionRegistry));
               break;
             }
             case 32: {
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                type_ = new java.util.ArrayList<Integer>();
+                type_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000008;
               }
               type_.add(input.readInt32());
@@ -4816,7 +4816,7 @@ public final class NetGame {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
-                type_ = new java.util.ArrayList<Integer>();
+                type_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000008;
               }
               while (input.getBytesUntilLimit() > 0) {
@@ -4841,11 +4841,11 @@ public final class NetGame {
               break;
             }
             case 66: {
-              NetExtraData.Builder subBuilder = null;
+              com.module.net.NetGame.NetExtraData.Builder subBuilder = null;
               if (((bitField0_ & 0x00000020) == 0x00000020)) {
                 subBuilder = extra_.toBuilder();
               }
-              extra_ = input.readMessage(NetExtraData.PARSER, extensionRegistry);
+              extra_ = input.readMessage(com.module.net.NetGame.NetExtraData.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(extra_);
                 extra_ = subBuilder.buildPartial();
@@ -4873,14 +4873,14 @@ public final class NetGame {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return NetGame.internal_static_RQCreateRoom_descriptor;
+      return com.module.net.NetGame.internal_static_RQCreateRoom_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return NetGame.internal_static_RQCreateRoom_fieldAccessorTable
+      return com.module.net.NetGame.internal_static_RQCreateRoom_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              RQCreateRoom.class, Builder.class);
+              com.module.net.NetGame.RQCreateRoom.class, com.module.net.NetGame.RQCreateRoom.Builder.class);
     }
 
     public static com.google.protobuf.Parser<RQCreateRoom> PARSER =
@@ -4893,7 +4893,7 @@ public final class NetGame {
       }
     };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<RQCreateRoom> getParserForType() {
       return PARSER;
     }
@@ -4933,17 +4933,17 @@ public final class NetGame {
 
     // repeated .NetUserData users = 3;
     public static final int USERS_FIELD_NUMBER = 3;
-    private java.util.List<NetUserData> users_;
+    private java.util.List<com.module.net.NetGame.NetUserData> users_;
     /**
      * <code>repeated .NetUserData users = 3;</code>
      */
-    public java.util.List<NetUserData> getUsersList() {
+    public java.util.List<com.module.net.NetGame.NetUserData> getUsersList() {
       return users_;
     }
     /**
      * <code>repeated .NetUserData users = 3;</code>
      */
-    public java.util.List<? extends NetUserDataOrBuilder>
+    public java.util.List<? extends com.module.net.NetGame.NetUserDataOrBuilder> 
         getUsersOrBuilderList() {
       return users_;
     }
@@ -4956,24 +4956,24 @@ public final class NetGame {
     /**
      * <code>repeated .NetUserData users = 3;</code>
      */
-    public NetUserData getUsers(int index) {
+    public com.module.net.NetGame.NetUserData getUsers(int index) {
       return users_.get(index);
     }
     /**
      * <code>repeated .NetUserData users = 3;</code>
      */
-    public NetUserDataOrBuilder getUsersOrBuilder(
+    public com.module.net.NetGame.NetUserDataOrBuilder getUsersOrBuilder(
         int index) {
       return users_.get(index);
     }
 
     // repeated int32 type = 4;
     public static final int TYPE_FIELD_NUMBER = 4;
-    private java.util.List<Integer> type_;
+    private java.util.List<java.lang.Integer> type_;
     /**
      * <code>repeated int32 type = 4;</code>
      */
-    public java.util.List<Integer>
+    public java.util.List<java.lang.Integer>
         getTypeList() {
       return type_;
     }
@@ -5040,7 +5040,7 @@ public final class NetGame {
 
     // optional .NetExtraData extra = 8;
     public static final int EXTRA_FIELD_NUMBER = 8;
-    private NetExtraData extra_;
+    private com.module.net.NetGame.NetExtraData extra_;
     /**
      * <code>optional .NetExtraData extra = 8;</code>
      */
@@ -5050,13 +5050,13 @@ public final class NetGame {
     /**
      * <code>optional .NetExtraData extra = 8;</code>
      */
-    public NetExtraData getExtra() {
+    public com.module.net.NetGame.NetExtraData getExtra() {
       return extra_;
     }
     /**
      * <code>optional .NetExtraData extra = 8;</code>
      */
-    public NetExtraDataOrBuilder getExtraOrBuilder() {
+    public com.module.net.NetGame.NetExtraDataOrBuilder getExtraOrBuilder() {
       return extra_;
     }
 
@@ -5068,7 +5068,7 @@ public final class NetGame {
       curRount_ = 0;
       gameStatus_ = 0;
       ownerId_ = 0;
-      extra_ = NetExtraData.getDefaultInstance();
+      extra_ = com.module.net.NetGame.NetExtraData.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5158,59 +5158,59 @@ public final class NetGame {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static RQCreateRoom parseFrom(
+    public static com.module.net.NetGame.RQCreateRoom parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RQCreateRoom parseFrom(
+    public static com.module.net.NetGame.RQCreateRoom parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RQCreateRoom parseFrom(byte[] data)
+    public static com.module.net.NetGame.RQCreateRoom parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RQCreateRoom parseFrom(
+    public static com.module.net.NetGame.RQCreateRoom parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RQCreateRoom parseFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RQCreateRoom parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RQCreateRoom parseFrom(
+    public static com.module.net.NetGame.RQCreateRoom parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static RQCreateRoom parseDelimitedFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RQCreateRoom parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static RQCreateRoom parseDelimitedFrom(
+    public static com.module.net.NetGame.RQCreateRoom parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static RQCreateRoom parseFrom(
+    public static com.module.net.NetGame.RQCreateRoom parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RQCreateRoom parseFrom(
+    public static com.module.net.NetGame.RQCreateRoom parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5219,14 +5219,14 @@ public final class NetGame {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(RQCreateRoom prototype) {
+    public static Builder newBuilder(com.module.net.NetGame.RQCreateRoom prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -5235,17 +5235,17 @@ public final class NetGame {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements RQCreateRoomOrBuilder {
+       implements com.module.net.NetGame.RQCreateRoomOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return NetGame.internal_static_RQCreateRoom_descriptor;
+        return com.module.net.NetGame.internal_static_RQCreateRoom_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return NetGame.internal_static_RQCreateRoom_fieldAccessorTable
+        return com.module.net.NetGame.internal_static_RQCreateRoom_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                RQCreateRoom.class, Builder.class);
+                com.module.net.NetGame.RQCreateRoom.class, com.module.net.NetGame.RQCreateRoom.Builder.class);
       }
 
       // Construct using com.module.net.NetGame.RQCreateRoom.newBuilder()
@@ -5254,7 +5254,7 @@ public final class NetGame {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -5289,7 +5289,7 @@ public final class NetGame {
         ownerId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
         if (extraBuilder_ == null) {
-          extra_ = NetExtraData.getDefaultInstance();
+          extra_ = com.module.net.NetGame.NetExtraData.getDefaultInstance();
         } else {
           extraBuilder_.clear();
         }
@@ -5303,23 +5303,23 @@ public final class NetGame {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return NetGame.internal_static_RQCreateRoom_descriptor;
+        return com.module.net.NetGame.internal_static_RQCreateRoom_descriptor;
       }
 
-      public RQCreateRoom getDefaultInstanceForType() {
-        return RQCreateRoom.getDefaultInstance();
+      public com.module.net.NetGame.RQCreateRoom getDefaultInstanceForType() {
+        return com.module.net.NetGame.RQCreateRoom.getDefaultInstance();
       }
 
-      public RQCreateRoom build() {
-        RQCreateRoom result = buildPartial();
+      public com.module.net.NetGame.RQCreateRoom build() {
+        com.module.net.NetGame.RQCreateRoom result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public RQCreateRoom buildPartial() {
-        RQCreateRoom result = new RQCreateRoom(this);
+      public com.module.net.NetGame.RQCreateRoom buildPartial() {
+        com.module.net.NetGame.RQCreateRoom result = new com.module.net.NetGame.RQCreateRoom(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -5370,16 +5370,16 @@ public final class NetGame {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof RQCreateRoom) {
-          return mergeFrom((RQCreateRoom)other);
+        if (other instanceof com.module.net.NetGame.RQCreateRoom) {
+          return mergeFrom((com.module.net.NetGame.RQCreateRoom)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(RQCreateRoom other) {
-        if (other == RQCreateRoom.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.module.net.NetGame.RQCreateRoom other) {
+        if (other == com.module.net.NetGame.RQCreateRoom.getDefaultInstance()) return this;
         if (other.hasRoomId()) {
           setRoomId(other.getRoomId());
         }
@@ -5446,11 +5446,11 @@ public final class NetGame {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        RQCreateRoom parsedMessage = null;
+        com.module.net.NetGame.RQCreateRoom parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (RQCreateRoom) e.getUnfinishedMessage();
+          parsedMessage = (com.module.net.NetGame.RQCreateRoom) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -5528,22 +5528,22 @@ public final class NetGame {
       }
 
       // repeated .NetUserData users = 3;
-      private java.util.List<NetUserData> users_ =
+      private java.util.List<com.module.net.NetGame.NetUserData> users_ =
         java.util.Collections.emptyList();
       private void ensureUsersIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          users_ = new java.util.ArrayList<NetUserData>(users_);
+          users_ = new java.util.ArrayList<com.module.net.NetGame.NetUserData>(users_);
           bitField0_ |= 0x00000004;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          NetUserData, NetUserData.Builder, NetUserDataOrBuilder> usersBuilder_;
+          com.module.net.NetGame.NetUserData, com.module.net.NetGame.NetUserData.Builder, com.module.net.NetGame.NetUserDataOrBuilder> usersBuilder_;
 
       /**
        * <code>repeated .NetUserData users = 3;</code>
        */
-      public java.util.List<NetUserData> getUsersList() {
+      public java.util.List<com.module.net.NetGame.NetUserData> getUsersList() {
         if (usersBuilder_ == null) {
           return java.util.Collections.unmodifiableList(users_);
         } else {
@@ -5563,7 +5563,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetUserData users = 3;</code>
        */
-      public NetUserData getUsers(int index) {
+      public com.module.net.NetGame.NetUserData getUsers(int index) {
         if (usersBuilder_ == null) {
           return users_.get(index);
         } else {
@@ -5574,7 +5574,7 @@ public final class NetGame {
        * <code>repeated .NetUserData users = 3;</code>
        */
       public Builder setUsers(
-          int index, NetUserData value) {
+          int index, com.module.net.NetGame.NetUserData value) {
         if (usersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5591,7 +5591,7 @@ public final class NetGame {
        * <code>repeated .NetUserData users = 3;</code>
        */
       public Builder setUsers(
-          int index, NetUserData.Builder builderForValue) {
+          int index, com.module.net.NetGame.NetUserData.Builder builderForValue) {
         if (usersBuilder_ == null) {
           ensureUsersIsMutable();
           users_.set(index, builderForValue.build());
@@ -5604,7 +5604,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetUserData users = 3;</code>
        */
-      public Builder addUsers(NetUserData value) {
+      public Builder addUsers(com.module.net.NetGame.NetUserData value) {
         if (usersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5621,7 +5621,7 @@ public final class NetGame {
        * <code>repeated .NetUserData users = 3;</code>
        */
       public Builder addUsers(
-          int index, NetUserData value) {
+          int index, com.module.net.NetGame.NetUserData value) {
         if (usersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5638,7 +5638,7 @@ public final class NetGame {
        * <code>repeated .NetUserData users = 3;</code>
        */
       public Builder addUsers(
-          NetUserData.Builder builderForValue) {
+          com.module.net.NetGame.NetUserData.Builder builderForValue) {
         if (usersBuilder_ == null) {
           ensureUsersIsMutable();
           users_.add(builderForValue.build());
@@ -5652,7 +5652,7 @@ public final class NetGame {
        * <code>repeated .NetUserData users = 3;</code>
        */
       public Builder addUsers(
-          int index, NetUserData.Builder builderForValue) {
+          int index, com.module.net.NetGame.NetUserData.Builder builderForValue) {
         if (usersBuilder_ == null) {
           ensureUsersIsMutable();
           users_.add(index, builderForValue.build());
@@ -5666,7 +5666,7 @@ public final class NetGame {
        * <code>repeated .NetUserData users = 3;</code>
        */
       public Builder addAllUsers(
-          Iterable<? extends NetUserData> values) {
+          java.lang.Iterable<? extends com.module.net.NetGame.NetUserData> values) {
         if (usersBuilder_ == null) {
           ensureUsersIsMutable();
           super.addAll(values, users_);
@@ -5705,14 +5705,14 @@ public final class NetGame {
       /**
        * <code>repeated .NetUserData users = 3;</code>
        */
-      public NetUserData.Builder getUsersBuilder(
+      public com.module.net.NetGame.NetUserData.Builder getUsersBuilder(
           int index) {
         return getUsersFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .NetUserData users = 3;</code>
        */
-      public NetUserDataOrBuilder getUsersOrBuilder(
+      public com.module.net.NetGame.NetUserDataOrBuilder getUsersOrBuilder(
           int index) {
         if (usersBuilder_ == null) {
           return users_.get(index);  } else {
@@ -5722,7 +5722,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetUserData users = 3;</code>
        */
-      public java.util.List<? extends NetUserDataOrBuilder>
+      public java.util.List<? extends com.module.net.NetGame.NetUserDataOrBuilder> 
            getUsersOrBuilderList() {
         if (usersBuilder_ != null) {
           return usersBuilder_.getMessageOrBuilderList();
@@ -5733,31 +5733,31 @@ public final class NetGame {
       /**
        * <code>repeated .NetUserData users = 3;</code>
        */
-      public NetUserData.Builder addUsersBuilder() {
+      public com.module.net.NetGame.NetUserData.Builder addUsersBuilder() {
         return getUsersFieldBuilder().addBuilder(
-            NetUserData.getDefaultInstance());
+            com.module.net.NetGame.NetUserData.getDefaultInstance());
       }
       /**
        * <code>repeated .NetUserData users = 3;</code>
        */
-      public NetUserData.Builder addUsersBuilder(
+      public com.module.net.NetGame.NetUserData.Builder addUsersBuilder(
           int index) {
         return getUsersFieldBuilder().addBuilder(
-            index, NetUserData.getDefaultInstance());
+            index, com.module.net.NetGame.NetUserData.getDefaultInstance());
       }
       /**
        * <code>repeated .NetUserData users = 3;</code>
        */
-      public java.util.List<NetUserData.Builder>
+      public java.util.List<com.module.net.NetGame.NetUserData.Builder> 
            getUsersBuilderList() {
         return getUsersFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          NetUserData, NetUserData.Builder, NetUserDataOrBuilder>
+          com.module.net.NetGame.NetUserData, com.module.net.NetGame.NetUserData.Builder, com.module.net.NetGame.NetUserDataOrBuilder> 
           getUsersFieldBuilder() {
         if (usersBuilder_ == null) {
           usersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              NetUserData, NetUserData.Builder, NetUserDataOrBuilder>(
+              com.module.net.NetGame.NetUserData, com.module.net.NetGame.NetUserData.Builder, com.module.net.NetGame.NetUserDataOrBuilder>(
                   users_,
                   ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
@@ -5768,17 +5768,17 @@ public final class NetGame {
       }
 
       // repeated int32 type = 4;
-      private java.util.List<Integer> type_ = java.util.Collections.emptyList();
+      private java.util.List<java.lang.Integer> type_ = java.util.Collections.emptyList();
       private void ensureTypeIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          type_ = new java.util.ArrayList<Integer>(type_);
+          type_ = new java.util.ArrayList<java.lang.Integer>(type_);
           bitField0_ |= 0x00000008;
          }
       }
       /**
        * <code>repeated int32 type = 4;</code>
        */
-      public java.util.List<Integer>
+      public java.util.List<java.lang.Integer>
           getTypeList() {
         return java.util.Collections.unmodifiableList(type_);
       }
@@ -5817,7 +5817,7 @@ public final class NetGame {
        * <code>repeated int32 type = 4;</code>
        */
       public Builder addAllType(
-          Iterable<? extends Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureTypeIsMutable();
         super.addAll(values, type_);
         onChanged();
@@ -5933,9 +5933,9 @@ public final class NetGame {
       }
 
       // optional .NetExtraData extra = 8;
-      private NetExtraData extra_ = NetExtraData.getDefaultInstance();
+      private com.module.net.NetGame.NetExtraData extra_ = com.module.net.NetGame.NetExtraData.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          NetExtraData, NetExtraData.Builder, NetExtraDataOrBuilder> extraBuilder_;
+          com.module.net.NetGame.NetExtraData, com.module.net.NetGame.NetExtraData.Builder, com.module.net.NetGame.NetExtraDataOrBuilder> extraBuilder_;
       /**
        * <code>optional .NetExtraData extra = 8;</code>
        */
@@ -5945,7 +5945,7 @@ public final class NetGame {
       /**
        * <code>optional .NetExtraData extra = 8;</code>
        */
-      public NetExtraData getExtra() {
+      public com.module.net.NetGame.NetExtraData getExtra() {
         if (extraBuilder_ == null) {
           return extra_;
         } else {
@@ -5955,7 +5955,7 @@ public final class NetGame {
       /**
        * <code>optional .NetExtraData extra = 8;</code>
        */
-      public Builder setExtra(NetExtraData value) {
+      public Builder setExtra(com.module.net.NetGame.NetExtraData value) {
         if (extraBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5972,7 +5972,7 @@ public final class NetGame {
        * <code>optional .NetExtraData extra = 8;</code>
        */
       public Builder setExtra(
-          NetExtraData.Builder builderForValue) {
+          com.module.net.NetGame.NetExtraData.Builder builderForValue) {
         if (extraBuilder_ == null) {
           extra_ = builderForValue.build();
           onChanged();
@@ -5985,12 +5985,12 @@ public final class NetGame {
       /**
        * <code>optional .NetExtraData extra = 8;</code>
        */
-      public Builder mergeExtra(NetExtraData value) {
+      public Builder mergeExtra(com.module.net.NetGame.NetExtraData value) {
         if (extraBuilder_ == null) {
           if (((bitField0_ & 0x00000080) == 0x00000080) &&
-              extra_ != NetExtraData.getDefaultInstance()) {
+              extra_ != com.module.net.NetGame.NetExtraData.getDefaultInstance()) {
             extra_ =
-              NetExtraData.newBuilder(extra_).mergeFrom(value).buildPartial();
+              com.module.net.NetGame.NetExtraData.newBuilder(extra_).mergeFrom(value).buildPartial();
           } else {
             extra_ = value;
           }
@@ -6006,7 +6006,7 @@ public final class NetGame {
        */
       public Builder clearExtra() {
         if (extraBuilder_ == null) {
-          extra_ = NetExtraData.getDefaultInstance();
+          extra_ = com.module.net.NetGame.NetExtraData.getDefaultInstance();
           onChanged();
         } else {
           extraBuilder_.clear();
@@ -6017,7 +6017,7 @@ public final class NetGame {
       /**
        * <code>optional .NetExtraData extra = 8;</code>
        */
-      public NetExtraData.Builder getExtraBuilder() {
+      public com.module.net.NetGame.NetExtraData.Builder getExtraBuilder() {
         bitField0_ |= 0x00000080;
         onChanged();
         return getExtraFieldBuilder().getBuilder();
@@ -6025,7 +6025,7 @@ public final class NetGame {
       /**
        * <code>optional .NetExtraData extra = 8;</code>
        */
-      public NetExtraDataOrBuilder getExtraOrBuilder() {
+      public com.module.net.NetGame.NetExtraDataOrBuilder getExtraOrBuilder() {
         if (extraBuilder_ != null) {
           return extraBuilder_.getMessageOrBuilder();
         } else {
@@ -6036,11 +6036,11 @@ public final class NetGame {
        * <code>optional .NetExtraData extra = 8;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          NetExtraData, NetExtraData.Builder, NetExtraDataOrBuilder>
+          com.module.net.NetGame.NetExtraData, com.module.net.NetGame.NetExtraData.Builder, com.module.net.NetGame.NetExtraDataOrBuilder> 
           getExtraFieldBuilder() {
         if (extraBuilder_ == null) {
           extraBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              NetExtraData, NetExtraData.Builder, NetExtraDataOrBuilder>(
+              com.module.net.NetGame.NetExtraData, com.module.net.NetGame.NetExtraData.Builder, com.module.net.NetGame.NetExtraDataOrBuilder>(
                   extra_,
                   getParentForChildren(),
                   isClean());
@@ -6081,7 +6081,7 @@ public final class NetGame {
     /**
      * <code>optional string key = 2;</code>
      */
-    String getKey();
+    java.lang.String getKey();
     /**
      * <code>optional string key = 2;</code>
      */
@@ -6111,7 +6111,7 @@ public final class NetGame {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
@@ -6163,14 +6163,14 @@ public final class NetGame {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return NetGame.internal_static_RPEnterRoom_descriptor;
+      return com.module.net.NetGame.internal_static_RPEnterRoom_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return NetGame.internal_static_RPEnterRoom_fieldAccessorTable
+      return com.module.net.NetGame.internal_static_RPEnterRoom_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              RPEnterRoom.class, Builder.class);
+              com.module.net.NetGame.RPEnterRoom.class, com.module.net.NetGame.RPEnterRoom.Builder.class);
     }
 
     public static com.google.protobuf.Parser<RPEnterRoom> PARSER =
@@ -6183,7 +6183,7 @@ public final class NetGame {
       }
     };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<RPEnterRoom> getParserForType() {
       return PARSER;
     }
@@ -6207,7 +6207,7 @@ public final class NetGame {
 
     // optional string key = 2;
     public static final int KEY_FIELD_NUMBER = 2;
-    private Object key_;
+    private java.lang.Object key_;
     /**
      * <code>optional string key = 2;</code>
      */
@@ -6217,14 +6217,14 @@ public final class NetGame {
     /**
      * <code>optional string key = 2;</code>
      */
-    public String getKey() {
-      Object ref = key_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getKey() {
+      java.lang.Object ref = key_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           key_ = s;
         }
@@ -6236,11 +6236,11 @@ public final class NetGame {
      */
     public com.google.protobuf.ByteString
         getKeyBytes() {
-      Object ref = key_;
-      if (ref instanceof String) {
+      java.lang.Object ref = key_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         key_ = b;
         return b;
       } else {
@@ -6293,59 +6293,59 @@ public final class NetGame {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static RPEnterRoom parseFrom(
+    public static com.module.net.NetGame.RPEnterRoom parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RPEnterRoom parseFrom(
+    public static com.module.net.NetGame.RPEnterRoom parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RPEnterRoom parseFrom(byte[] data)
+    public static com.module.net.NetGame.RPEnterRoom parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RPEnterRoom parseFrom(
+    public static com.module.net.NetGame.RPEnterRoom parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RPEnterRoom parseFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RPEnterRoom parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RPEnterRoom parseFrom(
+    public static com.module.net.NetGame.RPEnterRoom parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static RPEnterRoom parseDelimitedFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RPEnterRoom parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static RPEnterRoom parseDelimitedFrom(
+    public static com.module.net.NetGame.RPEnterRoom parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static RPEnterRoom parseFrom(
+    public static com.module.net.NetGame.RPEnterRoom parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RPEnterRoom parseFrom(
+    public static com.module.net.NetGame.RPEnterRoom parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6354,14 +6354,14 @@ public final class NetGame {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(RPEnterRoom prototype) {
+    public static Builder newBuilder(com.module.net.NetGame.RPEnterRoom prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -6370,17 +6370,17 @@ public final class NetGame {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements RPEnterRoomOrBuilder {
+       implements com.module.net.NetGame.RPEnterRoomOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return NetGame.internal_static_RPEnterRoom_descriptor;
+        return com.module.net.NetGame.internal_static_RPEnterRoom_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return NetGame.internal_static_RPEnterRoom_fieldAccessorTable
+        return com.module.net.NetGame.internal_static_RPEnterRoom_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                RPEnterRoom.class, Builder.class);
+                com.module.net.NetGame.RPEnterRoom.class, com.module.net.NetGame.RPEnterRoom.Builder.class);
       }
 
       // Construct using com.module.net.NetGame.RPEnterRoom.newBuilder()
@@ -6389,7 +6389,7 @@ public final class NetGame {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -6416,23 +6416,23 @@ public final class NetGame {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return NetGame.internal_static_RPEnterRoom_descriptor;
+        return com.module.net.NetGame.internal_static_RPEnterRoom_descriptor;
       }
 
-      public RPEnterRoom getDefaultInstanceForType() {
-        return RPEnterRoom.getDefaultInstance();
+      public com.module.net.NetGame.RPEnterRoom getDefaultInstanceForType() {
+        return com.module.net.NetGame.RPEnterRoom.getDefaultInstance();
       }
 
-      public RPEnterRoom build() {
-        RPEnterRoom result = buildPartial();
+      public com.module.net.NetGame.RPEnterRoom build() {
+        com.module.net.NetGame.RPEnterRoom result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public RPEnterRoom buildPartial() {
-        RPEnterRoom result = new RPEnterRoom(this);
+      public com.module.net.NetGame.RPEnterRoom buildPartial() {
+        com.module.net.NetGame.RPEnterRoom result = new com.module.net.NetGame.RPEnterRoom(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -6449,16 +6449,16 @@ public final class NetGame {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof RPEnterRoom) {
-          return mergeFrom((RPEnterRoom)other);
+        if (other instanceof com.module.net.NetGame.RPEnterRoom) {
+          return mergeFrom((com.module.net.NetGame.RPEnterRoom)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(RPEnterRoom other) {
-        if (other == RPEnterRoom.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.module.net.NetGame.RPEnterRoom other) {
+        if (other == com.module.net.NetGame.RPEnterRoom.getDefaultInstance()) return this;
         if (other.hasRoomId()) {
           setRoomId(other.getRoomId());
         }
@@ -6479,11 +6479,11 @@ public final class NetGame {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        RPEnterRoom parsedMessage = null;
+        com.module.net.NetGame.RPEnterRoom parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (RPEnterRoom) e.getUnfinishedMessage();
+          parsedMessage = (com.module.net.NetGame.RPEnterRoom) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -6528,7 +6528,7 @@ public final class NetGame {
       }
 
       // optional string key = 2;
-      private Object key_ = "";
+      private java.lang.Object key_ = "";
       /**
        * <code>optional string key = 2;</code>
        */
@@ -6538,15 +6538,15 @@ public final class NetGame {
       /**
        * <code>optional string key = 2;</code>
        */
-      public String getKey() {
-        Object ref = key_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref)
+      public java.lang.String getKey() {
+        java.lang.Object ref = key_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
               .toStringUtf8();
           key_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -6554,11 +6554,11 @@ public final class NetGame {
        */
       public com.google.protobuf.ByteString
           getKeyBytes() {
-        Object ref = key_;
+        java.lang.Object ref = key_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           key_ = b;
           return b;
         } else {
@@ -6569,7 +6569,7 @@ public final class NetGame {
        * <code>optional string key = 2;</code>
        */
       public Builder setKey(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -6620,7 +6620,7 @@ public final class NetGame {
      * <code>optional int32 status = 1;</code>
      *
      * <pre>
-     ** ×´Ì¬Î»(ï¿½ï¿½NetUserDataï¿½ï¿½statusÒ»ï¿½ï¿½) 
+     ** ×´Ì¬Î»(ÓëNetUserDataµÄstatusÒ»Ñù) 
      * </pre>
      */
     boolean hasStatus();
@@ -6628,7 +6628,7 @@ public final class NetGame {
      * <code>optional int32 status = 1;</code>
      *
      * <pre>
-     ** ×´Ì¬Î»(ï¿½ï¿½NetUserDataï¿½ï¿½statusÒ»ï¿½ï¿½) 
+     ** ×´Ì¬Î»(ÓëNetUserDataµÄstatusÒ»Ñù) 
      * </pre>
      */
     int getStatus();
@@ -6656,7 +6656,7 @@ public final class NetGame {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
@@ -6703,14 +6703,14 @@ public final class NetGame {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return NetGame.internal_static_RQUserStatus_descriptor;
+      return com.module.net.NetGame.internal_static_RQUserStatus_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return NetGame.internal_static_RQUserStatus_fieldAccessorTable
+      return com.module.net.NetGame.internal_static_RQUserStatus_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              RQUserStatus.class, Builder.class);
+              com.module.net.NetGame.RQUserStatus.class, com.module.net.NetGame.RQUserStatus.Builder.class);
     }
 
     public static com.google.protobuf.Parser<RQUserStatus> PARSER =
@@ -6723,7 +6723,7 @@ public final class NetGame {
       }
     };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<RQUserStatus> getParserForType() {
       return PARSER;
     }
@@ -6736,7 +6736,7 @@ public final class NetGame {
      * <code>optional int32 status = 1;</code>
      *
      * <pre>
-     ** ×´Ì¬Î»(ï¿½ï¿½NetUserDataï¿½ï¿½statusÒ»ï¿½ï¿½) 
+     ** ×´Ì¬Î»(ÓëNetUserDataµÄstatusÒ»Ñù) 
      * </pre>
      */
     public boolean hasStatus() {
@@ -6746,7 +6746,7 @@ public final class NetGame {
      * <code>optional int32 status = 1;</code>
      *
      * <pre>
-     ** ×´Ì¬Î»(ï¿½ï¿½NetUserDataï¿½ï¿½statusÒ»ï¿½ï¿½) 
+     ** ×´Ì¬Î»(ÓëNetUserDataµÄstatusÒ»Ñù) 
      * </pre>
      */
     public int getStatus() {
@@ -6790,59 +6790,59 @@ public final class NetGame {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static RQUserStatus parseFrom(
+    public static com.module.net.NetGame.RQUserStatus parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RQUserStatus parseFrom(
+    public static com.module.net.NetGame.RQUserStatus parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RQUserStatus parseFrom(byte[] data)
+    public static com.module.net.NetGame.RQUserStatus parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RQUserStatus parseFrom(
+    public static com.module.net.NetGame.RQUserStatus parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RQUserStatus parseFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RQUserStatus parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RQUserStatus parseFrom(
+    public static com.module.net.NetGame.RQUserStatus parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static RQUserStatus parseDelimitedFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RQUserStatus parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static RQUserStatus parseDelimitedFrom(
+    public static com.module.net.NetGame.RQUserStatus parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static RQUserStatus parseFrom(
+    public static com.module.net.NetGame.RQUserStatus parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RQUserStatus parseFrom(
+    public static com.module.net.NetGame.RQUserStatus parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6851,14 +6851,14 @@ public final class NetGame {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(RQUserStatus prototype) {
+    public static Builder newBuilder(com.module.net.NetGame.RQUserStatus prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -6867,17 +6867,17 @@ public final class NetGame {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements RQUserStatusOrBuilder {
+       implements com.module.net.NetGame.RQUserStatusOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return NetGame.internal_static_RQUserStatus_descriptor;
+        return com.module.net.NetGame.internal_static_RQUserStatus_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return NetGame.internal_static_RQUserStatus_fieldAccessorTable
+        return com.module.net.NetGame.internal_static_RQUserStatus_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                RQUserStatus.class, Builder.class);
+                com.module.net.NetGame.RQUserStatus.class, com.module.net.NetGame.RQUserStatus.Builder.class);
       }
 
       // Construct using com.module.net.NetGame.RQUserStatus.newBuilder()
@@ -6886,7 +6886,7 @@ public final class NetGame {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -6911,23 +6911,23 @@ public final class NetGame {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return NetGame.internal_static_RQUserStatus_descriptor;
+        return com.module.net.NetGame.internal_static_RQUserStatus_descriptor;
       }
 
-      public RQUserStatus getDefaultInstanceForType() {
-        return RQUserStatus.getDefaultInstance();
+      public com.module.net.NetGame.RQUserStatus getDefaultInstanceForType() {
+        return com.module.net.NetGame.RQUserStatus.getDefaultInstance();
       }
 
-      public RQUserStatus build() {
-        RQUserStatus result = buildPartial();
+      public com.module.net.NetGame.RQUserStatus build() {
+        com.module.net.NetGame.RQUserStatus result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public RQUserStatus buildPartial() {
-        RQUserStatus result = new RQUserStatus(this);
+      public com.module.net.NetGame.RQUserStatus buildPartial() {
+        com.module.net.NetGame.RQUserStatus result = new com.module.net.NetGame.RQUserStatus(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -6940,16 +6940,16 @@ public final class NetGame {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof RQUserStatus) {
-          return mergeFrom((RQUserStatus)other);
+        if (other instanceof com.module.net.NetGame.RQUserStatus) {
+          return mergeFrom((com.module.net.NetGame.RQUserStatus)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(RQUserStatus other) {
-        if (other == RQUserStatus.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.module.net.NetGame.RQUserStatus other) {
+        if (other == com.module.net.NetGame.RQUserStatus.getDefaultInstance()) return this;
         if (other.hasStatus()) {
           setStatus(other.getStatus());
         }
@@ -6965,11 +6965,11 @@ public final class NetGame {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        RQUserStatus parsedMessage = null;
+        com.module.net.NetGame.RQUserStatus parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (RQUserStatus) e.getUnfinishedMessage();
+          parsedMessage = (com.module.net.NetGame.RQUserStatus) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -6986,7 +6986,7 @@ public final class NetGame {
        * <code>optional int32 status = 1;</code>
        *
        * <pre>
-       ** ×´Ì¬Î»(ï¿½ï¿½NetUserDataï¿½ï¿½statusÒ»ï¿½ï¿½) 
+       ** ×´Ì¬Î»(ÓëNetUserDataµÄstatusÒ»Ñù) 
        * </pre>
        */
       public boolean hasStatus() {
@@ -6996,7 +6996,7 @@ public final class NetGame {
        * <code>optional int32 status = 1;</code>
        *
        * <pre>
-       ** ×´Ì¬Î»(ï¿½ï¿½NetUserDataï¿½ï¿½statusÒ»ï¿½ï¿½) 
+       ** ×´Ì¬Î»(ÓëNetUserDataµÄstatusÒ»Ñù) 
        * </pre>
        */
       public int getStatus() {
@@ -7006,7 +7006,7 @@ public final class NetGame {
        * <code>optional int32 status = 1;</code>
        *
        * <pre>
-       ** ×´Ì¬Î»(ï¿½ï¿½NetUserDataï¿½ï¿½statusÒ»ï¿½ï¿½) 
+       ** ×´Ì¬Î»(ÓëNetUserDataµÄstatusÒ»Ñù) 
        * </pre>
        */
       public Builder setStatus(int value) {
@@ -7019,7 +7019,7 @@ public final class NetGame {
        * <code>optional int32 status = 1;</code>
        *
        * <pre>
-       ** ×´Ì¬Î»(ï¿½ï¿½NetUserDataï¿½ï¿½statusÒ»ï¿½ï¿½) 
+       ** ×´Ì¬Î»(ÓëNetUserDataµÄstatusÒ»Ñù) 
        * </pre>
        */
       public Builder clearStatus() {
@@ -7057,12 +7057,12 @@ public final class NetGame {
     /**
      * <code>repeated .NetMjUserResult users = 2;</code>
      */
-    java.util.List<NetMjUserResult>
+    java.util.List<com.module.net.NetGame.NetMjUserResult> 
         getUsersList();
     /**
      * <code>repeated .NetMjUserResult users = 2;</code>
      */
-    NetMjUserResult getUsers(int index);
+    com.module.net.NetGame.NetMjUserResult getUsers(int index);
     /**
      * <code>repeated .NetMjUserResult users = 2;</code>
      */
@@ -7070,13 +7070,13 @@ public final class NetGame {
     /**
      * <code>repeated .NetMjUserResult users = 2;</code>
      */
-    java.util.List<? extends NetMjUserResultOrBuilder>
+    java.util.List<? extends com.module.net.NetGame.NetMjUserResultOrBuilder> 
         getUsersOrBuilderList();
     /**
      * <code>repeated .NetMjUserResult users = 2;</code>
      */
-    NetMjUserResultOrBuilder getUsersOrBuilder(
-            int index);
+    com.module.net.NetGame.NetMjUserResultOrBuilder getUsersOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code RQREsult}
@@ -7101,7 +7101,7 @@ public final class NetGame {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
@@ -7136,10 +7136,10 @@ public final class NetGame {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                users_ = new java.util.ArrayList<NetMjUserResult>();
+                users_ = new java.util.ArrayList<com.module.net.NetGame.NetMjUserResult>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              users_.add(input.readMessage(NetMjUserResult.PARSER, extensionRegistry));
+              users_.add(input.readMessage(com.module.net.NetGame.NetMjUserResult.PARSER, extensionRegistry));
               break;
             }
           }
@@ -7159,14 +7159,14 @@ public final class NetGame {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return NetGame.internal_static_RQREsult_descriptor;
+      return com.module.net.NetGame.internal_static_RQREsult_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return NetGame.internal_static_RQREsult_fieldAccessorTable
+      return com.module.net.NetGame.internal_static_RQREsult_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              RQREsult.class, Builder.class);
+              com.module.net.NetGame.RQREsult.class, com.module.net.NetGame.RQREsult.Builder.class);
     }
 
     public static com.google.protobuf.Parser<RQREsult> PARSER =
@@ -7179,7 +7179,7 @@ public final class NetGame {
       }
     };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<RQREsult> getParserForType() {
       return PARSER;
     }
@@ -7203,17 +7203,17 @@ public final class NetGame {
 
     // repeated .NetMjUserResult users = 2;
     public static final int USERS_FIELD_NUMBER = 2;
-    private java.util.List<NetMjUserResult> users_;
+    private java.util.List<com.module.net.NetGame.NetMjUserResult> users_;
     /**
      * <code>repeated .NetMjUserResult users = 2;</code>
      */
-    public java.util.List<NetMjUserResult> getUsersList() {
+    public java.util.List<com.module.net.NetGame.NetMjUserResult> getUsersList() {
       return users_;
     }
     /**
      * <code>repeated .NetMjUserResult users = 2;</code>
      */
-    public java.util.List<? extends NetMjUserResultOrBuilder>
+    public java.util.List<? extends com.module.net.NetGame.NetMjUserResultOrBuilder> 
         getUsersOrBuilderList() {
       return users_;
     }
@@ -7226,13 +7226,13 @@ public final class NetGame {
     /**
      * <code>repeated .NetMjUserResult users = 2;</code>
      */
-    public NetMjUserResult getUsers(int index) {
+    public com.module.net.NetGame.NetMjUserResult getUsers(int index) {
       return users_.get(index);
     }
     /**
      * <code>repeated .NetMjUserResult users = 2;</code>
      */
-    public NetMjUserResultOrBuilder getUsersOrBuilder(
+    public com.module.net.NetGame.NetMjUserResultOrBuilder getUsersOrBuilder(
         int index) {
       return users_.get(index);
     }
@@ -7282,59 +7282,59 @@ public final class NetGame {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static RQREsult parseFrom(
+    public static com.module.net.NetGame.RQREsult parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RQREsult parseFrom(
+    public static com.module.net.NetGame.RQREsult parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RQREsult parseFrom(byte[] data)
+    public static com.module.net.NetGame.RQREsult parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RQREsult parseFrom(
+    public static com.module.net.NetGame.RQREsult parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RQREsult parseFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RQREsult parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RQREsult parseFrom(
+    public static com.module.net.NetGame.RQREsult parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static RQREsult parseDelimitedFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RQREsult parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static RQREsult parseDelimitedFrom(
+    public static com.module.net.NetGame.RQREsult parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static RQREsult parseFrom(
+    public static com.module.net.NetGame.RQREsult parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RQREsult parseFrom(
+    public static com.module.net.NetGame.RQREsult parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -7343,14 +7343,14 @@ public final class NetGame {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(RQREsult prototype) {
+    public static Builder newBuilder(com.module.net.NetGame.RQREsult prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -7359,17 +7359,17 @@ public final class NetGame {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements RQREsultOrBuilder {
+       implements com.module.net.NetGame.RQREsultOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return NetGame.internal_static_RQREsult_descriptor;
+        return com.module.net.NetGame.internal_static_RQREsult_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return NetGame.internal_static_RQREsult_fieldAccessorTable
+        return com.module.net.NetGame.internal_static_RQREsult_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                RQREsult.class, Builder.class);
+                com.module.net.NetGame.RQREsult.class, com.module.net.NetGame.RQREsult.Builder.class);
       }
 
       // Construct using com.module.net.NetGame.RQREsult.newBuilder()
@@ -7378,7 +7378,7 @@ public final class NetGame {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -7410,23 +7410,23 @@ public final class NetGame {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return NetGame.internal_static_RQREsult_descriptor;
+        return com.module.net.NetGame.internal_static_RQREsult_descriptor;
       }
 
-      public RQREsult getDefaultInstanceForType() {
-        return RQREsult.getDefaultInstance();
+      public com.module.net.NetGame.RQREsult getDefaultInstanceForType() {
+        return com.module.net.NetGame.RQREsult.getDefaultInstance();
       }
 
-      public RQREsult build() {
-        RQREsult result = buildPartial();
+      public com.module.net.NetGame.RQREsult build() {
+        com.module.net.NetGame.RQREsult result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public RQREsult buildPartial() {
-        RQREsult result = new RQREsult(this);
+      public com.module.net.NetGame.RQREsult buildPartial() {
+        com.module.net.NetGame.RQREsult result = new com.module.net.NetGame.RQREsult(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -7448,16 +7448,16 @@ public final class NetGame {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof RQREsult) {
-          return mergeFrom((RQREsult)other);
+        if (other instanceof com.module.net.NetGame.RQREsult) {
+          return mergeFrom((com.module.net.NetGame.RQREsult)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(RQREsult other) {
-        if (other == RQREsult.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.module.net.NetGame.RQREsult other) {
+        if (other == com.module.net.NetGame.RQREsult.getDefaultInstance()) return this;
         if (other.hasFlag()) {
           setFlag(other.getFlag());
         }
@@ -7499,11 +7499,11 @@ public final class NetGame {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        RQREsult parsedMessage = null;
+        com.module.net.NetGame.RQREsult parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (RQREsult) e.getUnfinishedMessage();
+          parsedMessage = (com.module.net.NetGame.RQREsult) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -7548,22 +7548,22 @@ public final class NetGame {
       }
 
       // repeated .NetMjUserResult users = 2;
-      private java.util.List<NetMjUserResult> users_ =
+      private java.util.List<com.module.net.NetGame.NetMjUserResult> users_ =
         java.util.Collections.emptyList();
       private void ensureUsersIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          users_ = new java.util.ArrayList<NetMjUserResult>(users_);
+          users_ = new java.util.ArrayList<com.module.net.NetGame.NetMjUserResult>(users_);
           bitField0_ |= 0x00000002;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          NetMjUserResult, NetMjUserResult.Builder, NetMjUserResultOrBuilder> usersBuilder_;
+          com.module.net.NetGame.NetMjUserResult, com.module.net.NetGame.NetMjUserResult.Builder, com.module.net.NetGame.NetMjUserResultOrBuilder> usersBuilder_;
 
       /**
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
-      public java.util.List<NetMjUserResult> getUsersList() {
+      public java.util.List<com.module.net.NetGame.NetMjUserResult> getUsersList() {
         if (usersBuilder_ == null) {
           return java.util.Collections.unmodifiableList(users_);
         } else {
@@ -7583,7 +7583,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
-      public NetMjUserResult getUsers(int index) {
+      public com.module.net.NetGame.NetMjUserResult getUsers(int index) {
         if (usersBuilder_ == null) {
           return users_.get(index);
         } else {
@@ -7594,7 +7594,7 @@ public final class NetGame {
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
       public Builder setUsers(
-          int index, NetMjUserResult value) {
+          int index, com.module.net.NetGame.NetMjUserResult value) {
         if (usersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7611,7 +7611,7 @@ public final class NetGame {
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
       public Builder setUsers(
-          int index, NetMjUserResult.Builder builderForValue) {
+          int index, com.module.net.NetGame.NetMjUserResult.Builder builderForValue) {
         if (usersBuilder_ == null) {
           ensureUsersIsMutable();
           users_.set(index, builderForValue.build());
@@ -7624,7 +7624,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
-      public Builder addUsers(NetMjUserResult value) {
+      public Builder addUsers(com.module.net.NetGame.NetMjUserResult value) {
         if (usersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7641,7 +7641,7 @@ public final class NetGame {
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
       public Builder addUsers(
-          int index, NetMjUserResult value) {
+          int index, com.module.net.NetGame.NetMjUserResult value) {
         if (usersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7658,7 +7658,7 @@ public final class NetGame {
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
       public Builder addUsers(
-          NetMjUserResult.Builder builderForValue) {
+          com.module.net.NetGame.NetMjUserResult.Builder builderForValue) {
         if (usersBuilder_ == null) {
           ensureUsersIsMutable();
           users_.add(builderForValue.build());
@@ -7672,7 +7672,7 @@ public final class NetGame {
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
       public Builder addUsers(
-          int index, NetMjUserResult.Builder builderForValue) {
+          int index, com.module.net.NetGame.NetMjUserResult.Builder builderForValue) {
         if (usersBuilder_ == null) {
           ensureUsersIsMutable();
           users_.add(index, builderForValue.build());
@@ -7686,7 +7686,7 @@ public final class NetGame {
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
       public Builder addAllUsers(
-          Iterable<? extends NetMjUserResult> values) {
+          java.lang.Iterable<? extends com.module.net.NetGame.NetMjUserResult> values) {
         if (usersBuilder_ == null) {
           ensureUsersIsMutable();
           super.addAll(values, users_);
@@ -7725,14 +7725,14 @@ public final class NetGame {
       /**
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
-      public NetMjUserResult.Builder getUsersBuilder(
+      public com.module.net.NetGame.NetMjUserResult.Builder getUsersBuilder(
           int index) {
         return getUsersFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
-      public NetMjUserResultOrBuilder getUsersOrBuilder(
+      public com.module.net.NetGame.NetMjUserResultOrBuilder getUsersOrBuilder(
           int index) {
         if (usersBuilder_ == null) {
           return users_.get(index);  } else {
@@ -7742,7 +7742,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
-      public java.util.List<? extends NetMjUserResultOrBuilder>
+      public java.util.List<? extends com.module.net.NetGame.NetMjUserResultOrBuilder> 
            getUsersOrBuilderList() {
         if (usersBuilder_ != null) {
           return usersBuilder_.getMessageOrBuilderList();
@@ -7753,31 +7753,31 @@ public final class NetGame {
       /**
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
-      public NetMjUserResult.Builder addUsersBuilder() {
+      public com.module.net.NetGame.NetMjUserResult.Builder addUsersBuilder() {
         return getUsersFieldBuilder().addBuilder(
-            NetMjUserResult.getDefaultInstance());
+            com.module.net.NetGame.NetMjUserResult.getDefaultInstance());
       }
       /**
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
-      public NetMjUserResult.Builder addUsersBuilder(
+      public com.module.net.NetGame.NetMjUserResult.Builder addUsersBuilder(
           int index) {
         return getUsersFieldBuilder().addBuilder(
-            index, NetMjUserResult.getDefaultInstance());
+            index, com.module.net.NetGame.NetMjUserResult.getDefaultInstance());
       }
       /**
        * <code>repeated .NetMjUserResult users = 2;</code>
        */
-      public java.util.List<NetMjUserResult.Builder>
+      public java.util.List<com.module.net.NetGame.NetMjUserResult.Builder> 
            getUsersBuilderList() {
         return getUsersFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          NetMjUserResult, NetMjUserResult.Builder, NetMjUserResultOrBuilder>
+          com.module.net.NetGame.NetMjUserResult, com.module.net.NetGame.NetMjUserResult.Builder, com.module.net.NetGame.NetMjUserResultOrBuilder> 
           getUsersFieldBuilder() {
         if (usersBuilder_ == null) {
           usersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              NetMjUserResult, NetMjUserResult.Builder, NetMjUserResultOrBuilder>(
+              com.module.net.NetGame.NetMjUserResult, com.module.net.NetGame.NetMjUserResult.Builder, com.module.net.NetGame.NetMjUserResultOrBuilder>(
                   users_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
@@ -7805,12 +7805,12 @@ public final class NetGame {
     /**
      * <code>repeated .NetKvData scores = 1;</code>
      */
-    java.util.List<NetKvData>
+    java.util.List<com.module.net.NetGame.NetKvData> 
         getScoresList();
     /**
      * <code>repeated .NetKvData scores = 1;</code>
      */
-    NetKvData getScores(int index);
+    com.module.net.NetGame.NetKvData getScores(int index);
     /**
      * <code>repeated .NetKvData scores = 1;</code>
      */
@@ -7818,20 +7818,20 @@ public final class NetGame {
     /**
      * <code>repeated .NetKvData scores = 1;</code>
      */
-    java.util.List<? extends NetKvDataOrBuilder>
+    java.util.List<? extends com.module.net.NetGame.NetKvDataOrBuilder> 
         getScoresOrBuilderList();
     /**
      * <code>repeated .NetKvData scores = 1;</code>
      */
-    NetKvDataOrBuilder getScoresOrBuilder(
-            int index);
+    com.module.net.NetGame.NetKvDataOrBuilder getScoresOrBuilder(
+        int index);
 
     // optional int32 showType = 2;
     /**
      * <code>optional int32 showType = 2;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ì£¨ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+     ** ºúÅÆÀàÐÍ£¨×î´ó·¬£©/½Ð×ì£¨×î´ó·¬£©/µãÅÚÀàÐÍ 
      * </pre>
      */
     boolean hasShowType();
@@ -7839,7 +7839,7 @@ public final class NetGame {
      * <code>optional int32 showType = 2;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ì£¨ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+     ** ºúÅÆÀàÐÍ£¨×î´ó·¬£©/½Ð×ì£¨×î´ó·¬£©/µãÅÚÀàÐÍ 
      * </pre>
      */
     int getShowType();
@@ -7887,7 +7887,7 @@ public final class NetGame {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
@@ -7917,10 +7917,10 @@ public final class NetGame {
             }
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                scores_ = new java.util.ArrayList<NetKvData>();
+                scores_ = new java.util.ArrayList<com.module.net.NetGame.NetKvData>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              scores_.add(input.readMessage(NetKvData.PARSER, extensionRegistry));
+              scores_.add(input.readMessage(com.module.net.NetGame.NetKvData.PARSER, extensionRegistry));
               break;
             }
             case 16: {
@@ -7955,14 +7955,14 @@ public final class NetGame {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return NetGame.internal_static_NetMjUserResult_descriptor;
+      return com.module.net.NetGame.internal_static_NetMjUserResult_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return NetGame.internal_static_NetMjUserResult_fieldAccessorTable
+      return com.module.net.NetGame.internal_static_NetMjUserResult_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              NetMjUserResult.class, Builder.class);
+              com.module.net.NetGame.NetMjUserResult.class, com.module.net.NetGame.NetMjUserResult.Builder.class);
     }
 
     public static com.google.protobuf.Parser<NetMjUserResult> PARSER =
@@ -7975,7 +7975,7 @@ public final class NetGame {
       }
     };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<NetMjUserResult> getParserForType() {
       return PARSER;
     }
@@ -7983,17 +7983,17 @@ public final class NetGame {
     private int bitField0_;
     // repeated .NetKvData scores = 1;
     public static final int SCORES_FIELD_NUMBER = 1;
-    private java.util.List<NetKvData> scores_;
+    private java.util.List<com.module.net.NetGame.NetKvData> scores_;
     /**
      * <code>repeated .NetKvData scores = 1;</code>
      */
-    public java.util.List<NetKvData> getScoresList() {
+    public java.util.List<com.module.net.NetGame.NetKvData> getScoresList() {
       return scores_;
     }
     /**
      * <code>repeated .NetKvData scores = 1;</code>
      */
-    public java.util.List<? extends NetKvDataOrBuilder>
+    public java.util.List<? extends com.module.net.NetGame.NetKvDataOrBuilder> 
         getScoresOrBuilderList() {
       return scores_;
     }
@@ -8006,13 +8006,13 @@ public final class NetGame {
     /**
      * <code>repeated .NetKvData scores = 1;</code>
      */
-    public NetKvData getScores(int index) {
+    public com.module.net.NetGame.NetKvData getScores(int index) {
       return scores_.get(index);
     }
     /**
      * <code>repeated .NetKvData scores = 1;</code>
      */
-    public NetKvDataOrBuilder getScoresOrBuilder(
+    public com.module.net.NetGame.NetKvDataOrBuilder getScoresOrBuilder(
         int index) {
       return scores_.get(index);
     }
@@ -8024,7 +8024,7 @@ public final class NetGame {
      * <code>optional int32 showType = 2;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ì£¨ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+     ** ºúÅÆÀàÐÍ£¨×î´ó·¬£©/½Ð×ì£¨×î´ó·¬£©/µãÅÚÀàÐÍ 
      * </pre>
      */
     public boolean hasShowType() {
@@ -8034,7 +8034,7 @@ public final class NetGame {
      * <code>optional int32 showType = 2;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ì£¨ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+     ** ºúÅÆÀàÐÍ£¨×î´ó·¬£©/½Ð×ì£¨×î´ó·¬£©/µãÅÚÀàÐÍ 
      * </pre>
      */
     public int getShowType() {
@@ -8134,59 +8134,59 @@ public final class NetGame {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static NetMjUserResult parseFrom(
+    public static com.module.net.NetGame.NetMjUserResult parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static NetMjUserResult parseFrom(
+    public static com.module.net.NetGame.NetMjUserResult parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static NetMjUserResult parseFrom(byte[] data)
+    public static com.module.net.NetGame.NetMjUserResult parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static NetMjUserResult parseFrom(
+    public static com.module.net.NetGame.NetMjUserResult parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static NetMjUserResult parseFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.NetMjUserResult parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static NetMjUserResult parseFrom(
+    public static com.module.net.NetGame.NetMjUserResult parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static NetMjUserResult parseDelimitedFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.NetMjUserResult parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static NetMjUserResult parseDelimitedFrom(
+    public static com.module.net.NetGame.NetMjUserResult parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static NetMjUserResult parseFrom(
+    public static com.module.net.NetGame.NetMjUserResult parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static NetMjUserResult parseFrom(
+    public static com.module.net.NetGame.NetMjUserResult parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -8195,14 +8195,14 @@ public final class NetGame {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(NetMjUserResult prototype) {
+    public static Builder newBuilder(com.module.net.NetGame.NetMjUserResult prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -8211,17 +8211,17 @@ public final class NetGame {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements NetMjUserResultOrBuilder {
+       implements com.module.net.NetGame.NetMjUserResultOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return NetGame.internal_static_NetMjUserResult_descriptor;
+        return com.module.net.NetGame.internal_static_NetMjUserResult_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return NetGame.internal_static_NetMjUserResult_fieldAccessorTable
+        return com.module.net.NetGame.internal_static_NetMjUserResult_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                NetMjUserResult.class, Builder.class);
+                com.module.net.NetGame.NetMjUserResult.class, com.module.net.NetGame.NetMjUserResult.Builder.class);
       }
 
       // Construct using com.module.net.NetGame.NetMjUserResult.newBuilder()
@@ -8230,7 +8230,7 @@ public final class NetGame {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -8266,23 +8266,23 @@ public final class NetGame {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return NetGame.internal_static_NetMjUserResult_descriptor;
+        return com.module.net.NetGame.internal_static_NetMjUserResult_descriptor;
       }
 
-      public NetMjUserResult getDefaultInstanceForType() {
-        return NetMjUserResult.getDefaultInstance();
+      public com.module.net.NetGame.NetMjUserResult getDefaultInstanceForType() {
+        return com.module.net.NetGame.NetMjUserResult.getDefaultInstance();
       }
 
-      public NetMjUserResult build() {
-        NetMjUserResult result = buildPartial();
+      public com.module.net.NetGame.NetMjUserResult build() {
+        com.module.net.NetGame.NetMjUserResult result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public NetMjUserResult buildPartial() {
-        NetMjUserResult result = new NetMjUserResult(this);
+      public com.module.net.NetGame.NetMjUserResult buildPartial() {
+        com.module.net.NetGame.NetMjUserResult result = new com.module.net.NetGame.NetMjUserResult(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (scoresBuilder_ == null) {
@@ -8312,16 +8312,16 @@ public final class NetGame {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof NetMjUserResult) {
-          return mergeFrom((NetMjUserResult)other);
+        if (other instanceof com.module.net.NetGame.NetMjUserResult) {
+          return mergeFrom((com.module.net.NetGame.NetMjUserResult)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(NetMjUserResult other) {
-        if (other == NetMjUserResult.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.module.net.NetGame.NetMjUserResult other) {
+        if (other == com.module.net.NetGame.NetMjUserResult.getDefaultInstance()) return this;
         if (scoresBuilder_ == null) {
           if (!other.scores_.isEmpty()) {
             if (scores_.isEmpty()) {
@@ -8369,11 +8369,11 @@ public final class NetGame {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        NetMjUserResult parsedMessage = null;
+        com.module.net.NetGame.NetMjUserResult parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (NetMjUserResult) e.getUnfinishedMessage();
+          parsedMessage = (com.module.net.NetGame.NetMjUserResult) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -8385,22 +8385,22 @@ public final class NetGame {
       private int bitField0_;
 
       // repeated .NetKvData scores = 1;
-      private java.util.List<NetKvData> scores_ =
+      private java.util.List<com.module.net.NetGame.NetKvData> scores_ =
         java.util.Collections.emptyList();
       private void ensureScoresIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          scores_ = new java.util.ArrayList<NetKvData>(scores_);
+          scores_ = new java.util.ArrayList<com.module.net.NetGame.NetKvData>(scores_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          NetKvData, NetKvData.Builder, NetKvDataOrBuilder> scoresBuilder_;
+          com.module.net.NetGame.NetKvData, com.module.net.NetGame.NetKvData.Builder, com.module.net.NetGame.NetKvDataOrBuilder> scoresBuilder_;
 
       /**
        * <code>repeated .NetKvData scores = 1;</code>
        */
-      public java.util.List<NetKvData> getScoresList() {
+      public java.util.List<com.module.net.NetGame.NetKvData> getScoresList() {
         if (scoresBuilder_ == null) {
           return java.util.Collections.unmodifiableList(scores_);
         } else {
@@ -8420,7 +8420,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData scores = 1;</code>
        */
-      public NetKvData getScores(int index) {
+      public com.module.net.NetGame.NetKvData getScores(int index) {
         if (scoresBuilder_ == null) {
           return scores_.get(index);
         } else {
@@ -8431,7 +8431,7 @@ public final class NetGame {
        * <code>repeated .NetKvData scores = 1;</code>
        */
       public Builder setScores(
-          int index, NetKvData value) {
+          int index, com.module.net.NetGame.NetKvData value) {
         if (scoresBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8448,7 +8448,7 @@ public final class NetGame {
        * <code>repeated .NetKvData scores = 1;</code>
        */
       public Builder setScores(
-          int index, NetKvData.Builder builderForValue) {
+          int index, com.module.net.NetGame.NetKvData.Builder builderForValue) {
         if (scoresBuilder_ == null) {
           ensureScoresIsMutable();
           scores_.set(index, builderForValue.build());
@@ -8461,7 +8461,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData scores = 1;</code>
        */
-      public Builder addScores(NetKvData value) {
+      public Builder addScores(com.module.net.NetGame.NetKvData value) {
         if (scoresBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8478,7 +8478,7 @@ public final class NetGame {
        * <code>repeated .NetKvData scores = 1;</code>
        */
       public Builder addScores(
-          int index, NetKvData value) {
+          int index, com.module.net.NetGame.NetKvData value) {
         if (scoresBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8495,7 +8495,7 @@ public final class NetGame {
        * <code>repeated .NetKvData scores = 1;</code>
        */
       public Builder addScores(
-          NetKvData.Builder builderForValue) {
+          com.module.net.NetGame.NetKvData.Builder builderForValue) {
         if (scoresBuilder_ == null) {
           ensureScoresIsMutable();
           scores_.add(builderForValue.build());
@@ -8509,7 +8509,7 @@ public final class NetGame {
        * <code>repeated .NetKvData scores = 1;</code>
        */
       public Builder addScores(
-          int index, NetKvData.Builder builderForValue) {
+          int index, com.module.net.NetGame.NetKvData.Builder builderForValue) {
         if (scoresBuilder_ == null) {
           ensureScoresIsMutable();
           scores_.add(index, builderForValue.build());
@@ -8523,7 +8523,7 @@ public final class NetGame {
        * <code>repeated .NetKvData scores = 1;</code>
        */
       public Builder addAllScores(
-          Iterable<? extends NetKvData> values) {
+          java.lang.Iterable<? extends com.module.net.NetGame.NetKvData> values) {
         if (scoresBuilder_ == null) {
           ensureScoresIsMutable();
           super.addAll(values, scores_);
@@ -8562,14 +8562,14 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData scores = 1;</code>
        */
-      public NetKvData.Builder getScoresBuilder(
+      public com.module.net.NetGame.NetKvData.Builder getScoresBuilder(
           int index) {
         return getScoresFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .NetKvData scores = 1;</code>
        */
-      public NetKvDataOrBuilder getScoresOrBuilder(
+      public com.module.net.NetGame.NetKvDataOrBuilder getScoresOrBuilder(
           int index) {
         if (scoresBuilder_ == null) {
           return scores_.get(index);  } else {
@@ -8579,7 +8579,7 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData scores = 1;</code>
        */
-      public java.util.List<? extends NetKvDataOrBuilder>
+      public java.util.List<? extends com.module.net.NetGame.NetKvDataOrBuilder> 
            getScoresOrBuilderList() {
         if (scoresBuilder_ != null) {
           return scoresBuilder_.getMessageOrBuilderList();
@@ -8590,31 +8590,31 @@ public final class NetGame {
       /**
        * <code>repeated .NetKvData scores = 1;</code>
        */
-      public NetKvData.Builder addScoresBuilder() {
+      public com.module.net.NetGame.NetKvData.Builder addScoresBuilder() {
         return getScoresFieldBuilder().addBuilder(
-            NetKvData.getDefaultInstance());
+            com.module.net.NetGame.NetKvData.getDefaultInstance());
       }
       /**
        * <code>repeated .NetKvData scores = 1;</code>
        */
-      public NetKvData.Builder addScoresBuilder(
+      public com.module.net.NetGame.NetKvData.Builder addScoresBuilder(
           int index) {
         return getScoresFieldBuilder().addBuilder(
-            index, NetKvData.getDefaultInstance());
+            index, com.module.net.NetGame.NetKvData.getDefaultInstance());
       }
       /**
        * <code>repeated .NetKvData scores = 1;</code>
        */
-      public java.util.List<NetKvData.Builder>
+      public java.util.List<com.module.net.NetGame.NetKvData.Builder> 
            getScoresBuilderList() {
         return getScoresFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          NetKvData, NetKvData.Builder, NetKvDataOrBuilder>
+          com.module.net.NetGame.NetKvData, com.module.net.NetGame.NetKvData.Builder, com.module.net.NetGame.NetKvDataOrBuilder> 
           getScoresFieldBuilder() {
         if (scoresBuilder_ == null) {
           scoresBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              NetKvData, NetKvData.Builder, NetKvDataOrBuilder>(
+              com.module.net.NetGame.NetKvData, com.module.net.NetGame.NetKvData.Builder, com.module.net.NetGame.NetKvDataOrBuilder>(
                   scores_,
                   ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
@@ -8630,7 +8630,7 @@ public final class NetGame {
        * <code>optional int32 showType = 2;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ì£¨ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+       ** ºúÅÆÀàÐÍ£¨×î´ó·¬£©/½Ð×ì£¨×î´ó·¬£©/µãÅÚÀàÐÍ 
        * </pre>
        */
       public boolean hasShowType() {
@@ -8640,7 +8640,7 @@ public final class NetGame {
        * <code>optional int32 showType = 2;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ì£¨ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+       ** ºúÅÆÀàÐÍ£¨×î´ó·¬£©/½Ð×ì£¨×î´ó·¬£©/µãÅÚÀàÐÍ 
        * </pre>
        */
       public int getShowType() {
@@ -8650,7 +8650,7 @@ public final class NetGame {
        * <code>optional int32 showType = 2;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ì£¨ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+       ** ºúÅÆÀàÐÍ£¨×î´ó·¬£©/½Ð×ì£¨×î´ó·¬£©/µãÅÚÀàÐÍ 
        * </pre>
        */
       public Builder setShowType(int value) {
@@ -8663,7 +8663,7 @@ public final class NetGame {
        * <code>optional int32 showType = 2;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ì£¨ï¿½ï¿½ó·¬£ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+       ** ºúÅÆÀàÐÍ£¨×î´ó·¬£©/½Ð×ì£¨×î´ó·¬£©/µãÅÚÀàÐÍ 
        * </pre>
        */
       public Builder clearShowType() {
@@ -8761,11 +8761,11 @@ public final class NetGame {
     /**
      * <code>optional .NetUserData user = 1;</code>
      */
-    NetUserData getUser();
+    com.module.net.NetGame.NetUserData getUser();
     /**
      * <code>optional .NetUserData user = 1;</code>
      */
-    NetUserDataOrBuilder getUserOrBuilder();
+    com.module.net.NetGame.NetUserDataOrBuilder getUserOrBuilder();
   }
   /**
    * Protobuf type {@code RQEnterRoom}
@@ -8790,7 +8790,7 @@ public final class NetGame {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
@@ -8819,11 +8819,11 @@ public final class NetGame {
               break;
             }
             case 10: {
-              NetUserData.Builder subBuilder = null;
+              com.module.net.NetGame.NetUserData.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = user_.toBuilder();
               }
-              user_ = input.readMessage(NetUserData.PARSER, extensionRegistry);
+              user_ = input.readMessage(com.module.net.NetGame.NetUserData.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(user_);
                 user_ = subBuilder.buildPartial();
@@ -8845,14 +8845,14 @@ public final class NetGame {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return NetGame.internal_static_RQEnterRoom_descriptor;
+      return com.module.net.NetGame.internal_static_RQEnterRoom_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return NetGame.internal_static_RQEnterRoom_fieldAccessorTable
+      return com.module.net.NetGame.internal_static_RQEnterRoom_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              RQEnterRoom.class, Builder.class);
+              com.module.net.NetGame.RQEnterRoom.class, com.module.net.NetGame.RQEnterRoom.Builder.class);
     }
 
     public static com.google.protobuf.Parser<RQEnterRoom> PARSER =
@@ -8865,7 +8865,7 @@ public final class NetGame {
       }
     };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<RQEnterRoom> getParserForType() {
       return PARSER;
     }
@@ -8873,7 +8873,7 @@ public final class NetGame {
     private int bitField0_;
     // optional .NetUserData user = 1;
     public static final int USER_FIELD_NUMBER = 1;
-    private NetUserData user_;
+    private com.module.net.NetGame.NetUserData user_;
     /**
      * <code>optional .NetUserData user = 1;</code>
      */
@@ -8883,18 +8883,18 @@ public final class NetGame {
     /**
      * <code>optional .NetUserData user = 1;</code>
      */
-    public NetUserData getUser() {
+    public com.module.net.NetGame.NetUserData getUser() {
       return user_;
     }
     /**
      * <code>optional .NetUserData user = 1;</code>
      */
-    public NetUserDataOrBuilder getUserOrBuilder() {
+    public com.module.net.NetGame.NetUserDataOrBuilder getUserOrBuilder() {
       return user_;
     }
 
     private void initFields() {
-      user_ = NetUserData.getDefaultInstance();
+      user_ = com.module.net.NetGame.NetUserData.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8930,59 +8930,59 @@ public final class NetGame {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static RQEnterRoom parseFrom(
+    public static com.module.net.NetGame.RQEnterRoom parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RQEnterRoom parseFrom(
+    public static com.module.net.NetGame.RQEnterRoom parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RQEnterRoom parseFrom(byte[] data)
+    public static com.module.net.NetGame.RQEnterRoom parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RQEnterRoom parseFrom(
+    public static com.module.net.NetGame.RQEnterRoom parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RQEnterRoom parseFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RQEnterRoom parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RQEnterRoom parseFrom(
+    public static com.module.net.NetGame.RQEnterRoom parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static RQEnterRoom parseDelimitedFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RQEnterRoom parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static RQEnterRoom parseDelimitedFrom(
+    public static com.module.net.NetGame.RQEnterRoom parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static RQEnterRoom parseFrom(
+    public static com.module.net.NetGame.RQEnterRoom parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RQEnterRoom parseFrom(
+    public static com.module.net.NetGame.RQEnterRoom parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -8991,14 +8991,14 @@ public final class NetGame {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(RQEnterRoom prototype) {
+    public static Builder newBuilder(com.module.net.NetGame.RQEnterRoom prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -9007,17 +9007,17 @@ public final class NetGame {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements RQEnterRoomOrBuilder {
+       implements com.module.net.NetGame.RQEnterRoomOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return NetGame.internal_static_RQEnterRoom_descriptor;
+        return com.module.net.NetGame.internal_static_RQEnterRoom_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return NetGame.internal_static_RQEnterRoom_fieldAccessorTable
+        return com.module.net.NetGame.internal_static_RQEnterRoom_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                RQEnterRoom.class, Builder.class);
+                com.module.net.NetGame.RQEnterRoom.class, com.module.net.NetGame.RQEnterRoom.Builder.class);
       }
 
       // Construct using com.module.net.NetGame.RQEnterRoom.newBuilder()
@@ -9026,7 +9026,7 @@ public final class NetGame {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -9042,7 +9042,7 @@ public final class NetGame {
       public Builder clear() {
         super.clear();
         if (userBuilder_ == null) {
-          user_ = NetUserData.getDefaultInstance();
+          user_ = com.module.net.NetGame.NetUserData.getDefaultInstance();
         } else {
           userBuilder_.clear();
         }
@@ -9056,23 +9056,23 @@ public final class NetGame {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return NetGame.internal_static_RQEnterRoom_descriptor;
+        return com.module.net.NetGame.internal_static_RQEnterRoom_descriptor;
       }
 
-      public RQEnterRoom getDefaultInstanceForType() {
-        return RQEnterRoom.getDefaultInstance();
+      public com.module.net.NetGame.RQEnterRoom getDefaultInstanceForType() {
+        return com.module.net.NetGame.RQEnterRoom.getDefaultInstance();
       }
 
-      public RQEnterRoom build() {
-        RQEnterRoom result = buildPartial();
+      public com.module.net.NetGame.RQEnterRoom build() {
+        com.module.net.NetGame.RQEnterRoom result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public RQEnterRoom buildPartial() {
-        RQEnterRoom result = new RQEnterRoom(this);
+      public com.module.net.NetGame.RQEnterRoom buildPartial() {
+        com.module.net.NetGame.RQEnterRoom result = new com.module.net.NetGame.RQEnterRoom(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -9089,16 +9089,16 @@ public final class NetGame {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof RQEnterRoom) {
-          return mergeFrom((RQEnterRoom)other);
+        if (other instanceof com.module.net.NetGame.RQEnterRoom) {
+          return mergeFrom((com.module.net.NetGame.RQEnterRoom)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(RQEnterRoom other) {
-        if (other == RQEnterRoom.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.module.net.NetGame.RQEnterRoom other) {
+        if (other == com.module.net.NetGame.RQEnterRoom.getDefaultInstance()) return this;
         if (other.hasUser()) {
           mergeUser(other.getUser());
         }
@@ -9114,11 +9114,11 @@ public final class NetGame {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        RQEnterRoom parsedMessage = null;
+        com.module.net.NetGame.RQEnterRoom parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (RQEnterRoom) e.getUnfinishedMessage();
+          parsedMessage = (com.module.net.NetGame.RQEnterRoom) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -9130,9 +9130,9 @@ public final class NetGame {
       private int bitField0_;
 
       // optional .NetUserData user = 1;
-      private NetUserData user_ = NetUserData.getDefaultInstance();
+      private com.module.net.NetGame.NetUserData user_ = com.module.net.NetGame.NetUserData.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          NetUserData, NetUserData.Builder, NetUserDataOrBuilder> userBuilder_;
+          com.module.net.NetGame.NetUserData, com.module.net.NetGame.NetUserData.Builder, com.module.net.NetGame.NetUserDataOrBuilder> userBuilder_;
       /**
        * <code>optional .NetUserData user = 1;</code>
        */
@@ -9142,7 +9142,7 @@ public final class NetGame {
       /**
        * <code>optional .NetUserData user = 1;</code>
        */
-      public NetUserData getUser() {
+      public com.module.net.NetGame.NetUserData getUser() {
         if (userBuilder_ == null) {
           return user_;
         } else {
@@ -9152,7 +9152,7 @@ public final class NetGame {
       /**
        * <code>optional .NetUserData user = 1;</code>
        */
-      public Builder setUser(NetUserData value) {
+      public Builder setUser(com.module.net.NetGame.NetUserData value) {
         if (userBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -9169,7 +9169,7 @@ public final class NetGame {
        * <code>optional .NetUserData user = 1;</code>
        */
       public Builder setUser(
-          NetUserData.Builder builderForValue) {
+          com.module.net.NetGame.NetUserData.Builder builderForValue) {
         if (userBuilder_ == null) {
           user_ = builderForValue.build();
           onChanged();
@@ -9182,12 +9182,12 @@ public final class NetGame {
       /**
        * <code>optional .NetUserData user = 1;</code>
        */
-      public Builder mergeUser(NetUserData value) {
+      public Builder mergeUser(com.module.net.NetGame.NetUserData value) {
         if (userBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              user_ != NetUserData.getDefaultInstance()) {
+              user_ != com.module.net.NetGame.NetUserData.getDefaultInstance()) {
             user_ =
-              NetUserData.newBuilder(user_).mergeFrom(value).buildPartial();
+              com.module.net.NetGame.NetUserData.newBuilder(user_).mergeFrom(value).buildPartial();
           } else {
             user_ = value;
           }
@@ -9203,7 +9203,7 @@ public final class NetGame {
        */
       public Builder clearUser() {
         if (userBuilder_ == null) {
-          user_ = NetUserData.getDefaultInstance();
+          user_ = com.module.net.NetGame.NetUserData.getDefaultInstance();
           onChanged();
         } else {
           userBuilder_.clear();
@@ -9214,7 +9214,7 @@ public final class NetGame {
       /**
        * <code>optional .NetUserData user = 1;</code>
        */
-      public NetUserData.Builder getUserBuilder() {
+      public com.module.net.NetGame.NetUserData.Builder getUserBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getUserFieldBuilder().getBuilder();
@@ -9222,7 +9222,7 @@ public final class NetGame {
       /**
        * <code>optional .NetUserData user = 1;</code>
        */
-      public NetUserDataOrBuilder getUserOrBuilder() {
+      public com.module.net.NetGame.NetUserDataOrBuilder getUserOrBuilder() {
         if (userBuilder_ != null) {
           return userBuilder_.getMessageOrBuilder();
         } else {
@@ -9233,11 +9233,11 @@ public final class NetGame {
        * <code>optional .NetUserData user = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          NetUserData, NetUserData.Builder, NetUserDataOrBuilder>
+          com.module.net.NetGame.NetUserData, com.module.net.NetGame.NetUserData.Builder, com.module.net.NetGame.NetUserDataOrBuilder> 
           getUserFieldBuilder() {
         if (userBuilder_ == null) {
           userBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              NetUserData, NetUserData.Builder, NetUserDataOrBuilder>(
+              com.module.net.NetGame.NetUserData, com.module.net.NetGame.NetUserData.Builder, com.module.net.NetGame.NetUserDataOrBuilder>(
                   user_,
                   getParentForChildren(),
                   isClean());
@@ -9293,7 +9293,7 @@ public final class NetGame {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
@@ -9340,14 +9340,14 @@ public final class NetGame {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return NetGame.internal_static_RQExit_descriptor;
+      return com.module.net.NetGame.internal_static_RQExit_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return NetGame.internal_static_RQExit_fieldAccessorTable
+      return com.module.net.NetGame.internal_static_RQExit_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              RQExit.class, Builder.class);
+              com.module.net.NetGame.RQExit.class, com.module.net.NetGame.RQExit.Builder.class);
     }
 
     public static com.google.protobuf.Parser<RQExit> PARSER =
@@ -9360,7 +9360,7 @@ public final class NetGame {
       }
     };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<RQExit> getParserForType() {
       return PARSER;
     }
@@ -9419,59 +9419,59 @@ public final class NetGame {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static RQExit parseFrom(
+    public static com.module.net.NetGame.RQExit parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RQExit parseFrom(
+    public static com.module.net.NetGame.RQExit parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RQExit parseFrom(byte[] data)
+    public static com.module.net.NetGame.RQExit parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RQExit parseFrom(
+    public static com.module.net.NetGame.RQExit parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RQExit parseFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RQExit parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RQExit parseFrom(
+    public static com.module.net.NetGame.RQExit parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static RQExit parseDelimitedFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RQExit parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static RQExit parseDelimitedFrom(
+    public static com.module.net.NetGame.RQExit parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static RQExit parseFrom(
+    public static com.module.net.NetGame.RQExit parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RQExit parseFrom(
+    public static com.module.net.NetGame.RQExit parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -9480,14 +9480,14 @@ public final class NetGame {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(RQExit prototype) {
+    public static Builder newBuilder(com.module.net.NetGame.RQExit prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -9496,17 +9496,17 @@ public final class NetGame {
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements RQExitOrBuilder {
+       implements com.module.net.NetGame.RQExitOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return NetGame.internal_static_RQExit_descriptor;
+        return com.module.net.NetGame.internal_static_RQExit_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return NetGame.internal_static_RQExit_fieldAccessorTable
+        return com.module.net.NetGame.internal_static_RQExit_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                RQExit.class, Builder.class);
+                com.module.net.NetGame.RQExit.class, com.module.net.NetGame.RQExit.Builder.class);
       }
 
       // Construct using com.module.net.NetGame.RQExit.newBuilder()
@@ -9515,7 +9515,7 @@ public final class NetGame {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -9540,23 +9540,23 @@ public final class NetGame {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return NetGame.internal_static_RQExit_descriptor;
+        return com.module.net.NetGame.internal_static_RQExit_descriptor;
       }
 
-      public RQExit getDefaultInstanceForType() {
-        return RQExit.getDefaultInstance();
+      public com.module.net.NetGame.RQExit getDefaultInstanceForType() {
+        return com.module.net.NetGame.RQExit.getDefaultInstance();
       }
 
-      public RQExit build() {
-        RQExit result = buildPartial();
+      public com.module.net.NetGame.RQExit build() {
+        com.module.net.NetGame.RQExit result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public RQExit buildPartial() {
-        RQExit result = new RQExit(this);
+      public com.module.net.NetGame.RQExit buildPartial() {
+        com.module.net.NetGame.RQExit result = new com.module.net.NetGame.RQExit(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -9569,16 +9569,16 @@ public final class NetGame {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof RQExit) {
-          return mergeFrom((RQExit)other);
+        if (other instanceof com.module.net.NetGame.RQExit) {
+          return mergeFrom((com.module.net.NetGame.RQExit)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(RQExit other) {
-        if (other == RQExit.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.module.net.NetGame.RQExit other) {
+        if (other == com.module.net.NetGame.RQExit.getDefaultInstance()) return this;
         if (other.hasUid()) {
           setUid(other.getUid());
         }
@@ -9594,11 +9594,11 @@ public final class NetGame {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        RQExit parsedMessage = null;
+        com.module.net.NetGame.RQExit parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (RQExit) e.getUnfinishedMessage();
+          parsedMessage = (com.module.net.NetGame.RQExit) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -9670,7 +9670,7 @@ public final class NetGame {
    * Protobuf type {@code RPVote}
    *
    * <pre>
-   ** Í¶Æ±ï¿½ï¿½É¢ 
+   ** Í¶Æ±½âÉ¢ 
    * </pre>
    */
   public static final class RPVote extends
@@ -9693,7 +9693,7 @@ public final class NetGame {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
@@ -9740,14 +9740,14 @@ public final class NetGame {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return NetGame.internal_static_RPVote_descriptor;
+      return com.module.net.NetGame.internal_static_RPVote_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return NetGame.internal_static_RPVote_fieldAccessorTable
+      return com.module.net.NetGame.internal_static_RPVote_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              RPVote.class, Builder.class);
+              com.module.net.NetGame.RPVote.class, com.module.net.NetGame.RPVote.Builder.class);
     }
 
     public static com.google.protobuf.Parser<RPVote> PARSER =
@@ -9760,7 +9760,7 @@ public final class NetGame {
       }
     };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<RPVote> getParserForType() {
       return PARSER;
     }
@@ -9819,59 +9819,59 @@ public final class NetGame {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static RPVote parseFrom(
+    public static com.module.net.NetGame.RPVote parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RPVote parseFrom(
+    public static com.module.net.NetGame.RPVote parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RPVote parseFrom(byte[] data)
+    public static com.module.net.NetGame.RPVote parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RPVote parseFrom(
+    public static com.module.net.NetGame.RPVote parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RPVote parseFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RPVote parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RPVote parseFrom(
+    public static com.module.net.NetGame.RPVote parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static RPVote parseDelimitedFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RPVote parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static RPVote parseDelimitedFrom(
+    public static com.module.net.NetGame.RPVote parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static RPVote parseFrom(
+    public static com.module.net.NetGame.RPVote parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RPVote parseFrom(
+    public static com.module.net.NetGame.RPVote parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -9880,14 +9880,14 @@ public final class NetGame {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(RPVote prototype) {
+    public static Builder newBuilder(com.module.net.NetGame.RPVote prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -9895,22 +9895,22 @@ public final class NetGame {
      * Protobuf type {@code RPVote}
      *
      * <pre>
-     ** Í¶Æ±ï¿½ï¿½É¢ 
+     ** Í¶Æ±½âÉ¢ 
      * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements RPVoteOrBuilder {
+       implements com.module.net.NetGame.RPVoteOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return NetGame.internal_static_RPVote_descriptor;
+        return com.module.net.NetGame.internal_static_RPVote_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return NetGame.internal_static_RPVote_fieldAccessorTable
+        return com.module.net.NetGame.internal_static_RPVote_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                RPVote.class, Builder.class);
+                com.module.net.NetGame.RPVote.class, com.module.net.NetGame.RPVote.Builder.class);
       }
 
       // Construct using com.module.net.NetGame.RPVote.newBuilder()
@@ -9919,7 +9919,7 @@ public final class NetGame {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -9944,23 +9944,23 @@ public final class NetGame {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return NetGame.internal_static_RPVote_descriptor;
+        return com.module.net.NetGame.internal_static_RPVote_descriptor;
       }
 
-      public RPVote getDefaultInstanceForType() {
-        return RPVote.getDefaultInstance();
+      public com.module.net.NetGame.RPVote getDefaultInstanceForType() {
+        return com.module.net.NetGame.RPVote.getDefaultInstance();
       }
 
-      public RPVote build() {
-        RPVote result = buildPartial();
+      public com.module.net.NetGame.RPVote build() {
+        com.module.net.NetGame.RPVote result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public RPVote buildPartial() {
-        RPVote result = new RPVote(this);
+      public com.module.net.NetGame.RPVote buildPartial() {
+        com.module.net.NetGame.RPVote result = new com.module.net.NetGame.RPVote(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -9973,16 +9973,16 @@ public final class NetGame {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof RPVote) {
-          return mergeFrom((RPVote)other);
+        if (other instanceof com.module.net.NetGame.RPVote) {
+          return mergeFrom((com.module.net.NetGame.RPVote)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(RPVote other) {
-        if (other == RPVote.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.module.net.NetGame.RPVote other) {
+        if (other == com.module.net.NetGame.RPVote.getDefaultInstance()) return this;
         if (other.hasIsagree()) {
           setIsagree(other.getIsagree());
         }
@@ -9998,11 +9998,11 @@ public final class NetGame {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        RPVote parsedMessage = null;
+        com.module.net.NetGame.RPVote parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (RPVote) e.getUnfinishedMessage();
+          parsedMessage = (com.module.net.NetGame.RPVote) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -10075,7 +10075,7 @@ public final class NetGame {
      * <code>optional int32 uid = 2;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½Îª0ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Í¶Æ±ï¿½ï¿½ï¿½ï¿½Ê¾Í¬ï¿½ï¿½/ï¿½Ü¾ï¿½ï¿½ï¿½Å¥,ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Òµï¿½Ñ¡ï¿½ï¿½ 
+     ** Èç¹ûÎª0±íÊ¾·¢ÆðÍ¶Æ±£¬ÏÔÊ¾Í¬Òâ/¾Ü¾ø°´Å¥,·ñÔòÎª¸ÃÍæ¼ÒµÄÑ¡Ôñ 
      * </pre>
      */
     boolean hasUid();
@@ -10083,7 +10083,7 @@ public final class NetGame {
      * <code>optional int32 uid = 2;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½Îª0ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Í¶Æ±ï¿½ï¿½ï¿½ï¿½Ê¾Í¬ï¿½ï¿½/ï¿½Ü¾ï¿½ï¿½ï¿½Å¥,ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Òµï¿½Ñ¡ï¿½ï¿½ 
+     ** Èç¹ûÎª0±íÊ¾·¢ÆðÍ¶Æ±£¬ÏÔÊ¾Í¬Òâ/¾Ü¾ø°´Å¥,·ñÔòÎª¸ÃÍæ¼ÒµÄÑ¡Ôñ 
      * </pre>
      */
     int getUid();
@@ -10092,7 +10092,7 @@ public final class NetGame {
    * Protobuf type {@code RQVote}
    *
    * <pre>
-   ** Í¶Æ±ï¿½ï¿½É¢ 
+   ** Í¶Æ±½âÉ¢ 
    * </pre>
    */
   public static final class RQVote extends
@@ -10115,7 +10115,7 @@ public final class NetGame {
     }
 
     private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
@@ -10167,14 +10167,14 @@ public final class NetGame {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return NetGame.internal_static_RQVote_descriptor;
+      return com.module.net.NetGame.internal_static_RQVote_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return NetGame.internal_static_RQVote_fieldAccessorTable
+      return com.module.net.NetGame.internal_static_RQVote_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              RQVote.class, Builder.class);
+              com.module.net.NetGame.RQVote.class, com.module.net.NetGame.RQVote.Builder.class);
     }
 
     public static com.google.protobuf.Parser<RQVote> PARSER =
@@ -10187,7 +10187,7 @@ public final class NetGame {
       }
     };
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<RQVote> getParserForType() {
       return PARSER;
     }
@@ -10216,7 +10216,7 @@ public final class NetGame {
      * <code>optional int32 uid = 2;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½Îª0ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Í¶Æ±ï¿½ï¿½ï¿½ï¿½Ê¾Í¬ï¿½ï¿½/ï¿½Ü¾ï¿½ï¿½ï¿½Å¥,ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Òµï¿½Ñ¡ï¿½ï¿½ 
+     ** Èç¹ûÎª0±íÊ¾·¢ÆðÍ¶Æ±£¬ÏÔÊ¾Í¬Òâ/¾Ü¾ø°´Å¥,·ñÔòÎª¸ÃÍæ¼ÒµÄÑ¡Ôñ 
      * </pre>
      */
     public boolean hasUid() {
@@ -10226,7 +10226,7 @@ public final class NetGame {
      * <code>optional int32 uid = 2;</code>
      *
      * <pre>
-     ** ï¿½ï¿½ï¿½Îª0ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Í¶Æ±ï¿½ï¿½ï¿½ï¿½Ê¾Í¬ï¿½ï¿½/ï¿½Ü¾ï¿½ï¿½ï¿½Å¥,ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Òµï¿½Ñ¡ï¿½ï¿½ 
+     ** Èç¹ûÎª0±íÊ¾·¢ÆðÍ¶Æ±£¬ÏÔÊ¾Í¬Òâ/¾Ü¾ø°´Å¥,·ñÔòÎª¸ÃÍæ¼ÒµÄÑ¡Ôñ 
      * </pre>
      */
     public int getUid() {
@@ -10278,59 +10278,59 @@ public final class NetGame {
     }
 
     private static final long serialVersionUID = 0L;
-    @Override
-    protected Object writeReplace()
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
 
-    public static RQVote parseFrom(
+    public static com.module.net.NetGame.RQVote parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RQVote parseFrom(
+    public static com.module.net.NetGame.RQVote parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RQVote parseFrom(byte[] data)
+    public static com.module.net.NetGame.RQVote parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static RQVote parseFrom(
+    public static com.module.net.NetGame.RQVote parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static RQVote parseFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RQVote parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RQVote parseFrom(
+    public static com.module.net.NetGame.RQVote parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static RQVote parseDelimitedFrom(java.io.InputStream input)
+    public static com.module.net.NetGame.RQVote parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static RQVote parseDelimitedFrom(
+    public static com.module.net.NetGame.RQVote parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static RQVote parseFrom(
+    public static com.module.net.NetGame.RQVote parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static RQVote parseFrom(
+    public static com.module.net.NetGame.RQVote parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -10339,14 +10339,14 @@ public final class NetGame {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(RQVote prototype) {
+    public static Builder newBuilder(com.module.net.NetGame.RQVote prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -10354,22 +10354,22 @@ public final class NetGame {
      * Protobuf type {@code RQVote}
      *
      * <pre>
-     ** Í¶Æ±ï¿½ï¿½É¢ 
+     ** Í¶Æ±½âÉ¢ 
      * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements RQVoteOrBuilder {
+       implements com.module.net.NetGame.RQVoteOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return NetGame.internal_static_RQVote_descriptor;
+        return com.module.net.NetGame.internal_static_RQVote_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return NetGame.internal_static_RQVote_fieldAccessorTable
+        return com.module.net.NetGame.internal_static_RQVote_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                RQVote.class, Builder.class);
+                com.module.net.NetGame.RQVote.class, com.module.net.NetGame.RQVote.Builder.class);
       }
 
       // Construct using com.module.net.NetGame.RQVote.newBuilder()
@@ -10378,7 +10378,7 @@ public final class NetGame {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -10405,23 +10405,23 @@ public final class NetGame {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return NetGame.internal_static_RQVote_descriptor;
+        return com.module.net.NetGame.internal_static_RQVote_descriptor;
       }
 
-      public RQVote getDefaultInstanceForType() {
-        return RQVote.getDefaultInstance();
+      public com.module.net.NetGame.RQVote getDefaultInstanceForType() {
+        return com.module.net.NetGame.RQVote.getDefaultInstance();
       }
 
-      public RQVote build() {
-        RQVote result = buildPartial();
+      public com.module.net.NetGame.RQVote build() {
+        com.module.net.NetGame.RQVote result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public RQVote buildPartial() {
-        RQVote result = new RQVote(this);
+      public com.module.net.NetGame.RQVote buildPartial() {
+        com.module.net.NetGame.RQVote result = new com.module.net.NetGame.RQVote(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -10438,16 +10438,16 @@ public final class NetGame {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof RQVote) {
-          return mergeFrom((RQVote)other);
+        if (other instanceof com.module.net.NetGame.RQVote) {
+          return mergeFrom((com.module.net.NetGame.RQVote)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(RQVote other) {
-        if (other == RQVote.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.module.net.NetGame.RQVote other) {
+        if (other == com.module.net.NetGame.RQVote.getDefaultInstance()) return this;
         if (other.hasIsagree()) {
           setIsagree(other.getIsagree());
         }
@@ -10466,11 +10466,11 @@ public final class NetGame {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        RQVote parsedMessage = null;
+        com.module.net.NetGame.RQVote parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (RQVote) e.getUnfinishedMessage();
+          parsedMessage = (com.module.net.NetGame.RQVote) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -10520,7 +10520,7 @@ public final class NetGame {
        * <code>optional int32 uid = 2;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½Îª0ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Í¶Æ±ï¿½ï¿½ï¿½ï¿½Ê¾Í¬ï¿½ï¿½/ï¿½Ü¾ï¿½ï¿½ï¿½Å¥,ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Òµï¿½Ñ¡ï¿½ï¿½ 
+       ** Èç¹ûÎª0±íÊ¾·¢ÆðÍ¶Æ±£¬ÏÔÊ¾Í¬Òâ/¾Ü¾ø°´Å¥,·ñÔòÎª¸ÃÍæ¼ÒµÄÑ¡Ôñ 
        * </pre>
        */
       public boolean hasUid() {
@@ -10530,7 +10530,7 @@ public final class NetGame {
        * <code>optional int32 uid = 2;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½Îª0ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Í¶Æ±ï¿½ï¿½ï¿½ï¿½Ê¾Í¬ï¿½ï¿½/ï¿½Ü¾ï¿½ï¿½ï¿½Å¥,ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Òµï¿½Ñ¡ï¿½ï¿½ 
+       ** Èç¹ûÎª0±íÊ¾·¢ÆðÍ¶Æ±£¬ÏÔÊ¾Í¬Òâ/¾Ü¾ø°´Å¥,·ñÔòÎª¸ÃÍæ¼ÒµÄÑ¡Ôñ 
        * </pre>
        */
       public int getUid() {
@@ -10540,7 +10540,7 @@ public final class NetGame {
        * <code>optional int32 uid = 2;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½Îª0ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Í¶Æ±ï¿½ï¿½ï¿½ï¿½Ê¾Í¬ï¿½ï¿½/ï¿½Ü¾ï¿½ï¿½ï¿½Å¥,ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Òµï¿½Ñ¡ï¿½ï¿½ 
+       ** Èç¹ûÎª0±íÊ¾·¢ÆðÍ¶Æ±£¬ÏÔÊ¾Í¬Òâ/¾Ü¾ø°´Å¥,·ñÔòÎª¸ÃÍæ¼ÒµÄÑ¡Ôñ 
        * </pre>
        */
       public Builder setUid(int value) {
@@ -10553,7 +10553,7 @@ public final class NetGame {
        * <code>optional int32 uid = 2;</code>
        *
        * <pre>
-       ** ï¿½ï¿½ï¿½Îª0ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Í¶Æ±ï¿½ï¿½ï¿½ï¿½Ê¾Í¬ï¿½ï¿½/ï¿½Ü¾ï¿½ï¿½ï¿½Å¥,ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Òµï¿½Ñ¡ï¿½ï¿½ 
+       ** Èç¹ûÎª0±íÊ¾·¢ÆðÍ¶Æ±£¬ÏÔÊ¾Í¬Òâ/¾Ü¾ø°´Å¥,·ñÔòÎª¸ÃÍæ¼ÒµÄÑ¡Ôñ 
        * </pre>
        */
       public Builder clearUid() {
@@ -10572,6 +10572,402 @@ public final class NetGame {
     }
 
     // @@protoc_insertion_point(class_scope:RQVote)
+  }
+
+  public interface RQConnectOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional int32 roomId = 1;
+    /**
+     * <code>optional int32 roomId = 1;</code>
+     */
+    boolean hasRoomId();
+    /**
+     * <code>optional int32 roomId = 1;</code>
+     */
+    int getRoomId();
+  }
+  /**
+   * Protobuf type {@code RQConnect}
+   */
+  public static final class RQConnect extends
+      com.google.protobuf.GeneratedMessage
+      implements RQConnectOrBuilder {
+    // Use RQConnect.newBuilder() to construct.
+    private RQConnect(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private RQConnect(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RQConnect defaultInstance;
+    public static RQConnect getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public RQConnect getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RQConnect(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              roomId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.module.net.NetGame.internal_static_RQConnect_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.module.net.NetGame.internal_static_RQConnect_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.module.net.NetGame.RQConnect.class, com.module.net.NetGame.RQConnect.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<RQConnect> PARSER =
+        new com.google.protobuf.AbstractParser<RQConnect>() {
+      public RQConnect parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RQConnect(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RQConnect> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional int32 roomId = 1;
+    public static final int ROOMID_FIELD_NUMBER = 1;
+    private int roomId_;
+    /**
+     * <code>optional int32 roomId = 1;</code>
+     */
+    public boolean hasRoomId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 roomId = 1;</code>
+     */
+    public int getRoomId() {
+      return roomId_;
+    }
+
+    private void initFields() {
+      roomId_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, roomId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, roomId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.module.net.NetGame.RQConnect parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.module.net.NetGame.RQConnect parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.module.net.NetGame.RQConnect parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.module.net.NetGame.RQConnect parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.module.net.NetGame.RQConnect parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.module.net.NetGame.RQConnect parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.module.net.NetGame.RQConnect parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.module.net.NetGame.RQConnect parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.module.net.NetGame.RQConnect parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.module.net.NetGame.RQConnect parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.module.net.NetGame.RQConnect prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code RQConnect}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.module.net.NetGame.RQConnectOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.module.net.NetGame.internal_static_RQConnect_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.module.net.NetGame.internal_static_RQConnect_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.module.net.NetGame.RQConnect.class, com.module.net.NetGame.RQConnect.Builder.class);
+      }
+
+      // Construct using com.module.net.NetGame.RQConnect.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        roomId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.module.net.NetGame.internal_static_RQConnect_descriptor;
+      }
+
+      public com.module.net.NetGame.RQConnect getDefaultInstanceForType() {
+        return com.module.net.NetGame.RQConnect.getDefaultInstance();
+      }
+
+      public com.module.net.NetGame.RQConnect build() {
+        com.module.net.NetGame.RQConnect result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.module.net.NetGame.RQConnect buildPartial() {
+        com.module.net.NetGame.RQConnect result = new com.module.net.NetGame.RQConnect(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.roomId_ = roomId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.module.net.NetGame.RQConnect) {
+          return mergeFrom((com.module.net.NetGame.RQConnect)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.module.net.NetGame.RQConnect other) {
+        if (other == com.module.net.NetGame.RQConnect.getDefaultInstance()) return this;
+        if (other.hasRoomId()) {
+          setRoomId(other.getRoomId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.module.net.NetGame.RQConnect parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.module.net.NetGame.RQConnect) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional int32 roomId = 1;
+      private int roomId_ ;
+      /**
+       * <code>optional int32 roomId = 1;</code>
+       */
+      public boolean hasRoomId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 roomId = 1;</code>
+       */
+      public int getRoomId() {
+        return roomId_;
+      }
+      /**
+       * <code>optional int32 roomId = 1;</code>
+       */
+      public Builder setRoomId(int value) {
+        bitField0_ |= 0x00000001;
+        roomId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 roomId = 1;</code>
+       */
+      public Builder clearRoomId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        roomId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:RQConnect)
+    }
+
+    static {
+      defaultInstance = new RQConnect(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:RQConnect)
   }
 
   private static com.google.protobuf.Descriptors.Descriptor
@@ -10644,6 +11040,11 @@ public final class NetGame {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_RQVote_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_RQConnect_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_RQConnect_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -10652,7 +11053,7 @@ public final class NetGame {
   private static com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
-    String[] descriptorData = {
+    java.lang.String[] descriptorData = {
       "\n\023proto/NetGame.proto\"e\n\013NetUserData\022\013\n\003" +
       "uid\030\001 \001(\005\022\r\n\005image\030\002 \001(\t\022\014\n\004idex\030\003 \001(\005\022\016" +
       "\n\006status\030\004 \001(\005\022\034\n\005extra\030\005 \001(\0132\r.NetExtra" +
@@ -10677,8 +11078,9 @@ public final class NetGame {
       "\022\r\n\005score\030\004 \001(\005\")\n\013RQEnterRoom\022\032\n\004user\030\001" +
       " \001(\0132\014.NetUserData\"\025\n\006RQExit\022\013\n\003uid\030\001 \001(" +
       "\005\"\031\n\006RPVote\022\017\n\007isagree\030\001 \001(\010\"&\n\006RQVote\022\017" +
-      "\n\007isagree\030\001 \001(\010\022\013\n\003uid\030\002 \001(\005B\031\n\016com.modu" +
-      "le.netB\007NetGame"
+      "\n\007isagree\030\001 \001(\010\022\013\n\003uid\030\002 \001(\005\"\033\n\tRQConnec" +
+      "t\022\016\n\006roomId\030\001 \001(\005B\031\n\016com.module.netB\007Net" +
+      "Game"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10690,85 +11092,91 @@ public final class NetGame {
           internal_static_NetUserData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_NetUserData_descriptor,
-              new String[] { "Uid", "Image", "Idex", "Status", "Extra", });
+              new java.lang.String[] { "Uid", "Image", "Idex", "Status", "Extra", });
           internal_static_NetExtraData_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_NetExtraData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_NetExtraData_descriptor,
-              new String[] { "List", "KvDatas", "Operates", });
+              new java.lang.String[] { "List", "KvDatas", "Operates", });
           internal_static_NetOprateData_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_NetOprateData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_NetOprateData_descriptor,
-              new String[] { "Otype", "Uid", "Dval", "Flag", "Dlist", "KvDatas", });
+              new java.lang.String[] { "Otype", "Uid", "Dval", "Flag", "Dlist", "KvDatas", });
           internal_static_NetKvData_descriptor =
             getDescriptor().getMessageTypes().get(3);
           internal_static_NetKvData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_NetKvData_descriptor,
-              new String[] { "K", "V", "Dlist", });
+              new java.lang.String[] { "K", "V", "Dlist", });
           internal_static_RPCreateRoom_descriptor =
             getDescriptor().getMessageTypes().get(4);
           internal_static_RPCreateRoom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RPCreateRoom_descriptor,
-              new String[] { "RoomId", "GameId", "Type", });
+              new java.lang.String[] { "RoomId", "GameId", "Type", });
           internal_static_RQCreateRoom_descriptor =
             getDescriptor().getMessageTypes().get(5);
           internal_static_RQCreateRoom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RQCreateRoom_descriptor,
-              new String[] { "RoomId", "GameId", "Users", "Type", "CurRount", "GameStatus", "OwnerId", "Extra", });
+              new java.lang.String[] { "RoomId", "GameId", "Users", "Type", "CurRount", "GameStatus", "OwnerId", "Extra", });
           internal_static_RPEnterRoom_descriptor =
             getDescriptor().getMessageTypes().get(6);
           internal_static_RPEnterRoom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RPEnterRoom_descriptor,
-              new String[] { "RoomId", "Key", });
+              new java.lang.String[] { "RoomId", "Key", });
           internal_static_RQUserStatus_descriptor =
             getDescriptor().getMessageTypes().get(7);
           internal_static_RQUserStatus_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RQUserStatus_descriptor,
-              new String[] { "Status", });
+              new java.lang.String[] { "Status", });
           internal_static_RQREsult_descriptor =
             getDescriptor().getMessageTypes().get(8);
           internal_static_RQREsult_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RQREsult_descriptor,
-              new String[] { "Flag", "Users", });
+              new java.lang.String[] { "Flag", "Users", });
           internal_static_NetMjUserResult_descriptor =
             getDescriptor().getMessageTypes().get(9);
           internal_static_NetMjUserResult_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_NetMjUserResult_descriptor,
-              new String[] { "Scores", "ShowType", "WinType", "Score", });
+              new java.lang.String[] { "Scores", "ShowType", "WinType", "Score", });
           internal_static_RQEnterRoom_descriptor =
             getDescriptor().getMessageTypes().get(10);
           internal_static_RQEnterRoom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RQEnterRoom_descriptor,
-              new String[] { "User", });
+              new java.lang.String[] { "User", });
           internal_static_RQExit_descriptor =
             getDescriptor().getMessageTypes().get(11);
           internal_static_RQExit_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RQExit_descriptor,
-              new String[] { "Uid", });
+              new java.lang.String[] { "Uid", });
           internal_static_RPVote_descriptor =
             getDescriptor().getMessageTypes().get(12);
           internal_static_RPVote_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RPVote_descriptor,
-              new String[] { "Isagree", });
+              new java.lang.String[] { "Isagree", });
           internal_static_RQVote_descriptor =
             getDescriptor().getMessageTypes().get(13);
           internal_static_RQVote_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RQVote_descriptor,
-              new String[] { "Isagree", "Uid", });
+              new java.lang.String[] { "Isagree", "Uid", });
+          internal_static_RQConnect_descriptor =
+            getDescriptor().getMessageTypes().get(14);
+          internal_static_RQConnect_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_RQConnect_descriptor,
+              new java.lang.String[] { "RoomId", });
           return null;
         }
       };

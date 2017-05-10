@@ -72,4 +72,6 @@ public interface UserService {
     public int addMoney(int uid, int needMoney, LogType logFrom,int logId);
 
     public void updateRoleInfoRoomid(int roleId, int id);
+
+    public void updateCard(int roleId, int card);
 }
