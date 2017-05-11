@@ -252,16 +252,7 @@ public class GameCommHandler extends ModuleHandler {
     private void middleJoin(BaseTableVo baseTableVo, UserVistor vistor, Request request, Response response) {
         baseTableVo.getChairByUid(vistor.getRoleId()).setOnline(true);
 
-        NetGame.RQUserStatus.Builder rpEnterRoom = NetGame.RQUserStatus.newBuilder();
-        rpEnterRoom.setStatus(baseTableVo.getChairStatusToClient(baseTableVo.getChairByUid(vistor.getRoleId())));
-
-        for(int i = 0;i<baseTableVo.getChairs().length;i++){
-            if(baseTableVo.getChairs()[i] == null || vistor.getRoleId() == baseTableVo.getChairs()[i].getId()){
-                continue;
-            }
-            //给其他人发送
-            OnlineManager.getIntance().getUserById(baseTableVo.getChairs()[i].getId()).sendMsg(Response.defaultResponse(GameCommCmd.CREATE_TABLE.getModule(),GameCommCmd.UserStatus.getValue(),0,rpEnterRoom.build()));
-        }
+       baseTableVo.sendChairStatusMsgWithOutUid(vistor.getRoleId());
 
         response.setCmd(GameCommCmd.CREATE_TABLE.getValue());
         response.setObj(baseTableVo.getEnterRoomMsg(vistor.getRoleId()));
@@ -294,11 +285,12 @@ public class GameCommHandler extends ModuleHandler {
     private void ready(UserVistor vistor, Request request, Response response) {
         BaseTableVo table = TableManager.getInstance().getTable(vistor.getGameRole().getRoomId());
 
-        if(table == null){
+        if(table == null || table.getStatus().getValue() != 0){
             vistor.sendError(ResponseCode.Error.key_error);
             return;
         }
 
+        table.doAction(table.getStatus(),response,vistor,null);
     }
 
     @Override

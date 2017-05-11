@@ -12,7 +12,6 @@ import com.game.socket.module.UserVistor;
 import com.logger.log.SystemLogger;
 import com.lsocket.message.Response;
 import com.module.core.ResponseCode;
-import com.module.net.NetCommon;
 import com.module.net.NetGame;
 
 import java.util.*;
@@ -232,9 +231,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
     public void cleanTableCache(){
         step = 0;
         timeOutTime = 0;
-    }
 
-    public void resetChairInfo(){
         for(int i = 0;i<chairs.length;i++){
             if(chairs[i] == null){
                 continue;
@@ -243,7 +240,17 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         }
     }
 
-    public boolean doAction(TStatus fromStatus, Response response, UserVistor visitor, NetCommon.NetOprateData oprateData){
+    public void resetTableStatus(){
+        status = allStatus[0];
+        for(int i = 0;i<chairs.length;i++){
+            if(chairs[i] == null){
+                continue;
+            }
+            chairs[i].resetStatus();
+        }
+    }
+
+    public boolean doAction(TStatus fromStatus, Response response, UserVistor visitor, NetGame.NetOprateData oprateData){
         if(fromStatus != null && fromStatus != this.getStatus()){
             return false;
         }
@@ -276,8 +283,8 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         return focsIndex;
     }
 
-    public NetCommon.NetResponse getNetRespose(List<NetCommon.NetOprateData> operdata) {
-        NetCommon.NetResponse.Builder response = NetCommon.NetResponse.newBuilder();
+    public NetGame.NetResponse getNetRespose(List<NetGame.NetOprateData> operdata) {
+        NetGame.NetResponse.Builder response = NetGame.NetResponse.newBuilder();
         if(operdata != null){
             response.addAllOperateDatas(operdata);
         }
@@ -454,6 +461,18 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
 
             vistor.sendMsg(otherResponse);
         }
+    }
+
+    /**
+     * 发送玩家状态
+     * @param roleId
+     */
+    public void sendChairStatusMsgWithOutUid(int roleId){
+        NetGame.RQUserStatus.Builder rpEnterRoom = NetGame.RQUserStatus.newBuilder();
+        rpEnterRoom.setStatus(getChairStatusToClient(getChairByUid(roleId)));
+
+        //给其他人发送
+        sendMsgWithOutUid(Response.defaultResponse(GameCommCmd.CREATE_TABLE.getModule(),GameCommCmd.UserStatus.getValue(),0,rpEnterRoom.build()),roleId);
     }
 
     ////////////////////////////////////////////////////////////

@@ -21,6 +21,15 @@ public abstract class BaseChairInfo<Status extends BaseChairStatus,Hands extends
     }
 
     protected abstract Hands initHands();
+
+    /**
+     * 重置状态
+     */
+    public abstract void resetStatus();
+
+    /***
+     * 清除缓存
+     */
     public abstract void clean();
 
     public Status getStatus() {

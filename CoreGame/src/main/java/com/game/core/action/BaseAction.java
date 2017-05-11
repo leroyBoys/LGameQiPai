@@ -5,7 +5,7 @@ import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
 import com.game.core.room.BaseTableVo;
 import com.lsocket.message.Response;
-import com.module.net.NetCommon;
+import com.module.net.NetGame;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public abstract class BaseAction<T extends BaseTableVo> {
         return 1;
     }
 
-    public void doAction(T table, Response response, UserVistor visitor, NetCommon.NetOprateData netOprateData){
+    public void doAction(T table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData){
         ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),this.getActionType());
         for(int i= 0;i<optPlugins.size();i++){
             optPlugins.get(i).doOperation(table,response,netOprateData);

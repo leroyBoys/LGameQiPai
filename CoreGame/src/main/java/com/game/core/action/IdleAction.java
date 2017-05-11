@@ -5,7 +5,7 @@ import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseChairStatus;
 import com.game.core.room.BaseTableVo;
 import com.lsocket.message.Response;
-import com.module.net.NetCommon;
+import com.module.net.NetGame;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -20,7 +20,7 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
     protected abstract <S extends BaseChairStatus> S getReadyStatus();
 
     @Override
-    public void doAction(T table, Response response, UserVistor visitor, NetCommon.NetOprateData netOprateData) {
+    public void doAction(T table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
         BaseChairInfo chairInfo = table.getChairByUid(visitor.getRoleId());
         if(chairInfo.getStatus().getVal() == getReadyStatus().getVal()){
             return;
@@ -32,8 +32,7 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
         }
 
         //发送数据
-
-        //visitor.getIoSession()
+        table.sendChairStatusMsgWithOutUid(visitor.getRoleId());
     }
 
     @Override

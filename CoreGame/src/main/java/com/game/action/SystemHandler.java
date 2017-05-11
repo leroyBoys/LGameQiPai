@@ -22,7 +22,6 @@ import com.module.Status;
 import com.module.core.ResponseCode;
 import com.module.db.RoleInfo;
 import com.module.db.UserInfo;
-import com.module.net.Com;
 import com.module.net.DB;
 import com.module.net.NetGame;
 import com.module.net.NetParentOld;
@@ -74,7 +73,7 @@ public class SystemHandler extends ModuleHandler {
 
             @Override
             public Request getRequset(byte[] bytes, int module,int cmd, int sq) throws Exception {
-                return Request.valueOf(module,cmd,Com.NetLoginConfirm.parseFrom(bytes),sq);
+                return Request.valueOf(module,cmd, NetGame.NetLoginConfirm.parseFrom(bytes),sq);
             }
         });
 
@@ -109,7 +108,7 @@ public class SystemHandler extends ModuleHandler {
     }
 
     private void firstConnect(UserVistor vistor, Request request, Response response){
-        Com.NetLoginConfirm obj = (Com.NetLoginConfirm) request.getObj();
+        NetGame.NetLoginConfirm obj = (NetGame.NetLoginConfirm) request.getObj();
         String sn = (String) request.getAttribute("sn");
 
         UserService userService = DBServiceManager.getDbServiceManager().getUserService();

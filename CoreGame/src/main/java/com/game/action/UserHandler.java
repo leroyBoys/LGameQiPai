@@ -9,7 +9,7 @@ import com.lsocket.handler.ModuleCmd;
 import com.lsocket.handler.ModuleHandler;
 import com.lsocket.message.Request;
 import com.lsocket.message.Response;
-import com.module.net.Com;
+import com.module.net.NetGame;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -36,7 +36,7 @@ public class UserHandler extends ModuleHandler {
 
             @Override
             public Request getRequset(byte[] bytes, int module,int cmd, int sq) throws InvalidProtocolBufferException {
-                return Request.valueOf(module,cmd,Com.NetLoginConfirm.parseFrom(bytes),sq);
+                return Request.valueOf(module,cmd, NetGame.NetLoginConfirm.parseFrom(bytes),sq);
             }
         });
 

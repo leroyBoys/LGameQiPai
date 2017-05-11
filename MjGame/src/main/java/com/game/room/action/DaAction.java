@@ -4,7 +4,7 @@ import com.game.socket.module.UserVistor;
 import com.game.core.action.BaseAction;
 import com.game.room.MjTable;
 import com.lsocket.message.Response;
-import com.module.net.NetCommon;
+import com.module.net.NetGame;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -17,7 +17,7 @@ public class DaAction extends BaseAction<MjTable> {
     }
 
     @Override
-    public void doAction(MjTable table, Response response, UserVistor visitor, NetCommon.NetOprateData netOprateData) {
+    public void doAction(MjTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
 
     }
 

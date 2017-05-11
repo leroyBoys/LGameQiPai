@@ -3,8 +3,8 @@ package com.game.core.action.ddz;
 import com.game.socket.module.UserVistor;
 import com.game.core.action.BaseAction;
 import com.lsocket.message.Response;
-import com.module.net.NetCommon;
 import com.game.core.room.ddz.DDzTable;
+import com.module.net.NetGame;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -17,7 +17,7 @@ public class FaPaiAction extends BaseAction<DDzTable> {
     }
 
     @Override
-    public void doAction(DDzTable table, Response response, UserVistor visitor, NetCommon.NetOprateData netOprateData) {
+    public void doAction(DDzTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
 
     }
 }

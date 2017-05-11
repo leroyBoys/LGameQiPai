@@ -5,7 +5,7 @@ import com.game.core.room.BaseStatusData;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.lsocket.message.Response;
-import com.module.net.NetCommon;
+import com.module.net.NetGame;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -18,7 +18,7 @@ public class YaPaoPlugins implements IOptPlugin<MjTable> {
     }
 
     @Override
-    public synchronized Object doOperation(MjTable table, Response response, NetCommon.NetOprateData oprateData) {
+    public synchronized Object doOperation(MjTable table, Response response, NetGame.NetOprateData oprateData) {
         MjChairInfo info = table.getChairByUid(oprateData.getUid());
         if(!info.isCanYaPao()){
             return null;

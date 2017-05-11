@@ -22,9 +22,13 @@ public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContaine
     }
 
     @Override
+    public void resetStatus() {
+        this.status = MjChairStatus.Idle;
+    }
+
+    @Override
     public void clean() {
         yapaoNum = 0;
-        this.status = MjChairStatus.Idle;
         getHandsContainer().cleanHands();
     }
 
