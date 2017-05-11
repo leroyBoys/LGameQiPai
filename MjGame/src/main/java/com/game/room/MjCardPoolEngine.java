@@ -1,11 +1,10 @@
 package com.game.room;
 
+import com.game.core.config.RoomSetting;
+import com.game.core.config.TablePluginManager;
 import com.game.core.room.BaseCardPoolEngine;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -16,8 +15,8 @@ public class MjCardPoolEngine extends BaseCardPoolEngine<Integer> {
     private int lastPlayCard = 0;
     private int lastPlayCardUid = 0;
 
-    public MjCardPoolEngine(int gameId){
-        super(gameId);
+    public MjCardPoolEngine(int gameId,List<Integer> userSetStaticCardPool){
+        super(gameId,userSetStaticCardPool);
     }
 
     @Override
@@ -30,7 +29,15 @@ public class MjCardPoolEngine extends BaseCardPoolEngine<Integer> {
 
     @Override
     public void shuffle() {
+        init();
+        RoomSetting roomSetting = TablePluginManager.getInstance().getRoomSetting(gameId);
+        cardPool.addAll(roomSetting.getCardNumPools());
 
+        if(userSetStaticCardPool != null && !userSetStaticCardPool.isEmpty()){
+            cardPool.addAll(userSetStaticCardPool);
+        }
+
+        Collections.shuffle(cardPool);
     }
 
     @Override

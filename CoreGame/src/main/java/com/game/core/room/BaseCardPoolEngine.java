@@ -1,6 +1,8 @@
 package com.game.core.room;
 
-import java.util.ArrayList;
+import com.game.core.config.RoomSetting;
+import com.game.core.config.TablePluginManager;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,15 +11,20 @@ import java.util.List;
  * 2017/4/25.
  */
 public class BaseCardPoolEngine<C> implements ICardPoolEngine<C> {
+    /** 玩家选择增加的额外牌 */
+    protected List<C> userSetStaticCardPool = new LinkedList<>();
+
     /** 牌池，未使用的牌 */
     protected List<C> cardPool = new LinkedList<>();
     private final int allSize;
 
-    private final int gameId;
+    protected final int gameId;
 
-    public BaseCardPoolEngine(int gameId){
+    public BaseCardPoolEngine(int gameId,List<C> userSetStaticCardPool){
         this.gameId = gameId;
-        this.allSize = 0;
+        RoomSetting roomSetting = TablePluginManager.getInstance().getRoomSetting(gameId);
+        this.userSetStaticCardPool = userSetStaticCardPool;
+        this.allSize = roomSetting.getCardNumPools().size()+(userSetStaticCardPool == null?0:userSetStaticCardPool.size());
     }
 
     @Override
@@ -27,6 +34,7 @@ public class BaseCardPoolEngine<C> implements ICardPoolEngine<C> {
 
     @Override
     public void shuffle() {
+
     }
 
     @Override

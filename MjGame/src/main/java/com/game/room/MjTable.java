@@ -1,10 +1,13 @@
 package com.game.room;
 
+import com.game.action.MjCmd;
+import com.game.core.constant.GameConst;
 import com.game.core.factory.TableProducer;
 import com.game.core.room.BaseStepHistory;
 import com.game.core.room.BaseTableVo;
 import com.game.socket.module.UserVistor;
 import com.lgame.util.comm.RandomTool;
+import com.lsocket.message.Response;
 import com.module.core.ResponseCode;
 import com.module.net.NetGame;
 
@@ -31,7 +34,7 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
     @Override
     protected void initStatus() {
-        allStatus = new MjStatus[]{MjStatus.Idle, MjStatus.Pao, MjStatus.FaPai, MjStatus.Game};
+        this.setAllStatus(new MjStatus[]{MjStatus.Idle, MjStatus.Pao, MjStatus.FaPai, MjStatus.Game});
     }
 
     @Override
@@ -184,7 +187,38 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
         return ResponseCode.Error.succ;
     }
+    //////////////////////////////////////////////////////
 
+    /**
+     * 发送可以操作的集合
+     * @param actions
+     */
+    public Response getCanDoActionsResponse(List<NetGame.NetKvData> actions){
+        NetGame.NetOprateData.Builder canDoActions = NetGame.NetOprateData.newBuilder();
+        canDoActions.setOtype(GameConst.MJ.ACTION_TYPE_CanDoActions);
+        canDoActions.addAllKvDatas(actions);
+
+        return Response.defaultResponse(GameConst.MOUDLE_Mj, MjCmd.Game.getValue(),0,getNetResposeOnly(canDoActions.build()));
+    }
+
+    /**
+     * h获得压跑数据
+     * @return
+     */
+    public NetGame.NetOprateData.Builder getYaPaoNetOprateData() {
+        NetGame.NetOprateData.Builder yaPao = NetGame.NetOprateData.newBuilder();
+        yaPao.setOtype(GameConst.MJ.ACTION_TYPE_YAPao);
+        for(int i = 0;i<chairs.length;i++){
+            if(chairs[i] == null || chairs[i].isCanYaPao()){
+                continue;
+            }
+            NetGame.NetKvData.Builder netKvData = NetGame.NetKvData.newBuilder();
+            netKvData.setK(chairs[i].getId());
+            netKvData.setV(chairs[i].getYapaoNum());
+            yaPao.addKvDatas(netKvData);
+        }
+        return yaPao;
+    }
     /////////////////////////////////////////////////////////////
     public int getBankId() {
         return bankId;
@@ -218,4 +252,6 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     public void setNextBankerUid(int nextBankerUid) {
         this.nextBankerUid = nextBankerUid;
     }
+
+
 }

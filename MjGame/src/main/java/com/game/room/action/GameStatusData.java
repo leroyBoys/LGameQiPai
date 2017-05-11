@@ -3,6 +3,7 @@ package com.game.room.action;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
 import com.game.core.room.BaseStatusData;
+import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 
 import java.util.ArrayList;
@@ -21,4 +22,24 @@ public class GameStatusData extends BaseStatusData {
         }
     }
 
+    protected boolean canCheckGang(MjChairInfo chairInfo,int card){
+        return true;
+    }
+
+    public void checkGang(MjChairInfo chairInfo,int card) {
+        if(!canCheckGang(chairInfo,card)){
+            return;
+        }
+
+
+    }
+
+    public void checkChi() {
+    }
+
+    public void checkPeng() {
+    }
+
+    public void checkHu() {
+    }
 }

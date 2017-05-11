@@ -14,7 +14,7 @@ import static com.game.core.room.SuperCreateNew.CreateNewCache.create;
 public enum MjStatus implements BaseGameStatus {
     Idle(0,new MjIdleAction(), create(BaseStatusData.DefaultStatusData.class)),
     Pao(1,new YaPaoAction(), create(BaseStatusData.DefaultStatusData.class)),
-   // DingZhuang(2,new DingZhuangAction(), create(BaseStatusData.class)),
+    DingZhuang(2,new DingZhuangAction(), create(BaseStatusData.class)),
     FaPai(3,new FaPaiAction(), create(BaseStatusData.class)),
     Game(4,new GameAction(), create(GameStatusData.class)),
     GameOver(6,new GameAction(), create(BaseStatusData.class));

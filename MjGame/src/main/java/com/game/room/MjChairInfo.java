@@ -8,8 +8,8 @@ import com.game.core.room.BaseChairInfo;
  */
 public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContainer> {
     private int score;
-    /** 数值均减一即0为初始值，1位不压跑 */
-    private int yapaoNum = 0;
+    /** 数值 */
+    private int yapaoNum = -1;
 
     public MjChairInfo(int uid) {
         super(MjChairStatus.Idle);
@@ -28,16 +28,20 @@ public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContaine
 
     @Override
     public void clean() {
-        yapaoNum = 0;
+        yapaoNum = -1;
         getHandsContainer().cleanHands();
     }
 
     public boolean isCanYaPao() {
-        return yapaoNum==0;
+        return yapaoNum==-1;
     }
 
     public int getScore() {
         return score;
+    }
+
+    public int getYapaoNum() {
+        return yapaoNum;
     }
 
     public void setScore(int score) {
@@ -45,6 +49,6 @@ public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContaine
     }
 
     public void setYapaoNum(int yapaoNum) {
-        this.yapaoNum = yapaoNum<1 || yapaoNum>5 ?1:yapaoNum;
+        this.yapaoNum = yapaoNum<0 || yapaoNum>4 ?1:yapaoNum;
     }
 }

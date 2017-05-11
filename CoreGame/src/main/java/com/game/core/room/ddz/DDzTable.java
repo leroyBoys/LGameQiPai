@@ -20,7 +20,7 @@ public class DDzTable extends BaseTableVo<DdzStatus,BaseChairInfo> {
 
     @Override
     protected void initStatus() {
-        allStatus = new DdzStatus[]{DdzStatus.Idle,DdzStatus.FaPai,DdzStatus.Score,DdzStatus.Game};
+        this.setAllStatus(new DdzStatus[]{DdzStatus.Idle,DdzStatus.FaPai,DdzStatus.Score,DdzStatus.Game});
     }
 
     @Override

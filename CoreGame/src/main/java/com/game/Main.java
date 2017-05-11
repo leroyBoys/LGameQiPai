@@ -1,6 +1,6 @@
 package com.game;
 
-import com.game.socket.GameSocket;
+import com.game.core.config.TablePluginManager;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -9,7 +9,10 @@ import com.game.socket.GameSocket;
 public class Main {
     public static void main(String[] args){
         try {
-            GameSocket.getIntance().start();
+
+            TablePluginManager.getInstance().refresh("RoomSetting.xls","pluginGen.xls");
+
+          //  GameSocket.getIntance().start();
         } catch (Exception e) {
             e.printStackTrace();
         }

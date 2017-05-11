@@ -19,13 +19,11 @@ public class GameAction extends BaseAction<MjTable> {
     @Override
     public void initAction(MjTable table) {
         GameStatusData statusData = table.getStatusData();
-        statusData.moPai(table,table.getBankId());
+        statusData.checkGang(table.getChairByUid(table.getBankId()),0);
     }
 
     @Override
     public void doAction(MjTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
-        GameStatusData statusData = table.getStatusData();
-        statusData.moPai(table,table.getBankId());
     }
 
     @Override

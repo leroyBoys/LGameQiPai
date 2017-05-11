@@ -1,9 +1,11 @@
 package com.game.room.action.plugins;
 
+import com.game.core.config.AbstractStagePlugin;
 import com.game.core.config.IOptPlugin;
 import com.game.core.room.BaseStatusData;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
+import com.logger.log.SystemLogger;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
 
@@ -11,23 +13,25 @@ import com.module.net.NetGame;
  * Created by leroy:656515489@qq.com
  * 2017/4/24.
  */
-public class YaPaoPlugins implements IOptPlugin<MjTable> {
+public class YaPaoPlugins extends AbstractStagePlugin<MjTable> {
     @Override
     public IOptPlugin createNew() {
         return new YaPaoPlugins();
     }
 
     @Override
-    public synchronized Object doOperation(MjTable table, Response response, NetGame.NetOprateData oprateData) {
+    public synchronized Boolean doOperation(MjTable table, Response response, NetGame.NetOprateData oprateData) {
         MjChairInfo info = table.getChairByUid(oprateData.getUid());
         if(!info.isCanYaPao()){
-            return null;
+            SystemLogger.warn(this.getClass(),"yapao fail roleId:"+oprateData.getUid()+" yapao:"+info.isCanYaPao());
+            return false;
         }
 
         BaseStatusData.DefaultStatusData statusData = table.getStatusData();
         int size = statusData.addDoneUid(oprateData.getUid());
         if(size <= 0){
-            return null;
+            SystemLogger.warn(this.getClass(),"yapao fail roleId:"+oprateData.getUid()+" size:"+size);
+            return false;
         }
 
         info.setYapaoNum(oprateData.getDval());
@@ -35,7 +39,7 @@ public class YaPaoPlugins implements IOptPlugin<MjTable> {
         if(size == table.getChairs().length){
             table.getStatusData().setOver(true);
         }
-        return null;
+        return true;
     }
 
 }

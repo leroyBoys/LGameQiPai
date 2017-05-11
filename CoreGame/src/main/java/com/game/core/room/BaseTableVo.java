@@ -39,7 +39,8 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
      * 房间属性
      */
     private HashMap<AttributeKey, Object> attributeMap = new HashMap<>();
-    protected TStatus[] allStatus;
+    private TStatus[] allStatus;
+    private Set<TStatus> allStatusSet = new HashSet<>();
     /**
      * 当前状态的索引
      */
@@ -77,7 +78,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
     }
 
     protected void initCardPoolEngine(){
-        cardPoolEngine = new BaseCardPoolEngine(gameId);
+        cardPoolEngine = new BaseCardPoolEngine(gameId,null);
     }
 
     public boolean addChair(UserVistor visitor){
@@ -159,6 +160,10 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
             changeNextStaus();
             action.overAction(this);
             this.getStatus().getAction().initAction(this);
+
+            if(getStatusData().isOver()){
+                trigger();
+            }
             return;
         }
         action.tick(this);
@@ -289,12 +294,23 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
             response.addAllOperateDatas(operdata);
         }
 
-        response.setRetStatus(1);
+        response.setRetStatus(ResponseCode.Error.succ.value());
         response.setStatus(status.getValue());
         response.setStep(step);
         return response.build();
     }
 
+    public NetGame.NetResponse getNetResposeOnly(NetGame.NetOprateData operdata) {
+        NetGame.NetResponse.Builder response = NetGame.NetResponse.newBuilder();
+        if(operdata != null){
+            response.addOperateDatas(operdata);
+        }
+
+        response.setRetStatus(ResponseCode.Error.succ.value());
+        response.setStatus(status.getValue());
+        response.setStep(step);
+        return response.build();
+    }
     /**
      *
      * @param roleid
@@ -446,11 +462,36 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         return false;
     }
 
+
     ////////////////////////发消息//////////////////////////////////////
 
     public void sendMsgWithOutUid(Response otherResponse, int roleId) {
         for(int i = 0;i<chairs.length;i++){
             if(chairs[i] == null || chairs[i].getId() == roleId){
+                continue;
+            }
+            //发送
+            UserVistor vistor = OnlineManager.getIntance().getUserById(chairs[i].getId());
+            if(vistor == null){
+                continue;
+            }
+
+            vistor.sendMsg(otherResponse);
+        }
+    }
+
+    public void sendMsgToUid(Response otherResponse, int roleId) {
+        //发送
+        UserVistor vistor = OnlineManager.getIntance().getUserById(roleId);
+        if(vistor == null){
+            return;
+        }
+        vistor.sendMsg(otherResponse);
+    }
+
+    public void sendMsgAll(Response otherResponse) {
+        for(int i = 0;i<chairs.length;i++){
+            if(chairs[i] == null){
                 continue;
             }
             //发送
@@ -530,6 +571,24 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
 
     public void setFocusIdex(int focusIdex) {
         this.focusIdex = focusIdex;
+    }
+
+    public void setAllStatus(TStatus[] allStatus) {
+        this.allStatus = allStatus;
+        allStatusSet.clear();
+        allStatusSet.addAll(Arrays.asList(allStatus));
+    }
+
+    public TableProducer getTableProducer() {
+        return tableProducer;
+    }
+
+    public TStatus[] getAllStatus() {
+        return allStatus;
+    }
+
+    public Set<TStatus> getAllStatusSet() {
+        return allStatusSet;
     }
 
     public enum AttributeKey{

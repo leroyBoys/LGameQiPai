@@ -7,6 +7,9 @@ import com.module.net.NetGame;
 
 public interface IOptPlugin<A extends BaseTableVo> extends SuperCreateNew {
 	public IOptPlugin createNew();
+
+	public void setPluginId(int pluginId);
+
 	/** 执行这个插件的操作 */
 	public Object doOperation(A table, Response response, NetGame.NetOprateData oprateData) ;
 

@@ -5,21 +5,26 @@ import com.lgame.util.load.annotation.Id;
 import com.lgame.util.load.annotation.Resource;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by leroy:656515489@qq.com
  * 2017/4/25.
  */
-@Resource(suffix="xls")
+@Resource(suffix="xls",dataFromLine=3)
 public class RoomSetting {
     /**主键*/
     @Id
     private int gameId = 0;
+    private String name;
     /**参与人数*/
     private int playerNum = 0;
     /**棋牌库*/
     private String cardNumPool;
+
+    private List<Integer> cardNumPools;
     /**初始手牌数*/
     private int initHandCardCount;
     private String roomFactory;
@@ -53,6 +58,13 @@ public class RoomSetting {
 
     public void setCardNumPool(String cardNumPool) {
         this.cardNumPool = cardNumPool;
+
+        cardNumPools = new LinkedList<>();
+        String[] cards  = cardNumPool.split(StringTool.SIGN4);
+        for(String card:cards){
+            cardNumPools.add(Integer.valueOf(card));
+        }
+
     }
 
     public int getInitHandCardCount() {
@@ -81,6 +93,10 @@ public class RoomSetting {
 
     }
 
+    public List<Integer> getCardNumPools() {
+        return cardNumPools;
+    }
+
     public short getBaseScore() {
         return baseScore;
     }
@@ -95,6 +111,14 @@ public class RoomSetting {
 
     public void setBaseScore(short baseScore) {
         this.baseScore = baseScore;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Map<Integer, Integer> getCardSetMap() {

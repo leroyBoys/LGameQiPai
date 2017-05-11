@@ -78,7 +78,7 @@ public class ResponseCode {
             this.code = code;
         }
 
-        Integer value() {
+        public int value() {
             return code;
         }
 

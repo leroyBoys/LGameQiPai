@@ -1,5 +1,6 @@
 package com.game.room.action;
 
+import com.game.core.constant.GameConst;
 import com.game.socket.module.UserVistor;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
@@ -7,6 +8,9 @@ import com.lsocket.message.Response;
 import com.game.core.action.BaseAction;
 import com.game.room.MjTable;
 import com.module.net.NetGame;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -20,13 +24,25 @@ public class YaPaoAction extends BaseAction<MjTable> {
 
     @Override
     public void initAction(MjTable table) {
-     //   NetCommon.NetResponse
+        NetGame.NetKvData.Builder kvData = NetGame.NetKvData.newBuilder();
+        kvData.setK(GameConst.MJ.ACTION_TYPE_YAPao);
+        List<NetGame.NetKvData> actions = new LinkedList<>();
+        actions.add(kvData.build());
+        table.sendMsgAll(table.getCanDoActionsResponse(actions));
     }
 
     @Override
     public void doAction(MjTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
         IOptPlugin optPlugin = TablePluginManager.getInstance().getOneOptPlugin(table.getGameId(),this.getActionType());
-        optPlugin.doOperation(table,response,netOprateData);
+        if(!(Boolean) optPlugin.doOperation(table,response,netOprateData)){
+            return;
+        }
         //发送数据
+
+        NetGame.NetOprateData.Builder yaPao = table.getYaPaoNetOprateData();
+        yaPao.setUid(visitor.getRoleId());
+        yaPao.setDval(netOprateData.getDval());
+        response.setObj(table.getNetResposeOnly(yaPao.build()));
+        table.sendMsgAll(response);
     }
 }

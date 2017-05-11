@@ -13,21 +13,38 @@ public class GameConst {
     public static final int MOUDLE_Ddz = 12;
 
 
+    /** 轮到谁 */
     public static final int ACTION_TYPE_TURN = 6;
-    public static enum Gang{
-        MingGang(231),
-        AnGang(232),
-        JianGang(233),
-        SiFengGang(234),
-        SanJianKe(235);
 
-        private final int val;
-        Gang(int val){
-            this.val = val;
-        }
-
-        public int getVal(){
-            return val;
-        }
+    public final static class MJ{
+        /** 定庄 */
+        public static final int ACTION_TYPE_DINGZHUANG = 201;
+        /** 压跑 */
+        public static final int ACTION_TYPE_YAPao = 205;
+        /** 摸牌*/
+        public static final int ACTION_TYPE_MOPAI = 211;
+        /** 可操作集合 */
+        public static final int ACTION_TYPE_CanDoActions = 212;
+        /** 打/弃牌 */
+        public static final int ACTION_TYPE_DA = 213;
+        /** 碰 */
+        public static final int ACTION_TYPE_PENG = 214;
+        /** 过 */
+        public static final int ACTION_TYPE_GUO = 215;
+        /** 吃 */
+        public static final int ACTION_TYPE_CHI = 220;
+        /** 杠 */
+        public static final int ACTION_TYPE_GANG = 230;
+        public static final int ACTION_TYPE_GANG_MingGang = 231;
+        public static final int ACTION_TYPE_GANG_AnGang = 232;
+        public static final int ACTION_TYPE_GANG_JianGang = 233;//捡杠-过手杠
+        public static final int ACTION_TYPE_GANG_SiFengGang = 234;//四风
+        public static final int ACTION_TYPE_GANG_SanJianKe = 235;//三剑客
+        public static final int ACTION_TYPE_GANG_DaGang = 236;//大杠
+        /** 听牌 */
+        public static final int ACTION_TYPE_TING = 240;
+        /** 胡牌 */
+        public static final int ACTION_TYPE_HU = 250;
     }
+
 }
