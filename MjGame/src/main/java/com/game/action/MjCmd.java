@@ -54,6 +54,6 @@ public enum MjCmd implements ModuleCmd {
 
     @Override
     public int getModule() {
-        return GameConst.MOUDLE_GameComm;
+        return GameConst.MOUDLE_Mj;
     }
 }

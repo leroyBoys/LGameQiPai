@@ -107,11 +107,6 @@ public class DBServiceManager extends ICommon {
     protected void check() {
     }
 
-
-    public static DBServiceManager getDbServiceManager() {
-        return dbServiceManager;
-    }
-
     public SqlPool getCommUserPool() {
         return commUserPool;
     }

@@ -1,4 +1,4 @@
-package com.game;
+package com;
 
 import com.game.manager.DBServiceManager;
 import com.game.socket.GameSocket;

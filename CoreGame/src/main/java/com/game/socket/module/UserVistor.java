@@ -1,6 +1,7 @@
 package com.game.socket.module;
 
 import com.game.socket.GameSocket;
+import com.lsocket.core.SocketServer;
 import com.lsocket.message.Request;
 import com.lsocket.message.Response;
 import com.lsocket.module.SocketSystemCode;
@@ -24,7 +25,7 @@ public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
     private GameRole gameRole;
     private RoleInfo roleInfo;
 
-    public UserVistor(GameSocket socketServer, org.apache.mina.core.session.IoSession ioSession, long timeOutTime) {
+    public UserVistor(SocketServer socketServer, org.apache.mina.core.session.IoSession ioSession, long timeOutTime) {
         super(socketServer, ioSession, timeOutTime);
     }
 

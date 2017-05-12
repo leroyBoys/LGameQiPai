@@ -111,7 +111,7 @@ public class SystemHandler extends ModuleHandler {
         NetGame.NetLoginConfirm obj = (NetGame.NetLoginConfirm) request.getObj();
         String sn = (String) request.getAttribute("sn");
 
-        UserService userService = DBServiceManager.getDbServiceManager().getUserService();
+        UserService userService = DBServiceManager.getInstance().getUserService();
 
         DB.UK key = userService.getUserKey(obj.getUid());//从redis取key
         if(!MD5Tool.GetMD5Code(Tools.getByteJoin(obj.toByteArray(), key.getKey().getBytes())).equals(sn)){
@@ -139,7 +139,7 @@ public class SystemHandler extends ModuleHandler {
             }
         }
 
-        UserService userService = DBServiceManager.getDbServiceManager().getUserService();
+        UserService userService = DBServiceManager.getInstance().getUserService();
         //发送连接成功
         RoleInfo info = userService.getRoleInfoByUid(userInfo.getId());
         if (info == null) {
@@ -154,7 +154,7 @@ public class SystemHandler extends ModuleHandler {
         vistor.setRoleInfo(info);
         OnlineManager.getIntance().putOnlineList(userInfo.getId(), info.getId(), vistor);
 
-        GameRole gameRole = DBServiceManager.getDbServiceManager().getGameRedis().getGameRole(info.getId());
+        GameRole gameRole = DBServiceManager.getInstance().getGameRedis().getGameRole(info.getId());
         vistor.setGameRole(gameRole);
         userService.updateUserInfoLoginStatus(userInfo.getId(), true, new Date());
         //发送登陆成功消息
@@ -168,7 +168,7 @@ public class SystemHandler extends ModuleHandler {
     private RoleInfo initRole(int uid) {
         int sex = -1;
         RoleInfo info = new RoleInfo(uid, "", "", sex, "");
-        int id = DBServiceManager.getDbServiceManager().getUserService().createRoleInfo(uid, info.getUserAlise(), info.getHeadImage(), info.getUserHead(), sex, info.getUserLv(), (int) info.getUserExp(), info.getVipLevel());
+        int id = DBServiceManager.getInstance().getUserService().createRoleInfo(uid, info.getUserAlise(), info.getHeadImage(), info.getUserHead(), sex, info.getUserLv(), (int) info.getUserExp(), info.getVipLevel());
         info.setId(id);
         return info;
     }

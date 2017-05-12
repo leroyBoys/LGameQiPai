@@ -1,11 +1,8 @@
 package com.game.codec;
 
-import com.game.core.service.UserService;
-import com.game.manager.DBServiceManager;
 import com.game.manager.TimeCacheManager;
 import com.game.socket.module.UserVistor;
 import com.google.protobuf.ByteString;
-import com.google.protobuf.GeneratedMessage;
 import com.google.protobuf.Message;
 import com.lgame.util.PrintTool;
 import com.lgame.util.comm.Tools;
@@ -21,13 +18,12 @@ import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolEncoderOutput;
 
-import java.util.Date;
-
 /**
  * Created by leroy:656515489@qq.com
  * 2017/4/6.
  */
 public class ResponseEncoderRemote extends ResponseEncoder {
+
     public void encode(IoSession session, Object message, ProtocolEncoderOutput encoderOutput) throws Exception {
         if (message == null) {
             return;

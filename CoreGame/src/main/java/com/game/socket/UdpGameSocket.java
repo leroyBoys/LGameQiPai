@@ -7,17 +7,16 @@ import com.game.listen.GameHeartLinster;
 import com.game.manager.CoreServiceManager;
 import com.game.manager.DBServiceManager;
 import com.game.socket.module.UserVistor;
-import com.lgame.util.file.PropertiesTool;
-import com.lgame.util.load.xml.XmlApi;
 import com.lsocket.codec.RequestDecoder;
 import com.lsocket.codec.ResponseEncoder;
 import com.lsocket.config.SocketConfig;
 import com.lsocket.core.SocketServer;
+import com.lsocket.core.UdpServer;
 import com.lsocket.listen.HeartListen;
+import com.lsocket.module.HttpRequestType;
 import com.lsocket.module.ModuleDispaterInstance;
 import org.apache.mina.core.session.IoSession;
 
-import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,16 +24,14 @@ import java.util.List;
  * Created by leroy:656515489@qq.com
  * 2017/4/6.
  */
-public class GameSocket extends SocketServer<UserVistor>{
-    public final static GameSocket gameSocket = new GameSocket();
+public class UdpGameSocket extends UdpServer<UserVistor> {
+    public final static UdpGameSocket gameSocket = new UdpGameSocket();
 
-    private GameSocket(){
+    private UdpGameSocket(){
         super(new CoreDispatcherRmote());
-        DBServiceManager.getInstance().load();
-        CoreServiceManager.getIntance().load();
     }
 
-    public static GameSocket getIntance(){
+    public static UdpGameSocket getIntance(){
         return gameSocket;
     }
 
@@ -50,7 +47,11 @@ public class GameSocket extends SocketServer<UserVistor>{
 
     @Override
     public RequestDecoder initRequestDecoder() {
-        return new RequestDecoderRemote();
+        return new RequestDecoderRemote(HttpRequestType.udp);
+    }
+
+    @Override
+    protected void initModuleHanderConfig() {
     }
 
     @Override
@@ -65,11 +66,7 @@ public class GameSocket extends SocketServer<UserVistor>{
 
     @Override
     public ModuleDispaterInstance getInnerModuleDispaterConfig() {
-        ModuleDispaterInstance ins = new ModuleDispaterInstance();
-        List<ModuleDispaterInstance.Obj> objs = new LinkedList<>();
-        objs.add(new ModuleDispaterInstance.Obj("com.game.action"));
-        ins.setObjList(objs);
-        return ins;
+        return null;
     }
 
 }

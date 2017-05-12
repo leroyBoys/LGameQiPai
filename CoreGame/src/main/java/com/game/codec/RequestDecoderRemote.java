@@ -1,7 +1,5 @@
 package com.game.codec;
 
-import com.game.core.service.UserService;
-import com.game.manager.DBServiceManager;
 import com.game.manager.TimeCacheManager;
 import com.game.socket.module.UserVistor;
 import com.lgame.util.PrintTool;
@@ -13,6 +11,7 @@ import com.lsocket.handler.CmdModule;
 import com.lsocket.manager.CMDManager;
 import com.lsocket.message.Request;
 import com.lsocket.message.Response;
+import com.lsocket.module.HttpRequestType;
 import com.lsocket.util.ReceiveData;
 import com.lsocket.util.SocketConstant;
 import com.module.core.ResponseCode;
@@ -28,7 +27,13 @@ import java.io.IOException;
  * 2017/4/6.
  */
 public class RequestDecoderRemote extends RequestDecoder {
+    private HttpRequestType httpRequestType = HttpRequestType.tcp;
+    public RequestDecoderRemote(){
+    }
 
+    public RequestDecoderRemote(HttpRequestType httpRequestType){
+        this.httpRequestType = httpRequestType;
+    }
     protected boolean doDecode(IoSession session, IoBuffer input, ProtocolDecoderOutput out) throws Exception {
         int remainSize = input.remaining();
         if (remainSize > 0) {
@@ -53,7 +58,10 @@ public class RequestDecoderRemote extends RequestDecoder {
 
             CmdModule cmdModule = CMDManager.getIntance().getCmdModule(cmd_c);
             if(cmdModule == null){
-                PrintTool.error("not find cmd_c:"+module+"  cmd:"+cmd);
+                PrintTool.error("not find module:"+module+"  cmd:"+cmd);
+                return input.hasRemaining();
+            }else if(httpRequestType != cmdModule.getModuleCmd().getRequetType()){
+                PrintTool.error("module:"+module+"  cmd:"+cmd+" shold be "+cmdModule.getModuleCmd().getRequetType());
                 return input.hasRemaining();
             }
 
