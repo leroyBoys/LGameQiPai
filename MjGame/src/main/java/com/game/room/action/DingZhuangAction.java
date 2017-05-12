@@ -1,6 +1,7 @@
 package com.game.room.action;
 
 import com.game.core.action.BaseAction;
+import com.game.core.constant.GameConst;
 import com.game.room.MjTable;
 
 /**
@@ -11,6 +12,11 @@ public class DingZhuangAction extends BaseAction<MjTable> {
     @Override
     public boolean isChangeToNextStatus(MjTable table) {
         return false;
+    }
+
+    @Override
+    public int getActionType() {
+        return GameConst.MJ.ACTION_TYPE_DINGZHUANG;
     }
 
     @Override

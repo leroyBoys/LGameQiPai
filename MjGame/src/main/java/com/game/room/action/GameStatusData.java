@@ -22,24 +22,67 @@ public class GameStatusData extends BaseStatusData {
         }
     }
 
-    protected boolean canCheckGang(MjChairInfo chairInfo,int card){
+    protected boolean checkCanGang(MjChairInfo chairInfo,int card){
         return true;
     }
 
     public void checkGang(MjChairInfo chairInfo,int card) {
-        if(!canCheckGang(chairInfo,card)){
+        if(!checkCanGang(chairInfo,card)){
             return;
         }
 
-
+        GangAction.getInstance().check(chairInfo,card);
     }
 
-    public void checkChi() {
+
+    protected boolean checkCanChi(MjChairInfo chairInfo,int card){
+        return true;
     }
 
-    public void checkPeng() {
+    public void checkChi(MjChairInfo chairInfo,int card) {
+        if(!checkCanChi(chairInfo,card)){
+            return;
+        }
+
+        ChiAction.getInstance().check(chairInfo,card);
     }
 
-    public void checkHu() {
+    protected boolean checkCanPeng(MjChairInfo chairInfo,int card){
+        return true;
     }
+
+    public void checkPeng(MjChairInfo chairInfo,int card) {
+        if(!checkCanPeng(chairInfo,card)){
+            return;
+        }
+
+        PengAction.getInstance().check(chairInfo,card);
+    }
+
+
+    protected boolean checkCanHu(MjChairInfo chairInfo,int card){
+        return true;
+    }
+
+    public void checkHu(MjChairInfo chairInfo,int card) {
+        if(!checkCanHu(chairInfo,card)){
+            return;
+        }
+
+        HuAction.getInstance().check(chairInfo,card);
+    }
+
+    protected boolean checkCanTing(MjChairInfo chairInfo,int card){
+        return true;
+    }
+
+    public void checkTing(MjChairInfo chairInfo,int card) {
+        if(!checkCanTing(chairInfo,card)){
+            return;
+        }
+
+        GangAction.getInstance().check(chairInfo,card);
+    }
+
+
 }

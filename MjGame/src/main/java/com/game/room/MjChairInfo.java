@@ -11,8 +11,8 @@ public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContaine
     /** 数值 */
     private int yapaoNum = -1;
 
-    public MjChairInfo(int uid) {
-        super(MjChairStatus.Idle);
+    public MjChairInfo(int uid, MjTable baseTableVo) {
+        super(baseTableVo,MjChairStatus.Idle);
         this.setId(uid);
     }
 

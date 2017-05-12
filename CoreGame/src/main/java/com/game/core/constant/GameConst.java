@@ -13,6 +13,8 @@ public class GameConst {
     public static final int MOUDLE_Ddz = 12;
 
 
+    /**  发牌 */
+    public static final int ACTION_TYPE_FAPAI= 5;
     /** 轮到谁 */
     public static final int ACTION_TYPE_TURN = 6;
 

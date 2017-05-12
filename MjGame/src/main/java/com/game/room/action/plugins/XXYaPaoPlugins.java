@@ -13,10 +13,10 @@ import com.module.net.NetGame;
  * Created by leroy:656515489@qq.com
  * 2017/4/24.
  */
-public class YaPaoPlugins extends AbstractStagePlugin<MjTable> {
+public class XXYaPaoPlugins extends AbstractStagePlugin<MjTable> {
     @Override
     public IOptPlugin createNew() {
-        return new YaPaoPlugins();
+        return new XXYaPaoPlugins();
     }
 
     @Override

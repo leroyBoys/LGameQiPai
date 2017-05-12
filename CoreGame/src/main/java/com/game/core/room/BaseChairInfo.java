@@ -5,6 +5,7 @@ package com.game.core.room;
  * 2017/4/21.
  */
 public abstract class BaseChairInfo<Status extends BaseChairStatus,Hands extends BaseHandCardsContainer> {
+    protected BaseTableVo tableVo;
     protected Status status;
     protected int id;
     protected int idx;
@@ -15,9 +16,10 @@ public abstract class BaseChairInfo<Status extends BaseChairStatus,Hands extends
     protected Hands handsContainer;
     protected boolean robot = false;
 
-    public BaseChairInfo(Status status){
+    public BaseChairInfo(BaseTableVo tableVo,Status status){
         this.status = status;
         handsContainer = initHands();
+        this.tableVo = tableVo;
     }
 
     protected abstract Hands initHands();
@@ -98,6 +100,10 @@ public abstract class BaseChairInfo<Status extends BaseChairStatus,Hands extends
 
     public void setAuto(boolean auto) {
         isAuto = auto;
+    }
+
+    public BaseTableVo getTableVo() {
+        return tableVo;
     }
 
     public String getImage() {

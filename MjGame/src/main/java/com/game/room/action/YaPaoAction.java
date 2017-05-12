@@ -18,6 +18,11 @@ import java.util.List;
  */
 public class YaPaoAction extends BaseAction<MjTable> {
     @Override
+    public int getActionType() {
+        return GameConst.MJ.ACTION_TYPE_YAPao;
+    }
+
+    @Override
     public boolean isChangeToNextStatus(MjTable table) {
         return false;
     }

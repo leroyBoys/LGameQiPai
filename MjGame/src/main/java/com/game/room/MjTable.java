@@ -133,7 +133,7 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
     @Override
     public MjChairInfo createChair(UserVistor visitor) {
-        MjChairInfo chairInfo = new MjChairInfo(visitor.getRoleId());
+        MjChairInfo chairInfo = new MjChairInfo(visitor.getRoleId(),this);
         chairInfo.setIp(visitor.getIp().getIp());
         return chairInfo;
     }

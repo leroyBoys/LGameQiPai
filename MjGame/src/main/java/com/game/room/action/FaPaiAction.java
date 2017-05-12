@@ -3,6 +3,7 @@ package com.game.room.action;
 import com.game.core.action.BaseAction;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
+import com.game.core.constant.GameConst;
 import com.game.room.MjTable;
 import com.game.socket.module.UserVistor;
 import com.lsocket.message.Response;
@@ -17,6 +18,11 @@ public class FaPaiAction extends BaseAction<MjTable> {
     @Override
     public void initAction(MjTable table) {
         doAction(table,null,null,null);
+    }
+
+    @Override
+    public int getActionType() {
+        return GameConst.ACTION_TYPE_FAPAI;
     }
 
     @Override
