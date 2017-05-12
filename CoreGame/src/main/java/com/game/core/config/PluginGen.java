@@ -8,7 +8,7 @@ import com.lgame.util.load.annotation.Resource;
  * 2017/4/25.
  */
 @Resource(suffix="xls",dataFromLine=3)
-public class pluginGen {
+public class PluginGen {
     @Id
     private int tempId = 0;
     private int gameId;

@@ -2,9 +2,7 @@ package com.game.core.config;
 
 import com.lgame.util.comm.StringTool;
 import com.lgame.util.file.PropertiesTool;
-import com.lgame.util.json.JsonTool;
 import com.lgame.util.load.ResourceServiceImpl;
-import com.lgame.util.load.demo.excel.RoomSettingTemplateGen;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,7 +24,7 @@ public class TablePluginManager {
 
     /**  游戏id-插件类型-插件集合 */
     private final Map<Integer,Map<Integer,ArrayList<IOptPlugin>>> optPluginMap = new HashMap<>();
-    private final Map<Integer,pluginGen> pluginGenMap = new HashMap<>();
+    private final Map<Integer,PluginGen> pluginGenMap = new HashMap<>();
 
     private final Map<Integer,RoomSetting> roomSettingMap = new HashMap<>();
     private TablePluginManager() {
@@ -47,8 +45,8 @@ public class TablePluginManager {
             roomSettingMap.put(sett.getGameId(),sett);
         }
 
-        List<pluginGen> tempList2 = (List<pluginGen>) resourceService.listAll(pluginGen.class);
-        for(pluginGen sett:tempList2){
+        List<PluginGen> tempList2 = (List<PluginGen>) resourceService.listAll(PluginGen.class);
+        for(PluginGen sett:tempList2){
             pluginGenMap.put(sett.getTempId(),sett);
 
             Map<Integer,ArrayList<IOptPlugin>> tempMap = optPluginMap.get(sett.getGameId());
@@ -66,12 +64,8 @@ public class TablePluginManager {
                     tempMap.put(actionType,optPlugins);
                 }
                 optPlugins.add(createOptPlugin(sett));
-
             }
 
-
-
-          //  roomSettingMap.put(sett.getTempId(),sett);
         }
     }
 
@@ -87,15 +81,14 @@ public class TablePluginManager {
         return roomSettingMap.get(gameId);
     }
 
-    public IOptPlugin createOptPlugin(pluginGen pg) {
+    public IOptPlugin createOptPlugin(PluginGen pg) {
         if(pg == null){
             return null;
         }
 
-        String classpath = pg.getPluginClass();
         try {
             Class clazz = Class.forName(PluginsPath.getPluginsPath(pg.getGameId()) + "."
-                    + classpath);
+                    + pg.getPluginClass());
             IOptPlugin optPlugin =  (IOptPlugin) clazz.newInstance();
             optPlugin.setPluginId(pg.getTempId());
             return optPlugin;
@@ -105,10 +98,8 @@ public class TablePluginManager {
         return null;
     }
 
-
-
     public enum PluginsPath{
-        mj(1,""),
+        mj(1,"com.game.room.action.plugins"),
         ddz(2,"");
         private final int id;
         private  final String path;
