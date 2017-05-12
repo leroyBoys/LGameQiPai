@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args){
         try {
 
-            TablePluginManager.getInstance().refresh("RoomSetting.xls","pluginGen.xls");
+            TablePluginManager.getInstance().refresh("xml/RoomSetting.xls", "xml/pluginGen.xls");
 
           //  GameSocket.getIntance().start();
         } catch (Exception e) {

@@ -28,8 +28,8 @@ public class GameSocket extends SocketServer<UserVistor>{
 
     private GameSocket(){
         super(new CoreDispatcherRmote());
-       DBServiceManager.getInstance().load();
-       CoreServiceManager.getIntance().load();
+        DBServiceManager.getInstance().load();
+        CoreServiceManager.getIntance().load();
     }
 
     public static GameSocket getIntance(){
@@ -65,7 +65,7 @@ public class GameSocket extends SocketServer<UserVistor>{
     public ModuleDispaterInstance getInnerModuleDispaterConfig() {
         ModuleDispaterInstance ins = new ModuleDispaterInstance();
         List<ModuleDispaterInstance.Obj> objs = new LinkedList<>();
-        objs.add(new ModuleDispaterInstance.Obj("com.game.handler"));
+        objs.add(new ModuleDispaterInstance.Obj("com.game.action"));
         ins.setObjList(objs);
         return ins;
     }
