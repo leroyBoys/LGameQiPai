@@ -22,10 +22,6 @@ public class PluginGen {
     /** 插件执行的效果 */
     private String effectStr;
 
-    private int zimoFlag = 0;
-    private int dianedFlag = 0;
-    private int zimoedFlag = 0;
-    private int dianFlag = 0;
     private int subType = 0;
     private int canDoType = 0; //客户端可做的操作
 
@@ -83,38 +79,6 @@ public class PluginGen {
 
     public void setEffectStr(String effectStr) {
         this.effectStr = effectStr;
-    }
-
-    public int getZimoFlag() {
-        return zimoFlag;
-    }
-
-    public void setZimoFlag(int zimoFlag) {
-        this.zimoFlag = zimoFlag;
-    }
-
-    public int getDianedFlag() {
-        return dianedFlag;
-    }
-
-    public void setDianedFlag(int dianedFlag) {
-        this.dianedFlag = dianedFlag;
-    }
-
-    public int getZimoedFlag() {
-        return zimoedFlag;
-    }
-
-    public void setZimoedFlag(int zimoedFlag) {
-        this.zimoedFlag = zimoedFlag;
-    }
-
-    public int getDianFlag() {
-        return dianFlag;
-    }
-
-    public void setDianFlag(int dianFlag) {
-        this.dianFlag = dianFlag;
     }
 
     public int getSubType() {
