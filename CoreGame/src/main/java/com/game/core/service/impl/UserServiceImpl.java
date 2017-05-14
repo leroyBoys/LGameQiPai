@@ -35,6 +35,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void setUserKey(int uid,String ipPot,String key) {
+        userRedis.setUserKey(uid,ipPot,key);
+    }
+
+    @Override
     public boolean isOnline(int uid) {
         return OnlineManager.getIntance().getUserById(uid) != null;
     }

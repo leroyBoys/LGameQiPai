@@ -18,6 +18,8 @@ public interface UserService {
 
     public DB.UK getUserKey(int uid);
 
+    public void setUserKey(int uid,String ipPot,String key);
+
     public boolean isOnline(int uid);
 
     public UserInfo getUserInfo(String userName, String pwd);
@@ -45,7 +47,6 @@ public interface UserService {
     public boolean updateUserInfoLastDev(int uid, int devId);
 
     public boolean updateUserInfoLoginStatus(int uid, boolean isOnline, Date updateTime);
-
 
     public RoleInfo getRoleInfoByUid(int uid);
 

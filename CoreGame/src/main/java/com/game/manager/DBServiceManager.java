@@ -8,7 +8,11 @@ import com.game.core.service.UserService;
 import com.game.core.service.impl.UserServiceImpl;
 import com.lgame.util.comm.StringTool;
 import com.lgame.util.file.PropertiesTool;
+import com.logger.log.SystemLogger;
+import com.lsocket.config.SocketConfig;
 import com.lsocket.core.ICommon;
+import com.lsocket.module.IP;
+import com.lsocket.util.SocketConstant;
 import com.module.GameServer;
 import com.module.ServerGroup;
 import com.mysql.impl.SqlPool;
@@ -61,23 +65,26 @@ public class DBServiceManager extends ICommon {
         return dbProper;
     }
 
-    private void loadConfig(Properties properties){
-        SqlPool.DataSourceType sourceType = SqlPool.DataSourceType.valueOf(properties.getProperty("server.dbtype"));
+    private void loadConfig(){
+        SocketConfig socketConfig = SocketConfig.getInstance();
+        SqlPool.DataSourceType sourceType = SqlPool.DataSourceType.valueOf(socketConfig.getDbType());
         if(sourceType == null){
-            throw new RuntimeException(properties.getProperty("server.dbtype")+" can not find in DataSourceType");
+            throw new RuntimeException(socketConfig.getDbType()+" can not find in DataSourceType");
         }
         Properties dbProper = getProperties(sourceType);
         commUserPool = new SqlPool(sourceType,dbProper);
 
         serverService = new ServerService(commUserPool);
-        gameServer = serverService.getServerById(Integer.valueOf(properties.getProperty("server.id")));
+        gameServer = serverService.getServerById(socketConfig.getServerId());
         if(gameServer == null){
-            throw new RuntimeException(properties.getProperty("server.id")+" cant find from db");
+            throw new RuntimeException(socketConfig.getServerId()+" cant find from db");
+        }else {
+            SystemLogger.info(this.getClass(),"localhost:"+gameServer.getIp()+" serverType:"+gameServer.getServerType());
         }
 
-        if(gameServer.getServerType() != GameServer.ServerType.gate){
-            throw new RuntimeException(properties.getProperty("server.id")+" serverType:"+gameServer.getServerType());
-        }
+       /* if(gameServer.getServerType() != GameServer.ServerType.gate){
+            throw new RuntimeException(socketConfig.getServerId()+" serverType:"+gameServer.getServerType());
+        }*/
         serverGroup  = serverService.getServerGroup(gameServer.getGroupNum());
         if(serverGroup == null){
             throw new RuntimeException("can not find goupNum:"+gameServer.getGroupNum() + " in serverGroup db");
@@ -85,11 +92,12 @@ public class DBServiceManager extends ICommon {
 
         dbProper = resetProper(dbProper);
         commGamePool = new SqlPool(sourceType,dbProper);
+
+        SocketConstant.init(new IP(gameServer.getIp(),gameServer.getPort()),socketConfig.getMaxSocketLength(),socketConfig.getMaxQuqueVistor(),socketConfig.getSameIpMaxConnections());
     }
 
     protected void initService(){
-        loadConfig(PropertiesTool.loadProperty("server.properties"));
-        //RedisConnectionManager redisConnectionManager = new RedisConnectionManager(properties);
+        loadConfig();
 
         Properties redisProperties = PropertiesTool.loadProperty("redis.properties");
 

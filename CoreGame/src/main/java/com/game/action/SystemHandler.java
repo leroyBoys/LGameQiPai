@@ -12,12 +12,14 @@ import com.game.socket.module.UserVistor;
 import com.lgame.util.PrintTool;
 import com.lgame.util.comm.Tools;
 import com.lgame.util.encry.MD5Tool;
+import com.logger.log.SystemLogger;
 import com.lsocket.control.impl.CoreDispatcher;
 import com.lsocket.handler.ModuleCmd;
 import com.lsocket.handler.ModuleHandler;
 import com.lsocket.manager.CMDManager;
 import com.lsocket.message.Request;
 import com.lsocket.message.Response;
+import com.lsocket.util.SocketConstant;
 import com.module.Status;
 import com.module.core.ResponseCode;
 import com.module.db.RoleInfo;
@@ -117,7 +119,13 @@ public class SystemHandler extends ModuleHandler {
         if(!MD5Tool.GetMD5Code(Tools.getByteJoin(obj.toByteArray(), key.getKey().getBytes())).equals(sn)){
             vistor.getIoSession().closeNow();
             return;
+        }else if(!key.getIpPort().equals(SocketConstant.getLocalIp().getAll())){
+            vistor.getIoSession().closeNow();
+            SystemLogger.error(this.getClass(),"you should load:"+key.getIpPort());
+            return;
         }
+        key.toBuilder().setKey(SocketConstant.getLocalIp().getAll());
+        userService.setUserKey(key.getUid(),key.getIpPort(),key.getKey());
 
         vistor.setUk(key);
         UserInfo userInfo = userService.getUserInfo(obj.getUid());
@@ -142,20 +150,22 @@ public class SystemHandler extends ModuleHandler {
         UserService userService = DBServiceManager.getInstance().getUserService();
         //发送连接成功
         RoleInfo info = userService.getRoleInfoByUid(userInfo.getId());
+        GameRole gameRole = null;
         if (info == null) {
             //如果多角色则返回选择页面
             //如果不是自动初始化
             info = initRole(userInfo.getId());
 
+            gameRole = new GameRole(info.getId(),0,0);
             ///初始化创建角色奖励
-            initLoginReward(info);
+            initLoginReward(gameRole);
+        }else {
+            gameRole = DBServiceManager.getInstance().getGameRedis().getGameRole(info.getId());
         }
+        vistor.setGameRole(gameRole);
 
         vistor.setRoleInfo(info);
         OnlineManager.getIntance().putOnlineList(userInfo.getId(), info.getId(), vistor);
-
-        GameRole gameRole = DBServiceManager.getInstance().getGameRedis().getGameRole(info.getId());
-        vistor.setGameRole(gameRole);
         userService.updateUserInfoLoginStatus(userInfo.getId(), true, new Date());
         //发送登陆成功消息
 
@@ -173,7 +183,8 @@ public class SystemHandler extends ModuleHandler {
         return info;
     }
 
-    private void initLoginReward(RoleInfo info) {
+    private void initLoginReward(GameRole roleInfo) {
 
+        roleInfo.setCard(10);
     }
 }

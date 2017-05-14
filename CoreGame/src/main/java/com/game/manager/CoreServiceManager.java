@@ -1,5 +1,6 @@
 package com.game.manager;
 
+import com.game.config.SocketConfigRemote;
 import com.game.util.TaskScheduler;
 import com.lgame.util.json.JsonTool;
 import com.lsocket.core.ICommon;
@@ -21,7 +22,6 @@ public class CoreServiceManager extends ICommon {
     @Override
     protected void initService() {
         this.taskScheduler = new TaskScheduler(1);
-
     }
 
     @Override

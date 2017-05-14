@@ -39,7 +39,7 @@ public class ResponseEncoderRemote extends ResponseEncoder {
             UserVistor vistor = (UserVistor) session.getAttribute(SocketConstant.SessionKey.vistorKey);
             DB.UK key = vistor.getUk();
             
-            byte[] t = getCommondMes((Response) message, key, session);
+            byte[] t = getCommondMes((Response) message, key.getUid(),key.getKey(), session);
             // 定义一个发送消息协议格式：|--header:4 byte--|--content:10MB--|
             IoBuffer buf = transformByteArray(t);
 
@@ -68,7 +68,7 @@ public class ResponseEncoderRemote extends ResponseEncoder {
         return buffer;
     }
 
-    public static byte[] getCommondMes(Response response, DB.UK key, IoSession session) throws Exception {
+    public static byte[] getCommondMes(Response response, int uid,String key, IoSession session) throws Exception {
         NetParentOld.NetCommond.Builder com = NetParentOld.NetCommond.newBuilder();
 
         int cmdc = CMDManager.getCmd_M(response.getModule(),response.getCmd());
@@ -83,16 +83,16 @@ public class ResponseEncoderRemote extends ResponseEncoder {
         byte[] datas = response.getValue();
         if(datas == null && obj != null){
             datas = obj.toByteArray();
-            PrintTool.info(key.getUid()+"---Send---cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd())+"  "+datas.toString());
+            PrintTool.info(uid+"---Send---cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd())+"  "+datas.toString());
         }else {
-            PrintTool.info(key.getUid()+"---Send---cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd()));
+            PrintTool.info(uid+"---Send---cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd()));
         }
 
         if(datas != null){
             byte[] data = ZipTool.compressBytes(datas);//压缩
             com.setObj(ByteString.copyFrom(data));
 
-            String d = MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.getKey().getBytes()));//加密
+            String d = MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.getBytes()));//加密
             com.setSn(d);
         }
 

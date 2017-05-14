@@ -3,6 +3,7 @@ package com.game.core.dao.redis;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lgame.util.comm.FormatDataTool;
+import com.lgame.util.time.DateTimeTool;
 import com.module.net.DB;
 import com.redis.impl.RedisConnectionManager;
 
@@ -35,7 +36,8 @@ public class UserRedis {
         uk.setUid(uid);
         uk.setIpPort(ipPort);
         uk.setKey(key);
-
-        redisConnectionManager.getMaster().set(FormatDataTool.intToByteArray(uid),uk.build().toByteArray());
+        byte[] redisKey = FormatDataTool.intToByteArray(uid);
+        redisConnectionManager.getMaster().expire(redisKey, DateTimeTool.M_ONE_DAY);
+        redisConnectionManager.getMaster().set(redisKey,uk.build().toByteArray());
     }
 }
