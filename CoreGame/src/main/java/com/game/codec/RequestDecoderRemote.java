@@ -68,7 +68,7 @@ public class RequestDecoderRemote extends RequestDecoder {
             TimeCacheManager.getInstance().setCurTime(System.currentTimeMillis());
             UserVistor vistor = (UserVistor) session.getAttribute(SocketConstant.SessionKey.vistorKey);
             if(!cmdModule.getModuleCmd().isRequireOnline()){
-                Request request = cmdModule.getRequset(commond.getObj().toByteArray(),module,cmd,commond.getSeq());
+                Request request = cmdModule.getRequset(getData(commond),module,cmd,commond.getSeq());
                 request.addAttribute("sn",commond.getSn());
                 out.write(request);
                 return input.hasRemaining();
@@ -94,7 +94,7 @@ public class RequestDecoderRemote extends RequestDecoder {
                     return false;//父类接收新数据
                 }
 
-                data = ZipTool.uncompressBytes(data);//解压缩
+                data = getData(commond);//解压缩
             }
 
             vistor.setModule(CMDManager.getModule(cmd_c));
@@ -103,6 +103,11 @@ public class RequestDecoderRemote extends RequestDecoder {
             return input.hasRemaining();
         }
         return false;
+    }
+
+    private byte[] getData(NetParentOld.NetCommond commond) throws IOException {
+        byte[] data = commond.getObj().toByteArray();
+        return ZipTool.uncompressBytes(data);//解压缩
     }
 
     @Override

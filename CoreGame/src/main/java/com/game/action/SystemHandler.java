@@ -10,6 +10,7 @@ import com.game.socket.GameSocket;
 import com.game.socket.module.GameRole;
 import com.game.socket.module.UserVistor;
 import com.lgame.util.PrintTool;
+import com.lgame.util.comm.StringTool;
 import com.lgame.util.comm.Tools;
 import com.lgame.util.encry.MD5Tool;
 import com.logger.log.SystemLogger;
@@ -116,10 +117,11 @@ public class SystemHandler extends ModuleHandler {
         UserService userService = DBServiceManager.getInstance().getUserService();
 
         DB.UK key = userService.getUserKey(obj.getUid());//从redis取key
-        if(!MD5Tool.GetMD5Code(Tools.getByteJoin(obj.toByteArray(), key.getKey().getBytes())).equals(sn)){
+        /*if(!MD5Tool.GetMD5Code(Tools.getByteJoin(obj.toByteArray(), key.getKey().getBytes())).equals(sn)){
             vistor.getIoSession().closeNow();
             return;
-        }else if(!key.getIpPort().equals(SocketConstant.getLocalIp().getAll())){
+        }else */
+        if(StringTool.isNotNull(key.getIpPort()) && !key.getIpPort().equals(SocketConstant.getLocalIp().getAll())){
             vistor.getIoSession().closeNow();
             SystemLogger.error(this.getClass(),"you should load:"+key.getIpPort());
             return;

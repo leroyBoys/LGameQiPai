@@ -8,6 +8,7 @@ import com.game.core.service.UserService;
 import com.game.core.service.impl.UserServiceImpl;
 import com.lgame.util.comm.StringTool;
 import com.lgame.util.file.PropertiesTool;
+import com.lgame.util.json.JsonUtil;
 import com.logger.log.SystemLogger;
 import com.lsocket.config.SocketConfig;
 import com.lsocket.core.ICommon;
@@ -18,6 +19,7 @@ import com.module.ServerGroup;
 import com.mysql.impl.SqlPool;
 import com.redis.impl.RedisConnectionManager;
 
+import java.util.Enumeration;
 import java.util.Properties;
 
 /**
@@ -54,7 +56,15 @@ public class DBServiceManager extends ICommon {
         return PropertiesTool.loadProperty("hikari_db.properties");
     }
 
-    private Properties resetProper(Properties dbProper) {
+    private Properties resetProper(Properties dp) {
+        Enumeration enumeration = dp.propertyNames();
+
+        Properties dbProper = new Properties();
+        while (enumeration.hasMoreElements()){
+            Object o = enumeration.nextElement();
+            dbProper.put(o,dp.get(o));
+        }
+
         dbProper.setProperty("username",serverGroup.getSqlUserName());
         dbProper.setProperty("password",serverGroup.getSqlPwd());
         if(StringTool.isNotNull(dbProper.getProperty("jdbcUrl"))){

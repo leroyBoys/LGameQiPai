@@ -75,7 +75,7 @@ public class UserDao implements Base {
     public UserInfo getUserInfo(int uid) {
         MethodCacheTime ct = new MethodCacheTime();
         try {
-            return userPool.ExecuteQueryOne(UserInfo.instance,"CALL GET_USERINFO_UP(?,?)", new Object[]{uid});
+            return userPool.ExecuteQueryOne(UserInfo.instance,"SELECT * FROM user_info WHERE id = ?", uid);
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
