@@ -22,7 +22,6 @@ public class RoleInfo extends DbFactory{
     private int id;
     private int uid;
     private String userAlise;
-    private byte[] userHead;
     private String headImage;
     private int userLv;
     private long userExp;
@@ -35,7 +34,6 @@ public class RoleInfo extends DbFactory{
     private Date createDate;
     private Status.UserStatus userStatus;//Status.userStatus
 
-    private String signature;//签名
     private int card;//0: card
 
     public RoleInfo() {
@@ -50,7 +48,6 @@ public class RoleInfo extends DbFactory{
         role.setUid(rs.getInt("uid"));
         role.setUserAlise(rs.getString("user_alise"));
         role.setUserExp(rs.getLong("user_exp"));
-        role.setUserHead(rs.getBytes("user_head"));
         role.setUserLv(rs.getInt("user_lv"));
         role.setUserSex(rs.getInt("user_sex"));
         role.setUserStatus(Status.UserStatus.indexOf(rs.getInt("user_status")));
@@ -65,23 +62,14 @@ public class RoleInfo extends DbFactory{
         return new RoleInfo();
     }
 
-    public RoleInfo(int uid, String userAlise, String headImage, int userSex, String signature) {
+    public RoleInfo(int uid, String userAlise, String headImage, int userSex) {
         this.uid = uid;
         this.userAlise = userAlise;
         this.headImage = headImage;
         this.userLv = 1;
         this.userSex = userSex;
-        this.signature = signature;
         this.createDate = new Date();
         this.userStatus = Status.UserStatus.not_create;
-    }
-
-    public String getSignature() {
-        return signature;
-    }
-
-    public void setSignature(String signature) {
-        this.signature = signature;
     }
 
     public int getVipLevel() {
@@ -114,14 +102,6 @@ public class RoleInfo extends DbFactory{
 
     public void setUserAlise(String userAlise) {
         this.userAlise = userAlise;
-    }
-
-    public byte[] getUserHead() {
-        return userHead;
-    }
-
-    public void setUserHead(byte[] userHead) {
-        this.userHead = userHead;
     }
 
     public String getHeadImage() {

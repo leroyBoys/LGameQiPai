@@ -137,8 +137,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int createRoleInfo(int uid, String alise, String headImage, byte[] head, int sex, int iv, int exp, int vip) {
-        return userDao.createRoleInfo(uid, alise, headImage, head, sex, iv, exp, vip);
+    public int createRoleInfo(int uid, String alise, String headImage, int sex, int iv, int exp, int vip) {
+        return userDao.createRoleInfo(uid, alise, headImage, sex, iv, exp, vip);
     }
 
     @Override

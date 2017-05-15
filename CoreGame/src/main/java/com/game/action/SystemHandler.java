@@ -21,6 +21,7 @@ import com.lsocket.manager.CMDManager;
 import com.lsocket.message.Request;
 import com.lsocket.message.Response;
 import com.lsocket.util.SocketConstant;
+import com.module.FromType;
 import com.module.Status;
 import com.module.core.ResponseCode;
 import com.module.db.RoleInfo;
@@ -156,7 +157,7 @@ public class SystemHandler extends ModuleHandler {
         if (info == null) {
             //如果多角色则返回选择页面
             //如果不是自动初始化
-            info = initRole(userInfo.getId());
+            info = initRole(userInfo);
 
             gameRole = new GameRole(info.getId(),0,0);
             ///初始化创建角色奖励
@@ -177,10 +178,14 @@ public class SystemHandler extends ModuleHandler {
         vistor.sendMsg(response);
     }
 
-    private RoleInfo initRole(int uid) {
+    private RoleInfo initRole(UserInfo roleInfo) {
         int sex = -1;
-        RoleInfo info = new RoleInfo(uid, "", "", sex, "");
-        int id = DBServiceManager.getInstance().getUserService().createRoleInfo(uid, info.getUserAlise(), info.getHeadImage(), info.getUserHead(), sex, info.getUserLv(), (int) info.getUserExp(), info.getVipLevel());
+        RoleInfo info = new RoleInfo(roleInfo.getId(), "", "", sex);
+        if(roleInfo.getUserFromType() == FromType.tx.val()){//获取数据
+
+        }
+
+        int id = DBServiceManager.getInstance().getUserService().createRoleInfo(roleInfo.getId(), info.getUserAlise(), info.getHeadImage(), sex, info.getUserLv(), (int) info.getUserExp(), info.getVipLevel());
         info.setId(id);
         return info;
     }

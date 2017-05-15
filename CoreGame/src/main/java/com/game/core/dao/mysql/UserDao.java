@@ -233,11 +233,13 @@ public class UserDao implements Base {
     }
 
 
-    public int createRoleInfo(int uid, String alise, String headImage, byte[] head, int sex, int iv, int exp, int vip) {
+    public int createRoleInfo(int uid, String alise, String headImage,int sex, int iv, int exp, int vip) {
         MethodCacheTime ct = new MethodCacheTime();
         try {
-            return (int) gamePool.Insert("INSERT INTO role_info(user_alise,uid,user_head,head_image,user_lv,user_exp,vip_level,vip_end_time,user_sex,create_date,user_status)VALUES(?,?,?,?,?,?,?,?,?,?,?)", new Object[]{
-                    alise, uid, head, headImage, iv, exp, 0, null, sex, new Date(), Status.UserStatus.normal.getValue()});
+            return (int) gamePool.Insert("INSERT INTO role_info" +
+                            "(user_alise,uid,head_image,user_lv,user_exp,vip_level,vip_end_time,user_sex,create_date,user_status)" +
+                            "VALUES(?,?,?,?,?,?,?,?,?,?)",
+                    alise, uid, headImage, iv, exp, 0, null, sex, new Date(), Status.UserStatus.normal.getValue());
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
@@ -293,7 +295,7 @@ public class UserDao implements Base {
     public RoleInfo getRoleInfoByUid(int uid) {
         MethodCacheTime ct = new MethodCacheTime();
         try {
-            return gamePool.ExecuteQueryOne(RoleInfo.instance,"CALL get_role_by_uid(?)", new Object[]{uid});
+            return gamePool.ExecuteQueryOne(RoleInfo.instance,"SELECT * FROM role_info WHERE uid = 1?", uid);
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {

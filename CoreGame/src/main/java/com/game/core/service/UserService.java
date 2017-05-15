@@ -52,7 +52,7 @@ public interface UserService {
 
     public RoleInfo getRoleInfoById(int id);
 
-    public int createRoleInfo(int uid, String alise, String headImage, byte[] head, int sex, int iv, int exp, int vip);
+    public int createRoleInfo(int uid, String alise, String headImage,int sex, int iv, int exp, int vip);
 
     public void updateRoleInfo(RoleInfo info);
 
