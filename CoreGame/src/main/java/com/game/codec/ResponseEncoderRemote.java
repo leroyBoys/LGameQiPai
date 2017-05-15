@@ -89,11 +89,11 @@ public class ResponseEncoderRemote extends ResponseEncoder {
         }
 
         if(datas != null){
-            byte[] data = ZipTool.compressBytes(datas);//压缩
-            com.setObj(ByteString.copyFrom(data));
+           // byte[] data = ZipTool.compressBytes(datas);//压缩
+            com.setObj(ByteString.copyFrom(datas));
 
-            String d = MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.getBytes()));//加密
-            com.setSn(d);
+          /*  String d = MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.getBytes()));//加密
+            com.setSn(d);*/
         }
 
         return com.build().toByteArray();

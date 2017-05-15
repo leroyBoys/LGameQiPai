@@ -56,15 +56,7 @@ public class DBServiceManager extends ICommon {
         return PropertiesTool.loadProperty("hikari_db.properties");
     }
 
-    private Properties resetProper(Properties dp) {
-        Enumeration enumeration = dp.propertyNames();
-
-        Properties dbProper = new Properties();
-        while (enumeration.hasMoreElements()){
-            Object o = enumeration.nextElement();
-            dbProper.put(o,dp.get(o));
-        }
-
+    private Properties resetProper(Properties dbProper) {
         dbProper.setProperty("username",serverGroup.getSqlUserName());
         dbProper.setProperty("password",serverGroup.getSqlPwd());
         if(StringTool.isNotNull(dbProper.getProperty("jdbcUrl"))){

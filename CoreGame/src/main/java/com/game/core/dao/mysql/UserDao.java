@@ -1,6 +1,8 @@
 package com.game.core.dao.mysql;
 
-import com.game.util.MethodCacheTime;
+import com.game.manager.CoreServiceManager;
+import com.lgame.util.MethodCacheTime;
+import com.lgame.util.StatisticsMonitor;
 import com.logger.type.LogType;
 import com.module.CustomKey;
 import com.module.SetKey;
@@ -20,38 +22,36 @@ import java.util.Map;
 public class UserDao implements Base {
     private SqlPool userPool;
     private SqlPool gamePool;
+    private StatisticsMonitor monitor;
     public UserDao(SqlPool userPool,SqlPool gamePool){
         this.userPool = userPool;
         this.gamePool = gamePool;
-    }
-
-    public UserInfo getUserInfo(String userName, String pwd) {
-        MethodCacheTime ct = new MethodCacheTime();
-        try {
-            return userPool.ExecuteQueryOne(UserInfo.instance,"CALL GET_USERINFO_UP(?,?)", new Object[]{userName, pwd});
-        } catch (Exception ex) {
-            file.ErrorLog(ex, LogType.Error, "db");
-        } finally {
-            ct.dbTrace("GET_USERINFO_UP");
-        }
-        return null;
+        monitor = CoreServiceManager.getIntance().monitor;
     }
 
     public UserInfo getUserInfo(String userName) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
-            return userPool.ExecuteQueryOne(UserInfo.instance,"CALL GET_USERINFO_UP(?,?)", new Object[]{userName});
+            return userPool.ExecuteQueryOne(UserInfo.instance,"SELECT * FROM user_info WHERE user_name =?", userName);
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("GET_USERINFO_NAME");
+            monitor.end(ct,"getUserInfo1");
         }
         return null;
     }
 
    
     public UserInfo getUserInfoFromId(int fromId) {
-        return getUserInfo(0, fromId, 0);
+        MethodCacheTime ct = monitor.start();
+        try {
+            return userPool.ExecuteQueryOne(UserInfo.instance,"SELECT * FROM user_info WHERE user_from_id = ?", fromId);
+        } catch (Exception ex) {
+            file.ErrorLog(ex, LogType.Error, "db");
+        } finally {
+            monitor.end(ct,"getUserInfoFromId");
+        }
+        return null;
     }
 
    
@@ -60,20 +60,20 @@ public class UserDao implements Base {
     }
 
     private UserInfo getUserInfo(int uid, int fromId, int devId) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
-            return userPool.ExecuteQueryOne(UserInfo.instance,"CALL GET_USERINFO_UP(?,?)", new Object[]{uid, fromId,devId});
+            return userPool.ExecuteQueryOne(UserInfo.instance,"SELECT * FROM user_info WHERE id= ? AND user_from_id = ? AND device_id = ?",uid, fromId,devId);
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("GET_USERINFO_ID");
+            monitor.end(ct,"getUserInfo2");
         }
         return null;
     }
 
 
     public UserInfo getUserInfo(int uid) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             return userPool.ExecuteQueryOne(UserInfo.instance,"SELECT * FROM user_info WHERE id = ?", uid);
         } catch (Exception ex) {
@@ -86,7 +86,7 @@ public class UserDao implements Base {
 
    
     public UserInfo insertUserInfo(UserInfo info) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             long id = userPool.Insert("INSERT INTO user_info(device_id,user_from_type,user_from_id,user_name,user_pwd,role,invite_code,user_status,status_endtime,create_date)"
                     + "			VALUES(?,?,?,?,?,?,?,?,?,?)", new Object[]{
@@ -113,7 +113,7 @@ public class UserDao implements Base {
 
    
     public UserDev insertDev(UserDev dev) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             long id = userPool.Insert("INSERT INTO user_device(device_info,device_name,os_id,device_mac,udid,create_date)VALUES(?,?,?,?,?,?)", new Object[]{
                     dev.getDeviceInfo(),
@@ -135,7 +135,7 @@ public class UserDao implements Base {
 
    
     public int findDevId(String device_mc, String udid) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
           Object obj = userPool.ExecuteQueryOnlyValue("CALL GET_DEV(?,?)", new Object[]{
                   device_mc,
@@ -155,7 +155,7 @@ public class UserDao implements Base {
 
    
     public UserFrom insertFrom(UserFrom from) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             long id = userPool.Insert("INSERT INTO user_from(user_src,serial_num,info,create_date)VALUES(?,?,?,?)", new Object[]{from.getUserSrc(), from.getSerialNum(), from.getInfo(), from.getCreateDate()});
             from.setId((int) id);
@@ -170,7 +170,7 @@ public class UserDao implements Base {
 
    
     public boolean updateUserInfoStatus(int uid, Status.UserStatus status, Date endTime) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             userPool.Execute("CALL SET_USERINFO_STATUS(?,?,?)", new Object[]{
                     uid, status.getValue(), endTime
@@ -186,7 +186,7 @@ public class UserDao implements Base {
 
    
     public boolean updateUserInfoLoginStatus(int uid, boolean isOnline, Date updateTime) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             userPool.Execute("CALL SET_USERINFO_ONLINE(?,?,?)", new Object[]{
                     uid, isOnline, updateTime
@@ -202,7 +202,7 @@ public class UserDao implements Base {
 
    
     public boolean updateUserInfoStatus(int uid, String userName, String pwd, String invite_code) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             userPool.Execute("CALL SET_USERINFO_AGAIN(?,?,?,?)", new Object[]{
                     uid, userName, pwd, invite_code
@@ -218,7 +218,7 @@ public class UserDao implements Base {
 
    
     public boolean updateUserInfoLastDev(int uid, int devId) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             userPool.Execute("CALL SET_USERINFO_DEV(?,?)", new Object[]{
                     uid, devId
@@ -234,7 +234,7 @@ public class UserDao implements Base {
 
 
     public int createRoleInfo(int uid, String alise, String headImage,int sex, int iv, int exp, int vip) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             return (int) gamePool.Insert("INSERT INTO role_info" +
                             "(user_alise,uid,head_image,user_lv,user_exp,vip_level,vip_end_time,user_sex,create_date,user_status)" +
@@ -250,7 +250,7 @@ public class UserDao implements Base {
 
    
     public boolean updatepwd(int uid, String oldPwd, String newpwd) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             return userPool.ExecuteUpdate("CALL SET_USERINFO_PWD(?,?,?)", new Object[]{
                     uid, oldPwd, newpwd
@@ -265,7 +265,7 @@ public class UserDao implements Base {
 
    
     public String getCustom(int uid, CustomKey ck) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             return (String) gamePool.ExecuteQueryOnlyValue("CALL get_user_custom(?,?)", new Object[]{uid, ck.getValue()});
         } catch (Exception ex) {
@@ -278,7 +278,7 @@ public class UserDao implements Base {
 
    
     public boolean setCustom(int uid, CustomKey ck, String val) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             return gamePool.ExecuteUpdate("CALL set_user_custom(?,?,?)", new Object[]{
                     uid, ck.getValue(), val
@@ -293,7 +293,7 @@ public class UserDao implements Base {
 
    
     public RoleInfo getRoleInfoByUid(int uid) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             return gamePool.ExecuteQueryOne(RoleInfo.instance,"SELECT * FROM role_info WHERE uid = 1?", uid);
         } catch (Exception ex) {
@@ -312,7 +312,7 @@ public class UserDao implements Base {
      */
    
     public Map<Integer, String> getUserSetByKey(int uid, SetKey ck) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             return (Map<Integer, String>) gamePool.ExecuteQueryOnlyValue("CALL get_sets_uid_pid(?,?)", new Object[]{uid, ck.getValue()});
         } catch (Exception ex) {
@@ -325,7 +325,7 @@ public class UserDao implements Base {
 
    
     public List<UserSet> getUserSets(int uid) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             return gamePool.ExecuteQuery(UserSet.instance,"CALL get_sets_uid(?)", new Object[]{uid});
         } catch (Exception ex) {
@@ -338,7 +338,7 @@ public class UserDao implements Base {
 
    
     public boolean setUserSet(int uid, SetKey ck, int cid, String val) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             return gamePool.ExecuteUpdate("CALL set_user_set(?,?,?,?)", new Object[]{uid, ck.getValue(), cid, val});
         } catch (Exception ex) {
@@ -351,7 +351,7 @@ public class UserDao implements Base {
 
    
     public RoleInfo getRoleInfoById(int id) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             return gamePool.ExecuteQueryOne(RoleInfo.instance,"CALL get_role_by_id(?)", new Object[]{id});
         } catch (Exception ex) {
@@ -363,7 +363,7 @@ public class UserDao implements Base {
     }
 
     public void updateCard(int roleId, int card) {
-        MethodCacheTime ct = new MethodCacheTime();
+        MethodCacheTime ct = monitor.start();
         try {
             gamePool.Execute("CALL get_role_by_id(update user_info set card=? where id = ?)",roleId,card);
         } catch (Exception ex) {
