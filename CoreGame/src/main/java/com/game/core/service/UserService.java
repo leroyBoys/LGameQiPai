@@ -42,8 +42,6 @@ public interface UserService {
 
     public boolean updateUserInfoStatus(int uid, Status.UserStatus status, Date endTime);
 
-    public boolean updateUserInfoStatus(int uid, String userName, String pwd, String invite_code);
-
     public boolean updateUserInfoLastDev(int uid, int devId);
 
     public boolean updateUserInfoLoginStatus(int uid, boolean isOnline, Date updateTime);
@@ -56,7 +54,7 @@ public interface UserService {
 
     public void updateRoleInfo(RoleInfo info);
 
-    public boolean updatepwd(int uid, String oldPwd, String newpwd);
+    public boolean updatepwd(int uid, String newpwd);
 
     public String getCustom(int uid, CustomKey ck);
 

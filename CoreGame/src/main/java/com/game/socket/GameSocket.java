@@ -30,8 +30,8 @@ public class GameSocket extends SocketServer<UserVistor>{
 
     private GameSocket(){
         super(new CoreDispatcherRmote());
-        DBServiceManager.getInstance().load();
         CoreServiceManager.getIntance().load();
+        DBServiceManager.getInstance().load();
     }
 
     public static GameSocket getIntance(){

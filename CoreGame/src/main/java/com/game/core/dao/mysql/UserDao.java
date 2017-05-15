@@ -79,7 +79,7 @@ public class UserDao implements Base {
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("GET_USERINFO_ID");
+            monitor.end(ct,"getUserInfo3");
         }
         return null;
     }
@@ -89,7 +89,7 @@ public class UserDao implements Base {
         MethodCacheTime ct = monitor.start();
         try {
             long id = userPool.Insert("INSERT INTO user_info(device_id,user_from_type,user_from_id,user_name,user_pwd,role,invite_code,user_status,status_endtime,create_date)"
-                    + "			VALUES(?,?,?,?,?,?,?,?,?,?)", new Object[]{
+                    + "			VALUES(?,?,?,?,?,?,?,?,?,?)",
                     info.getDeviceId(),
                     info.getUserFromType(),
                     info.getUserFromId(),
@@ -100,13 +100,13 @@ public class UserDao implements Base {
                     info.getUserStatus(),
                     info.getStatusEndTime(),
                     info.getCreateDate()
-            });
+            );
             info.setId((int) id);
             return info;
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("IN_USERINFO");
+            monitor.end(ct,"insertUserInfo");
         }
         return null;
     }
@@ -115,20 +115,20 @@ public class UserDao implements Base {
     public UserDev insertDev(UserDev dev) {
         MethodCacheTime ct = monitor.start();
         try {
-            long id = userPool.Insert("INSERT INTO user_device(device_info,device_name,os_id,device_mac,udid,create_date)VALUES(?,?,?,?,?,?)", new Object[]{
+            long id = userPool.Insert("INSERT INTO user_device(device_info,device_name,os_id,device_mac,udid,create_date)VALUES(?,?,?,?,?,?)",
                     dev.getDeviceInfo(),
                     dev.getDeviceName(),
                     dev.getOsId(),
                     dev.getDeviceMac(),
                     dev.getUdid(),
                     dev.getCreateDate()
-            });
+            );
             dev.setId((int) id);
             return dev;
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("IN_DEVICE");
+            monitor.end(ct,"insertDev");
         }
         return null;
     }
@@ -137,9 +137,8 @@ public class UserDao implements Base {
     public int findDevId(String device_mc, String udid) {
         MethodCacheTime ct = monitor.start();
         try {
-          Object obj = userPool.ExecuteQueryOnlyValue("CALL GET_DEV(?,?)", new Object[]{
-                  device_mc,
-                  udid});
+          Object obj = userPool.ExecuteQueryOnlyValue("SELECT * FROM user_device WHERE device_mac = ? AND udid = ?",
+                  device_mc,udid);
           if(obj == null){
               return 0;
           }
@@ -148,7 +147,7 @@ public class UserDao implements Base {
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("GET_DEV");
+            monitor.end(ct,"findDevId");
         }
         return -1;
     }
@@ -157,13 +156,14 @@ public class UserDao implements Base {
     public UserFrom insertFrom(UserFrom from) {
         MethodCacheTime ct = monitor.start();
         try {
-            long id = userPool.Insert("INSERT INTO user_from(user_src,serial_num,info,create_date)VALUES(?,?,?,?)", new Object[]{from.getUserSrc(), from.getSerialNum(), from.getInfo(), from.getCreateDate()});
+            long id = userPool.Insert("INSERT INTO user_from(user_src,serial_num,info,create_date)VALUES(?,?,?,?)",
+                    from.getUserSrc(), from.getSerialNum(), from.getInfo(), from.getCreateDate());
             from.setId((int) id);
             return from;
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("IN_USERFROM");
+            monitor.end(ct,"insertFrom");
         }
         return null;
     }
@@ -172,14 +172,12 @@ public class UserDao implements Base {
     public boolean updateUserInfoStatus(int uid, Status.UserStatus status, Date endTime) {
         MethodCacheTime ct = monitor.start();
         try {
-            userPool.Execute("CALL SET_USERINFO_STATUS(?,?,?)", new Object[]{
-                    uid, status.getValue(), endTime
-            });
+            userPool.Execute("UPDATE user_info SET user_status = ?,status_endtime = ? WHERE id = ?;",status.getValue(), endTime,uid);
             return true;
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("SET_USERINFO_STATUS");
+            monitor.end(ct,"updateUserInfoStatus");
         }
         return false;
     }
@@ -188,46 +186,28 @@ public class UserDao implements Base {
     public boolean updateUserInfoLoginStatus(int uid, boolean isOnline, Date updateTime) {
         MethodCacheTime ct = monitor.start();
         try {
-            userPool.Execute("CALL SET_USERINFO_ONLINE(?,?,?)", new Object[]{
-                    uid, isOnline, updateTime
-            });
+            String sql = isOnline?"UPDATE user_info SET is_online = ?,login_time = ? WHERE id = ?":"UPDATE user_info SET is_online = ?,login_off_time = ? WHERE id = ?";
+
+
+            userPool.Execute(sql,isOnline, updateTime,uid);
             return true;
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("SET_USERINFO_ONLINE");
+            monitor.end(ct,"updateUserInfoLoginStatus");
         }
         return false;
     }
 
-   
-    public boolean updateUserInfoStatus(int uid, String userName, String pwd, String invite_code) {
-        MethodCacheTime ct = monitor.start();
-        try {
-            userPool.Execute("CALL SET_USERINFO_AGAIN(?,?,?,?)", new Object[]{
-                    uid, userName, pwd, invite_code
-            });
-            return true;
-        } catch (Exception ex) {
-            file.ErrorLog(ex, LogType.Error, "db");
-        } finally {
-            ct.dbTrace("SET_USERINFO_AGAIN");
-        }
-        return false;
-    }
-
-   
     public boolean updateUserInfoLastDev(int uid, int devId) {
         MethodCacheTime ct = monitor.start();
         try {
-            userPool.Execute("CALL SET_USERINFO_DEV(?,?)", new Object[]{
-                    uid, devId
-            });
+            userPool.Execute("UPDATE user_info SET device_id = ?  WHERE id = ?", devId,uid);
             return true;
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("SET_USERINFO_DEV");
+            ct.dbTrace("updateUserInfoLastDev");
         }
         return false;
     }
@@ -243,22 +223,21 @@ public class UserDao implements Base {
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("IN_ROLE_INFO");
+            ct.dbTrace("createRoleInfo");
         }
         return -1;
     }
 
-   
-    public boolean updatepwd(int uid, String oldPwd, String newpwd) {
+    public boolean updatepwd(int uid, String newpwd) {
         MethodCacheTime ct = monitor.start();
         try {
-            return userPool.ExecuteUpdate("CALL SET_USERINFO_PWD(?,?,?)", new Object[]{
-                    uid, oldPwd, newpwd
+            return userPool.ExecuteUpdate("UPDATE user_info SET user_pwd = ? WHERE id = ?", new Object[]{
+                    newpwd,uid
             });
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("SET_USERINFO_PWD");
+            ct.dbTrace("updatepwd");
         }
         return true;
     }
@@ -271,7 +250,7 @@ public class UserDao implements Base {
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("get_user_custom");
+            ct.dbTrace("getCustom");
         }
         return null;
     }
@@ -299,31 +278,12 @@ public class UserDao implements Base {
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("get_role_by_uid");
+            ct.dbTrace("getRoleInfoByUid");
         }
         return null;
     }
 
-    /**
-     *
-     * @param uid
-     * @param ck
-     * @return cid子id val状态
-     */
-   
-    public Map<Integer, String> getUserSetByKey(int uid, SetKey ck) {
-        MethodCacheTime ct = monitor.start();
-        try {
-            return (Map<Integer, String>) gamePool.ExecuteQueryOnlyValue("CALL get_sets_uid_pid(?,?)", new Object[]{uid, ck.getValue()});
-        } catch (Exception ex) {
-            file.ErrorLog(ex, LogType.Error, "db");
-        } finally {
-            ct.dbTrace("get_sets_uid_pid");
-        }
-        return null;
-    }
 
-   
     public List<UserSet> getUserSets(int uid) {
         MethodCacheTime ct = monitor.start();
         try {
@@ -331,7 +291,7 @@ public class UserDao implements Base {
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("get_sets_uid");
+            ct.dbTrace("getUserSets");
         }
         return null;
     }
@@ -344,7 +304,7 @@ public class UserDao implements Base {
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("set_user_set");
+            ct.dbTrace("setUserSet");
         }
         return false;
     }
@@ -353,11 +313,11 @@ public class UserDao implements Base {
     public RoleInfo getRoleInfoById(int id) {
         MethodCacheTime ct = monitor.start();
         try {
-            return gamePool.ExecuteQueryOne(RoleInfo.instance,"CALL get_role_by_id(?)", new Object[]{id});
+            return gamePool.ExecuteQueryOne(RoleInfo.instance,"SELECT * FROM role_info WHERE id = ?", id);
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
-            ct.dbTrace("get_role_by_id");
+            ct.dbTrace("getRoleInfoById");
         }
         return null;
     }
@@ -365,7 +325,7 @@ public class UserDao implements Base {
     public void updateCard(int roleId, int card) {
         MethodCacheTime ct = monitor.start();
         try {
-            gamePool.Execute("CALL get_role_by_id(update user_info set card=? where id = ?)",roleId,card);
+            gamePool.Execute("CALL get_role_by_id(update user_info set card=? where id = ?)",card,roleId);
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {

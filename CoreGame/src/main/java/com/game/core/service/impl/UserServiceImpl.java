@@ -112,11 +112,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUserInfoStatus(int uid, String userName, String pwd, String invite_code) {
-        return userDao.updateUserInfoStatus(uid, userName, pwd, invite_code);
-    }
-
-    @Override
     public boolean updateUserInfoLastDev(int uid, int devId) {
         return userDao.updateUserInfoLastDev(uid, devId);
     }
@@ -146,8 +141,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updatepwd(int uid, String oldPwd, String newpwd) {
-        return userDao.updatepwd(uid, oldPwd, newpwd);
+    public boolean updatepwd(int uid, String newpwd) {
+        return userDao.updatepwd(uid, newpwd);
     }
 
     @Override

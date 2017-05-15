@@ -2,10 +2,10 @@ package com.game.codec;
 
 import com.game.manager.TimeCacheManager;
 import com.game.socket.module.UserVistor;
-import com.lgame.util.PrintTool;
 import com.lgame.util.comm.Tools;
 import com.lgame.util.encry.MD5Tool;
 import com.lgame.util.encry.ZipTool;
+import com.logger.log.SystemLogger;
 import com.lsocket.codec.RequestDecoder;
 import com.lsocket.handler.CmdModule;
 import com.lsocket.manager.CMDManager;
@@ -58,12 +58,14 @@ public class RequestDecoderRemote extends RequestDecoder {
 
             CmdModule cmdModule = CMDManager.getIntance().getCmdModule(cmd_c);
             if(cmdModule == null){
-                PrintTool.error("not find module:"+module+"  cmd:"+cmd);
+                SystemLogger.info(RequestDecoderRemote.class,"not find module:"+module+"  cmd:"+cmd);
                 return input.hasRemaining();
             }else if(httpRequestType != cmdModule.getModuleCmd().getRequetType()){
-                PrintTool.error("module:"+module+"  cmd:"+cmd+" shold be "+cmdModule.getModuleCmd().getRequetType());
+                SystemLogger.info(RequestDecoderRemote.class,"module:"+module+"  cmd:"+cmd+" shold be "+cmdModule.getModuleCmd().getRequetType());
                 return input.hasRemaining();
             }
+
+            SystemLogger.info(RequestDecoderRemote.class,"====receiver:"+commond.toString());
 
             TimeCacheManager.getInstance().setCurTime(System.currentTimeMillis());
             UserVistor vistor = (UserVistor) session.getAttribute(SocketConstant.SessionKey.vistorKey);
@@ -88,7 +90,7 @@ public class RequestDecoderRemote extends RequestDecoder {
 
                 data = commond.getObj().toByteArray();
                 if(key == null || !MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.getKey().getBytes())).equals(commond.getSn())){
-                    PrintTool.error("can not find uid:"+vistor.getUid()+" 的 Key:"+(key==null?"null":key.toString()));
+                    SystemLogger.info(RequestDecoderRemote.class,"can not find uid:"+vistor.getUid()+" 的 Key:"+(key==null?"null":key.toString()));
                     session.write(getError(ResponseCode.Error.key_error,commond.getSeq(),module,cmd));
                     session.closeNow();
                     return false;//父类接收新数据
@@ -99,6 +101,10 @@ public class RequestDecoderRemote extends RequestDecoder {
 
             vistor.setModule(CMDManager.getModule(cmd_c));
             Request request = cmdModule.getRequset(data,module,cmd,commond.getSeq());
+
+            if(request.getObj() != null){
+                SystemLogger.info(RequestDecoderRemote.class,"====rece222iver:"+request.getObj().toString());
+            }
             out.write(request);
             return input.hasRemaining();
         }

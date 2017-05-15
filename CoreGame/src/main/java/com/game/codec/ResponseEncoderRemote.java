@@ -8,6 +8,7 @@ import com.lgame.util.PrintTool;
 import com.lgame.util.comm.Tools;
 import com.lgame.util.encry.MD5Tool;
 import com.lgame.util.encry.ZipTool;
+import com.logger.log.SystemLogger;
 import com.lsocket.codec.ResponseEncoder;
 import com.lsocket.manager.CMDManager;
 import com.lsocket.message.Response;
@@ -83,9 +84,9 @@ public class ResponseEncoderRemote extends ResponseEncoder {
         byte[] datas = response.getValue();
         if(datas == null && obj != null){
             datas = obj.toByteArray();
-            PrintTool.info(uid+"---Send---cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd())+"  "+datas.toString());
+            SystemLogger.info(ResponseEncoderRemote.class,uid+"---Send---cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd())+"  "+obj.toString());
         }else {
-            PrintTool.info(uid+"---Send---cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd()));
+            SystemLogger.info(ResponseEncoderRemote.class,uid+"---Send---cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd()));
         }
 
         if(datas != null){

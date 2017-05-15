@@ -126,7 +126,7 @@ public class ResponseCode {
 
                 Comment tip = field.getAnnotation(Comment.class);
                 String desc = "";
-                if(tip == null){
+                if(tip != null){
                     desc = tip.value();
                 }
                 codeValueDescMap.put(codevalues.get(key),desc);
