@@ -40,6 +40,11 @@ public class GameCommHandler extends ModuleHandler {
             public void invoke(UserVistor vistor, Request request, Response response) {
                 NetGame.RPCreateRoom rpCreateRoom = (NetGame.RPCreateRoom) request.getObj();
                 BaseTableVo baseTableVo = TableFactory.getInstance().createTable(vistor.getRoleId(),rpCreateRoom.getGameId());
+                if(baseTableVo == null){
+                    vistor.sendError(ResponseCode.Error.parmter_error);
+                    return;
+                }
+
                 ResponseCode.Error code = baseTableVo.setSelected(rpCreateRoom.getTypeList());
                 if(code != ResponseCode.Error.succ){
                     vistor.sendError(code);

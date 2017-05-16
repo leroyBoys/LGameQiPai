@@ -1,11 +1,15 @@
 package com.game.core;
 
 import com.game.core.config.RoomSetting;
+import com.game.core.config.TablePluginManager;
 import com.game.core.factory.TableProducer;
 import com.game.core.room.BaseTableVo;
 import com.lgame.util.PrintTool;
 import com.lgame.util.comm.RandomTool;
+import com.lgame.util.file.FileTool;
+import com.lgame.util.file.PropertiesTool;
 import com.lgame.util.load.ResourceServiceImpl;
+import com.lgame.util.load.properties.PropertiesHelper;
 
 import java.util.List;
 import java.util.Map;
@@ -31,9 +35,11 @@ public class TableFactory  implements Runnable{
 
 
     private TableFactory() {
-        List<RoomSetting> roomSettingTemplateGens = (List<RoomSetting>) ResourceServiceImpl.getInstance("resources").listAll(RoomSetting.class);
         try {
-            for(RoomSetting gen:roomSettingTemplateGens){
+            RoomSetting gen ;
+            for(Map.Entry<Integer,RoomSetting> genGame:TablePluginManager.getInstance().getRoomSettings().entrySet()){
+                gen  = genGame.getValue();
+
                 PrintTool.info("begin load TableFactory:"+gen.getRoomFactory());
 
                 TableProducer tableProducer = (TableProducer) Class.forName(gen.getRoomFactory()).newInstance();
@@ -90,6 +96,10 @@ public class TableFactory  implements Runnable{
 
     public <T extends BaseTableVo> T createTable(int ownerId, int gameId){
         TableProducer tableProducer =  tableFactory.get(gameId);
+        if(tableProducer == null){
+            return null;
+        }
+
         BaseTableVo table = tableProducer.create(produceNewTableId(),ownerId);
         TableManager.getInstance().addTable(table);
 

@@ -1,5 +1,7 @@
 package com.game.manager;
 
+import com.game.core.TableFactory;
+import com.game.core.config.TablePluginManager;
 import com.game.util.TaskScheduler;
 import com.lgame.util.EmptyMontior;
 import com.lgame.util.MethodCacheMontior;
@@ -23,6 +25,8 @@ public class CoreServiceManager extends ICommon {
     protected void initService() {
         monitor = new MethodCacheMontior();
         //monitor = new EmptyMontior();
+        TablePluginManager.getInstance().refresh("RoomSetting.xls","PluginGen.xls");
+        TableFactory.getInstance().initGoodNum("");
         this.taskScheduler = new TaskScheduler(1);
     }
 

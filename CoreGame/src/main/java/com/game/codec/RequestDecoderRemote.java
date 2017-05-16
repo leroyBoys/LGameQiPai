@@ -64,14 +64,14 @@ public class RequestDecoderRemote extends RequestDecoder {
                 SystemLogger.info(RequestDecoderRemote.class,"module:"+module+"  cmd:"+cmd+" shold be "+cmdModule.getModuleCmd().getRequetType());
                 return input.hasRemaining();
             }
-
-            SystemLogger.info(RequestDecoderRemote.class,"====receiver:"+commond.toString());
+            SystemLogger.info(RequestDecoderRemote.class,"============================receiver:"+commond.toString());
 
             TimeCacheManager.getInstance().setCurTime(System.currentTimeMillis());
             UserVistor vistor = (UserVistor) session.getAttribute(SocketConstant.SessionKey.vistorKey);
             if(!cmdModule.getModuleCmd().isRequireOnline()){
                 Request request = cmdModule.getRequset(getData(commond),module,cmd,commond.getSeq());
                 request.addAttribute("sn",commond.getSn());
+                request.addAttribute("bytes",commond.getObj().toByteArray());
                 out.write(request);
                 return input.hasRemaining();
             }

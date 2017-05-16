@@ -118,11 +118,16 @@ public class SystemHandler extends ModuleHandler {
         UserService userService = DBServiceManager.getInstance().getUserService();
 
         DB.UK key = userService.getUserKey(obj.getUid());//从redis取key
-        /*if(!MD5Tool.GetMD5Code(Tools.getByteJoin(obj.toByteArray(), key.getKey().getBytes())).equals(sn)){
+        byte[] data = (byte[]) request.getAttribute("bytes");
+        if(key == null){
+            SystemLogger.error(this.getClass(),"cant find key from uid:"+obj.getUid());
             vistor.getIoSession().closeNow();
             return;
-        }else */
-        if(StringTool.isNotNull(key.getIpPort()) && !key.getIpPort().equals(SocketConstant.getLocalIp().getAll())){
+        }else if(!MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.getKey().getBytes())).equals(sn)){
+            vistor.getIoSession().closeNow();
+            SystemLogger.error(this.getClass(),"key not same from uid:"+obj.getUid());
+            return;
+        }else if(StringTool.isNotNull(key.getIpPort()) && !key.getIpPort().equals(SocketConstant.getLocalIp().getAll())){
             vistor.getIoSession().closeNow();
             SystemLogger.error(this.getClass(),"you should load:"+key.getIpPort());
             return;
@@ -178,14 +183,14 @@ public class SystemHandler extends ModuleHandler {
         vistor.sendMsg(response);
     }
 
-    private RoleInfo initRole(UserInfo roleInfo) {
+    private RoleInfo initRole(UserInfo userInfo) {
         int sex = -1;
-        RoleInfo info = new RoleInfo(roleInfo.getId(), "", "", sex);
-        if(roleInfo.getUserFromType() == FromType.tx.val()){//获取数据
+        RoleInfo info = new RoleInfo(userInfo.getId(), "", "", sex);
+        if(userInfo.getUserFromType() == FromType.tx.val()){//获取数据
 
         }
 
-        int id = DBServiceManager.getInstance().getUserService().createRoleInfo(roleInfo.getId(), info.getUserAlise(), info.getHeadImage(), sex, info.getUserLv(), (int) info.getUserExp(), info.getVipLevel());
+        int id = DBServiceManager.getInstance().getUserService().createRoleInfo(userInfo.getId(), info.getUserAlise(), info.getHeadImage(), sex, info.getUserLv(), (int) info.getUserExp(), info.getVipLevel());
         info.setId(id);
         return info;
     }

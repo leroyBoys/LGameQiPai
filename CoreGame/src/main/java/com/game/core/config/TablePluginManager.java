@@ -1,5 +1,6 @@
 package com.game.core.config;
 
+import com.game.core.TableManager;
 import com.lgame.util.comm.StringTool;
 import com.lgame.util.file.PropertiesTool;
 import com.lgame.util.load.ResourceServiceImpl;
@@ -47,6 +48,10 @@ public class TablePluginManager {
 
         List<PluginGen> tempList2 = (List<PluginGen>) resourceService.listAll(PluginGen.class);
         for(PluginGen sett:tempList2){
+            if(!roomSettingMap.containsKey(sett.getGameId())){
+                continue;
+            }
+
             pluginGenMap.put(sett.getTempId(),sett);
 
             Map<Integer,ArrayList<IOptPlugin>> tempMap = optPluginMap.get(sett.getGameId());
@@ -57,7 +62,7 @@ public class TablePluginManager {
 
             String[] actions = sett.getActionType().split(StringTool.SIGN4);
             for(String at:actions){
-                int actionType = Integer.valueOf(at);
+                int actionType = Integer.valueOf(StringTool.isNotNull(at)?at:"0");
                 ArrayList<IOptPlugin> optPlugins = tempMap.get(actionType);
                 if(optPlugins == null){
                     optPlugins = new ArrayList<>();
@@ -67,6 +72,7 @@ public class TablePluginManager {
             }
 
         }
+
     }
 
     public ArrayList<IOptPlugin> getOptPlugin(int gameId,int actionType){
@@ -79,6 +85,10 @@ public class TablePluginManager {
 
     public RoomSetting getRoomSetting(int gameId){
         return roomSettingMap.get(gameId);
+    }
+
+    public Map<Integer,RoomSetting> getRoomSettings(){
+        return roomSettingMap;
     }
 
     public IOptPlugin createOptPlugin(PluginGen pg) {

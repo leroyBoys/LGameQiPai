@@ -58,13 +58,6 @@ public class RoomSetting {
 
     public void setCardNumPool(String cardNumPool) {
         this.cardNumPool = cardNumPool;
-
-        cardNumPools = new LinkedList<>();
-        String[] cards  = cardNumPool.split(StringTool.SIGN4);
-        for(String card:cards){
-            cardNumPools.add(Integer.valueOf(card));
-        }
-
     }
 
     public int getInitHandCardCount() {
@@ -81,19 +74,17 @@ public class RoomSetting {
 
     public void setCardSet(String cardSet) {
         this.cardSet = cardSet;
-
-        if(cardSet == null){
-            return;
-        }
-        String[] arrays = cardSet.split(StringTool.SIGN4);
-        for(String strs:arrays){
-            String[] cardsSetArray = strs.split(StringTool.SIGN3);
-            cardSetMap.put(Integer.valueOf(cardsSetArray[0]),Integer.valueOf(cardsSetArray[1]));
-        }
-
     }
 
     public List<Integer> getCardNumPools() {
+        if(cardNumPools ==null){
+            cardNumPools = new LinkedList<>();
+            String[] cards  = cardNumPool.split(StringTool.SIGN4);
+            for(String card:cards){
+                cardNumPools.add(Integer.valueOf(card));
+            }
+        }
+
         return cardNumPools;
     }
 
@@ -122,6 +113,14 @@ public class RoomSetting {
     }
 
     public Map<Integer, Integer> getCardSetMap() {
+        if(cardSetMap == null || cardSetMap.isEmpty()){
+            String[] arrays = cardSet.split(StringTool.SIGN4);
+            for(String strs:arrays){
+                String[] cardsSetArray = strs.split(StringTool.SIGN3);
+                cardSetMap.put(Integer.valueOf(cardsSetArray[0]),Integer.valueOf(cardsSetArray[1]));
+            }
+        }
+
         return cardSetMap;
     }
 }
