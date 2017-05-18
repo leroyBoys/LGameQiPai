@@ -16,7 +16,7 @@ public enum MjStatus implements BaseGameStatus {
     Pao(1,new YaPaoAction(), create(BaseStatusData.DefaultStatusData.class)),
     DingZhuang(2,new DingZhuangAction(), create(BaseStatusData.class)),
     FaPai(3,new FaPaiAction(), create(BaseStatusData.class)),
-    Game(4,new GameAction(), create(GameStatusData.class)),
+    Game(4,new GameAction(), create(SuperGameStatusData.class)),
     GameOver(6,new GameAction(), create(BaseStatusData.class));
     private int value;
     private BaseAction baseAction;

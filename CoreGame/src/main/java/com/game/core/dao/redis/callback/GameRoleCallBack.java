@@ -21,7 +21,7 @@ public class GameRoleCallBack implements RedisFromSqlCall<GameRole,Integer> {
 
     @Override
     public GameRole callBack(Integer roleId) {
-        UserVistor vistor =  OnlineManager.getIntance().getUserById(roleId);
+        UserVistor vistor =  OnlineManager.getIntance().getRoleId(roleId);
         if(vistor != null && vistor.getRoleInfo() != null){
             DBServiceManager.getInstance().getGameRedis().setCard(roleId,vistor.getRoleInfo().getCard());
             return new GameRole(roleId,0,vistor.getRoleInfo().getCard());

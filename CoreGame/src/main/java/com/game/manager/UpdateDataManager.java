@@ -46,7 +46,7 @@ public class UpdateDataManager implements Runnable{
             }
             UserVistor vistor;
             for(Integer roleId:ret){
-                vistor =  OnlineManager.getIntance().getUserById(roleId);
+                vistor =  OnlineManager.getIntance().getRoleId(roleId);
                 if(vistor == null ||  vistor.getGameRole() == null){
                     continue;
                 }

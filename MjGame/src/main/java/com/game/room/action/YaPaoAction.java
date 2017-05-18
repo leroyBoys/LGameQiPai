@@ -33,7 +33,7 @@ public class YaPaoAction extends BaseAction<MjTable> {
         kvData.setK(GameConst.MJ.ACTION_TYPE_YAPao);
         List<NetGame.NetKvData> actions = new LinkedList<>();
         actions.add(kvData.build());
-        table.sendMsgAll(table.getCanDoActionsResponse(actions));
+        table.addMsgQueueAll(table.getCanDoActionsResponse(actions),0);
     }
 
     @Override
@@ -47,7 +47,6 @@ public class YaPaoAction extends BaseAction<MjTable> {
         NetGame.NetOprateData.Builder yaPao = table.getYaPaoNetOprateData();
         yaPao.setUid(visitor.getRoleId());
         yaPao.setDval(netOprateData.getDval());
-        response.setObj(table.getNetResposeOnly(yaPao.build()));
-        table.sendMsgAll(response);
+        table.addMsgQueueAll(yaPao.build(),response.getSeq());
     }
 }

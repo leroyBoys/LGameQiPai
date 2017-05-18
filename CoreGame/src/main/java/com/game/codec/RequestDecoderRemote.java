@@ -2,6 +2,7 @@ package com.game.codec;
 
 import com.game.manager.TimeCacheManager;
 import com.game.socket.module.UserVistor;
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.lgame.util.comm.Tools;
 import com.lgame.util.encry.MD5Tool;
 import com.lgame.util.encry.ZipTool;
@@ -22,19 +23,23 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 
 import java.io.IOException;
+import java.util.Arrays;
+
 /**
  * Created by leroy:656515489@qq.com
  * 2017/4/6.
  */
 public class RequestDecoderRemote extends RequestDecoder {
     private HttpRequestType httpRequestType = HttpRequestType.tcp;
-    public RequestDecoderRemote(){
+
+    public RequestDecoderRemote() {
     }
 
-    public RequestDecoderRemote(HttpRequestType httpRequestType){
+    public RequestDecoderRemote(HttpRequestType httpRequestType) {
         this.httpRequestType = httpRequestType;
     }
-    protected boolean doDecode(IoSession session, IoBuffer input, ProtocolDecoderOutput out) throws Exception {
+
+    protected boolean doDecode(IoSession session, IoBuffer input, ProtocolDecoderOutput out) {
         int remainSize = input.remaining();
         if (remainSize > 0) {
             if (input.remaining() <= 4) {
@@ -51,61 +56,67 @@ public class RequestDecoderRemote extends RequestDecoder {
 
             byte[] b = new byte[size];
             input.get(b);
-            NetParentOld.NetCommond commond = NetParentOld.NetCommond.parseFrom(b);
-            int cmd_c = commond.getCmd();
-            int module = CMDManager.getModule(cmd_c);
-            int cmd = CMDManager.getCmd(cmd_c);
+            NetParentOld.NetCommond commond = null;
+            try {
+                commond = NetParentOld.NetCommond.parseFrom(b);
 
-            CmdModule cmdModule = CMDManager.getIntance().getCmdModule(cmd_c);
-            if(cmdModule == null){
-                SystemLogger.info(RequestDecoderRemote.class,"not find module:"+module+"  cmd:"+cmd);
-                return input.hasRemaining();
-            }else if(httpRequestType != cmdModule.getModuleCmd().getRequetType()){
-                SystemLogger.info(RequestDecoderRemote.class,"module:"+module+"  cmd:"+cmd+" shold be "+cmdModule.getModuleCmd().getRequetType());
-                return input.hasRemaining();
-            }
-            SystemLogger.info(RequestDecoderRemote.class,"============================receiver:"+commond.toString());
+                int cmd_c = commond.getCmd();
+                int module = CMDManager.getModule(cmd_c);
+                int cmd = CMDManager.getCmd(cmd_c);
 
-            TimeCacheManager.getInstance().setCurTime(System.currentTimeMillis());
-            UserVistor vistor = (UserVistor) session.getAttribute(SocketConstant.SessionKey.vistorKey);
-            if(!cmdModule.getModuleCmd().isRequireOnline()){
-                Request request = cmdModule.getRequset(getData(commond),module,cmd,commond.getSeq());
-                request.addAttribute("sn",commond.getSn());
-                request.addAttribute("bytes",commond.getObj().toByteArray());
-                out.write(request);
-                return input.hasRemaining();
-            }
+                CmdModule cmdModule = CMDManager.getIntance().getCmdModule(cmd_c);
+                if (cmdModule == null) {
+                    SystemLogger.info(RequestDecoderRemote.class, "not find module:" + module + "  cmd:" + cmd);
+                    return input.hasRemaining();
+                } else if (httpRequestType != cmdModule.getModuleCmd().getRequetType()) {
+                    SystemLogger.info(RequestDecoderRemote.class, "module:" + module + "  cmd:" + cmd + " shold be " + cmdModule.getModuleCmd().getRequetType());
+                    return input.hasRemaining();
+                }
+                SystemLogger.info(RequestDecoderRemote.class, "============================receiver:" + commond.toString());
 
-            if(vistor.getUid() <= 0){
-                session.write(getError(ResponseCode.Error.login_timeout,commond.getSeq(),module,cmd));
-                session.closeNow();
-                return false;//父类接收新数据
-            }
+                TimeCacheManager.getInstance().setCurTime(System.currentTimeMillis());
+                UserVistor vistor = (UserVistor) session.getAttribute(SocketConstant.SessionKey.vistorKey);
+                if (!cmdModule.getModuleCmd().isRequireOnline()) {
+                    Request request = cmdModule.getRequset(getData(commond), module, cmd, commond.getSeq());
+                    request.addAttribute("sn", commond.getSn());
+                    request.addAttribute("bytes", commond.getObj().toByteArray());
+                    out.write(request);
+                    return input.hasRemaining();
+                }
 
-            //检验是否正确
-            DB.UK key = vistor.getUk();
-
-            byte[] data = null;
-            if(commond.getObj() != null){//秘钥验证
-
-                data = commond.getObj().toByteArray();
-                if(key == null || !MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.getKey().getBytes())).equals(commond.getSn())){
-                    SystemLogger.info(RequestDecoderRemote.class,"can not find uid:"+vistor.getUid()+" 的 Key:"+(key==null?"null":key.toString()));
-                    session.write(getError(ResponseCode.Error.key_error,commond.getSeq(),module,cmd));
+                if (vistor.getUid() <= 0) {
+                    session.write(getError(ResponseCode.Error.login_timeout, commond.getSeq(), module, cmd));
                     session.closeNow();
                     return false;//父类接收新数据
                 }
 
-                data = getData(commond);//解压缩
-            }
+                //检验是否正确
+                DB.UK key = vistor.getUk();
 
-            vistor.setModule(CMDManager.getModule(cmd_c));
-            Request request = cmdModule.getRequset(data,module,cmd,commond.getSeq());
+                byte[] data = null;
+                if (commond.getObj() != null) {//秘钥验证
 
-            if(request.getObj() != null){
-                SystemLogger.info(RequestDecoderRemote.class,"====rece222iver:"+request.getObj().toString());
+                    data = commond.getObj().toByteArray();
+                    if (key == null || !MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.getKey().getBytes())).equals(commond.getSn())) {
+                        SystemLogger.info(RequestDecoderRemote.class, "can not find uid:" + vistor.getUid() + " 的 Key:" + (key == null ? "null" : key.toString()));
+                        session.write(getError(ResponseCode.Error.key_error, commond.getSeq(), module, cmd));
+                        session.closeNow();
+                        return false;//父类接收新数据
+                    }
+
+                    data = getData(commond);//解压缩
+                }
+
+                vistor.setModule(CMDManager.getModule(cmd_c));
+                Request request = cmdModule.getRequset(data, module, cmd, commond.getSeq());
+
+                if (request.getObj() != null) {
+                    SystemLogger.info(RequestDecoderRemote.class, "====rece222iver:" + request.getObj().toString());
+                }
+                out.write(request);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            out.write(request);
             return input.hasRemaining();
         }
         return false;
@@ -117,12 +128,11 @@ public class RequestDecoderRemote extends RequestDecoder {
     }
 
     @Override
-    public void doRequeset(IoSession session, ProtocolDecoderOutput out,ReceiveData receiveData) throws IOException {
+    public void doRequeset(IoSession session, ProtocolDecoderOutput out, ReceiveData receiveData) throws IOException {
     }
 
-
-    private Response getError(ResponseCode.Error error,int seq,int module,int cmd){
-        Response res = Response.defaultResponse(module,cmd,seq);
+    private Response getError(ResponseCode.Error error, int seq, int module, int cmd) {
+        Response res = Response.defaultResponse(module, cmd, seq);
         res.setStatus(ResponseCode.getCodeValue(error));
         return res;
     }

@@ -79,14 +79,27 @@ public class TableFactory  implements Runnable{
         }
     }
 
-    private int produceNewTableId(){
+    public <T extends BaseTableVo> T createTable(int ownerId, int gameId){
+        TableProducer tableProducer =  tableFactory.get(gameId);
+        if(tableProducer == null){
+            return null;
+        }
+        BaseTableVo table = tableProducer.create(0,ownerId);
+        return (T)table;
+    }
+
+    public void produceNewTableId(BaseTableVo table){
+        int tableId = 0;
         try {
-            return tableIdPool.take();
+            tableId = tableIdPool.take();
         } catch (Exception e) {
             e.printStackTrace();
-            return createSpecialTable(e);
+            tableId = createSpecialTable(e);
         }finally {
         }
+        TableManager.getInstance().addTable(table);
+        System.out.println("===create from pool:"+table.getId());
+        table.setId(tableId);
     }
 
     private int createSpecialTable(Exception e){
@@ -94,36 +107,17 @@ public class TableFactory  implements Runnable{
         return RandomTool.getRandom().nextInt(10000)+maxTableId;
     }
 
-    public <T extends BaseTableVo> T createTable(int ownerId, int gameId){
-        TableProducer tableProducer =  tableFactory.get(gameId);
-        if(tableProducer == null){
-            return null;
-        }
-
-        BaseTableVo table = tableProducer.create(produceNewTableId(),ownerId);
-        TableManager.getInstance().addTable(table);
-
-        System.out.println("===create from pool:"+table.getId());
-        return (T)table;
-    }
-
-    public <T extends BaseTableVo> T createGoodTable(int ownerId,int type){
-        TableProducer tableProducer =  tableFactory.get(type);
-        Integer goodNum = produceGoodTableId();
-        boolean isGoodNum = true;
+    public void produceGoodTableId(BaseTableVo table){
+        Integer goodNum = goodTableIdPool.poll();
         if(goodNum == null){
-            goodNum = produceNewTableId();
-            isGoodNum = false;
+            produceNewTableId(table);
+            table.setGoodId(false);
+            return;
         }
-
-        BaseTableVo table = tableProducer.create(goodNum,ownerId);
-        table.setGoodId(isGoodNum);
+        table.setId(goodNum);
+        table.setGoodId(true);
         TableManager.getInstance().addTable(table);
-        return (T) table;
-    }
-
-    private Integer produceGoodTableId(){
-        return goodTableIdPool.poll();
+        System.out.println("===create from pool:"+table.getId());
     }
 
     @Override

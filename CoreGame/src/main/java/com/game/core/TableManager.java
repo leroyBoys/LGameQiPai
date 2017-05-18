@@ -26,7 +26,7 @@ public class TableManager implements Runnable,CheckOutStatus {
         new Thread(this).start();
     }
 
-    protected  <T extends BaseTableVo> void addTable(T t){
+    public   <T extends BaseTableVo> void addTable(T t){
         tableMap.put(t.getId(),t);
     }
 

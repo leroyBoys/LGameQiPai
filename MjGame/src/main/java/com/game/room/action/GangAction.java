@@ -1,12 +1,6 @@
 package com.game.room.action;
 
-import com.game.core.config.IOptPlugin;
-import com.game.core.config.IPluginCheckCanExecuteAction;
-import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
-import com.game.room.MjChairInfo;
-
-import java.util.ArrayList;
 
 /**
  * Created by leroy:656515489@qq.com

@@ -22,6 +22,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * 2017/4/19.
  */
 public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends BaseChairInfo> implements Runnable{
+    protected final Map<Integer,MessageQueue> messageQueue = new HashMap<>();
+    public final boolean isMsgCache = false;//是否缓存队列
     private GameOverType gameOverType = GameOverType.NULL;
     private TStatus status;
     private Map<TStatus,BaseStatusData> statusDataMap = new HashMap<>(1);
@@ -99,6 +101,8 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
             chairMap.put(chair.getId(),chair);
             chairs[chairMap.size()-1] = chair;
             chair.setIdx(chairMap.size()-1);
+
+            messageQueue.put(visitor.getRoleId(),new MessageQueue(visitor,this));
             return true;
         }catch (Exception e){}finally {
             addRemoveLock.unlock();
@@ -272,6 +276,11 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         return (CardPoo) cardPoolEngine;
     }
 
+    public void leaveOffline(int roleId){
+        messageQueue.get(roleId).setVistor(null);
+        this.getChairByUid(roleId).setOnline(false);
+        sendChairStatusMsgWithOutUid(roleId);
+    }
 
     public boolean addRound(){
         curRount++;
@@ -287,6 +296,41 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         focsIndex = ++focsIndex == this.getChairs().length ? 0 : focsIndex;
         return focsIndex;
     }
+    ///////////////////////////////////////////////////////////////////////
+    public abstract int getGameResponseCmd();
+
+    public abstract int getGameResponseModule();
+
+    public void sendGameResponse(NetGame.NetOprateData hands,UserVistor vistor,int seq) {
+        Response response = Response.defaultResponse(getGameResponseModule(),getGameResponseCmd(),seq);
+        NetGame.NetResponse netResponse = getNetResposeOnly(hands);
+        response.setObj(netResponse);
+        vistor.sendMsg(response);
+    }
+
+    public void sendGameResponse(List<NetGame.NetOprateData> hands,UserVistor vistor,int seq) {
+        Response response = Response.defaultResponse(getGameResponseModule(),getGameResponseCmd(),seq);
+        NetGame.NetResponse netResponse = getNetRespose(hands);
+        response.setObj(netResponse);
+        vistor.sendMsg(response);
+    }
+
+    public void sendGameResponse(NetGame.NetOprateData hands,int roleId,int seq) {
+        UserVistor v = OnlineManager.getIntance().getRoleId(roleId);
+        if(v == null){
+            return;
+        }
+        sendGameResponse(hands,v,seq);
+    }
+
+    public void sendGameResponse(List<NetGame.NetOprateData> hands,int roleId,int seq) {
+        UserVistor v = OnlineManager.getIntance().getRoleId(roleId);
+        if(v == null){
+            return;
+        }
+        sendGameResponse(hands,v,seq);
+    }
+
 
     public NetGame.NetResponse getNetRespose(List<NetGame.NetOprateData> operdata) {
         NetGame.NetResponse.Builder response = NetGame.NetResponse.newBuilder();
@@ -311,6 +355,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         response.setStep(step);
         return response.build();
     }
+
     /**
      *
      * @param roleid
@@ -419,6 +464,34 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         return netKvData.build();
     }
 
+
+    public void addMsgQueue(int roleId, List<NetGame.NetOprateData> msgs,int seq){
+        messageQueue.get(roleId).addMsgList(msgs,seq);
+    }
+
+    public void addMsgQueue(int roleId, NetGame.NetOprateData msg,int seq){
+        messageQueue.get(roleId).addMsg(msg,seq);
+    }
+
+    public void addMsgQueueAll(List<NetGame.NetOprateData> msgs,int seq){
+        for(int i = 0;i<chairs.length;i++) {
+            if (chairs[i] == null) {
+                continue;
+            }
+            messageQueue.get(chairs[i].getId()).addMsgList(msgs,seq);
+        }
+    }
+
+    public void addMsgQueueAll(NetGame.NetOprateData msg,int seq){
+        for(int i = 0;i<chairs.length;i++) {
+            if (chairs[i] == null) {
+                continue;
+            }
+            messageQueue.get(chairs[i].getId()).addMsg(msg,seq);
+        }
+    }
+
+
     /**
      * 投票解散，返回是否解散
      * @param vistor
@@ -471,7 +544,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
                 continue;
             }
             //发送
-            UserVistor vistor = OnlineManager.getIntance().getUserById(chairs[i].getId());
+            UserVistor vistor = OnlineManager.getIntance().getRoleId(chairs[i].getId());
             if(vistor == null){
                 continue;
             }
@@ -482,7 +555,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
 
     public void sendMsgToUid(Response otherResponse, int roleId) {
         //发送
-        UserVistor vistor = OnlineManager.getIntance().getUserById(roleId);
+        UserVistor vistor = OnlineManager.getIntance().getRoleId(roleId);
         if(vistor == null){
             return;
         }
@@ -495,7 +568,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
                 continue;
             }
             //发送
-            UserVistor vistor = OnlineManager.getIntance().getUserById(chairs[i].getId());
+            UserVistor vistor = OnlineManager.getIntance().getRoleId(chairs[i].getId());
             if(vistor == null){
                 continue;
             }
@@ -589,6 +662,10 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
 
     public Set<TStatus> getAllStatusSet() {
         return allStatusSet;
+    }
+
+    public MessageQueue getMessageQueue(int roleId){
+        return messageQueue.get(roleId);
     }
 
     public enum AttributeKey{

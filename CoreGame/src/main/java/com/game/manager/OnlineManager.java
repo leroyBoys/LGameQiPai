@@ -25,8 +25,8 @@ public class OnlineManager{
         return serverManager;
     }
 
-    public UserVistor getUserById(int uid){
-        return roleId_session.get(uid);
+    public UserVistor getRoleId(int roleId){
+        return roleId_session.get(roleId);
     }
 
     protected final int maxOnlineCount = 10000;

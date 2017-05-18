@@ -4,10 +4,14 @@ import com.game.core.action.BaseAction;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
+import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.game.socket.module.UserVistor;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -29,14 +33,31 @@ public class FaPaiAction extends BaseAction<MjTable> {
     public void doAction(MjTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
         IOptPlugin optPlugin = TablePluginManager.getInstance().getOneOptPlugin(table.getGameId(),this.getActionType());
         optPlugin.doOperation(table,response,netOprateData);
-
-        //发消息
-
-
     }
 
     @Override
     public void overAction(MjTable table) {
+        //发消息
+        List<NetGame.NetKvData> handNumList = new LinkedList<>();
+
+        for(int i = 0;i<table.getChairs().length;i++){
+            MjChairInfo chairInfo = table.getChairs()[i];
+            NetGame.NetKvData.Builder kvData = NetGame.NetKvData.newBuilder();
+            kvData.setK(chairInfo.getId());
+            kvData.setV(chairInfo.getHandsContainer().getHandCards().size());
+            handNumList.add(kvData.build());
+        }
+
+        for(int i = 0;i<table.getChairs().length;i++){
+            MjChairInfo chairInfo = table.getChairs()[i];
+
+            NetGame.NetOprateData.Builder hands = NetGame.NetOprateData.newBuilder();
+            hands.setUid(chairInfo.getId());
+            hands.addAllDlist(chairInfo.getHandsContainer().getHandCards());
+            hands.addAllKvDatas(handNumList);
+
+            table.addMsgQueue(chairInfo.getId(),hands.build(),0);
+        }
     }
 
     @Override

@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isOnline(int uid) {
-        return OnlineManager.getIntance().getUserById(uid) != null;
+        return OnlineManager.getIntance().getRoleId(uid) != null;
     }
 
     @Override

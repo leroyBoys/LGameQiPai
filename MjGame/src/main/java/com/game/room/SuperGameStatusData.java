@@ -1,10 +1,14 @@
-package com.game.room.action;
+package com.game.room;
 
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
 import com.game.core.room.BaseStatusData;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
+import com.game.room.action.ChiAction;
+import com.game.room.action.GangAction;
+import com.game.room.action.HuAction;
+import com.game.room.action.PengAction;
 
 import java.util.ArrayList;
 
@@ -12,7 +16,7 @@ import java.util.ArrayList;
  * Created by leroy:656515489@qq.com
  * 2017/4/27.
  */
-public class GameStatusData extends BaseStatusData {
+public class SuperGameStatusData extends BaseStatusData {
 
     public void moPai(MjTable table, int uid){
         table.setFocusIdex(table.getChairByUid(uid).getIdx());
@@ -31,7 +35,7 @@ public class GameStatusData extends BaseStatusData {
             return;
         }
 
-        GangAction.getInstance().check(chairInfo,card);
+        GangAction.getInstance().check(chairInfo,card,null);
     }
 
 
@@ -44,7 +48,7 @@ public class GameStatusData extends BaseStatusData {
             return;
         }
 
-        ChiAction.getInstance().check(chairInfo,card);
+        ChiAction.getInstance().check(chairInfo,card,null);
     }
 
     protected boolean checkCanPeng(MjChairInfo chairInfo,int card){
@@ -56,33 +60,21 @@ public class GameStatusData extends BaseStatusData {
             return;
         }
 
-        PengAction.getInstance().check(chairInfo,card);
+        PengAction.getInstance().check(chairInfo,card,null);
     }
 
 
-    protected boolean checkCanHu(MjChairInfo chairInfo,int card){
-        return true;
+    protected HuAction.CheckHuType checkCanHu(MjChairInfo chairInfo, int card){
+        return HuAction.CheckHuType.Hu;
     }
 
     public void checkHu(MjChairInfo chairInfo,int card) {
-        if(!checkCanHu(chairInfo,card)){
+        HuAction.CheckHuType checkHuType = checkCanHu(chairInfo,card);
+        if(checkHuType == HuAction.CheckHuType.NULL){
             return;
         }
 
-        HuAction.getInstance().check(chairInfo,card);
+        HuAction.getInstance().check(chairInfo,card,checkHuType);
     }
-
-    protected boolean checkCanTing(MjChairInfo chairInfo,int card){
-        return true;
-    }
-
-    public void checkTing(MjChairInfo chairInfo,int card) {
-        if(!checkCanTing(chairInfo,card)){
-            return;
-        }
-
-        GangAction.getInstance().check(chairInfo,card);
-    }
-
 
 }

@@ -51,6 +51,12 @@ public class GameCommHandler extends ModuleHandler {
                     return;
                 }
 
+                boolean isGoodsTable = false;
+                if(isGoodsTable){
+                    TableFactory.getInstance().produceGoodTableId(baseTableVo);
+                }else {
+                    TableFactory.getInstance().produceNewTableId(baseTableVo);
+                }
                 if(baseTableVo.addChair(vistor)){
                     return;
                 }
@@ -245,7 +251,7 @@ public class GameCommHandler extends ModuleHandler {
             int chairId = tableVo.getChairs()[i].getId();
             tableVo.removeChair(chairId);
             //发送
-            UserVistor v = OnlineManager.getIntance().getUserById(chairId);
+            UserVistor v = OnlineManager.getIntance().getRoleId(chairId);
             if(v == null){
                 continue;
             }
@@ -257,7 +263,8 @@ public class GameCommHandler extends ModuleHandler {
     private void middleJoin(BaseTableVo baseTableVo, UserVistor vistor, Request request, Response response) {
         baseTableVo.getChairByUid(vistor.getRoleId()).setOnline(true);
 
-       baseTableVo.sendChairStatusMsgWithOutUid(vistor.getRoleId());
+        baseTableVo.getMessageQueue(vistor.getRoleId()).setVistor(vistor);
+        baseTableVo.sendChairStatusMsgWithOutUid(vistor.getRoleId());
 
         response.setCmd(GameCommCmd.CREATE_TABLE.getValue());
         response.setObj(baseTableVo.getEnterRoomMsg(vistor.getRoleId()));
@@ -278,7 +285,7 @@ public class GameCommHandler extends ModuleHandler {
                 continue;
             }
             //给其他人发送
-            OnlineManager.getIntance().getUserById(baseTableVo.getChairs()[i].getId()).sendMsg(Response.defaultResponse(this.getModule(),GameCommCmd.ENTER_GAME.getValue(),0,rpEnterRoom.build()));
+            OnlineManager.getIntance().getRoleId(baseTableVo.getChairs()[i].getId()).sendMsg(Response.defaultResponse(this.getModule(),GameCommCmd.ENTER_GAME.getValue(),0,rpEnterRoom.build()));
         }
 
         response.setModule(this.getModule());

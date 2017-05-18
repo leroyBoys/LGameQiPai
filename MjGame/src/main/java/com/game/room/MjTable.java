@@ -53,6 +53,16 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     }
 
     @Override
+    public int getGameResponseCmd() {
+        return MjCmd.Game.getValue();
+    }
+
+    @Override
+    public int getGameResponseModule() {
+        return MjCmd.Game.getModule();
+    }
+
+    @Override
     protected NetGame.NetExtraData.Builder getTableExtrData() {
         NetGame.NetExtraData.Builder extra = NetGame.NetExtraData.newBuilder();
         extra.addList(this.getBankId());
@@ -193,12 +203,12 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
      * 发送可以操作的集合
      * @param actions
      */
-    public Response getCanDoActionsResponse(List<NetGame.NetKvData> actions){
+    public NetGame.NetOprateData getCanDoActionsResponse(List<NetGame.NetKvData> actions){
         NetGame.NetOprateData.Builder canDoActions = NetGame.NetOprateData.newBuilder();
         canDoActions.setOtype(GameConst.MJ.ACTION_TYPE_CanDoActions);
         canDoActions.addAllKvDatas(actions);
 
-        return Response.defaultResponse(GameConst.MOUDLE_Mj, MjCmd.Game.getValue(),0,getNetResposeOnly(canDoActions.build()));
+        return canDoActions.build();
     }
 
     /**
