@@ -9,7 +9,7 @@ public abstract class BaseChairInfo<Status extends BaseChairStatus,Hands extends
     protected Status status;
     protected int id;
     protected int idx;
-    protected String image;
+    protected String image="bg";
     protected boolean isOnline = true;
     protected boolean isAuto = false;
     protected String ip;

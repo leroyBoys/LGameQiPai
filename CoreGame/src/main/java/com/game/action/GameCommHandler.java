@@ -57,7 +57,7 @@ public class GameCommHandler extends ModuleHandler {
                 }else {
                     TableFactory.getInstance().produceNewTableId(baseTableVo);
                 }
-                if(baseTableVo.addChair(vistor)){
+                if(!baseTableVo.addChair(vistor)){
                     return;
                 }
 
@@ -272,7 +272,7 @@ public class GameCommHandler extends ModuleHandler {
     }
 
     private void joinTable(BaseTableVo baseTableVo, UserVistor vistor, Request request, Response response) {
-        if(baseTableVo.addChair(vistor)){
+        if(!baseTableVo.addChair(vistor)){
             return;
         }
 

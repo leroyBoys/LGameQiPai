@@ -104,7 +104,9 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
 
             messageQueue.put(visitor.getRoleId(),new MessageQueue(visitor,this));
             return true;
-        }catch (Exception e){}finally {
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
             addRemoveLock.unlock();
         }
 
