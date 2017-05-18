@@ -16,6 +16,7 @@ import java.util.Map;
  * 2017/4/21.
  */
 public class TablePluginManager {
+    private final String PLUGINPATH="com.game.room.action";
     private ResourceServiceImpl resourceService = null;
     private static TablePluginManager ourInstance = new TablePluginManager();
 
@@ -97,8 +98,7 @@ public class TablePluginManager {
         }
 
         try {
-            Class clazz = Class.forName(PluginsPath.getPluginsPath(pg.getGameId()) + "."
-                    + pg.getPluginClass());
+            Class clazz = Class.forName(PLUGINPATH + "." + pg.getPluginClass());
             IOptPlugin optPlugin =  (IOptPlugin) clazz.newInstance();
             optPlugin.setPluginId(pg.getTempId());
             return optPlugin;
@@ -108,28 +108,4 @@ public class TablePluginManager {
         return null;
     }
 
-    public enum PluginsPath{
-        mj(1,"com.game.room.action.plugins"),
-        ddz(2,"");
-        private final int id;
-        private  final String path;
-        PluginsPath(int id,String path){
-            this.id = id;
-            this.path = path;
-        }
-
-        public static PluginsPath getPluginsPath(int id){
-            for(PluginsPath pluginsPath:PluginsPath.values()){
-                if(id == pluginsPath.id){
-                    return pluginsPath;
-                }
-            }
-
-            return null;
-        }
-
-        public String getPath() {
-            return path;
-        }
-    }
 }

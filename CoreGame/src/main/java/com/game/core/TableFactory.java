@@ -97,9 +97,9 @@ public class TableFactory  implements Runnable{
             tableId = createSpecialTable(e);
         }finally {
         }
+        table.setId(tableId);
         TableManager.getInstance().addTable(table);
         System.out.println("===create from pool:"+table.getId());
-        table.setId(tableId);
     }
 
     private int createSpecialTable(Exception e){
