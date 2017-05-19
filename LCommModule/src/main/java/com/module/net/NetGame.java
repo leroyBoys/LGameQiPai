@@ -12454,6 +12454,916 @@ public final class NetGame {
     // @@protoc_insertion_point(class_scope:NetLoginConfirm)
   }
 
+  public interface NetChatOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional int32 receiveId = 1;
+    /**
+     * <code>optional int32 receiveId = 1;</code>
+     */
+    boolean hasReceiveId();
+    /**
+     * <code>optional int32 receiveId = 1;</code>
+     */
+    int getReceiveId();
+
+    // optional string userName = 2;
+    /**
+     * <code>optional string userName = 2;</code>
+     */
+    boolean hasUserName();
+    /**
+     * <code>optional string userName = 2;</code>
+     */
+    String getUserName();
+    /**
+     * <code>optional string userName = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserNameBytes();
+
+    // optional int32 channel = 3;
+    /**
+     * <code>optional int32 channel = 3;</code>
+     */
+    boolean hasChannel();
+    /**
+     * <code>optional int32 channel = 3;</code>
+     */
+    int getChannel();
+
+    // optional string content = 4;
+    /**
+     * <code>optional string content = 4;</code>
+     */
+    boolean hasContent();
+    /**
+     * <code>optional string content = 4;</code>
+     */
+    String getContent();
+    /**
+     * <code>optional string content = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getContentBytes();
+
+    // optional int32 isaction = 5;
+    /**
+     * <code>optional int32 isaction = 5;</code>
+     *
+     * <pre>
+     ** 是否是动作表情特效0:普通聊天，1：特效 
+     * </pre>
+     */
+    boolean hasIsaction();
+    /**
+     * <code>optional int32 isaction = 5;</code>
+     *
+     * <pre>
+     ** 是否是动作表情特效0:普通聊天，1：特效 
+     * </pre>
+     */
+    int getIsaction();
+  }
+  /**
+   * Protobuf type {@code NetChat}
+   *
+   * <pre>
+   ** 聊天 
+   * </pre>
+   */
+  public static final class NetChat extends
+      com.google.protobuf.GeneratedMessage
+      implements NetChatOrBuilder {
+    // Use NetChat.newBuilder() to construct.
+    private NetChat(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private NetChat(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final NetChat defaultInstance;
+    public static NetChat getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public NetChat getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private NetChat(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              receiveId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              userName_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              channel_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              content_ = input.readBytes();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              isaction_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return NetGame.internal_static_NetChat_descriptor;
+    }
+
+    protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return NetGame.internal_static_NetChat_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              NetChat.class, Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<NetChat> PARSER =
+        new com.google.protobuf.AbstractParser<NetChat>() {
+      public NetChat parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new NetChat(input, extensionRegistry);
+      }
+    };
+
+    @Override
+    public com.google.protobuf.Parser<NetChat> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional int32 receiveId = 1;
+    public static final int RECEIVEID_FIELD_NUMBER = 1;
+    private int receiveId_;
+    /**
+     * <code>optional int32 receiveId = 1;</code>
+     */
+    public boolean hasReceiveId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 receiveId = 1;</code>
+     */
+    public int getReceiveId() {
+      return receiveId_;
+    }
+
+    // optional string userName = 2;
+    public static final int USERNAME_FIELD_NUMBER = 2;
+    private Object userName_;
+    /**
+     * <code>optional string userName = 2;</code>
+     */
+    public boolean hasUserName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string userName = 2;</code>
+     */
+    public String getUserName() {
+      Object ref = userName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userName = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserNameBytes() {
+      Object ref = userName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        userName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int32 channel = 3;
+    public static final int CHANNEL_FIELD_NUMBER = 3;
+    private int channel_;
+    /**
+     * <code>optional int32 channel = 3;</code>
+     */
+    public boolean hasChannel() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 channel = 3;</code>
+     */
+    public int getChannel() {
+      return channel_;
+    }
+
+    // optional string content = 4;
+    public static final int CONTENT_FIELD_NUMBER = 4;
+    private Object content_;
+    /**
+     * <code>optional string content = 4;</code>
+     */
+    public boolean hasContent() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string content = 4;</code>
+     */
+    public String getContent() {
+      Object ref = content_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          content_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string content = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getContentBytes() {
+      Object ref = content_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        content_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int32 isaction = 5;
+    public static final int ISACTION_FIELD_NUMBER = 5;
+    private int isaction_;
+    /**
+     * <code>optional int32 isaction = 5;</code>
+     *
+     * <pre>
+     ** 是否是动作表情特效0:普通聊天，1：特效 
+     * </pre>
+     */
+    public boolean hasIsaction() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 isaction = 5;</code>
+     *
+     * <pre>
+     ** 是否是动作表情特效0:普通聊天，1：特效 
+     * </pre>
+     */
+    public int getIsaction() {
+      return isaction_;
+    }
+
+    private void initFields() {
+      receiveId_ = 0;
+      userName_ = "";
+      channel_ = 0;
+      content_ = "";
+      isaction_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, receiveId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getUserNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, channel_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getContentBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, isaction_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, receiveId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getUserNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, channel_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getContentBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, isaction_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @Override
+    protected Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static NetChat parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static NetChat parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static NetChat parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static NetChat parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static NetChat parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static NetChat parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static NetChat parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static NetChat parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static NetChat parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static NetChat parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(NetChat prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @Override
+    protected Builder newBuilderForType(
+        BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code NetChat}
+     *
+     * <pre>
+     ** 聊天 
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements NetChatOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return NetGame.internal_static_NetChat_descriptor;
+      }
+
+      protected FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return NetGame.internal_static_NetChat_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                NetChat.class, Builder.class);
+      }
+
+      // Construct using com.module.net.NetGame.NetChat.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        receiveId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        channel_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        content_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        isaction_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return NetGame.internal_static_NetChat_descriptor;
+      }
+
+      public NetChat getDefaultInstanceForType() {
+        return NetChat.getDefaultInstance();
+      }
+
+      public NetChat build() {
+        NetChat result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public NetChat buildPartial() {
+        NetChat result = new NetChat(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.receiveId_ = receiveId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userName_ = userName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.channel_ = channel_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.content_ = content_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.isaction_ = isaction_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof NetChat) {
+          return mergeFrom((NetChat)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(NetChat other) {
+        if (other == NetChat.getDefaultInstance()) return this;
+        if (other.hasReceiveId()) {
+          setReceiveId(other.getReceiveId());
+        }
+        if (other.hasUserName()) {
+          bitField0_ |= 0x00000002;
+          userName_ = other.userName_;
+          onChanged();
+        }
+        if (other.hasChannel()) {
+          setChannel(other.getChannel());
+        }
+        if (other.hasContent()) {
+          bitField0_ |= 0x00000008;
+          content_ = other.content_;
+          onChanged();
+        }
+        if (other.hasIsaction()) {
+          setIsaction(other.getIsaction());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        NetChat parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (NetChat) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional int32 receiveId = 1;
+      private int receiveId_ ;
+      /**
+       * <code>optional int32 receiveId = 1;</code>
+       */
+      public boolean hasReceiveId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 receiveId = 1;</code>
+       */
+      public int getReceiveId() {
+        return receiveId_;
+      }
+      /**
+       * <code>optional int32 receiveId = 1;</code>
+       */
+      public Builder setReceiveId(int value) {
+        bitField0_ |= 0x00000001;
+        receiveId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 receiveId = 1;</code>
+       */
+      public Builder clearReceiveId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        receiveId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional string userName = 2;
+      private Object userName_ = "";
+      /**
+       * <code>optional string userName = 2;</code>
+       */
+      public boolean hasUserName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string userName = 2;</code>
+       */
+      public String getUserName() {
+        Object ref = userName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>optional string userName = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserNameBytes() {
+        Object ref = userName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          userName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userName = 2;</code>
+       */
+      public Builder setUserName(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userName = 2;</code>
+       */
+      public Builder clearUserName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userName_ = getDefaultInstance().getUserName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userName = 2;</code>
+       */
+      public Builder setUserNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userName_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 channel = 3;
+      private int channel_ ;
+      /**
+       * <code>optional int32 channel = 3;</code>
+       */
+      public boolean hasChannel() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 channel = 3;</code>
+       */
+      public int getChannel() {
+        return channel_;
+      }
+      /**
+       * <code>optional int32 channel = 3;</code>
+       */
+      public Builder setChannel(int value) {
+        bitField0_ |= 0x00000004;
+        channel_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 channel = 3;</code>
+       */
+      public Builder clearChannel() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        channel_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional string content = 4;
+      private Object content_ = "";
+      /**
+       * <code>optional string content = 4;</code>
+       */
+      public boolean hasContent() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string content = 4;</code>
+       */
+      public String getContent() {
+        Object ref = content_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          content_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>optional string content = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getContentBytes() {
+        Object ref = content_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          content_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string content = 4;</code>
+       */
+      public Builder setContent(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        content_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string content = 4;</code>
+       */
+      public Builder clearContent() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        content_ = getDefaultInstance().getContent();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string content = 4;</code>
+       */
+      public Builder setContentBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        content_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 isaction = 5;
+      private int isaction_ ;
+      /**
+       * <code>optional int32 isaction = 5;</code>
+       *
+       * <pre>
+       ** 是否是动作表情特效0:普通聊天，1：特效 
+       * </pre>
+       */
+      public boolean hasIsaction() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 isaction = 5;</code>
+       *
+       * <pre>
+       ** 是否是动作表情特效0:普通聊天，1：特效 
+       * </pre>
+       */
+      public int getIsaction() {
+        return isaction_;
+      }
+      /**
+       * <code>optional int32 isaction = 5;</code>
+       *
+       * <pre>
+       ** 是否是动作表情特效0:普通聊天，1：特效 
+       * </pre>
+       */
+      public Builder setIsaction(int value) {
+        bitField0_ |= 0x00000010;
+        isaction_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 isaction = 5;</code>
+       *
+       * <pre>
+       ** 是否是动作表情特效0:普通聊天，1：特效 
+       * </pre>
+       */
+      public Builder clearIsaction() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        isaction_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:NetChat)
+    }
+
+    static {
+      defaultInstance = new NetChat(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:NetChat)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_NetUserData_descriptor;
   private static
@@ -12539,6 +13449,11 @@ public final class NetGame {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_NetLoginConfirm_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_NetChat_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_NetChat_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -12576,8 +13491,10 @@ public final class NetGame {
       "t\022\016\n\006roomId\030\001 \001(\005\"d\n\013NetResponse\022\016\n\006stat" +
       "us\030\001 \001(\005\022$\n\014operateDatas\030\002 \003(\0132\016.NetOpra" +
       "teData\022\021\n\tretStatus\030\003 \002(\005\022\014\n\004step\030\004 \001(\005\"" +
-      "\036\n\017NetLoginConfirm\022\013\n\003uid\030\001 \002(\005B\031\n\016com.m" +
-      "odule.netB\007NetGame"
+      "\036\n\017NetLoginConfirm\022\013\n\003uid\030\001 \002(\005\"b\n\007NetCh" +
+      "at\022\021\n\treceiveId\030\001 \001(\005\022\020\n\010userName\030\002 \001(\t\022",
+      "\017\n\007channel\030\003 \001(\005\022\017\n\007content\030\004 \001(\t\022\020\n\010isa" +
+      "ction\030\005 \001(\005B\031\n\016com.module.netB\007NetGame"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -12686,6 +13603,12 @@ public final class NetGame {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_NetLoginConfirm_descriptor,
               new String[] { "Uid", });
+          internal_static_NetChat_descriptor =
+            getDescriptor().getMessageTypes().get(17);
+          internal_static_NetChat_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_NetChat_descriptor,
+              new String[] { "ReceiveId", "UserName", "Channel", "Content", "Isaction", });
           return null;
         }
       };

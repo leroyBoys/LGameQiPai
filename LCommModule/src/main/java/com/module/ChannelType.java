@@ -15,9 +15,9 @@ public enum ChannelType {
      */
     world(0),
     /**
-     * 班级
+     * 房间
      */
-    classs(1),
+    room(1),
     /**
      * 队伍聊天
      */
@@ -52,5 +52,4 @@ public enum ChannelType {
         }
         return world;
     }
-
 }

@@ -5,11 +5,19 @@ package com.game.core.constant;
  * 2017/4/24.
  */
 public class GameConst {
+    /** 系统module */
     public static final int MOUDLE_System = 0;
+    /** 系统登录module */
     public static final int MOUDLE_Login = 1;
+    /** 用户信息module */
     public static final int MOUDLE_User = 2;
+    /**  聊天module */
+    public static final int MOUDLE_Chat = 3;
+    /** 游戏共有流程module */
     public static final int MOUDLE_GameComm = 10;
+    /** 麻将module */
     public static final int MOUDLE_Mj = 11;
+    /**  斗地主module */
     public static final int MOUDLE_Ddz = 12;
 
 
