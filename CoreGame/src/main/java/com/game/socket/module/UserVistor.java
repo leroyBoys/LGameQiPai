@@ -1,6 +1,5 @@
 package com.game.socket.module;
 
-import com.game.socket.GameSocket;
 import com.lsocket.core.SocketServer;
 import com.lsocket.message.Request;
 import com.lsocket.message.Response;
@@ -32,6 +31,12 @@ public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
     public UserVistor() {
         super(null, null, 0);
     }
+
+    public UserVistor(int roleId) {
+        super(null, null, 0);
+        this.setRoleId(roleId);
+    }
+
 
     @Override
     public void sendError(SocketSystemCode socketSystemCode) {

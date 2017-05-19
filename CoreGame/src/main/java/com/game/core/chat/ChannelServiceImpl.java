@@ -39,14 +39,10 @@ public class ChannelServiceImpl implements ChatFilter {
     }
 
     @Override
-    public boolean sendMsg(ChannelType type, int uid, int pid, String msg, int isActionEffect) {
+    public boolean sendMsg(ChannelType type, UserVistor vistor, int pid, String msg, int isActionEffect) {
 
         String userName = "";
-        if (uid > 0) {
-            UserVistor vistor = OnlineManager.getIntance().getRoleId(uid);
-            if(vistor == null){
-                return true;
-            }
+        if (vistor != null) {
 
             if (vistor.getRoleInfo().getUserStatus() == Status.UserStatus.gag) {
                 // SendMsg.sendErrorMsg(response.getSeq(), uid, ResponseCode.Error.cantNotChat);
@@ -54,8 +50,8 @@ public class ChannelServiceImpl implements ChatFilter {
                 return true;
             }
             if(type == ChannelType.privateChat){
-                if (uid == pid) {
-                    sendSystemMsg(uid, "不能给自己发送消息！");
+                if (vistor.getRoleId() == pid) {
+                    sendSystemMsg(vistor.getRoleId(), "不能给自己发送消息！");
                     return true;
                 }
             }
@@ -69,9 +65,9 @@ public class ChannelServiceImpl implements ChatFilter {
                 return true;
             }
             //存数据库
-            saveToDb(type, uid, pid, msg);
+            saveToDb(type, vistor.getRoleId(), pid, msg);
         }
-        _sendChannelMsg(type, uid, userName, pid, msg, isActionEffect);
+        _sendChannelMsg(type, vistor.getRoleId(), userName, pid, msg, isActionEffect);
         return true;
     }
     private void saveToDb(ChannelType type, int uid, int pid, String msg){

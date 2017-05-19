@@ -21,7 +21,12 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
 
     @Override
     public void doAction(T table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
-        BaseChairInfo chairInfo = table.getChairByUid(visitor.getRoleId());
+        doAction(table,visitor.getRoleId(),true);
+    }
+
+    @Override
+    public void doAction(T table, int roleId, Object paramter) {
+        BaseChairInfo chairInfo = table.getChairByUid(roleId);
         if(chairInfo.getStatus().getVal() == getReadyStatus().getVal()){
             return;
         }
@@ -32,7 +37,7 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
         }
 
         //发送数据
-        table.sendChairStatusMsgWithOutUid(visitor.getRoleId());
+        table.sendChairStatusMsgWithOutUid(roleId);
     }
 
     @Override

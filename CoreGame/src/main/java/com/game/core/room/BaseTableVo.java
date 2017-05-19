@@ -198,8 +198,8 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         statusDataMap = tmpStatusDataMap;
     }
 
-    public Chair getChairByUid(Integer uid) {
-        return chairMap.get(uid);
+    public Chair getChairByUid(int roleId) {
+        return chairMap.get(roleId);
     }
 
     public int getCurChirCount(){
