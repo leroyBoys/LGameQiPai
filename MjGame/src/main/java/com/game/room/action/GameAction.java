@@ -34,7 +34,11 @@ public class GameAction extends BaseAction<MjTable> {
     }
 
     @Override
-    public void doAction(MjTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
+    public void doAction(MjTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData){
+        ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),this.getActionType());
+        for(int i= 0;i<optPlugins.size();i++){
+            optPlugins.get(i).doOperation(table,response,visitor.getRoleId(),netOprateData);
+        }
     }
 
     @Override
@@ -49,7 +53,9 @@ public class GameAction extends BaseAction<MjTable> {
         }
 
         for(int i= 0;i<optPlugins.size();i++){
-            ((IPluginCheckCanExecuteAction)optPlugins.get(i)).checkExecute(chairInfo,card,parems);
+           if(((IPluginCheckCanExecuteAction)optPlugins.get(i)).checkExecute(chairInfo,card,parems)){
+               return;
+           }
         }
 
     }

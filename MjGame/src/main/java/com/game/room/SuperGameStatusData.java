@@ -3,30 +3,37 @@ package com.game.room;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
 import com.game.core.room.BaseStatusData;
-import com.game.room.MjChairInfo;
-import com.game.room.MjTable;
-import com.game.room.action.ChiAction;
-import com.game.room.action.GangAction;
-import com.game.room.action.HuAction;
-import com.game.room.action.PengAction;
+import com.game.room.action.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Created by leroy:656515489@qq.com
  * 2017/4/27.
  */
 public class SuperGameStatusData extends BaseStatusData {
+    /** 可以操作的操作集合 大类（不含胡牌）-数据 */
+    protected Map<Integer,StepGameStatusData> canDoDatas = new HashMap<>();
+    protected List<StepGameStatusData> canHuDatas = new LinkedList<>();
+    /** 可以操作的操作集合的一个权重 */
+    protected int canDoDataLimit = 0;//
+    private int createStep;
 
-    public void moPai(MjTable table, int uid){
-        table.setFocusIdex(table.getChairByUid(uid).getIdx());
-        ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),1);
-        for(int i= 0;i<optPlugins.size();i++){
-            optPlugins.get(i).doOperation(table,null,null);
-        }
+    public void addCanDoDatas(StepGameStatusData stepGameStatusData){
+        canDoDataLimit |= stepGameStatusData.getiOptPlugin().getWeight();
+        canDoDatas.put(stepGameStatusData.getType(),stepGameStatusData);
     }
 
-    protected boolean checkCanGang(MjChairInfo chairInfo,int card){
+    public void addCanHuDatas(StepGameStatusData stepGameStatusData){
+        canDoDataLimit |= stepGameStatusData.getiOptPlugin().getWeight();
+        canHuDatas.add(stepGameStatusData);
+    }
+
+    public void moPai(MjTable table, int uid){
+        MoAction.getInstance().systemDoAction(table,uid,null);
+    }
+
+    protected boolean checkCanGang(MjChairInfo chairInfo, int card){
         return true;
     }
 
@@ -37,7 +44,6 @@ public class SuperGameStatusData extends BaseStatusData {
 
         GangAction.getInstance().check(chairInfo,card,null);
     }
-
 
     protected boolean checkCanChi(MjChairInfo chairInfo,int card){
         return true;

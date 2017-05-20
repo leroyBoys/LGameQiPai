@@ -1,15 +1,16 @@
-package com.game.core.config;
+package com.game.room.action.basePlugins;
 
+import com.game.core.config.IOptPlugin;
 import com.game.core.room.BaseTableVo;
+import com.game.room.StepGameStatusData;
 import com.lsocket.message.Response;
-import com.module.net.NetGame;
 
 /**
  * 游戏中行为插件（吃碰杠胡）
  * Created by leroy:656515489@qq.com
  * 2017/5/11.
  */
-public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOptPlugin<A> {
+public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOptPlugin<A,StepGameStatusData> {
 
     @Override
     public IOptPlugin createNew() {
@@ -21,7 +22,7 @@ public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOp
     }
 
     @Override
-    public Object doOperation(A table, Response response, NetGame.NetOprateData oprateData) {
+    public Object doOperation(A table, Response response,int roleId, StepGameStatusData stepGameStatusData) {
         return null;
     }
 }

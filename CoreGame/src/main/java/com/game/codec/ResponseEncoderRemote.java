@@ -19,6 +19,8 @@ import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolEncoderOutput;
 
+import java.util.Arrays;
+
 /**
  * Created by leroy:656515489@qq.com
  * 2017/4/6.
@@ -39,8 +41,14 @@ public class ResponseEncoderRemote extends ResponseEncoder {
         try {
             UserVistor vistor = (UserVistor) session.getAttribute(SocketConstant.SessionKey.vistorKey);
             DB.UK key = vistor.getUk();
-            
-            byte[] t = getCommondMes((Response) message, key.getUid(),key.getKey(), session);
+            int uid = 0;
+            String keyValue = "test";
+            if(key != null){
+                uid = key.getUid();
+                keyValue = key.getKey();
+            }
+
+            byte[] t = getCommondMes((Response) message,uid,keyValue, session);
             // 定义一个发送消息协议格式：|--header:4 byte--|--content:10MB--|
             IoBuffer buf = transformByteArray(t);
 
@@ -58,6 +66,7 @@ public class ResponseEncoderRemote extends ResponseEncoder {
         if ((bytes == null) || (bytes.length == 0)) {
             return null;
         }
+    //    SystemLogger.info(ResponseEncoderRemote.class,"=========22=>sendssssss"+ Arrays.toString(bytes));
         int messageLength = bytes.length;
         IoBuffer buffer = IoBuffer.allocate(messageLength + 4);
         buffer.setAutoExpand(true);
@@ -84,9 +93,9 @@ public class ResponseEncoderRemote extends ResponseEncoder {
         byte[] datas = response.getValue();
         if(datas == null && obj != null){
             datas = obj.toByteArray();
-            SystemLogger.info(ResponseEncoderRemote.class,uid+"---Send---cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd())+"  "+obj.toString());
+            SystemLogger.info(ResponseEncoderRemote.class,uid+"---Send-1--cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd())+"  "+obj.toString());
         }else {
-            SystemLogger.info(ResponseEncoderRemote.class,uid+"---Send---cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd()));
+            SystemLogger.info(ResponseEncoderRemote.class,uid+"---Send-2--cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd())+com.build().toString());
         }
 
         if(datas != null){

@@ -59,6 +59,10 @@ public class MessageQueue implements IMessageQueue<NetGame.NetOprateData> {
         return null;
     }
 
+    public UserVistor getVistor() {
+        return vistor;
+    }
+
     @Override
     public synchronized void sendNow(int seq) {
         if(msgs.isEmpty()){

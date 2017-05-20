@@ -20,17 +20,17 @@ public class XXYaPaoPlugins extends AbstractStagePlugin<MjTable> {
     }
 
     @Override
-    public synchronized Boolean doOperation(MjTable table, Response response, NetGame.NetOprateData oprateData) {
-        MjChairInfo info = table.getChairByUid(oprateData.getUid());
+    public synchronized Boolean doOperation(MjTable table, Response response,int roleId, NetGame.NetOprateData oprateData) {
+        MjChairInfo info = table.getChairByUid(roleId);
         if(!info.isCanYaPao()){
-            SystemLogger.warn(this.getClass(),"yapao fail roleId:"+oprateData.getUid()+" yapao:"+info.isCanYaPao());
+            SystemLogger.warn(this.getClass(),"yapao fail roleId:"+roleId+" yapao:"+info.isCanYaPao());
             return false;
         }
 
         BaseStatusData.DefaultStatusData statusData = table.getStatusData();
-        int size = statusData.addDoneUid(oprateData.getUid());
+        int size = statusData.addDoneUid(roleId);
         if(size <= 0){
-            SystemLogger.warn(this.getClass(),"yapao fail roleId:"+oprateData.getUid()+" size:"+size);
+            SystemLogger.warn(this.getClass(),"yapao fail roleId:"+roleId+" size:"+size);
             return false;
         }
 

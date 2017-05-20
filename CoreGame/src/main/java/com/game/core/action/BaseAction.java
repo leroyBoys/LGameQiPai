@@ -24,14 +24,14 @@ public abstract class BaseAction<T extends BaseTableVo> {
     public void doAction(T table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData){
         ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),this.getActionType());
         for(int i= 0;i<optPlugins.size();i++){
-            optPlugins.get(i).doOperation(table,response,netOprateData);
+            optPlugins.get(i).doOperation(table,response,visitor.getRoleId(),netOprateData);
         }
     }
 
-    public void doAction(T table,int roleId, Object paramter){
+    public void systemDoAction(T table,int roleId, Object paramter){
         ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),this.getActionType());
         for(int i= 0;i<optPlugins.size();i++){
-            optPlugins.get(i).doOperation(table,null,null);
+            optPlugins.get(i).doOperation(table,null,roleId,paramter);
         }
     }
 

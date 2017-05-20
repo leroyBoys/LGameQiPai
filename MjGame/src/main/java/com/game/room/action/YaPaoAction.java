@@ -39,7 +39,7 @@ public class YaPaoAction extends BaseAction<MjTable> {
     @Override
     public void doAction(MjTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
         IOptPlugin optPlugin = TablePluginManager.getInstance().getOneOptPlugin(table.getGameId(),this.getActionType());
-        if(!(Boolean) optPlugin.doOperation(table,response,netOprateData)){
+        if(!(Boolean) optPlugin.doOperation(table,response,visitor.getRoleId(),netOprateData)){
             return;
         }
         //发送数据

@@ -66,7 +66,9 @@ public class RequestDecoderRemote extends RequestDecoder {
 
                 CmdModule cmdModule = CMDManager.getIntance().getCmdModule(cmd_c);
                 if (cmdModule == null) {
+                    session.write(getError(ResponseCode.Error.login_timeout, commond.getSeq(), module, cmd));
                     SystemLogger.info(RequestDecoderRemote.class, "not find module:" + module + "  cmd:" + cmd);
+                    session.closeNow();
                     return input.hasRemaining();
                 } else if (httpRequestType != cmdModule.getModuleCmd().getRequetType()) {
                     SystemLogger.info(RequestDecoderRemote.class, "module:" + module + "  cmd:" + cmd + " shold be " + cmdModule.getModuleCmd().getRequetType());
@@ -86,7 +88,7 @@ public class RequestDecoderRemote extends RequestDecoder {
 
                 if (vistor.getUid() <= 0) {
                     session.write(getError(ResponseCode.Error.login_timeout, commond.getSeq(), module, cmd));
-                    session.closeNow();
+                   // session.closeNow();
                     return false;//父类接收新数据
                 }
 

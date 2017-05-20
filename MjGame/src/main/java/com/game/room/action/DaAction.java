@@ -23,11 +23,6 @@ public class DaAction extends BaseAction<MjTable> {
     }
 
     @Override
-    public void doAction(MjTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
-
-    }
-
-    @Override
     public void overAction(MjTable table) {
 
     }

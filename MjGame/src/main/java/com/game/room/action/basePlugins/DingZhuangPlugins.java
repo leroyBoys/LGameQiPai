@@ -17,7 +17,7 @@ public class DingZhuangPlugins<T extends MjTable> extends AbstractStagePlugin<T>
     }
 
     @Override
-    public Object doOperation(T table, Response response,NetGame.NetOprateData oprateData) {
+    public Object doOperation(T table, Response response,int roleId, NetGame.NetOprateData oprateData) {
         if(table.getNextBankerUid() <= 0){
             table.setNextBankerUid(table.getChairs()[0].getId());
         }

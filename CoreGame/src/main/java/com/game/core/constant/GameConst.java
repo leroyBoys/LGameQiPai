@@ -57,4 +57,10 @@ public class GameConst {
         public static final int ACTION_TYPE_HU = 250;
     }
 
+    public static class Weight{
+        public static final int CHI = 1<<2;
+        public static final int PENG = CHI<<1;
+        public static final int GANG = PENG<<1;
+        public static final int HU_TING = GANG<<1;
+    }
 }

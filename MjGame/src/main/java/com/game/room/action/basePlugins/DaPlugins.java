@@ -1,5 +1,6 @@
 package com.game.room.action.basePlugins;
 
+import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
 import com.game.room.MjTable;
@@ -10,7 +11,7 @@ import com.module.net.NetGame;
  * Created by leroy:656515489@qq.com
  * 2017/5/11.
  */
-public class XuanFengGangPlugins<T extends MjTable> extends AnGangGangPlugins<T> {
+public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction{
     @Override
     public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
         return false;
@@ -22,8 +23,13 @@ public class XuanFengGangPlugins<T extends MjTable> extends AnGangGangPlugins<T>
     }
 
     @Override
-    public XuanFengGangPlugins createNew() {
-        return new XuanFengGangPlugins();
+    public DaPlugins createNew() {
+        return new DaPlugins();
+    }
+
+    @Override
+    public int getWeight() {
+        return 0;
     }
 
 }

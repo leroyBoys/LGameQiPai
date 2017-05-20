@@ -32,7 +32,7 @@ public class FaPaiAction extends BaseAction<MjTable> {
     @Override
     public void doAction(MjTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
         IOptPlugin optPlugin = TablePluginManager.getInstance().getOneOptPlugin(table.getGameId(),this.getActionType());
-        optPlugin.doOperation(table,response,netOprateData);
+        optPlugin.doOperation(table,response,0,netOprateData);
     }
 
     @Override

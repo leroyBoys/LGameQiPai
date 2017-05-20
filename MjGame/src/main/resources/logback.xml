@@ -3,8 +3,7 @@
  otherwise the contex info will print when error occour -->
 <configuration scan="true" scanPeriod="60 seconds" debug="false"> 
 <!--    <statusListener class="com.jgps.Listener.LogbackListener" />  -->
- <property file="${user.dir}/resources/server.properties" />
-    <Property name="Log.path" value="${user.dir}/logs/logback"/>
+    <Property name="Log.path" value="/myapp/logs/game"/>
     <contextName>Game_Default</contextName>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">   
        <Encoding>UTF-8</Encoding>   
