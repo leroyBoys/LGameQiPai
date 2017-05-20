@@ -21,7 +21,7 @@ public class FaPaiAction extends BaseAction<MjTable> {
 
     @Override
     public void initAction(MjTable table) {
-        doAction(table,null,null,null);
+        doAction(table,null,0,null);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class FaPaiAction extends BaseAction<MjTable> {
     }
 
     @Override
-    public void doAction(MjTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
+    public void doAction(MjTable table, Response response, int roleId, NetGame.NetOprateData netOprateData) {
         IOptPlugin optPlugin = TablePluginManager.getInstance().getOneOptPlugin(table.getGameId(),this.getActionType());
         optPlugin.doOperation(table,response,0,netOprateData);
     }

@@ -1,7 +1,8 @@
-package com.game.room;
+package com.game.room.action;
 
 import com.game.core.config.IOptPlugin;
 import com.game.core.room.BaseStatusData;
+import com.game.room.action.GameAction;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -19,10 +20,10 @@ public class StepGameStatusData extends BaseStatusData {
     private List<List<Integer>> dataList = new LinkedList<>();
     private int card;
     private Set<Integer> subTypes = new HashSet<>();
-    private final int type;
+    private final GameAction gameAction;
 
-    public StepGameStatusData(int type,int fromRoleId,int uid,IOptPlugin iOptPlugin){
-        this.type = type;
+    public StepGameStatusData(GameAction gameAction,int fromRoleId,int uid,IOptPlugin iOptPlugin){
+        this.gameAction = gameAction;
         this.fromRoleId = fromRoleId;
         this.uid = uid;
         this.iOptPlugin = iOptPlugin;
@@ -73,8 +74,8 @@ public class StepGameStatusData extends BaseStatusData {
         return fromRoleId;
     }
 
-    public int getType() {
-        return type;
+    public GameAction getGameAction() {
+        return gameAction;
     }
 
     public int getUid() {

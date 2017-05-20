@@ -16,8 +16,4 @@ public class FaPaiAction extends BaseAction<DDzTable> {
         return false;
     }
 
-    @Override
-    public void doAction(DDzTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
-
-    }
 }

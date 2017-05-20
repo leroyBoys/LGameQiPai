@@ -1,14 +1,14 @@
 package com.game.room.action;
 
+import com.game.core.action.BaseAction;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.config.TablePluginManager;
+import com.game.core.room.GameOverType;
 import com.game.room.MjChairInfo;
-import com.game.room.SuperGameStatusData;
-import com.game.socket.module.UserVistor;
-import com.game.core.action.BaseAction;
 import com.game.room.MjTable;
 import com.lsocket.message.Response;
+import com.module.core.ResponseCode;
 import com.module.net.NetGame;
 
 import java.util.ArrayList;
@@ -31,19 +31,56 @@ public class GameAction extends BaseAction<MjTable> {
         statusData.checkChi(chairInfo,0);
         statusData.checkPeng(chairInfo,0);
         statusData.checkHu(chairInfo,0);
-    }
-
-    @Override
-    public void doAction(MjTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData){
-        ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),this.getActionType());
-        for(int i= 0;i<optPlugins.size();i++){
-            optPlugins.get(i).doOperation(table,response,visitor.getRoleId(),netOprateData);
+        if(statusData.getCanDoDatas().isEmpty()){
+            statusData.addCanDoDatas(new StepGameStatusData(DaAction.getIntance(),table.getBankId(),table.getBankId(),null));
         }
     }
 
     @Override
+    public final void doAction(MjTable table, Response response, int roleId, NetGame.NetOprateData netOprateData){
+        SuperGameStatusData statusData = table.getStatusData();
+        StepGameStatusData firstStep = statusData.getCanDoDatas().getFirst();
+        if(firstStep.getGameAction().getActionType() != netOprateData.getOtype() || firstStep.getUid() != roleId){
+            table.sendError(ResponseCode.Error.not_your_turn,roleId);
+            return;
+        }else if(!firstStep.getGameAction().checkRight(netOprateData,firstStep)){
+            table.sendError(ResponseCode.Error.parmter_error,roleId);
+            return;
+        }
+
+        table.getStepHistoryManager().add(this.getActionType(),roleId);
+
+        ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),firstStep.getGameAction().getActionType());
+        for(int i= 0;i<optPlugins.size();i++){
+            optPlugins.get(i).doOperation(table,response,roleId,netOprateData);
+        }
+
+        table.addMsgQueue(roleId,netOprateData,response==null?0:response.getSeq());
+    }
+
+    private void sendMsg(MjTable table){
+
+
+        table.sendSettlementMsg();
+    }
+
+ /*   @Override
+    public void systemDoAction(MjTable table,int roleId, Object paramter){
+        table.getStepHistoryManager().add(this.getActionType(),roleId);
+
+        ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),this.getActionType());
+        for(int i= 0;i<optPlugins.size();i++){
+            optPlugins.get(i).doOperation(table,null,roleId,paramter);
+        }
+    }*/
+
+    @Override
     public void overAction(MjTable table) {
         table.addRound(); //局数加一
+    }
+
+    public boolean checkRight(NetGame.NetOprateData netOprateData,StepGameStatusData gameStatusData){
+        return true;
     }
 
     public void check(MjChairInfo chairInfo, int card,Object parems){
@@ -57,6 +94,5 @@ public class GameAction extends BaseAction<MjTable> {
                return;
            }
         }
-
     }
 }

@@ -15,9 +15,4 @@ public class AddRateAction extends BaseAction<DDzTable> {
     public boolean isChangeToNextStatus(DDzTable table) {
         return false;
     }
-
-    @Override
-    public void doAction(DDzTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
-
-    }
 }

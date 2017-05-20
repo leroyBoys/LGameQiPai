@@ -1,6 +1,7 @@
 package com.game.room.action;
 
 import com.game.core.constant.GameConst;
+import com.module.net.NetGame;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -10,7 +11,7 @@ public class PengAction extends GameAction {
     private final static PengAction instance = new PengAction();
     private PengAction(){}
 
-    public static PengAction getInstance(){
+    protected static PengAction getInstance(){
         return instance;
     }
 
@@ -19,4 +20,8 @@ public class PengAction extends GameAction {
         return GameConst.MJ.ACTION_TYPE_PENG;
     }
 
+    @Override
+    public boolean checkRight(NetGame.NetOprateData netOprateData,StepGameStatusData gameStatusData) {
+        return true;
+    }
 }

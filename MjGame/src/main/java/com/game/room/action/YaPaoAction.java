@@ -37,15 +37,15 @@ public class YaPaoAction extends BaseAction<MjTable> {
     }
 
     @Override
-    public void doAction(MjTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
+    public void doAction(MjTable table, Response response, int roleId, NetGame.NetOprateData netOprateData) {
         IOptPlugin optPlugin = TablePluginManager.getInstance().getOneOptPlugin(table.getGameId(),this.getActionType());
-        if(!(Boolean) optPlugin.doOperation(table,response,visitor.getRoleId(),netOprateData)){
+        if(!(Boolean) optPlugin.doOperation(table,response,roleId,netOprateData)){
             return;
         }
         //发送数据
 
         NetGame.NetOprateData.Builder yaPao = table.getYaPaoNetOprateData();
-        yaPao.setUid(visitor.getRoleId());
+        yaPao.setUid(roleId);
         yaPao.setDval(netOprateData.getDval());
         table.addMsgQueueAll(yaPao.build(),response.getSeq());
     }

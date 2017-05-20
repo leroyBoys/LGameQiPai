@@ -11,7 +11,15 @@ import com.module.net.NetGame;
  * Created by leroy:656515489@qq.com
  * 2017/4/19.
  */
-public class DaAction extends BaseAction<MjTable> {
+public class DaAction extends GameAction{
+    private final static DaAction intance = new DaAction();
+
+    private DaAction(){}
+
+    protected static final DaAction getIntance(){
+        return intance;
+    }
+
     @Override
     public boolean isChangeToNextStatus(MjTable table) {
         return false;

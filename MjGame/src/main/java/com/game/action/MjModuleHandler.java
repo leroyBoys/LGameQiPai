@@ -73,7 +73,7 @@ public class MjModuleHandler extends ModuleHandler {
             vistor.sendError(ResponseCode.Error.room_not_exit);
             return;
         }
-        tableVo.doAction(stats,response,vistor,(NetGame.NetOprateData) request.getObj());
+        tableVo.doAction(stats,response,vistor.getRoleId(),(NetGame.NetOprateData) request.getObj());
     }
 
     @Override

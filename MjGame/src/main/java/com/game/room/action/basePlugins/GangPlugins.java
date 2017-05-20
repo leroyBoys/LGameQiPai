@@ -5,7 +5,7 @@ import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
 import com.game.room.MjTable;
-import com.game.room.StepGameStatusData;
+import com.game.room.action.StepGameStatusData;
 import com.lsocket.message.Response;
 
 /**

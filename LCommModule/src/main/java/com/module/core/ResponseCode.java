@@ -70,8 +70,9 @@ public class ResponseCode {
         room_is_full(15),
 
         @Comment("桌子不存在")
-        table_not_exit(16)
-        ;
+        table_not_exit(16),
+        @Comment("出牌顺序错误")
+        not_your_turn(17);
         private final int code;
 
         private Error(int code) {

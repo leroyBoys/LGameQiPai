@@ -3,7 +3,7 @@ package com.game.core.room.ddz;
 import com.game.core.factory.TableProducer;
 import com.game.socket.module.UserVistor;
 import com.game.core.room.BaseChairInfo;
-import com.game.core.room.BaseStepHistory;
+import com.game.core.room.StepHistory;
 import com.game.core.room.BaseTableVo;
 import com.module.net.NetGame;
 
@@ -59,7 +59,7 @@ public class DDzTable extends BaseTableVo<DdzStatus,BaseChairInfo> {
     }
 
     @Override
-    public BaseStepHistory getStepHistoryManager() {
+    public StepHistory getStepHistoryManager() {
         return null;
     }
 

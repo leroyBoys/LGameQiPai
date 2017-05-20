@@ -1,40 +1,37 @@
-package com.game.room;
+package com.game.room.action;
 
-import com.game.core.config.IOptPlugin;
-import com.game.core.config.TablePluginManager;
 import com.game.core.room.BaseStatusData;
-import com.game.room.action.*;
+import com.game.room.MjChairInfo;
+import com.game.room.MjTable;
 
-import java.util.*;
+import java.util.LinkedList;
 
 /**
  * Created by leroy:656515489@qq.com
  * 2017/4/27.
  */
 public class SuperGameStatusData extends BaseStatusData {
-    /** 可以操作的操作集合 大类（不含胡牌）-数据 */
-    protected Map<Integer,StepGameStatusData> canDoDatas = new HashMap<>();
-    protected List<StepGameStatusData> canHuDatas = new LinkedList<>();
-    /** 可以操作的操作集合的一个权重 */
-    protected int canDoDataLimit = 0;//
-    private int createStep;
+    protected LinkedList<StepGameStatusData> canDoDatas = new LinkedList<>();
 
     public void addCanDoDatas(StepGameStatusData stepGameStatusData){
-        canDoDataLimit |= stepGameStatusData.getiOptPlugin().getWeight();
-        canDoDatas.put(stepGameStatusData.getType(),stepGameStatusData);
-    }
-
-    public void addCanHuDatas(StepGameStatusData stepGameStatusData){
-        canDoDataLimit |= stepGameStatusData.getiOptPlugin().getWeight();
-        canHuDatas.add(stepGameStatusData);
+        canDoDatas.add(stepGameStatusData);
     }
 
     public void moPai(MjTable table, int uid){
-        MoAction.getInstance().systemDoAction(table,uid,null);
+        MoAction.getInstance().doAction(table,null,uid,null);
     }
 
     protected boolean checkCanGang(MjChairInfo chairInfo, int card){
         return true;
+    }
+
+
+    public void checkCanDo(MjChairInfo chairInfo,int card) {
+        checkGang(chairInfo,0);
+        checkChi(chairInfo,0);
+        checkPeng(chairInfo,0);
+        checkHu(chairInfo,0);
+
     }
 
     public void checkGang(MjChairInfo chairInfo,int card) {
@@ -83,4 +80,7 @@ public class SuperGameStatusData extends BaseStatusData {
         HuAction.getInstance().check(chairInfo,card,checkHuType);
     }
 
+    public LinkedList<StepGameStatusData> getCanDoDatas() {
+        return canDoDatas;
+    }
 }

@@ -91,7 +91,7 @@ public class AdminCmdFilter implements ChatFilter {
                 continue;
             }
 
-            DdzStatus.Idle.getAction().systemDoAction(tableVo,tableVo.getChairs()[i].getId(),null);
+            DdzStatus.Idle.getAction().doAction(tableVo,null,tableVo.getChairs()[i].getId(),null);
         }
 
     }

@@ -17,7 +17,7 @@ public class ScorePaiAction extends BaseAction<DDzTable> {
     }
 
     @Override
-    public void doAction(DDzTable table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
+    public void doAction(DDzTable table, Response response, int roleId, NetGame.NetOprateData netOprateData) {
 
     }
 }

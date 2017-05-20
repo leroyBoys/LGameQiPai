@@ -2,7 +2,7 @@ package com.game.room.action.basePlugins;
 
 import com.game.core.config.IOptPlugin;
 import com.game.core.room.BaseTableVo;
-import com.game.room.StepGameStatusData;
+import com.game.room.action.StepGameStatusData;
 import com.lsocket.message.Response;
 
 /**

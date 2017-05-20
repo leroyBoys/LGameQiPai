@@ -1,6 +1,5 @@
 package com.game.core.action;
 
-import com.game.socket.module.UserVistor;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseChairStatus;
 import com.game.core.room.BaseTableVo;
@@ -20,8 +19,8 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
     protected abstract <S extends BaseChairStatus> S getReadyStatus();
 
     @Override
-    public void doAction(T table, Response response, UserVistor visitor, NetGame.NetOprateData netOprateData) {
-        this.ready(table,visitor.getRoleId());
+    public void doAction(T table, Response response, int roleId, NetGame.NetOprateData netOprateData) {
+        this.ready(table,roleId);
     }
 
     @Override

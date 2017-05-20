@@ -185,7 +185,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         this.setStatus(allStatus[curStatusIdex]);
     }
 
-    public abstract <History extends BaseStepHistory > History getStepHistoryManager();
+    public abstract <History extends StepHistory> History getStepHistoryManager();
 
     public TStatus getStatus() {
         return status;
@@ -242,6 +242,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
     public void cleanTableCache(){
         step = 0;
         timeOutTime = 0;
+        gameOverType = GameOverType.NULL;
 
         for(int i = 0;i<chairs.length;i++){
             if(chairs[i] == null){
@@ -261,12 +262,12 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         }
     }
 
-    public boolean doAction(TStatus fromStatus, Response response, UserVistor visitor, NetGame.NetOprateData oprateData){
+    public boolean doAction(TStatus fromStatus, Response response, int roleId, NetGame.NetOprateData oprateData){
         if(fromStatus != null && fromStatus != this.getStatus()){
             return false;
         }
 
-        this.getStatus().getAction().doAction(this,response,visitor,oprateData);
+        this.getStatus().getAction().doAction(this,response,roleId,oprateData);
 
         if(this.getStatusData().isOver()){
             TableManager.getInstance().trigger(getId());
@@ -564,6 +565,15 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         vistor.sendMsg(otherResponse);
     }
 
+    public void sendError(ResponseCode.Error error, int roleId) {
+        //发送
+        UserVistor vistor = OnlineManager.getIntance().getRoleId(roleId);
+        if(vistor == null){
+            return;
+        }
+        vistor.sendError(error);
+    }
+
     public void sendMsgAll(Response otherResponse) {
         for(int i = 0;i<chairs.length;i++){
             if(chairs[i] == null){
@@ -589,6 +599,25 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
 
         //给其他人发送
         sendMsgWithOutUid(Response.defaultResponse(GameCommCmd.CREATE_TABLE.getModule(),GameCommCmd.UserStatus.getValue(),0,rpEnterRoom.build()),roleId);
+    }
+
+    /**
+     * 发送结算信息
+     */
+    protected abstract void sendSettlementDetailMsg();
+
+    /**
+     * 发送结算信息
+     */
+    public void sendSettlementMsg(){
+
+
+
+
+        if(getGameOverType() == GameOverType.NULL){
+            return;
+        }
+        sendSettlementDetailMsg();
     }
 
     ////////////////////////////////////////////////////////////

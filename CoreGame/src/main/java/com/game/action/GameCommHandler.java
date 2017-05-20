@@ -269,6 +269,8 @@ public class GameCommHandler extends ModuleHandler {
         response.setCmd(GameCommCmd.CREATE_TABLE.getValue());
         response.setObj(baseTableVo.getEnterRoomMsg(vistor.getRoleId()));
         vistor.sendMsg(response);
+
+        baseTableVo.sendSettlementMsg();
     }
 
     private void joinTable(BaseTableVo baseTableVo, UserVistor vistor, Request request, Response response) {
@@ -302,7 +304,7 @@ public class GameCommHandler extends ModuleHandler {
             return;
         }
 
-        table.doAction(table.getStatus(),response,vistor,null);
+        table.doAction(table.getStatus(),response,vistor.getRoleId(),null);
     }
 
     @Override

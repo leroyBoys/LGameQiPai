@@ -21,7 +21,7 @@ public class DingZhuangAction extends BaseAction<MjTable> {
 
     @Override
     public void initAction(MjTable table) {
-        doAction(table,null,null,null);
+        doAction(table,null,0,null);
     }
 
 }
