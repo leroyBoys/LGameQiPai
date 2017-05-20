@@ -1,7 +1,6 @@
 package com.game.room.action;
 
 import com.game.core.constant.GameConst;
-import com.module.net.NetGame;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -20,8 +19,4 @@ public class MoAction extends GameAction {
         return GameConst.MJ.ACTION_TYPE_MOPAI;
     }
 
-    @Override
-    public boolean checkRight(NetGame.NetOprateData netOprateData) {
-        return false;
-    }
 }

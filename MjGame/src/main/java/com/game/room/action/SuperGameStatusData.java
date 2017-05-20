@@ -1,8 +1,11 @@
 package com.game.room.action;
 
+import com.game.core.constant.GameConst;
+import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseStatusData;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
+import com.lgame.util.comm.KVData;
 
 import java.util.LinkedList;
 
@@ -22,11 +25,20 @@ public class SuperGameStatusData extends BaseStatusData {
     }
 
     protected boolean checkCanGang(MjChairInfo chairInfo, int card){
+        KVData last = (KVData) chairInfo.getTableVo().getStepHistoryManager().getActionTypeSteps().getLast();
+        if(card>0){
+            if(last.getK() != GameConst.MJ.ACTION_TYPE_DA){
+                return false;
+            }
+        }else if(last.getK() != GameConst.MJ.ACTION_TYPE_MOPAI){
+            return false;
+        }
+
         return true;
     }
 
 
-    public void checkCanDo(MjChairInfo chairInfo,int card) {
+    public final void checkCanDo(MjChairInfo chairInfo,int card) {
         checkGang(chairInfo,0);
         checkChi(chairInfo,0);
         checkPeng(chairInfo,0);
@@ -34,7 +46,7 @@ public class SuperGameStatusData extends BaseStatusData {
 
     }
 
-    public void checkGang(MjChairInfo chairInfo,int card) {
+    public final void checkGang(MjChairInfo chairInfo,int card) {
         if(!checkCanGang(chairInfo,card)){
             return;
         }
@@ -43,10 +55,18 @@ public class SuperGameStatusData extends BaseStatusData {
     }
 
     protected boolean checkCanChi(MjChairInfo chairInfo,int card){
+        KVData<Integer,Integer> last = (KVData) chairInfo.getTableVo().getStepHistoryManager().getActionTypeSteps().getLast();
+        if(last.getK() != GameConst.MJ.ACTION_TYPE_DA || card <= 0){
+            return false;
+        }
+        BaseChairInfo lastUserInfo = chairInfo.getTableVo().getChairByUid(last.getV());
+        if(chairInfo.getIdx() != chairInfo.getTableVo().nextFocusIndex(lastUserInfo.getIdx())){
+            return false;
+        }
         return true;
     }
 
-    public void checkChi(MjChairInfo chairInfo,int card) {
+    public final void checkChi(MjChairInfo chairInfo,int card) {
         if(!checkCanChi(chairInfo,card)){
             return;
         }
@@ -55,10 +75,15 @@ public class SuperGameStatusData extends BaseStatusData {
     }
 
     protected boolean checkCanPeng(MjChairInfo chairInfo,int card){
+        KVData<Integer,Integer> last = (KVData) chairInfo.getTableVo().getStepHistoryManager().getActionTypeSteps().getLast();
+        if(last.getK() != GameConst.MJ.ACTION_TYPE_DA || card <= 0){
+            return false;
+        }
+
         return true;
     }
 
-    public void checkPeng(MjChairInfo chairInfo,int card) {
+    public final void checkPeng(MjChairInfo chairInfo,int card) {
         if(!checkCanPeng(chairInfo,card)){
             return;
         }
@@ -71,7 +96,7 @@ public class SuperGameStatusData extends BaseStatusData {
         return HuAction.CheckHuType.Hu;
     }
 
-    public void checkHu(MjChairInfo chairInfo,int card) {
+    public final void checkHu(MjChairInfo chairInfo,int card) {
         HuAction.CheckHuType checkHuType = checkCanHu(chairInfo,card);
         if(checkHuType == HuAction.CheckHuType.NULL){
             return;
@@ -80,7 +105,7 @@ public class SuperGameStatusData extends BaseStatusData {
         HuAction.getInstance().check(chairInfo,card,checkHuType);
     }
 
-    public LinkedList<StepGameStatusData> getCanDoDatas() {
+    public final LinkedList<StepGameStatusData> getCanDoDatas() {
         return canDoDatas;
     }
 }

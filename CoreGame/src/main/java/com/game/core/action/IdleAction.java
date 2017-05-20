@@ -23,11 +23,6 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
         this.ready(table,roleId);
     }
 
-    @Override
-    public void systemDoAction(T table, int roleId, Object paramter) {
-       this.ready(table,roleId);
-    }
-
     private void ready(T table,int roleId){
         BaseChairInfo chairInfo = table.getChairByUid(roleId);
         if(chairInfo.getStatus().getVal() == getReadyStatus().getVal()){

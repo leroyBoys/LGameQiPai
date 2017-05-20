@@ -196,6 +196,11 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
         return ResponseCode.Error.succ;
     }
+
+    @Override
+    protected void sendSettlementDetailMsg() {
+
+    }
     //////////////////////////////////////////////////////
 
     /**

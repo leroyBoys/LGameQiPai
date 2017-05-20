@@ -59,6 +59,11 @@ public class DDzTable extends BaseTableVo<DdzStatus,BaseChairInfo> {
     }
 
     @Override
+    protected void sendSettlementDetailMsg() {
+
+    }
+
+    @Override
     public StepHistory getStepHistoryManager() {
         return null;
     }

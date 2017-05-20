@@ -11,8 +11,11 @@ import java.util.LinkedList;
 public class StepHistory<T extends BaseTableVo> {
     private LinkedList<KVData> actionTypeSteps = new LinkedList<>();
 
+    public LinkedList<KVData> getActionTypeSteps() {
+        return actionTypeSteps;
+    }
 
-    public void add(int actionType,int roleId){
+    public void add(int actionType, int roleId){
         actionTypeSteps.add(new KVData(roleId,actionType));
     }
 }

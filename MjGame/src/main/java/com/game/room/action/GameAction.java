@@ -4,9 +4,11 @@ import com.game.core.action.BaseAction;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.config.TablePluginManager;
+import com.game.core.constant.GameConst;
 import com.game.core.room.GameOverType;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
+import com.lgame.util.comm.KVData;
 import com.lsocket.message.Response;
 import com.module.core.ResponseCode;
 import com.module.net.NetGame;
@@ -25,6 +27,8 @@ public class GameAction extends BaseAction<MjTable> {
 
     @Override
     public void initAction(MjTable table) {
+        table.getStepHistoryManager().getActionTypeSteps().add(new KVData<>(GameConst.MJ.ACTION_TYPE_MOPAI,table.getBankId()));
+
         SuperGameStatusData statusData = table.getStatusData();
         MjChairInfo chairInfo = table.getChairByUid(table.getBankId());
         statusData.checkGang(chairInfo,0);
@@ -48,7 +52,8 @@ public class GameAction extends BaseAction<MjTable> {
             return;
         }
 
-        table.getStepHistoryManager().add(this.getActionType(),roleId);
+        int actionType = netOprateData.getDval()>0?netOprateData.getDval():firstStep.getGameAction().getActionType();
+        table.getStepHistoryManager().add(actionType,roleId);
 
         ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),firstStep.getGameAction().getActionType());
         for(int i= 0;i<optPlugins.size();i++){
