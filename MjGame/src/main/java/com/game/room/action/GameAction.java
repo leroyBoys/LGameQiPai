@@ -20,14 +20,10 @@ import java.util.ArrayList;
  * 2017/4/19.
  */
 public class GameAction extends BaseAction<MjTable> {
-    @Override
-    public boolean isChangeToNextStatus(MjTable table) {
-        return false;
-    }
 
     @Override
     public void initAction(MjTable table) {
-        table.getStepHistoryManager().getActionTypeSteps().add(new KVData<>(GameConst.MJ.ACTION_TYPE_MOPAI,table.getBankId()));
+      //  table.getStepHistoryManager().getActionTypeSteps().add(new StepGameStatusData());
 
         SuperGameStatusData statusData = table.getStatusData();
         MjChairInfo chairInfo = table.getChairByUid(table.getBankId());
@@ -53,18 +49,23 @@ public class GameAction extends BaseAction<MjTable> {
         }
 
         int actionType = netOprateData.getDval()>0?netOprateData.getDval():firstStep.getGameAction().getActionType();
-        table.getStepHistoryManager().add(actionType,roleId);
+      ///  table.getStepHistoryManager().add(actionType,roleId);
 
+        NetGame.NetOprateData.Builder retOperaData = NetGame.NetOprateData.newBuilder(netOprateData);
         ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),firstStep.getGameAction().getActionType());
         for(int i= 0;i<optPlugins.size();i++){
-            optPlugins.get(i).doOperation(table,response,roleId,netOprateData);
+            IOptPlugin optPlugin = optPlugins.get(i);
+            if(!optPlugin.doOperation(table,response,roleId,netOprateData)){
+                continue;
+            }
+            retOperaData.addDlist(optPlugin.getPlugin().getSubType());
         }
 
-        table.addMsgQueue(roleId,netOprateData,response==null?0:response.getSeq());
+        table.addMsgQueueAll(retOperaData.build(),response==null?0:response.getSeq());
     }
 
     private void sendMsg(MjTable table){
-
+      //  table.getNetRespose();
 
         table.sendSettlementMsg();
     }
@@ -77,7 +78,8 @@ public class GameAction extends BaseAction<MjTable> {
         for(int i= 0;i<optPlugins.size();i++){
             optPlugins.get(i).doOperation(table,null,roleId,paramter);
         }
-    }*/
+    }
+    */
 
     @Override
     public void overAction(MjTable table) {

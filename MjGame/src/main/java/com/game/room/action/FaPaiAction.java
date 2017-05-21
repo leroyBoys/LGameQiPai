@@ -60,8 +60,4 @@ public class FaPaiAction extends BaseAction<MjTable> {
         }
     }
 
-    @Override
-    public boolean isChangeToNextStatus(MjTable table) {
-        return false;
-    }
 }

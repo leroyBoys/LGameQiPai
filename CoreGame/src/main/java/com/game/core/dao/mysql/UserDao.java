@@ -332,4 +332,29 @@ public class UserDao implements Base {
             ct.dbTrace("updateCard");
         }
     }
+
+    public boolean loginConfim(int uid) {
+
+        MethodCacheTime ct = monitor.start();
+        try {
+            return gamePool.ExecuteUpdate("UPDATE user_info SET is_online=1  WHERE id = ? AND is_online=0", new Object[]{uid});
+        } catch (Exception ex) {
+            file.ErrorLog(ex, LogType.Error, "db");
+        } finally {
+            ct.dbTrace("loginConfim");
+        }
+        return false;
+    }
+
+    public boolean offLine(int uid) {
+        MethodCacheTime ct = monitor.start();
+        try {
+            return gamePool.ExecuteUpdate("UPDATE user_info SET is_online=2 ,login_off_time = NOW() WHERE id = ? ", new Object[]{uid});
+        } catch (Exception ex) {
+            file.ErrorLog(ex, LogType.Error, "db");
+        } finally {
+            ct.dbTrace("offLine");
+        }
+        return false;
+    }
 }

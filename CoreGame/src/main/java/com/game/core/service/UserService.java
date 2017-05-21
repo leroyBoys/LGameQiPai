@@ -73,4 +73,8 @@ public interface UserService {
     public void updateRoleInfoRoomid(int roleId, int id);
 
     public void updateCard(int roleId, int card);
+
+    public boolean loginConfim(int uid);
+
+    public boolean offLine(int uid);
 }

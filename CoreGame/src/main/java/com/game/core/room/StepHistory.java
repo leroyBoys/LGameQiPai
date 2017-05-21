@@ -1,21 +1,24 @@
 package com.game.core.room;
 
-import com.lgame.util.comm.KVData;
-
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by leroy:656515489@qq.com
  * 2017/4/19.
  */
-public class StepHistory<T extends BaseTableVo> {
-    private LinkedList<KVData> actionTypeSteps = new LinkedList<>();
+public class StepHistory<STEP> {
+    private List<STEP> actionTypeSteps = new ArrayList<>();
 
-    public LinkedList<KVData> getActionTypeSteps() {
+    public List<STEP> getActionTypeSteps() {
         return actionTypeSteps;
     }
 
-    public void add(int actionType, int roleId){
-        actionTypeSteps.add(new KVData(roleId,actionType));
+    public void add(STEP data){
+        actionTypeSteps.add(data);
+    }
+
+    public STEP getLastStep() {
+        return actionTypeSteps.get(actionTypeSteps.size()-1);
     }
 }

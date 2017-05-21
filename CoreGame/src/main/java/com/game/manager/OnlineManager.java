@@ -5,6 +5,7 @@ import com.lgame.util.exception.AppException;
 import com.logger.log.SystemLogger;
 import com.lsocket.manager.AddressManager;
 import com.lsocket.module.Visitor;
+import com.lsocket.util.SocketConstant;
 import com.module.core.ResponseCode;
 import com.module.supers.SuperLog;
 import org.apache.mina.core.session.IoSession;
@@ -32,6 +33,8 @@ public class OnlineManager{
     protected final int maxOnlineCount = 10000;
     protected ConcurrentHashMap<Integer, UserVistor> roleId_session = new ConcurrentHashMap();//userId-session
 
+    protected ConcurrentHashMap<Long, IoSession> oneLineSession = new ConcurrentHashMap();//sessionId-session
+
     private ConcurrentHashMap<String, AtomicInteger> ip_links = new ConcurrentHashMap();
     protected final int ip_maxLinks = 20;//单客户端连接最大数
 
@@ -47,6 +50,10 @@ public class OnlineManager{
         if (userVistor == null || roleId <= 0) {
             return ResponseCode.Error.succ;
         }
+        if(oneLineSession.putIfAbsent(userVistor.getIoSession().getId(),userVistor.getIoSession()) != null){
+            return ResponseCode.Error.succ;
+        }
+
         userVistor.setUid(uid);
         userVistor.setRoleId(roleId);
 
@@ -83,10 +90,13 @@ public class OnlineManager{
      *
      * @return
      */
-    public void removeFromOnlineList(int roleId) {
-        UserVistor userVistor = roleId_session.remove(roleId);
+    public void removeFromOnlineList(IoSession session) {
+        if(oneLineSession.remove(session.getId()) == null){
+            return;
+        }
 
-        if (userVistor == null) {
+        UserVistor userVistor = (UserVistor) session.getAttribute(SocketConstant.SessionKey.vistorKey);
+        if(userVistor == null){
             return;
         }
 

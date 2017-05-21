@@ -189,4 +189,14 @@ public class UserServiceImpl implements UserService {
     public void updateCard(int roleId, int card) {
         userDao.updateCard(roleId, card);
     }
+
+    @Override
+    public boolean loginConfim(int uid) {
+        return userDao.loginConfim(uid);
+    }
+
+    @Override
+    public boolean offLine(int uid) {
+        return userDao.offLine(uid);
+    }
 }

@@ -11,10 +11,6 @@ import com.module.net.NetGame;
  * 2017/4/19.
  */
 public class ScorePaiAction extends BaseAction<DDzTable> {
-    @Override
-    public boolean isChangeToNextStatus(DDzTable table) {
-        return false;
-    }
 
     @Override
     public void doAction(DDzTable table, Response response, int roleId, NetGame.NetOprateData netOprateData) {

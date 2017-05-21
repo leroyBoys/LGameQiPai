@@ -21,11 +21,6 @@ public class DaAction extends GameAction{
     }
 
     @Override
-    public boolean isChangeToNextStatus(MjTable table) {
-        return false;
-    }
-
-    @Override
     public int getActionType() {
         return GameConst.MJ.ACTION_TYPE_DA;
     }

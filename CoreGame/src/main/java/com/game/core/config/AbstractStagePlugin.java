@@ -10,6 +10,8 @@ import com.module.net.NetGame;
  * 2017/5/11.
  */
 public class AbstractStagePlugin<A extends BaseTableVo> implements IOptPlugin<A,NetGame.NetOprateData > {
+    private PluginGen pluginGen;
+
     @Override
     public IOptPlugin createNew() {
         return new AbstractStagePlugin();
@@ -19,13 +21,18 @@ public class AbstractStagePlugin<A extends BaseTableVo> implements IOptPlugin<A,
     public int getWeight() {
         return 0;
     }
-
     @Override
-    public void setPluginId(int pluginId) {
+    public void setPlugin(PluginGen plugin) {
+        this.pluginGen = plugin;
     }
 
     @Override
-    public Object doOperation(A table, Response response,int roleId, NetGame.NetOprateData o) {
-        return null;
+    public PluginGen getPlugin() {
+        return pluginGen;
+    }
+
+    @Override
+    public boolean doOperation(A table, Response response,int roleId, NetGame.NetOprateData o) {
+        return false;
     }
 }

@@ -9,10 +9,6 @@ import com.game.room.MjTable;
  * 2017/4/19.
  */
 public class DingZhuangAction extends BaseAction<MjTable> {
-    @Override
-    public boolean isChangeToNextStatus(MjTable table) {
-        return false;
-    }
 
     @Override
     public int getActionType() {

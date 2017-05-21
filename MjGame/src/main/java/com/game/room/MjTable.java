@@ -17,6 +17,7 @@ import java.util.*;
  * 2017/4/19.
  */
 public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
+
     /** 庄家id */
     private int bankId;
     ////顺序东北西南->0-3
@@ -42,13 +43,13 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     }
 
     @Override
-    public <History extends StepHistory> History getStepHistoryManager() {
-        return null;
+    public void cleanTableCache() {
+
     }
 
     @Override
-    public void cleanTableCache() {
-
+    protected void initStepHistory() {
+        stepHistory = new MjStepHistory();
     }
 
     @Override

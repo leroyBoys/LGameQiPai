@@ -27,7 +27,7 @@ public class DaGangPlugins<T extends MjTable> extends GangPlugins<T>{
     }
 
     @Override
-    public Object doOperation(T table, Response response,int roleId, StepGameStatusData stepGameStatusData) {
-        return null;
+    public boolean doOperation(T table, Response response,int roleId, StepGameStatusData stepGameStatusData) {
+        return false;
     }
 }

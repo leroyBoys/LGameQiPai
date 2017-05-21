@@ -19,6 +19,7 @@ public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
     private long heartTime;
     private int heartNum;
     private int connectErrorCount;
+    private boolean isSelfOffLine = true;
 
     private DB.UK uk;
     private GameRole gameRole;
@@ -95,6 +96,14 @@ public class UserVistor extends Visitor<Request,Response,ResponseCode.Error> {
 
     public void setUk(DB.UK uk) {
         this.uk = uk;
+    }
+
+    public boolean isSelfOffLine() {
+        return isSelfOffLine;
+    }
+
+    public void setSelfOffLine(boolean selfOffLine) {
+        isSelfOffLine = selfOffLine;
     }
 
     public GameRole getGameRole() {

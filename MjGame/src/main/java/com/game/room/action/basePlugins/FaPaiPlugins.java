@@ -22,7 +22,7 @@ public class FaPaiPlugins<T extends MjTable> extends AbstractStagePlugin<T> {
 
 
     @Override
-    public Object doOperation(T table, Response response,int roleId, NetGame.NetOprateData o) {
+    public boolean doOperation(T table, Response response,int roleId, NetGame.NetOprateData o) {
         table.getCardPool().shuffle();
 
         List<Integer> cardPool = table.getCardPool().getRemainCards();

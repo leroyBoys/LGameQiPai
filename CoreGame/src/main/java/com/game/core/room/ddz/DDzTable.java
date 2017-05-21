@@ -64,11 +64,6 @@ public class DDzTable extends BaseTableVo<DdzStatus,BaseChairInfo> {
     }
 
     @Override
-    public StepHistory getStepHistoryManager() {
-        return null;
-    }
-
-    @Override
     public BaseChairInfo createChair(UserVistor visitor) {
         return null;
     }

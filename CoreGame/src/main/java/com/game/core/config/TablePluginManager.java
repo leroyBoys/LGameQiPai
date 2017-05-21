@@ -1,6 +1,5 @@
 package com.game.core.config;
 
-import com.game.core.TableManager;
 import com.lgame.util.comm.StringTool;
 import com.lgame.util.file.PropertiesTool;
 import com.lgame.util.load.ResourceServiceImpl;
@@ -100,7 +99,7 @@ public class TablePluginManager {
         try {
             Class clazz = Class.forName(PLUGINPATH + "." + pg.getPluginClass());
             IOptPlugin optPlugin =  (IOptPlugin) clazz.newInstance();
-            optPlugin.setPluginId(pg.getTempId());
+            optPlugin.setPlugin(pg);
             return optPlugin;
         } catch (Exception e) {
             e.printStackTrace();

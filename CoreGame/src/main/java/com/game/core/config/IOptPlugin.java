@@ -10,9 +10,11 @@ public interface IOptPlugin<A extends BaseTableVo,OP> extends SuperCreateNew {
 
 	public int getWeight();
 
-	public void setPluginId(int pluginId);
+	public void setPlugin(PluginGen plugin);
+
+	public PluginGen getPlugin();
 
 	/** 执行这个插件的操作 */
-	public Object doOperation(A table,Response response,int roleId, OP op) ;
+	public boolean doOperation(A table,Response response,int roleId, OP op) ;
 
 }

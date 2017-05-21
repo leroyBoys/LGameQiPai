@@ -23,11 +23,6 @@ public class YaPaoAction extends BaseAction<MjTable> {
     }
 
     @Override
-    public boolean isChangeToNextStatus(MjTable table) {
-        return false;
-    }
-
-    @Override
     public void initAction(MjTable table) {
         NetGame.NetKvData.Builder kvData = NetGame.NetKvData.newBuilder();
         kvData.setK(GameConst.MJ.ACTION_TYPE_YAPao);
@@ -39,7 +34,7 @@ public class YaPaoAction extends BaseAction<MjTable> {
     @Override
     public void doAction(MjTable table, Response response, int roleId, NetGame.NetOprateData netOprateData) {
         IOptPlugin optPlugin = TablePluginManager.getInstance().getOneOptPlugin(table.getGameId(),this.getActionType());
-        if(!(Boolean) optPlugin.doOperation(table,response,roleId,netOprateData)){
+        if(!optPlugin.doOperation(table,response,roleId,netOprateData)){
             return;
         }
         //发送数据

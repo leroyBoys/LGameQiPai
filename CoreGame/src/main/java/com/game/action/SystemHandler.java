@@ -132,11 +132,22 @@ public class SystemHandler extends ModuleHandler {
             SystemLogger.error(this.getClass(),"you should load:"+key.getIpPort());
             return;
         }
-        key.toBuilder().setKey(SocketConstant.getLocalIp().getAll());
-        userService.setUserKey(key.getUid(),key.getIpPort(),key.getKey());
 
-        vistor.setUk(key);
-        UserInfo userInfo = userService.getUserInfo(obj.getUid());
+        //OnlineManager.getIntance().getRoleId()
+        UserInfo userInfo;
+        if(!userService.loginConfim(obj.getUid())){
+            userInfo = userService.getUserInfo(obj.getUid());
+
+            if(userInfo == null || userInfo.getOnLineType() == UserInfo.OnLineType.login){
+                SystemLogger.error(this.getClass(),"you login failed :uid:"+obj.getUid());
+                return;
+            }else {
+                //断线重连
+            }
+        }else {
+            userInfo = userService.getUserInfo(obj.getUid());
+        }
+
         if(userInfo == null){
             vistor.sendError(ResponseCode.Error.user_exit);
             PrintTool.error("cant find uid:"+obj.getUid());
@@ -144,6 +155,10 @@ public class SystemHandler extends ModuleHandler {
             return;
         }
 
+        key.toBuilder().setKey(SocketConstant.getLocalIp().getAll());
+        userService.setUserKey(key.getUid(),key.getIpPort(),key.getKey());
+
+        vistor.setUk(key);
         connectNow(request,userInfo,vistor,response);
     }
 
@@ -170,6 +185,13 @@ public class SystemHandler extends ModuleHandler {
         }else {
             gameRole = DBServiceManager.getInstance().getGameRedis().getGameRole(info.getId());
         }
+
+        UserVistor lastUser = OnlineManager.getIntance().getRoleId(info.getId());
+        if(lastUser != null){//如果有在线的，则提示踢掉对方、不能登录
+            lastUser.setSelfOffLine(false);
+            lastUser.sendError(ResponseCode.Error.other_login);
+        }
+
         vistor.setGameRole(gameRole);
 
         vistor.setRoleInfo(info);

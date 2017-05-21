@@ -12,10 +12,14 @@ import java.util.Map;
  * Created by Administrator on 2017/4/15.
  */
 public class GameRedis {
-    protected RedisConnectionManager redisConnectionManager;
+    protected final RedisConnectionManager redisConnectionManager;
 
     public GameRedis(RedisConnectionManager redisConnectionManager){
         this.redisConnectionManager = redisConnectionManager;
+    }
+
+    public RedisConnectionManager getRedisConnectionManager(){
+        return redisConnectionManager;
     }
 
     public GameRole getGameRole(int roleId){

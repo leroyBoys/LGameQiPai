@@ -27,7 +27,7 @@ public class UserInfo extends DbFactory implements java.io.Serializable {
     private String inviteCode;
     private byte userStatus;//Status.userStatus
     private Date statusEndTime;
-    private boolean isOnline;
+    private OnLineType onLineType;
     private Date createDate;
     private Date loginTime;
     private Date loginOffTime;
@@ -75,6 +75,14 @@ public class UserInfo extends DbFactory implements java.io.Serializable {
         this.userPwd = userPwd;
     }
 
+    public OnLineType getOnLineType() {
+        return onLineType;
+    }
+
+    public void setOnLineType(OnLineType onLineType) {
+        this.onLineType = onLineType;
+    }
+
     public byte getRole() {
         return role;
     }
@@ -105,14 +113,6 @@ public class UserInfo extends DbFactory implements java.io.Serializable {
 
     public void setStatusEndTime(Date statusEndTime) {
         this.statusEndTime = statusEndTime;
-    }
-
-    public boolean isIsOnline() {
-        return isOnline;
-    }
-
-    public void setIsOnline(boolean isOnline) {
-        this.isOnline = isOnline;
     }
 
     public Date getCreateDate() {
@@ -154,7 +154,10 @@ public class UserInfo extends DbFactory implements java.io.Serializable {
         userInfo.setDeviceId(rs.getInt("device_id"));
         userInfo.setId(rs.getInt("id"));
         userInfo.setInviteCode(rs.getString("invite_code"));
-        userInfo.setIsOnline(rs.getBoolean("is_online"));
+
+        int onlinetype = rs.getInt("is_online");
+        int length = OnLineType.values().length-1;
+        userInfo.setOnLineType(OnLineType.values()[Math.min(length,onlinetype)]);
         userInfo.setLoginOffTime(rs.getDate("login_off_time"));
         userInfo.setLoginTime(rs.getDate("login_time"));
         userInfo.setRole(rs.getByte("role"));
@@ -169,5 +172,10 @@ public class UserInfo extends DbFactory implements java.io.Serializable {
     @Override
     protected UserInfo createNew() {
         return new UserInfo();
+    }
+
+
+    public enum OnLineType{
+        waitLogin,login,offline
     }
 }

@@ -14,8 +14,6 @@ import java.util.ArrayList;
  * 2017/4/19.
  */
 public abstract class BaseAction<T extends BaseTableVo> {
-    @Deprecated
-    public abstract boolean isChangeToNextStatus(T table);
     public int getActionType(){
         return 0;
     }

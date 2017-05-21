@@ -34,7 +34,7 @@ public class GangPlugins<T extends MjTable> extends AbstractActionPlugin<T> impl
     }
 
     @Override
-    public Object doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
+    public boolean doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
         return super.doOperation(table, response, roleId, stepGameStatusData);
     }
 }

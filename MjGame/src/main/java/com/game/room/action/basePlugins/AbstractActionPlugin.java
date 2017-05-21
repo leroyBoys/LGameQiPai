@@ -1,6 +1,7 @@
 package com.game.room.action.basePlugins;
 
 import com.game.core.config.IOptPlugin;
+import com.game.core.config.PluginGen;
 import com.game.core.room.BaseTableVo;
 import com.game.room.action.StepGameStatusData;
 import com.lsocket.message.Response;
@@ -11,6 +12,7 @@ import com.lsocket.message.Response;
  * 2017/5/11.
  */
 public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOptPlugin<A,StepGameStatusData> {
+    private PluginGen pluginGen;
 
     @Override
     public IOptPlugin createNew() {
@@ -18,11 +20,17 @@ public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOp
     }
 
     @Override
-    public void setPluginId(int pluginId) {
+    public void setPlugin(PluginGen plugin) {
+        this.pluginGen = plugin;
     }
 
     @Override
-    public Object doOperation(A table, Response response,int roleId, StepGameStatusData stepGameStatusData) {
-        return null;
+    public PluginGen getPlugin() {
+        return pluginGen;
+    }
+
+    @Override
+    public boolean doOperation(A table, Response response,int roleId, StepGameStatusData stepGameStatusData) {
+        return false;
     }
 }

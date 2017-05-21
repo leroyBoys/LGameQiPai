@@ -11,11 +11,6 @@ import com.module.net.NetGame;
  * 2017/4/19.
  */
 public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
-    @Override
-    public final boolean isChangeToNextStatus(BaseTableVo table) {
-        return false;
-    }
-
     protected abstract <S extends BaseChairStatus> S getReadyStatus();
 
     @Override

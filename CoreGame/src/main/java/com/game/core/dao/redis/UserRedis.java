@@ -40,4 +40,8 @@ public class UserRedis {
         redisConnectionManager.getMaster().expire(redisKey, DateTimeTool.M_ONE_DAY);
         redisConnectionManager.getMaster().set(redisKey,uk.build().toByteArray());
     }
+
+    public RedisConnectionManager getRedisConnectionManager() {
+        return redisConnectionManager;
+    }
 }

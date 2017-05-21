@@ -51,6 +51,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
     /** 当前局数 */
     private int curRount = 1;
     private TableProducer tableProducer;
+    protected StepHistory stepHistory;
 
     private final ReentrantLock tableLock = new ReentrantLock();
     private final ReentrantLock statusLock = new ReentrantLock();
@@ -68,7 +69,12 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         initStatus();
         initCardPoolEngine();
         initChair(maxSize);
+        initStepHistory();
        // lockKey = Tools.getCharacterAndNumber(6);
+    }
+
+    protected  void initStepHistory(){
+        stepHistory = new StepHistory();
     }
 
     protected abstract void initStatus();
@@ -185,7 +191,9 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         this.setStatus(allStatus[curStatusIdex]);
     }
 
-    public abstract <History extends StepHistory> History getStepHistoryManager();
+    public StepHistory getStepHistoryManager(){
+        return stepHistory;
+    }
 
     public TStatus getStatus() {
         return status;
@@ -610,10 +618,6 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
      * 发送结算信息
      */
     public void sendSettlementMsg(){
-
-
-
-
         if(getGameOverType() == GameOverType.NULL){
             return;
         }

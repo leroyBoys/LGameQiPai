@@ -8,8 +8,4 @@ import com.game.core.room.ddz.DDzTable;
  * 2017/4/19.
  */
 public class GameAction extends BaseAction<DDzTable> {
-    @Override
-    public boolean isChangeToNextStatus(DDzTable table) {
-        return false;
-    }
 }
