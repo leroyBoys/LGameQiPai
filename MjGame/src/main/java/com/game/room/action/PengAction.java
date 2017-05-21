@@ -7,7 +7,7 @@ import com.module.net.NetGame;
  * Created by leroy:656515489@qq.com
  * 2017/4/19.
  */
-public class PengAction extends GameAction {
+public class PengAction extends GameOperateAction {
     private final static PengAction instance = new PengAction();
     private PengAction(){}
 

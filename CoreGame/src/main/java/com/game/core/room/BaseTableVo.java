@@ -703,6 +703,10 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         return messageQueue.get(roleId);
     }
 
+    public void addStep() {
+        step++;
+    }
+
     public enum AttributeKey{
         /** 总局数 */
         AllRount,

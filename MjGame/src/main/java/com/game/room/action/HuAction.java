@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Created by leroy:656515489@qq.com
  * 2017/4/19.
  */
-public class HuAction extends GameAction {
+public class HuAction extends GameOperateAction {
     private final static HuAction instance = new HuAction();
     private HuAction(){}
 
@@ -23,7 +23,7 @@ public class HuAction extends GameAction {
 
     @Override
     public int getActionType() {
-        return GameConst.MJ.ACTION_TYPE_GANG;
+        return GameConst.MJ.ACTION_TYPE_HU;
     }
 
     @Override

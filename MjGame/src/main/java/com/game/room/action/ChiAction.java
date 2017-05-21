@@ -7,7 +7,7 @@ import com.module.net.NetGame;
  * Created by leroy:656515489@qq.com
  * 2017/4/19.
  */
-public class ChiAction extends GameAction {
+public class ChiAction extends GameOperateAction {
     private final static ChiAction instance = new ChiAction();
     private ChiAction(){}
 

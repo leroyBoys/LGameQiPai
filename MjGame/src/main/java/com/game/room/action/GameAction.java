@@ -31,27 +31,30 @@ public class GameAction extends BaseAction<MjTable> {
         statusData.checkChi(chairInfo,0);
         statusData.checkPeng(chairInfo,0);
         statusData.checkHu(chairInfo,0);
-        if(statusData.getCanDoDatas().isEmpty()){
-            statusData.addCanDoDatas(new StepGameStatusData(DaAction.getIntance(),table.getBankId(),table.getBankId(),null));
-        }
+        statusData.checkDa(chairInfo,0);
     }
 
     @Override
-    public final void doAction(MjTable table, Response response, int roleId, NetGame.NetOprateData netOprateData){
+    public void doAction(MjTable table, Response response, int roleId, NetGame.NetOprateData netOprateData){
+        if(netOprateData.getOtype() == GameConst.MJ.ACTION_TYPE_GUO){
+            GuoAction.getInstance().doAction(table,response,roleId,netOprateData);
+            return;
+        }
+
         SuperGameStatusData statusData = table.getStatusData();
-        StepGameStatusData firstStep = statusData.getCanDoDatas().getFirst();
-        if(firstStep.getGameAction().getActionType() != netOprateData.getOtype() || firstStep.getUid() != roleId){
+        StepGameStatusData firstStep = statusData.getFirstCanDoAction();
+        if(firstStep.getAction().getActionType() != netOprateData.getOtype() || firstStep.getUid() != roleId){
             table.sendError(ResponseCode.Error.not_your_turn,roleId);
             return;
-        }else if(!firstStep.getGameAction().checkRight(netOprateData,firstStep)){
+        }else if(!firstStep.getAction().checkRight(netOprateData,firstStep)){
             table.sendError(ResponseCode.Error.parmter_error,roleId);
             return;
         }
 
-        int actionType = netOprateData.getDval()>0?netOprateData.getDval():firstStep.getGameAction().getActionType();
-      ///  table.getStepHistoryManager().add(actionType,roleId);
-
-        NetGame.NetOprateData.Builder retOperaData = NetGame.NetOprateData.newBuilder(netOprateData);
+        table.addStep();
+        table.getStepHistoryManager().add(firstStep);
+        firstStep.getAction().doAction(table,response,roleId,netOprateData);
+       /* NetGame.NetOprateData.Builder retOperaData = NetGame.NetOprateData.newBuilder(netOprateData);
         ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),firstStep.getGameAction().getActionType());
         for(int i= 0;i<optPlugins.size();i++){
             IOptPlugin optPlugin = optPlugins.get(i);
@@ -61,11 +64,18 @@ public class GameAction extends BaseAction<MjTable> {
             retOperaData.addDlist(optPlugin.getPlugin().getSubType());
         }
 
-        table.addMsgQueueAll(retOperaData.build(),response==null?0:response.getSeq());
+        table.addMsgQueueAll(retOperaData.build(),response==null?0:response.getSeq());*/
+
+        //排序
+        statusData.sortCanDoDatas(table);
+
     }
 
     private void sendMsg(MjTable table){
       //  table.getNetRespose();
+        SuperGameStatusData statusData = table.getStatusData();
+        statusData.getCanDoDatas();
+
 
         table.sendSettlementMsg();
     }

@@ -6,7 +6,10 @@ import com.game.core.room.BaseStatusData;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.lgame.util.comm.KVData;
+import com.module.net.NetGame;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 /**
@@ -15,9 +18,11 @@ import java.util.LinkedList;
  */
 public class SuperGameStatusData extends BaseStatusData {
     protected LinkedList<StepGameStatusData> canDoDatas = new LinkedList<>();
+    protected boolean isChange = true;
 
     public void addCanDoDatas(StepGameStatusData stepGameStatusData){
         canDoDatas.add(stepGameStatusData);
+        isChange = true;
     }
 
     public void moPai(MjTable table, int uid){
@@ -36,10 +41,10 @@ public class SuperGameStatusData extends BaseStatusData {
     protected boolean checkCanGang(MjChairInfo chairInfo, int card){
         StepGameStatusData last = (StepGameStatusData) chairInfo.getTableVo().getStepHistoryManager().getLastStep();
         if(card>0){
-            if(last.getGameAction().getActionType() != GameConst.MJ.ACTION_TYPE_DA){
+            if(last.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_DA){
                 return false;
             }
-        }else if(last.getGameAction().getActionType() != GameConst.MJ.ACTION_TYPE_MOPAI){
+        }else if(last.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_MOPAI){
             return false;
         }
 
@@ -56,7 +61,7 @@ public class SuperGameStatusData extends BaseStatusData {
 
     protected boolean checkCanChi(MjChairInfo chairInfo,int card){
         StepGameStatusData last = (StepGameStatusData) chairInfo.getTableVo().getStepHistoryManager().getLastStep();
-        if(last.getGameAction().getActionType() != GameConst.MJ.ACTION_TYPE_DA || card <= 0){
+        if(last.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_DA || card <= 0){
             return false;
         }
         BaseChairInfo lastUserInfo = chairInfo.getTableVo().getChairByUid(last.getUid());
@@ -76,7 +81,7 @@ public class SuperGameStatusData extends BaseStatusData {
 
     protected boolean checkCanPeng(MjChairInfo chairInfo,int card){
         StepGameStatusData last = (StepGameStatusData) chairInfo.getTableVo().getStepHistoryManager().getLastStep();
-        if(last.getGameAction().getActionType() != GameConst.MJ.ACTION_TYPE_DA || card <= 0){
+        if(last.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_DA || card <= 0){
             return false;
         }
 
@@ -105,7 +110,62 @@ public class SuperGameStatusData extends BaseStatusData {
         HuAction.getInstance().check(chairInfo,card,checkHuType);
     }
 
-    public final LinkedList<StepGameStatusData> getCanDoDatas() {
-        return canDoDatas;
+    public void checkDa(MjChairInfo chairInfo, int card) {
+        if(canDoDatas.isEmpty()){
+            addCanDoDatas(new StepGameStatusData(DaAction.getIntance(),chairInfo.getId(),chairInfo.getId(),null));
+        }
+    }
+
+    public StepGameStatusData getFirstCanDoAction() {
+        return canDoDatas.getFirst();
+    }
+
+    public void sortCanDoDatas(final MjTable table) {
+        isChange = false;
+        if(canDoDatas.size() <=1){
+            return;
+        }
+
+        Collections.sort(canDoDatas, new Comparator<StepGameStatusData>() {
+            @Override
+            public int compare(StepGameStatusData o1, StepGameStatusData o2) {
+                Integer wight1 = o1.getiOptPlugin().getWeight();
+                Integer wight2 = o2.getiOptPlugin().getWeight();
+
+                if(wight1 == wight2){
+                    StepGameStatusData last = (StepGameStatusData) table.getStepHistoryManager().getLastStep();
+                    int lastIdex = table.getChairByUid(last.getUid()).getIdx();
+                    wight1 = getIdexWeight(table.getChairByUid(o1.getUid()).getIdx(),lastIdex);
+                    wight2 = getIdexWeight(table.getChairByUid(o2.getUid()).getIdx(),lastIdex);
+                }
+                return wight1.compareTo(wight2);
+            }
+        });
+    }
+
+    private int getIdexWeight(int myIndex,int targetIndex){
+        return 1;
+    }
+
+    public NetGame.NetOprateData getCanDoDatas(){
+        NetGame.NetOprateData.Builder netOprate = NetGame.NetOprateData.newBuilder();
+        netOprate.setUid(canDoDatas.getFirst().getUid());
+
+        for(StepGameStatusData step:canDoDatas){
+            if(netOprate.getUid() != step.getUid()){
+                break;
+            }
+
+            NetGame.NetKvData.Builder netKv = NetGame.NetKvData.newBuilder();
+            netKv.setK(step.getAction().getActionType());
+            netKv.setV(step.getiOptPlugin().getPlugin().getSubType());
+            if(step.getCard() != 0){
+
+            }
+/*
+            netKv.addAllDlist(step.ge)
+            netOprate.addKvDatas()*/
+        }
+        return netOprate.build();
     }
 }

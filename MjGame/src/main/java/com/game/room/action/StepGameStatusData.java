@@ -20,10 +20,10 @@ public class StepGameStatusData extends BaseStatusData {
     private List<List<Integer>> dataList = new LinkedList<>();
     private int card;
     private Set<Integer> subTypes = new HashSet<>();
-    private final GameAction gameAction;
+    private final GameOperateAction action;
 
-    public StepGameStatusData(GameAction gameAction,int fromRoleId,int uid,IOptPlugin iOptPlugin){
-        this.gameAction = gameAction;
+    public StepGameStatusData(GameOperateAction action,int fromRoleId,int uid,IOptPlugin iOptPlugin){
+        this.action = action;
         this.fromRoleId = fromRoleId;
         this.uid = uid;
         this.iOptPlugin = iOptPlugin;
@@ -66,6 +66,14 @@ public class StepGameStatusData extends BaseStatusData {
         return this.card == card;
     }
 
+    public List<List<Integer>> getDataList() {
+        return dataList;
+    }
+
+    public int getCard() {
+        return card;
+    }
+
     public IOptPlugin getiOptPlugin() {
         return iOptPlugin;
     }
@@ -74,8 +82,8 @@ public class StepGameStatusData extends BaseStatusData {
         return fromRoleId;
     }
 
-    public GameAction getGameAction() {
-        return gameAction;
+    public GameOperateAction getAction() {
+        return action;
     }
 
     public int getUid() {
