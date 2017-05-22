@@ -8,9 +8,7 @@ import com.game.room.MjTable;
 import com.lgame.util.comm.KVData;
 import com.module.net.NetGame;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -18,11 +16,13 @@ import java.util.LinkedList;
  */
 public class SuperGameStatusData extends BaseStatusData {
     protected LinkedList<StepGameStatusData> canDoDatas = new LinkedList<>();
-    protected boolean isChange = true;
+    protected Set<Integer> firstActionSet = new HashSet<>();//第一可以操作的集合
 
     public void addCanDoDatas(StepGameStatusData stepGameStatusData){
         canDoDatas.add(stepGameStatusData);
-        isChange = true;
+        if(!firstActionSet.isEmpty()){
+            firstActionSet.clear();
+        }
     }
 
     public void moPai(MjTable table, int uid){
@@ -120,8 +120,7 @@ public class SuperGameStatusData extends BaseStatusData {
         return canDoDatas.getFirst();
     }
 
-    public void sortCanDoDatas(final MjTable table) {
-        isChange = false;
+    private void sortCanDoDatas(final MjTable table) {
         if(canDoDatas.size() <=1){
             return;
         }
@@ -129,8 +128,8 @@ public class SuperGameStatusData extends BaseStatusData {
         Collections.sort(canDoDatas, new Comparator<StepGameStatusData>() {
             @Override
             public int compare(StepGameStatusData o1, StepGameStatusData o2) {
-                Integer wight1 = o1.getiOptPlugin().getWeight();
-                Integer wight2 = o2.getiOptPlugin().getWeight();
+                Integer wight1 = o1.getAction().getWeight();
+                Integer wight2 = o2.getAction().getWeight();
 
                 if(wight1 == wight2){
                     StepGameStatusData last = (StepGameStatusData) table.getStepHistoryManager().getLastStep();
@@ -147,25 +146,33 @@ public class SuperGameStatusData extends BaseStatusData {
         return 1;
     }
 
-    public NetGame.NetOprateData getCanDoDatas(){
-        NetGame.NetOprateData.Builder netOprate = NetGame.NetOprateData.newBuilder();
-        netOprate.setUid(canDoDatas.getFirst().getUid());
+    public NetGame.NetOprateData getCanDoDatas(MjTable table,int roleId){
+        if(firstActionSet.isEmpty()){
+            sortCanDoDatas(table);
+        }
+
+        if(roleId != 0 && roleId != canDoDatas.getFirst().getUid()){
+            return null;
+        }
+
+        NetGame.NetOprateData.Builder netOprate = table.getCanDoActionsNetOprateData(roleId);
 
         for(StepGameStatusData step:canDoDatas){
             if(netOprate.getUid() != step.getUid()){
                 break;
             }
 
+            firstActionSet.add(step.getAction().getActionType());
             NetGame.NetKvData.Builder netKv = NetGame.NetKvData.newBuilder();
             netKv.setK(step.getAction().getActionType());
             netKv.setV(step.getiOptPlugin().getPlugin().getSubType());
-            if(step.getCard() != 0){
-
-            }
-/*
-            netKv.addAllDlist(step.ge)
-            netOprate.addKvDatas()*/
+            netOprate.addAllDlist(step.getCards());
+            netOprate.addKvDatas(netKv);
         }
         return netOprate.build();
+    }
+
+    public boolean isEmpty(){
+        return canDoDatas.isEmpty();
     }
 }

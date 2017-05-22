@@ -18,10 +18,6 @@ public class AbstractStagePlugin<A extends BaseTableVo> implements IOptPlugin<A,
     }
 
     @Override
-    public int getWeight() {
-        return 0;
-    }
-    @Override
     public void setPlugin(PluginGen plugin) {
         this.pluginGen = plugin;
     }

@@ -24,4 +24,9 @@ public class PengAction extends GameOperateAction {
     public boolean checkRight(NetGame.NetOprateData netOprateData,StepGameStatusData gameStatusData) {
         return true;
     }
+
+    @Override
+    public int getWeight() {
+        return GameConst.Weight.PENG;
+    }
 }

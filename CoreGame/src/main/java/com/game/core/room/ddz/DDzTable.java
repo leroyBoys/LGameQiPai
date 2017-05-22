@@ -44,7 +44,7 @@ public class DDzTable extends BaseTableVo<DdzStatus,BaseChairInfo> {
     }
 
     @Override
-    public NetGame.NetExtraData.Builder getTableExtrData() {
+    public NetGame.NetExtraData.Builder getTableExtrData(int roleId) {
         return null;
     }
 
@@ -59,7 +59,7 @@ public class DDzTable extends BaseTableVo<DdzStatus,BaseChairInfo> {
     }
 
     @Override
-    protected void sendSettlementDetailMsg() {
+    protected void sendSettlementDetailMsg(int roleId) {
 
     }
 

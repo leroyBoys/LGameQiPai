@@ -28,9 +28,4 @@ public class PengPlugins<T extends MjTable> extends AbstractActionPlugin<T> impl
         return new PengPlugins();
     }
 
-    @Override
-    public int getWeight() {
-        return GameConst.Weight.PENG;
-    }
-
 }

@@ -22,6 +22,12 @@ public class ChiAction extends GameOperateAction {
 
     @Override
     public boolean checkRight(NetGame.NetOprateData netOprateData,StepGameStatusData gameStatusData) {
-        return gameStatusData.isRight(netOprateData.getDval(),netOprateData.getDlistList());
+       // return gameStatusData.isRight(netOprateData.getDval(),netOprateData.getDlistList());
+        return false;
+    }
+
+    @Override
+    public int getWeight() {
+        return GameConst.Weight.CHI;
     }
 }

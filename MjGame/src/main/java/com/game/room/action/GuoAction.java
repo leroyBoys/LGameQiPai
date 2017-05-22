@@ -48,6 +48,11 @@ public class GuoAction extends GameOperateAction {
         }
     }
 
+    @Override
+    public int getWeight() {
+        return 0;
+    }
+
     public enum CheckHuType{
         NULL,Hu,Ting
     }

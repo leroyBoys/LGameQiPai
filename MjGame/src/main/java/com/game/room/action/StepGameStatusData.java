@@ -15,71 +15,32 @@ import java.util.Set;
  */
 public class StepGameStatusData extends BaseStatusData {
     private final IOptPlugin iOptPlugin;
-    private final int fromRoleId;
+    private final int fromId;
     private final int uid;
-    private List<List<Integer>> dataList = new LinkedList<>();
-    private int card;
-    private Set<Integer> subTypes = new HashSet<>();
+    private List<Integer> cards = new LinkedList<>();
     private final GameOperateAction action;
 
-    public StepGameStatusData(GameOperateAction action,int fromRoleId,int uid,IOptPlugin iOptPlugin){
+    public StepGameStatusData(GameOperateAction action,int fromId,int uid,IOptPlugin iOptPlugin){
         this.action = action;
-        this.fromRoleId = fromRoleId;
+        this.fromId = fromId;
         this.uid = uid;
         this.iOptPlugin = iOptPlugin;
     }
 
-    public void addDatas(int card){
-        this.card = card;
+    public List<Integer> getCards() {
+        return cards;
     }
 
-    public void addDatas(int subTypeId,List<Integer> datas){
-        if(subTypeId > 0){
-            subTypes.add(subTypeId);
-        }
-
-        dataList.add(datas);
-    }
-
-    public boolean isRight(int subType,List<Integer> datas){
-        if(!subTypes.contains(subType) || datas == null || datas.isEmpty()){
-            return false;
-        }
-
-        for(List<Integer> list:dataList){
-            if(list.size() != datas.size()){
-                return false;
-            }
-
-            for(int i=0;i<list.size();i++){
-                if(list.get(i) != datas.get(i)){
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean isRight(int card){
-        return this.card == card;
-    }
-
-    public List<List<Integer>> getDataList() {
-        return dataList;
-    }
-
-    public int getCard() {
-        return card;
+    public void setCards(List<Integer> cards) {
+        this.cards = cards;
     }
 
     public IOptPlugin getiOptPlugin() {
         return iOptPlugin;
     }
 
-    public int getFromRoleId() {
-        return fromRoleId;
+    public int getFromId() {
+        return fromId;
     }
 
     public GameOperateAction getAction() {

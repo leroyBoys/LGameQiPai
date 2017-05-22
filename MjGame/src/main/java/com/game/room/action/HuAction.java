@@ -48,6 +48,11 @@ public class HuAction extends GameOperateAction {
         }
     }
 
+    @Override
+    public int getWeight() {
+        return GameConst.Weight.HU_TING;
+    }
+
     public enum CheckHuType{
         NULL,Hu,Ting
     }

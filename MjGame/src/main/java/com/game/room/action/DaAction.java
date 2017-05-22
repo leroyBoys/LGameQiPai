@@ -29,4 +29,10 @@ public class DaAction extends GameOperateAction{
     public void overAction(MjTable table) {
 
     }
+
+
+    @Override
+    public int getWeight() {
+        return 0;
+    }
 }

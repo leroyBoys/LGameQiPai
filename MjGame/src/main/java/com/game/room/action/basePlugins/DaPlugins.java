@@ -27,9 +27,4 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
         return new DaPlugins();
     }
 
-    @Override
-    public int getWeight() {
-        return 0;
-    }
-
 }

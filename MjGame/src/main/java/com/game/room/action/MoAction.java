@@ -18,5 +18,8 @@ public class MoAction extends GameOperateAction {
     public int getActionType() {
         return GameConst.MJ.ACTION_TYPE_MOPAI;
     }
-
+    @Override
+    public int getWeight() {
+        return 0;
+    }
 }

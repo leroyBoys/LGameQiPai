@@ -28,11 +28,6 @@ public class MoPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
     }
 
     @Override
-    public int getWeight() {
-        return 0;
-    }
-
-    @Override
     public boolean doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
         return super.doOperation(table, response, roleId, stepGameStatusData);
     }

@@ -380,7 +380,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         rqCreateRoom.setOwnerId(this.getOwnerId());
         rqCreateRoom.setGameStatus(this.status.getValue());
         rqCreateRoom.addAllType(typeList);
-        NetGame.NetExtraData.Builder extra = this.getTableExtrData();
+        NetGame.NetExtraData.Builder extra = this.getTableExtrData(roleid);
         if(extra != null){
             rqCreateRoom.setExtra(extra);
         }
@@ -406,7 +406,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
      * 牌局额外数据
      * @return
      */
-    protected abstract NetGame.NetExtraData.Builder getTableExtrData();
+    protected abstract NetGame.NetExtraData.Builder getTableExtrData(int roleId);
 
     public NetGame.NetUserData getOtherNetUserData(Chair chair){
         NetGame.NetUserData.Builder netUserData = getNetUserData(chair);
@@ -612,16 +612,16 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
     /**
      * 发送结算信息
      */
-    protected abstract void sendSettlementDetailMsg();
+    protected abstract void sendSettlementDetailMsg(int roleId);
 
     /**
      * 发送结算信息
      */
-    public void sendSettlementMsg(){
+    public void sendSettlementMsg(int roleId){
         if(getGameOverType() == GameOverType.NULL){
             return;
         }
-        sendSettlementDetailMsg();
+        sendSettlementDetailMsg(roleId);
     }
 
     ////////////////////////////////////////////////////////////

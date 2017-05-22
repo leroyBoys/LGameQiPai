@@ -3,8 +3,11 @@ package com.game.room;
 import com.game.action.MjCmd;
 import com.game.core.constant.GameConst;
 import com.game.core.factory.TableProducer;
+import com.game.core.room.BaseStatusData;
+import com.game.core.room.GameOverType;
 import com.game.core.room.StepHistory;
 import com.game.core.room.BaseTableVo;
+import com.game.room.action.SuperGameStatusData;
 import com.game.socket.module.UserVistor;
 import com.lgame.util.comm.RandomTool;
 import com.module.core.ResponseCode;
@@ -63,13 +66,18 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     }
 
     @Override
-    protected NetGame.NetExtraData.Builder getTableExtrData() {
+    protected NetGame.NetExtraData.Builder getTableExtrData(int roleId) {
         NetGame.NetExtraData.Builder extra = NetGame.NetExtraData.newBuilder();
         extra.addList(this.getBankId());
         extra.addList(this.getCardPool().getRemainCount());
         extra.addList(this.getCardPool().getAllSize());
 
         extra.addOperates(this.getTurnData());
+
+        NetGame.NetOprateData netOprateData = getCanDoActionMsg(roleId);
+        if(netOprateData != null){
+            extra.addOperates(netOprateData);
+        }
         return extra;
     }
 
@@ -199,21 +207,64 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     }
 
     @Override
-    protected void sendSettlementDetailMsg() {
+    protected void sendSettlementDetailMsg(int roleId) {
 
     }
+
+    public void sendCanDoActionMsg(int roleId){
+        if(getGameOverType() != GameOverType.NULL){
+            sendSettlementMsg(roleId);
+            return;
+        }else if(getStatus().getValue() == 0){
+            return;
+        }
+
+        BaseStatusData curStatusData = getStatusData();
+        if(!(curStatusData instanceof SuperGameStatusData)){
+            return;
+        }
+
+        SuperGameStatusData statusData = (SuperGameStatusData)curStatusData;
+
+        NetGame.NetOprateData netOprateData = statusData.getCanDoDatas(this,0);
+        getNetResposeOnly(netOprateData);
+        addMsgQueue(netOprateData.getUid(),netOprateData,0);//可操作集合
+    }
+
+    public NetGame.NetOprateData getCanDoActionMsg(int roleId){
+        if(getGameOverType() != GameOverType.NULL){
+            sendSettlementMsg(roleId);
+            return null;
+        }else if(getStatus().getValue() == 0){
+            return null;
+        }
+
+        BaseStatusData curStatusData = getStatusData();
+        if(!(curStatusData instanceof SuperGameStatusData)){
+            return null;
+        }
+
+        SuperGameStatusData statusData = (SuperGameStatusData)curStatusData;
+
+        NetGame.NetOprateData netOprateData = statusData.getCanDoDatas(this,roleId);
+        if(netOprateData == null){
+            return null;
+        }
+
+       return netOprateData;
+    }
+
     //////////////////////////////////////////////////////
 
     /**
-     * 发送可以操作的集合
-     * @param actions
+     * 可以操作的集合
+     * @param
      */
-    public NetGame.NetOprateData getCanDoActionsResponse(List<NetGame.NetKvData> actions){
+    public NetGame.NetOprateData.Builder getCanDoActionsNetOprateData(int roleId){
         NetGame.NetOprateData.Builder canDoActions = NetGame.NetOprateData.newBuilder();
         canDoActions.setOtype(GameConst.MJ.ACTION_TYPE_CanDoActions);
-        canDoActions.addAllKvDatas(actions);
-
-        return canDoActions.build();
+        canDoActions.setUid(roleId);
+        return canDoActions;
     }
 
     /**

@@ -26,9 +26,4 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
         return new ChiPlugins();
     }
 
-    @Override
-    public int getWeight() {
-        return GameConst.Weight.CHI;
-    }
-
 }

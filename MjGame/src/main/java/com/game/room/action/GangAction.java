@@ -40,4 +40,9 @@ public class GangAction extends GameOperateAction {
             }
         }
     }
+
+    @Override
+    public int getWeight() {
+        return GameConst.Weight.GANG;
+    }
 }

@@ -4,6 +4,7 @@ import com.game.core.action.BaseAction;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.config.TablePluginManager;
+import com.game.core.constant.GameConst;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.lsocket.message.Response;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * Created by leroy:656515489@qq.com
  * 2017/4/19.
  */
-public class GameOperateAction extends BaseAction<MjTable> {
+public abstract class GameOperateAction extends BaseAction<MjTable> {
 
     @Override
     public void initAction(MjTable table) {
@@ -58,4 +59,6 @@ public class GameOperateAction extends BaseAction<MjTable> {
            }
         }
     }
+
+    public abstract int getWeight();
 }

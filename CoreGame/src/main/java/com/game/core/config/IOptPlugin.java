@@ -8,8 +8,6 @@ import com.module.net.NetGame;
 public interface IOptPlugin<A extends BaseTableVo,OP> extends SuperCreateNew {
 	public IOptPlugin createNew();
 
-	public int getWeight();
-
 	public void setPlugin(PluginGen plugin);
 
 	public PluginGen getPlugin();
