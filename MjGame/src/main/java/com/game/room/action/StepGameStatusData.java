@@ -35,6 +35,10 @@ public class StepGameStatusData extends BaseStatusData {
         this.cards = cards;
     }
 
+    public void setCard(int card) {
+        this.cards.add(card);
+    }
+
     public IOptPlugin getiOptPlugin() {
         return iOptPlugin;
     }

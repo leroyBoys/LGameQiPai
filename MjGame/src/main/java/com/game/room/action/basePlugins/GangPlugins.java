@@ -30,6 +30,9 @@ public class GangPlugins<T extends MjTable> extends AbstractActionPlugin<T> impl
 
     @Override
     public boolean doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
-        return super.doOperation(table, response, roleId, stepGameStatusData);
+        int card = (int) table.getCardPool().getRemainCards().remove(0);
+        table.getChairByUid(roleId).getHandsContainer().addHandCards(card);
+        stepGameStatusData.setCard(card);
+        return true;
     }
 }

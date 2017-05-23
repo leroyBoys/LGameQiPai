@@ -5,6 +5,8 @@ import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
 import com.game.room.MjTable;
+import com.game.room.action.StepGameStatusData;
+import com.lsocket.message.Response;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -26,4 +28,11 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
         return new ChiPlugins();
     }
 
+    @Override
+    public boolean doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
+        int card = (int) table.getCardPool().getRemainCards().remove(0);
+        table.getChairByUid(roleId).getHandsContainer().addHandCards(card);
+        stepGameStatusData.setCard(card);
+        return true;
+    }
 }

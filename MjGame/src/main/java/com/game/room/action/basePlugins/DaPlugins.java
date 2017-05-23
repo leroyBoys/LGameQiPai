@@ -3,9 +3,14 @@ package com.game.room.action.basePlugins;
 import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
+import com.game.room.MjCardPoolEngine;
 import com.game.room.MjTable;
+import com.game.room.action.StepGameStatusData;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
+
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -20,6 +25,25 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
     @Override
     public void createCanExecuteAction(BaseTableVo room) {
 
+    }
+
+    @Override
+    public boolean doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
+
+        int removeCard = stepGameStatusData.getCards().get(0);
+        MjCardPoolEngine poolEngine = table.getCardPool();
+
+        Iterator<Integer> it = table.getChairByUid(roleId).getHandsContainer().getHandCards().iterator();
+        while (it.hasNext()) {
+            Integer card = it.next();
+            if (card == removeCard) {
+                it.remove();
+                poolEngine.playOutCard(roleId,card);
+                break;
+            }
+        }
+
+        return true;
     }
 
     @Override
