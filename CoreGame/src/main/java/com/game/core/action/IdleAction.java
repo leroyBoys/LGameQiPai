@@ -1,5 +1,6 @@
 package com.game.core.action;
 
+import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseChairStatus;
 import com.game.core.room.BaseTableVo;
@@ -12,6 +13,10 @@ import com.module.net.NetGame;
  */
 public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
     protected abstract <S extends BaseChairStatus> S getReadyStatus();
+
+    public int getActionType(){
+        return GameConst.ACTION_TYPE_READY;
+    }
 
     @Override
     public void doAction(T table, Response response, int roleId, NetGame.NetOprateData netOprateData) {

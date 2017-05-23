@@ -24,12 +24,7 @@ public class YaPaoAction extends BaseAction<MjTable> {
 
     @Override
     public void initAction(MjTable table) {
-        NetGame.NetKvData.Builder kvData = NetGame.NetKvData.newBuilder();
-        kvData.setK(GameConst.MJ.ACTION_TYPE_YAPao);
-
-        NetGame.NetOprateData.Builder canDoActions = table.getCanDoActionsNetOprateData(0);
-        canDoActions.addKvDatas(kvData);
-        table.addMsgQueueAll(canDoActions.build(),0);
+       super.initAction(table);
     }
 
     @Override

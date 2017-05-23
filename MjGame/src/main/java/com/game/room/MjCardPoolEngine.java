@@ -2,7 +2,7 @@ package com.game.room;
 
 import com.game.core.config.RoomSetting;
 import com.game.core.config.TablePluginManager;
-import com.game.core.room.BaseCardPoolEngine;
+import com.game.core.room.card.BaseCardPoolEngine;
 
 import java.util.*;
 
@@ -11,9 +11,8 @@ import java.util.*;
  * 2017/4/25.
  */
 public class MjCardPoolEngine extends BaseCardPoolEngine<Integer> {
-    protected Map<Integer,List<Integer>> outPool = new HashMap<>();
-    private int lastPlayCard = 0;
-    private int lastPlayCardUid = 0;
+    protected Map<Integer,LinkedList<Integer>> outPool = new HashMap<>();
+    private int lastPlayUid = 0;
 
     public MjCardPoolEngine(int gameId,List<Integer> userSetStaticCardPool){
         super(gameId,userSetStaticCardPool);
@@ -22,8 +21,7 @@ public class MjCardPoolEngine extends BaseCardPoolEngine<Integer> {
     @Override
     public void init() {
         outPool.clear();
-        lastPlayCard = 0;
-        lastPlayCardUid = 0;
+        lastPlayUid = 0;
         super.init();
     }
 
@@ -51,27 +49,22 @@ public class MjCardPoolEngine extends BaseCardPoolEngine<Integer> {
     }
 
     public int removeLastCard(){
-        int card = lastPlayCard;
-        lastPlayCard = 0;
-        return card;
+        return outPool.get(lastPlayUid).removeLast();
     }
 
-    protected void putOutCard(int uid,int c){
-        List<Integer> cards = outPool.get(uid);
+    public void playOutCard(int uid,int card){
+        lastPlayUid = uid;
+
+        LinkedList<Integer>  cards = outPool.get(uid);
         if(cards == null){
             cards = new LinkedList<>();
             outPool.put(uid,cards);
         }
 
-        cards.add(c);
+        cards.add(card);
     }
 
-    public void playOutCard(int uid,int c){
-        if(lastPlayCard != 0){
-            putOutCard(uid,c);
-        }
-
-        lastPlayCard = c;
-        lastPlayCardUid = uid;
+    public List<Integer> getOutPool(int uid) {
+        return outPool.get(uid);
     }
 }

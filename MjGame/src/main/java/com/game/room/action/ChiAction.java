@@ -1,6 +1,7 @@
 package com.game.room.action;
 
 import com.game.core.constant.GameConst;
+import com.game.room.status.StepGameStatusData;
 import com.module.net.NetGame;
 
 /**

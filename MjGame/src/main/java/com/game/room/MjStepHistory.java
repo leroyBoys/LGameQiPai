@@ -1,7 +1,7 @@
 package com.game.room;
 
 import com.game.core.room.StepHistory;
-import com.game.room.action.StepGameStatusData;
+import com.game.room.status.StepGameStatusData;
 
 /**
  * Created by leroy:656515489@qq.com

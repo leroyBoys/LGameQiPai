@@ -1,6 +1,6 @@
 package com.game.room;
 
-import com.game.core.room.BaseHandCardsContainer;
+import com.game.core.room.card.BaseHandCardsContainer;
 
 import java.util.LinkedList;
 import java.util.List;

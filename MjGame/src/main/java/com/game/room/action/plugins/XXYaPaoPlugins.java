@@ -2,7 +2,7 @@ package com.game.room.action.plugins;
 
 import com.game.core.config.AbstractStagePlugin;
 import com.game.core.config.IOptPlugin;
-import com.game.core.room.BaseStatusData;
+import com.game.core.room.BaseGameStateData;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.logger.log.SystemLogger;
@@ -27,7 +27,7 @@ public class XXYaPaoPlugins extends AbstractStagePlugin<MjTable> {
             return false;
         }
 
-        BaseStatusData.DefaultStatusData statusData = table.getStatusData();
+        BaseGameStateData.DefaultStatusData statusData = table.getStatusData();
         int size = statusData.addDoneUid(roleId);
         if(size <= 0){
             SystemLogger.warn(this.getClass(),"yapao fail roleId:"+roleId+" size:"+size);

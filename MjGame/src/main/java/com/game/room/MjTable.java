@@ -3,9 +3,8 @@ package com.game.room;
 import com.game.action.MjCmd;
 import com.game.core.constant.GameConst;
 import com.game.core.factory.TableProducer;
-import com.game.core.room.BaseStatusData;
+import com.game.core.room.BaseGameStateData;
 import com.game.core.room.GameOverType;
-import com.game.core.room.StepHistory;
 import com.game.core.room.BaseTableVo;
 import com.game.room.action.SuperGameStatusData;
 import com.game.socket.module.UserVistor;
@@ -74,10 +73,19 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
         extra.addOperates(this.getTurnData());
 
-        NetGame.NetOprateData netOprateData = getCanDoActionMsg(roleId);
+        NetGame.NetOprateData.Builder netOprateData = getStatusData().getCanDoDatas(this,roleId);
         if(netOprateData != null){
+            NetGame.NetKvData.Builder kvData = NetGame.NetKvData.newBuilder();
+            kvData.setK(getStatus().getAction().getActionType());
+            netOprateData.addKvDatas(kvData);
             extra.addOperates(netOprateData);
         }
+        NetGame.NetOprateData.Builder details = getStatusData().getStatusDetail(this);
+        if(details!=null){
+            details.setOtype(getStatus().getAction().getActionType());
+            extra.addOperates(details);
+        }
+
         return extra;
     }
 
@@ -215,43 +223,17 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
         if(getGameOverType() != GameOverType.NULL){
             sendSettlementMsg(roleId);
             return;
-        }else if(getStatus().getValue() == 0){
-            return;
         }
 
-        BaseStatusData curStatusData = getStatusData();
-        if(!(curStatusData instanceof SuperGameStatusData)){
-            return;
+        NetGame.NetOprateData.Builder netOprateData = getStatusData().getCanDoDatas(this,roleId);
+        if(netOprateData != null){
+            NetGame.NetKvData.Builder kvData = NetGame.NetKvData.newBuilder();
+            kvData.setK(getStatus().getAction().getActionType());
+            netOprateData.addKvDatas(kvData);
+            NetGame.NetResponse.Builder res = getNetRespose();
+            res.addOperateDatas(netOprateData);
+            addMsgQueue(roleId,netOprateData.build(),0);//可操作集合
         }
-
-        SuperGameStatusData statusData = (SuperGameStatusData)curStatusData;
-
-        NetGame.NetOprateData netOprateData = statusData.getCanDoDatas(this,0);
-        getNetResposeOnly(netOprateData);
-        addMsgQueue(netOprateData.getUid(),netOprateData,0);//可操作集合
-    }
-
-    public NetGame.NetOprateData getCanDoActionMsg(int roleId){
-        if(getGameOverType() != GameOverType.NULL){
-            sendSettlementMsg(roleId);
-            return null;
-        }else if(getStatus().getValue() == 0){
-            return null;
-        }
-
-        BaseStatusData curStatusData = getStatusData();
-        if(!(curStatusData instanceof SuperGameStatusData)){
-            return null;
-        }
-
-        SuperGameStatusData statusData = (SuperGameStatusData)curStatusData;
-
-        NetGame.NetOprateData netOprateData = statusData.getCanDoDatas(this,roleId);
-        if(netOprateData == null){
-            return null;
-        }
-
-       return netOprateData;
     }
 
     //////////////////////////////////////////////////////

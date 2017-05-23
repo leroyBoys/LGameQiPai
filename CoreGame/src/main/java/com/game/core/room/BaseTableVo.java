@@ -5,6 +5,8 @@ import com.game.core.TableManager;
 import com.game.core.action.BaseAction;
 import com.game.core.constant.GameConst;
 import com.game.core.factory.TableProducer;
+import com.game.core.room.card.BaseCardPoolEngine;
+import com.game.core.room.card.ICardPoolEngine;
 import com.game.manager.DBServiceManager;
 import com.game.manager.OnlineManager;
 import com.game.manager.TimeCacheManager;
@@ -21,12 +23,12 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by leroy:656515489@qq.com
  * 2017/4/19.
  */
-public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends BaseChairInfo> implements Runnable{
+public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends BaseChairInfo> implements Runnable{
     protected final Map<Integer,MessageQueue> messageQueue = new HashMap<>();
     public final boolean isMsgCache = false;//是否缓存队列
     private GameOverType gameOverType = GameOverType.NULL;
     private TStatus status;
-    private Map<TStatus,BaseStatusData> statusDataMap = new HashMap<>(1);
+    private Map<TStatus,BaseGameStateData> statusDataMap = new HashMap<>(1);
     private int id;
     private boolean isGoodId = false;
     protected Chair[] chairs;
@@ -81,7 +83,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
 
     protected abstract void initChair(int maxSize);
 
-    public <T extends BaseStatusData> T getStatusData(){
+    public <T extends BaseGameStateData> T getStatusData(){
         return (T) statusDataMap.get(status);
     }
 
@@ -201,7 +203,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
 
     public void setStatus(TStatus status) {
         this.status = status;
-        Map<TStatus,BaseStatusData> tmpStatusDataMap = new HashMap<>(1);
+        Map<TStatus,BaseGameStateData> tmpStatusDataMap = new HashMap<>(1);
         tmpStatusDataMap.put(status,status.createNew());
         statusDataMap = tmpStatusDataMap;
     }
@@ -314,8 +316,9 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
 
     public void sendGameResponse(NetGame.NetOprateData hands,UserVistor vistor,int seq) {
         Response response = Response.defaultResponse(getGameResponseModule(),getGameResponseCmd(),seq);
-        NetGame.NetResponse netResponse = getNetResposeOnly(hands);
-        response.setObj(netResponse);
+        NetGame.NetResponse.Builder netResponse = getNetRespose();
+        netResponse.addOperateDatas(hands);
+        response.setObj(netResponse.build());
         vistor.sendMsg(response);
     }
 
@@ -324,6 +327,10 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         NetGame.NetResponse netResponse = getNetRespose(hands);
         response.setObj(netResponse);
         vistor.sendMsg(response);
+    }
+
+    public Response getGameResponse(){
+        return Response.defaultResponse(getGameResponseModule(),getGameResponseCmd(),0);
     }
 
     public void sendGameResponse(NetGame.NetOprateData hands,int roleId,int seq) {
@@ -339,7 +346,10 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         if(v == null){
             return;
         }
-        sendGameResponse(hands,v,seq);
+
+        Response response = getGameResponse();
+        response.setObj(getNetRespose(hands));
+        v.sendMsg(response);
     }
 
 
@@ -355,16 +365,12 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         return response.build();
     }
 
-    public NetGame.NetResponse getNetResposeOnly(NetGame.NetOprateData operdata) {
+    public NetGame.NetResponse.Builder getNetRespose() {
         NetGame.NetResponse.Builder response = NetGame.NetResponse.newBuilder();
-        if(operdata != null){
-            response.addOperateDatas(operdata);
-        }
-
         response.setRetStatus(ResponseCode.Error.succ.value());
         response.setStatus(status.getValue());
         response.setStep(step);
-        return response.build();
+        return response;
     }
 
     /**
@@ -444,7 +450,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
         stats = stats | (chair.isAuto?1>>1:0);
 
         boolean isReady = true;
-        if(status.getValue() == 0 && !((BaseStatusData.DefaultStatusData)getStatusData()).contains(chair.getId())){
+        if(status.getValue() == 0 && !((BaseGameStateData.DefaultStatusData)getStatusData()).contains(chair.getId())){
             isReady = false;
         }
 
@@ -613,6 +619,24 @@ public abstract class BaseTableVo<TStatus extends BaseGameStatus,Chair extends B
      * 发送结算信息
      */
     protected abstract void sendSettlementDetailMsg(int roleId);
+
+    public void flushMsgQueue() {
+        for(int i = 0;i<chairs.length;i++){
+            if(chairs[i] == null){
+                continue;
+            }
+
+            messageQueue.get(chairs[i].getId()).sendNow(0);
+        }
+    }
+
+    public void flushMsgQueue(int roleId) {
+        if(roleId == 0){
+            flushMsgQueue();
+            return;
+        }
+        messageQueue.get(roleId).sendNow(0);
+    }
 
     /**
      * 发送结算信息

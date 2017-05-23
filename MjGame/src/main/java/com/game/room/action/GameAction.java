@@ -5,10 +5,9 @@ import com.game.core.config.IOptPlugin;
 import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
-import com.game.core.room.GameOverType;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
-import com.lgame.util.comm.KVData;
+import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 import com.module.core.ResponseCode;
 import com.module.net.NetGame;
@@ -55,10 +54,25 @@ public class GameAction extends BaseAction<MjTable> {
         table.getStepHistoryManager().add(firstStep);
         firstStep.getAction().doAction(table,response,roleId,netOprateData);
 
+        sendReturnOperate(table,roleId,netOprateData);
+        table.sendCanDoActionMsg(0);
     }
 
-    private void sendMsg(MjTable table){
-        table.sendCanDoActionMsg(0);
+    /**
+     * 发送当前操作的结果
+     * @param table
+     * @param roleId
+     */
+    protected void sendReturnOperate(MjTable table,int roleId,NetGame.NetOprateData netOprateData){
+
+        Response response = table.getGameResponse();
+        NetGame.NetResponse.Builder netRespose = table.getNetRespose();
+        NetGame.NetOprateData.Builder retNetOprateData = NetGame.NetOprateData.newBuilder(netOprateData);
+        retNetOprateData.setOtype(roleId);
+        netRespose.addOperateDatas(retNetOprateData.build());
+        response.setObj(netRespose.build());
+
+        table.sendMsgAll(response);
     }
 
  /*   @Override

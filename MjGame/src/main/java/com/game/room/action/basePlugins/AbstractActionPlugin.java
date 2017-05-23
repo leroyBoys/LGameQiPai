@@ -3,7 +3,7 @@ package com.game.room.action.basePlugins;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.PluginGen;
 import com.game.core.room.BaseTableVo;
-import com.game.room.action.StepGameStatusData;
+import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
 /**

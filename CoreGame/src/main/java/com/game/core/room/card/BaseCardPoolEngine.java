@@ -1,7 +1,8 @@
-package com.game.core.room;
+package com.game.core.room.card;
 
 import com.game.core.config.RoomSetting;
 import com.game.core.config.TablePluginManager;
+import com.game.core.room.card.ICardPoolEngine;
 
 import java.util.LinkedList;
 import java.util.List;

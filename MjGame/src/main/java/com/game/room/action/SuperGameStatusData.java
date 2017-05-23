@@ -2,10 +2,12 @@ package com.game.room.action;
 
 import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
-import com.game.core.room.BaseStatusData;
+import com.game.core.room.BaseGameStateData;
+import com.game.core.room.BaseTableVo;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
-import com.lgame.util.comm.KVData;
+import com.game.room.action.*;
+import com.game.room.status.StepGameStatusData;
 import com.module.net.NetGame;
 
 import java.util.*;
@@ -14,7 +16,7 @@ import java.util.*;
  * Created by leroy:656515489@qq.com
  * 2017/4/27.
  */
-public class SuperGameStatusData extends BaseStatusData {
+public class SuperGameStatusData extends BaseGameStateData {
     protected LinkedList<StepGameStatusData> canDoDatas = new LinkedList<>();
     protected Set<Integer> firstActionSet = new HashSet<>();//第一可以操作的集合
 
@@ -121,7 +123,7 @@ public class SuperGameStatusData extends BaseStatusData {
     }
 
 
-    public void sortCanDoDatas(final MjTable table) {
+    private void sortCanDoDatas(final BaseTableVo table) {
         if(canDoDatas.size() <=1){
             return;
         }
@@ -147,15 +149,19 @@ public class SuperGameStatusData extends BaseStatusData {
      * @param targetIndex
      * @return
      */
-    private int getIdexWeight(MjTable table,int targetIndex){
+    private int getIdexWeight(BaseTableVo table,int targetIndex){
         if(table.getFocusIdex() > targetIndex){
             return table.getChairs().length-table.getFocusIdex()+targetIndex;
         }
         return targetIndex - table.getFocusIdex();
     }
 
+    public boolean isEmpty(){
+        return canDoDatas.isEmpty();
+    }
 
-    public NetGame.NetOprateData getCanDoDatas(MjTable table,int roleId){
+    @Override
+    public NetGame.NetOprateData.Builder getCanDoDatas(BaseTableVo table, int roleId) {
         if(firstActionSet.isEmpty()){
             sortCanDoDatas(table);
         }
@@ -164,7 +170,7 @@ public class SuperGameStatusData extends BaseStatusData {
             return null;
         }
 
-        NetGame.NetOprateData.Builder netOprate = table.getCanDoActionsNetOprateData(roleId);
+        NetGame.NetOprateData.Builder netOprate = super.getCanDoDatas(table,roleId);
 
         for(StepGameStatusData step:canDoDatas){
             if(netOprate.getUid() != step.getUid()){
@@ -178,10 +184,11 @@ public class SuperGameStatusData extends BaseStatusData {
             netOprate.addAllDlist(step.getCards());
             netOprate.addKvDatas(netKv);
         }
-        return netOprate.build();
+        return netOprate;
     }
 
-    public boolean isEmpty(){
-        return canDoDatas.isEmpty();
+    @Override
+    public NetGame.NetOprateData.Builder getStatusDetail(BaseTableVo tableVo) {
+        return null;
     }
 }

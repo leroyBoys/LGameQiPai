@@ -1,4 +1,4 @@
-package com.game.core.room;
+package com.game.core.room.card;
 
 import java.util.ArrayList;
 import java.util.List;

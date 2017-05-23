@@ -5,6 +5,7 @@ import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
 import com.game.room.MjChairInfo;
+import com.game.room.status.StepGameStatusData;
 import com.module.net.NetGame;
 
 import java.util.ArrayList;

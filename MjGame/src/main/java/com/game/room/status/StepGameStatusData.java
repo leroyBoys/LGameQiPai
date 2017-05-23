@@ -1,19 +1,17 @@
-package com.game.room.action;
+package com.game.room.status;
 
 import com.game.core.config.IOptPlugin;
-import com.game.core.room.BaseStatusData;
-import com.game.room.action.GameAction;
+import com.game.core.room.BaseGameStateData;
+import com.game.room.action.GameOperateAction;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by leroy:656515489@qq.com
  * 2017/4/27.
  */
-public class StepGameStatusData extends BaseStatusData {
+public class StepGameStatusData{
     private final IOptPlugin iOptPlugin;
     private final int fromId;
     private final int uid;

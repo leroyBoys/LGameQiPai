@@ -5,12 +5,10 @@ import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
 import com.game.room.MjCardPoolEngine;
 import com.game.room.MjTable;
-import com.game.room.action.StepGameStatusData;
+import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
-import com.module.net.NetGame;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 
 /**
  * Created by leroy:656515489@qq.com
