@@ -120,7 +120,8 @@ public class SuperGameStatusData extends BaseStatusData {
         return canDoDatas.getFirst();
     }
 
-    private void sortCanDoDatas(final MjTable table) {
+
+    public void sortCanDoDatas(final MjTable table) {
         if(canDoDatas.size() <=1){
             return;
         }
@@ -132,19 +133,27 @@ public class SuperGameStatusData extends BaseStatusData {
                 Integer wight2 = o2.getAction().getWeight();
 
                 if(wight1 == wight2){
-                    StepGameStatusData last = (StepGameStatusData) table.getStepHistoryManager().getLastStep();
-                    int lastIdex = table.getChairByUid(last.getUid()).getIdx();
-                    wight1 = getIdexWeight(table.getChairByUid(o1.getUid()).getIdx(),lastIdex);
-                    wight2 = getIdexWeight(table.getChairByUid(o2.getUid()).getIdx(),lastIdex);
+                    wight1 = getIdexWeight(table,table.getChairByUid(o1.getUid()).getIdx());
+                    wight2 = getIdexWeight(table,table.getChairByUid(o2.getUid()).getIdx());
                 }
                 return wight1.compareTo(wight2);
             }
         });
     }
 
-    private int getIdexWeight(int myIndex,int targetIndex){
-        return 1;
+    /**
+     *  根据当前的位置判断获得一个目标位置与自己位置优先级的权重值
+     * @param table
+     * @param targetIndex
+     * @return
+     */
+    private int getIdexWeight(MjTable table,int targetIndex){
+        if(table.getFocusIdex() > targetIndex){
+            return table.getChairs().length-table.getFocusIdex()+targetIndex;
+        }
+        return targetIndex - table.getFocusIdex();
     }
+
 
     public NetGame.NetOprateData getCanDoDatas(MjTable table,int roleId){
         if(firstActionSet.isEmpty()){
