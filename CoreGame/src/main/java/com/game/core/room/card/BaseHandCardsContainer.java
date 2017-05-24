@@ -4,13 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /***
- * 手牌容器的通用接口,积分，计算条件等都可以在这里陈列
+ * 手牌容器的通用接口
  * 
  * @author Administrator
  * 
  */
 public abstract class BaseHandCardsContainer {
 	private List<Integer> hands = new ArrayList<>();
+
+	protected abstract AutoCacheHandContainer getAutoCache();
+
+	public final AutoCacheHandContainer getAutoCacheHands(){
+		AutoCacheHandContainer autoCacheHandContainer = getAutoCache();
+		if(autoCacheHandContainer != null){
+			autoCacheHandContainer.check(hands);
+		}
+
+		return autoCacheHandContainer;
+	}
 
 	/** 取得手牌 */
 	public List<Integer> getHandCards(){
@@ -20,6 +31,10 @@ public abstract class BaseHandCardsContainer {
 	/** 设置手牌 */
 	public void setHandCards(List<Integer> list){
 		hands = list;
+		AutoCacheHandContainer autoCacheHandContainer = getAutoCache();
+		if(autoCacheHandContainer != null){
+			autoCacheHandContainer.clear();
+		}
 	}
 
 	/** 添加一张手牌*/

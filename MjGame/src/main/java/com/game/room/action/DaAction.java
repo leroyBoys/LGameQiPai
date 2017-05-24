@@ -16,7 +16,7 @@ public class DaAction extends GameOperateAction{
 
     private DaAction(){}
 
-    protected static final DaAction getIntance(){
+    public static final DaAction getIntance(){
         return intance;
     }
 

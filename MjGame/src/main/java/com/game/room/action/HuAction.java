@@ -18,18 +18,13 @@ public class HuAction extends GameOperateAction {
     private final static HuAction instance = new HuAction();
     private HuAction(){}
 
-    protected static HuAction getInstance(){
+    public static HuAction getInstance(){
         return instance;
     }
 
     @Override
     public int getActionType() {
         return GameConst.MJ.ACTION_TYPE_HU;
-    }
-
-    @Override
-    public boolean checkRight(NetGame.NetOprateData netOprateData,StepGameStatusData gameStatusData) {
-        return true;
     }
 
     public void check(MjChairInfo chairInfo, int card, Object parems){

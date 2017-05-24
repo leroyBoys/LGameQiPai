@@ -16,7 +16,7 @@ public class GangAction extends GameOperateAction {
     private final static GangAction instance = new GangAction();
     private GangAction(){}
 
-    protected static GangAction getInstance(){
+    public static GangAction getInstance(){
         return instance;
     }
 

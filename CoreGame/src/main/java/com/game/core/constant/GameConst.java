@@ -58,6 +58,7 @@ public class GameConst {
         public static final int ACTION_TYPE_TING = 240;
         /** 胡牌 */
         public static final int ACTION_TYPE_HU = 250;
+
     }
 
     public static class Weight{

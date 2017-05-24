@@ -4,6 +4,8 @@ import com.game.core.room.BaseTableVo;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
 
+import java.util.List;
+
 /**
  * 阶段插件（叫分，发牌等）
  * Created by leroy:656515489@qq.com
@@ -31,4 +33,5 @@ public class AbstractStagePlugin<A extends BaseTableVo> implements IOptPlugin<A,
     public boolean doOperation(A table, Response response,int roleId, NetGame.NetOprateData o) {
         return false;
     }
+
 }

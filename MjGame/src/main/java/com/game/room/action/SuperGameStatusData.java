@@ -7,7 +7,10 @@ import com.game.core.room.BaseTableVo;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.game.room.action.*;
+import com.game.room.action.basePlugins.AbstractActionPlugin;
 import com.game.room.status.StepGameStatusData;
+import com.lsocket.message.Response;
+import com.module.core.ResponseCode;
 import com.module.net.NetGame;
 
 import java.util.*;
@@ -118,11 +121,6 @@ public class SuperGameStatusData extends BaseGameStateData {
         }
     }
 
-    public StepGameStatusData getFirstCanDoAction() {
-        return canDoDatas.getFirst();
-    }
-
-
     private void sortCanDoDatas(final BaseTableVo table) {
         if(canDoDatas.size() <=1){
             return;
@@ -161,7 +159,7 @@ public class SuperGameStatusData extends BaseGameStateData {
     }
 
     @Override
-    public NetGame.NetOprateData.Builder getCanDoDatas(BaseTableVo table, int roleId) {
+    public synchronized NetGame.NetOprateData.Builder getCanDoDatas(BaseTableVo table, int roleId) {
         if(firstActionSet.isEmpty()){
             sortCanDoDatas(table);
         }
@@ -190,5 +188,67 @@ public class SuperGameStatusData extends BaseGameStateData {
     @Override
     public NetGame.NetOprateData.Builder getStatusDetail(BaseTableVo tableVo) {
         return null;
+    }
+
+    private void clearCanDoDatas(int roleId){
+        Iterator<StepGameStatusData> ites = canDoDatas.iterator();
+        while (ites.hasNext()){
+            if(roleId != ites.next().getUid()){
+                break;
+            }
+            ites.remove();
+        }
+    }
+
+    public synchronized boolean checkMatch(MjTable table, int roleId, NetGame.NetOprateData netOprateData, Response response){
+
+        if(netOprateData.getOtype() == GameConst.MJ.ACTION_TYPE_GUO){
+            if(canDoDatas.isEmpty() || canDoDatas.getFirst().getUid() != roleId){
+                table.sendError(ResponseCode.Error.parmter_error,roleId);
+                return false;
+            }
+
+            clearCanDoDatas(roleId);
+            GuoAction.getInstance().doAction(table,response,roleId,netOprateData);
+            return true;
+        }
+
+        if(!firstActionSet.contains(netOprateData.getOtype())){
+            table.sendError(ResponseCode.Error.parmter_error,roleId);
+            return false;
+        }
+
+        StepGameStatusData firstMatch = null;
+        for(StepGameStatusData stepStatus:canDoDatas){
+            if(roleId != stepStatus.getUid()){
+                break;
+            }
+
+            if(stepStatus.getAction().getActionType() != netOprateData.getOtype()){
+                continue;
+            }
+
+            if(netOprateData.getDval() != 0 && stepStatus.getiOptPlugin().getPlugin().getSubType() != netOprateData.getDval()){
+                continue;
+            }
+
+            if(((AbstractActionPlugin)stepStatus.getiOptPlugin()).chickMatch(netOprateData.getDlistList(),stepStatus) == 1){
+                firstMatch = stepStatus;
+                break;
+            }
+
+        }
+
+        if(firstMatch == null){
+            table.sendError(ResponseCode.Error.parmter_error,roleId);
+            return false;
+        }
+
+       // clearCanDoDatas(roleId);
+        canDoDatas.clear();
+        table.addStep();
+        table.getStepHistoryManager().add(firstMatch);
+        firstMatch.getAction().doAction(table,response,roleId,netOprateData);
+        return true;
     }
 }

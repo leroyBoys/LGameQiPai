@@ -12,19 +12,13 @@ public class ChiAction extends GameOperateAction {
     private final static ChiAction instance = new ChiAction();
     private ChiAction(){}
 
-    protected static ChiAction getInstance(){
+    public static ChiAction getInstance(){
         return instance;
     }
 
     @Override
     public int getActionType() {
         return GameConst.MJ.ACTION_TYPE_CHI;
-    }
-
-    @Override
-    public boolean checkRight(NetGame.NetOprateData netOprateData,StepGameStatusData gameStatusData) {
-       // return gameStatusData.isRight(netOprateData.getDval(),netOprateData.getDlistList());
-        return false;
     }
 
     @Override

@@ -5,6 +5,8 @@ import com.game.core.room.SuperCreateNew;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
 
+import java.util.List;
+
 public interface IOptPlugin<A extends BaseTableVo,OP> extends SuperCreateNew {
 	public IOptPlugin createNew();
 

@@ -7,6 +7,8 @@ import com.game.room.MjTable;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
+import java.util.List;
+
 /**
  * Created by leroy:656515489@qq.com
  * 2017/5/11.
@@ -33,5 +35,10 @@ public class MoPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
         table.getChairByUid(roleId).getHandsContainer().addHandCards(card);
         stepGameStatusData.setCard(card);
         return true;
+    }
+
+    @Override
+    public int chickMatch(List<Integer> card, StepGameStatusData stepData) {
+        return 1;
     }
 }

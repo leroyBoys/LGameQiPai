@@ -12,18 +12,13 @@ public class PengAction extends GameOperateAction {
     private final static PengAction instance = new PengAction();
     private PengAction(){}
 
-    protected static PengAction getInstance(){
+    public static PengAction getInstance(){
         return instance;
     }
 
     @Override
     public int getActionType() {
         return GameConst.MJ.ACTION_TYPE_PENG;
-    }
-
-    @Override
-    public boolean checkRight(NetGame.NetOprateData netOprateData,StepGameStatusData gameStatusData) {
-        return true;
     }
 
     @Override

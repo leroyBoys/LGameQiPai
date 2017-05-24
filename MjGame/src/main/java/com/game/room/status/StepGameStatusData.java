@@ -25,6 +25,19 @@ public class StepGameStatusData{
         this.iOptPlugin = iOptPlugin;
     }
 
+    public StepGameStatusData(GameOperateAction action,int fromId,int uid,int card,IOptPlugin iOptPlugin){
+        this.action = action;
+        this.fromId = fromId;
+        this.uid = uid;
+        this.iOptPlugin = iOptPlugin;
+        this.setCard(card);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
     public List<Integer> getCards() {
         return cards;
     }
