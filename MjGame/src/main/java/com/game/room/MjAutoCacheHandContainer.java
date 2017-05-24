@@ -58,7 +58,8 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
     }
 
     public NetGame.NetOprateData getNetOprateData(StepGameStatusData stepStatus) {
-
+        switch (stepStatus.getAction().getActionType()){
+        }
         return null;
     }
 
