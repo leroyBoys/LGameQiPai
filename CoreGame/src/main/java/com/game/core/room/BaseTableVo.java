@@ -612,7 +612,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
         rpEnterRoom.setStatus(getChairStatusToClient(getChairByUid(roleId)));
 
         //给其他人发送
-        sendMsgWithOutUid(Response.defaultResponse(GameCommCmd.CREATE_TABLE.getModule(),GameCommCmd.UserStatus.getValue(),0,rpEnterRoom.build()),roleId);
+        sendMsgWithOutUid(Response.defaultResponse(GameCommCmd.UserStatus.getModule(),GameCommCmd.UserStatus.getValue(),0,rpEnterRoom.build()),roleId);
     }
 
     /**

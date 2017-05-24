@@ -14,6 +14,7 @@ import com.lsocket.handler.*;
 import com.lsocket.handler.ModuleCmd;
 import com.lsocket.message.Request;
 import com.lsocket.message.Response;
+import com.lsocket.module.Visitor;
 import com.module.core.ResponseCode;
 import com.module.net.NetGame;
 
@@ -21,7 +22,7 @@ import com.module.net.NetGame;
  * Created by leroy:656515489@qq.com
  * 2017/5/3.
  */
-public class GameCommHandler extends ModuleHandler {
+public class GameCommHandler extends ModuleHandler<UserVistor,Request,Response> {
     @Override
     public int getModule() {
         return GameConst.MOUDLE_GameComm;
@@ -223,7 +224,9 @@ public class GameCommHandler extends ModuleHandler {
 
         NetGame.RQExit rqExit1 = rqExit.build();
         respons.setObj(rqExit1);
-        vistor.sendMsg(respons);
+        if(respons != null){
+            vistor.sendMsg(respons);
+        }
         if(tableVo.getCurChirCount() == 0){
             return;
         }
@@ -312,4 +315,20 @@ public class GameCommHandler extends ModuleHandler {
         return GameSocket.getIntance().getCoreDispatcher();
     }
 
+    @Override
+    public void session_closed(UserVistor vister) {
+        BaseTableVo table = TableManager.getInstance().getTable(vister.getGameRole().getRoomId());
+
+        if(table == null){
+            return;
+        }
+
+        if(table.getChairs().length <= 1){
+            exitSelf(vister,table,null);
+            return;
+        }
+
+        table.leaveOffline(vister.getRoleId());
+
+    }
 }
