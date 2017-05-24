@@ -5,6 +5,7 @@ import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.config.TablePluginManager;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
+import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
 
@@ -17,12 +18,15 @@ import java.util.ArrayList;
 public abstract class GameOperateAction<T extends MjTable> {
     public abstract int getActionType();
 
-    protected void doAction(T table, Response response, int roleId, NetGame.NetOprateData netOprateData){
-        NetGame.NetOprateData.Builder retOperaData = NetGame.NetOprateData.newBuilder(netOprateData);
+    protected void doAction(T table, Response response, int roleId, StepGameStatusData stepStatusData){
+        NetGame.NetOprateData.Builder retOperaData = NetGame.NetOprateData.newBuilder();
+        retOperaData.setOtype(this.getActionType());
+        retOperaData.setUid(roleId);
+
         ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),this.getActionType());
         for(int i= 0;i<optPlugins.size();i++){
             IOptPlugin optPlugin = optPlugins.get(i);
-            if(!optPlugin.doOperation(table,response,roleId,netOprateData)){
+            if(!optPlugin.doOperation(table,response,roleId,stepStatusData)){
                 continue;
             }
             retOperaData.addDlist(optPlugin.getPlugin().getSubType());

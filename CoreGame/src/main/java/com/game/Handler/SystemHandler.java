@@ -1,5 +1,6 @@
 package com.game.Handler;
 
+import com.game.core.TableManager;
 import com.game.socket.codec.ResponseEncoderRemote;
 import com.game.core.constant.GameConst;
 import com.game.core.service.UserService;
@@ -109,6 +110,10 @@ public class SystemHandler extends ModuleHandler {
         NetParentOld.NetCommond.Builder commond = NetParentOld.NetCommond.newBuilder();
         commond.setCmd(CMDManager.getCmd_M(request.getModule(),request.getCmd()));
         vistor.getIoSession().write(ResponseEncoderRemote.transformByteArray(commond.build().toByteArray()));
+
+        if(vistor.getGameRole().getRoomId() != 0){
+            TableManager.getInstance().trigger(vistor.getGameRole().getRoomId());
+        }
     }
 
     private void firstConnect(UserVistor vistor, Request request, Response response){

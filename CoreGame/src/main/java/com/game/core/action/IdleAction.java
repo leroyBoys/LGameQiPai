@@ -42,4 +42,14 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
     public void overAction(BaseTableVo table) {
         table.cleanTableCache();
     }
+
+    @Override
+    public void tick(T table){
+        for(int i = 0;i<table.getChairs().length;i++){
+            if(table.getChairs()[i] == null || (!table.getChairs()[i].isRobot() && !table.getChairs()[i].isAuto())){
+                continue;
+            }
+            this.ready(table,table.getChairs()[i].getId());
+        }
+    }
 }

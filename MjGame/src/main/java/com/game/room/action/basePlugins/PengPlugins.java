@@ -38,7 +38,7 @@ public class PengPlugins<T extends MjTable> extends AbstractActionPlugin<T> impl
     }
 
     @Override
-    public int chickMatch(List<Integer> card, StepGameStatusData stepData) {
+    public int chickMatch(T table,List<Integer> card, StepGameStatusData stepData) {
         return 1;
     }
 }

@@ -40,7 +40,7 @@ public class SanJiangKeGangPlugins<T extends MjTable> extends AnGangGangPlugins<
             if (card == 45 || card == 46||card == 47){
                 StepGameStatusData stepGameStatusData = new StepGameStatusData(GangAction.getInstance(),chair.getId(),chair.getId(),card,this);
                 stepGameStatusData.setCard(card);
-                gameStatusData.addCanDoDatas(stepGameStatusData);
+                gameStatusData.addCanDoDatas(chair.getTableVo().getStep(),stepGameStatusData);
                 continue;
             }
         }

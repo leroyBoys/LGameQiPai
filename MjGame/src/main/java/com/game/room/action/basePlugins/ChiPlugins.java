@@ -30,20 +30,21 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
         SuperGameStatusData gameStatusData= (SuperGameStatusData) chair.getTableVo().getStatusData();
         Map<Integer, Integer> countMap =  mjAutoCache.getCardNumMap();
 
-        check(gameStatusData,countMap,cNum-2,cNum - 1,cNum,fromId,chair.getId());
-        check(gameStatusData,countMap,cNum-1,cNum,cNum + 1,fromId,chair.getId());
-        check(gameStatusData,countMap,cNum,cNum + 1,cNum + 2,fromId,chair.getId());
+        int step = chair.getTableVo().getStep();
+        check(gameStatusData,countMap,cNum-2,cNum - 1,cNum,fromId,chair.getId(),step);
+        check(gameStatusData,countMap,cNum-1,cNum,cNum + 1,fromId,chair.getId(),step);
+        check(gameStatusData,countMap,cNum,cNum + 1,cNum + 2,fromId,chair.getId(),step);
         return false;
     }
 
-    private void check(SuperGameStatusData gameStatusData,Map<Integer, Integer> countMap,int cardFirst,int cardSecond,int cardThree,int fromId,int roleId){
+    private void check(SuperGameStatusData gameStatusData,Map<Integer, Integer> countMap,int cardFirst,int cardSecond,int cardThree,int fromId,int roleId,int step){
         if (!countMap.containsKey(cardFirst) || !countMap.containsKey(cardSecond)) {
             return;
         }
         StepGameStatusData stepGameStatusData = new StepGameStatusData(ChiAction.getInstance(),fromId,roleId,cardFirst,this);
         stepGameStatusData.setCard(cardSecond);
         stepGameStatusData.setCard(cardThree);
-        gameStatusData.addCanDoDatas(stepGameStatusData);
+        gameStatusData.addCanDoDatas(step,stepGameStatusData);
     }
 
     @Override
@@ -79,7 +80,8 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
         return true;
     }
 
-    public int chickMatch(List<Integer> card, StepGameStatusData stepData) {
+    @Override
+    public int chickMatch(T table,List<Integer> card, StepGameStatusData stepData) {
         try{
             return card.get(0) == stepData.getCards().get(0) && card.get(1) == stepData.getCards().get(1)&&card.get(2) == stepData.getCards().get(2)?1:0;
         }catch (Exception ex){

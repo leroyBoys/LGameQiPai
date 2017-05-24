@@ -22,18 +22,16 @@ import java.util.*;
 public class SuperGameStatusData extends BaseGameStateData {
     protected LinkedList<StepGameStatusData> canDoDatas = new LinkedList<>();
     protected Set<Integer> firstActionSet = new HashSet<>();//第一可以操作的集合
+    private volatile int writeStep = -1;
+    private volatile int readStep = -1;
 
-    public void addCanDoDatas(StepGameStatusData stepGameStatusData){
+    public void addCanDoDatas(int step,StepGameStatusData stepGameStatusData){
         canDoDatas.add(stepGameStatusData);
-        if(!firstActionSet.isEmpty()){
-            firstActionSet.clear();
+
+        if(this.writeStep != step){
+            this.writeStep = step;
         }
     }
-
-    public void moPai(MjTable table, int uid){
-        MoAction.getInstance().doAction(table,null,uid,null);
-    }
-
 
     public final void checkCanDo(MjChairInfo chairInfo,int card) {
         checkGang(chairInfo,0);
@@ -117,11 +115,12 @@ public class SuperGameStatusData extends BaseGameStateData {
 
     public void checkDa(MjChairInfo chairInfo, int card) {
         if(canDoDatas.isEmpty()){
-            addCanDoDatas(new StepGameStatusData(DaAction.getIntance(),chairInfo.getId(),chairInfo.getId(),null));
+            addCanDoDatas(chairInfo.getTableVo().getStep(),new StepGameStatusData(DaAction.getIntance(),chairInfo.getId(),chairInfo.getId(),null));
         }
     }
 
     private void sortCanDoDatas(final BaseTableVo table) {
+        readStep = writeStep;
         if(canDoDatas.size() <=1){
             return;
         }
@@ -160,7 +159,7 @@ public class SuperGameStatusData extends BaseGameStateData {
 
     @Override
     public synchronized NetGame.NetOprateData.Builder getCanDoDatas(BaseTableVo table, int roleId) {
-        if(firstActionSet.isEmpty()){
+        if(readStep != writeStep){
             sortCanDoDatas(table);
         }
 
@@ -168,6 +167,7 @@ public class SuperGameStatusData extends BaseGameStateData {
             return null;
         }
 
+        firstActionSet.clear();
         NetGame.NetOprateData.Builder netOprate = super.getCanDoDatas(table,roleId);
 
         for(StepGameStatusData step:canDoDatas){
@@ -190,6 +190,10 @@ public class SuperGameStatusData extends BaseGameStateData {
         return null;
     }
 
+    public StepGameStatusData getFirst(){
+        return canDoDatas.getFirst();
+    }
+
     private void clearCanDoDatas(int roleId){
         Iterator<StepGameStatusData> ites = canDoDatas.iterator();
         while (ites.hasNext()){
@@ -201,6 +205,11 @@ public class SuperGameStatusData extends BaseGameStateData {
     }
 
     public synchronized boolean checkMatch(MjTable table, int roleId, NetGame.NetOprateData netOprateData, Response response){
+        if(canDoDatas.getFirst().isAuto()){
+            this.next(canDoDatas.getFirst(),table,response,roleId,netOprateData);
+            return true;
+        }
+
 
         if(netOprateData.getOtype() == GameConst.MJ.ACTION_TYPE_GUO){
             if(canDoDatas.isEmpty() || canDoDatas.getFirst().getUid() != roleId){
@@ -209,7 +218,13 @@ public class SuperGameStatusData extends BaseGameStateData {
             }
 
             clearCanDoDatas(roleId);
-            GuoAction.getInstance().doAction(table,response,roleId,netOprateData);
+            table.addMsgQueue(roleId,netOprateData,response==null?0:response.getSeq());
+
+            if(canDoDatas.isEmpty()){
+                int focuxIdx = table.nextFocusIndex(table.getFocusIdex());
+                BaseChairInfo info = table.getChairs()[focuxIdx];
+                addCanDoDatas(table.getStep(),new StepGameStatusData(MoAction.getInstance(),info.getId(),info.getId(),null));
+            }
             return true;
         }
 
@@ -232,7 +247,7 @@ public class SuperGameStatusData extends BaseGameStateData {
                 continue;
             }
 
-            if(((AbstractActionPlugin)stepStatus.getiOptPlugin()).chickMatch(netOprateData.getDlistList(),stepStatus) == 1){
+            if(((AbstractActionPlugin)stepStatus.getiOptPlugin()).chickMatch(table,netOprateData.getDlistList(),stepStatus) == 1){
                 firstMatch = stepStatus;
                 break;
             }
@@ -244,11 +259,26 @@ public class SuperGameStatusData extends BaseGameStateData {
             return false;
         }
 
-       // clearCanDoDatas(roleId);
-        canDoDatas.clear();
+        this.next(firstMatch,table,response,roleId,netOprateData);
+        return true;
+    }
+
+    private void next(StepGameStatusData firstMatch, MjTable table, Response response,int roleId,NetGame.NetOprateData netOprateData){
+        if(firstMatch.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_HU){
+            canDoDatas.clear();
+        }else {//如果是胡牌操作，
+            Iterator<StepGameStatusData> ites = canDoDatas.iterator();
+            while (ites.hasNext()){
+                StepGameStatusData tmp = ites.next();
+                if(roleId ==tmp.getUid() || tmp.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_HU){
+                    ites.remove();
+                    continue;
+                }
+            }
+        }
+
         table.addStep();
         table.getStepHistoryManager().add(firstMatch);
-        firstMatch.getAction().doAction(table,response,roleId,netOprateData);
-        return true;
+        firstMatch.getAction().doAction(table,response,roleId,firstMatch);
     }
 }

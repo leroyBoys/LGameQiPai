@@ -1,6 +1,7 @@
 package com.game.core;
 
 import com.game.core.room.BaseTableVo;
+import com.game.manager.CoreServiceManager;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -64,13 +65,13 @@ public class TableManager implements Runnable,CheckOutStatus {
     @Override
     public void run() {
         try {
-
             BaseTableVo baseTableVo;
             while (true){
                 int tableId = taskQeque.take();
                 baseTableVo = tableMap.get(tableId);
                 if(baseTableVo != null){
-                    baseTableVo.trigger();
+                    //baseTableVo.trigger();
+                    CoreServiceManager.getIntance().getTableThreadPool().execute(baseTableVo);
                 }
 
                 tasks.remove(tableId);

@@ -3,6 +3,7 @@ package com.game.room.action.basePlugins;
 import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
+import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjCardPoolEngine;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
@@ -23,7 +24,7 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
     @Override
     public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
         SuperGameStatusData gameStatusData= (SuperGameStatusData) chair.getTableVo().getStatusData();
-        gameStatusData.addCanDoDatas(new StepGameStatusData(DaAction.getIntance(),chair.getId(),chair.getId(),this));
+        gameStatusData.addCanDoDatas(chair.getTableVo().getStep(),new StepGameStatusData(DaAction.getIntance(),chair.getId(),chair.getId(),this));
         return false;
     }
 
@@ -40,13 +41,14 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
         }
 
         if(statusData.isEmpty()){
-       //     statusData.addCanDoDatas(new StepGameStatusData(MoAction.getIntance(),chair.getId(),chair.getId(),this));
+           int focuxIdx = table.nextFocusIndex(table.getFocusIdex());
+           BaseChairInfo info = table.getChairs()[focuxIdx];
+           statusData.addCanDoDatas(table.getStep(),new StepGameStatusData(MoAction.getInstance(),info.getId(),info.getId(),this));
         }
     }
 
     @Override
     public boolean doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
-
         int removeCard = stepGameStatusData.getCards().get(0);
         table.getChairByUid(roleId).getHandsContainer().removeCardFromHand(removeCard,1);
 
@@ -60,7 +62,8 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
         return new DaPlugins();
     }
 
-    public int chickMatch(List<Integer> card, StepGameStatusData stepData) {
-        return 1;
+    public int chickMatch(T table,List<Integer> card, StepGameStatusData stepData) {
+        BaseChairInfo chairInfo = table.getChairs()[table.getFocusIdex()];
+        return ((MjAutoCacheHandContainer)(chairInfo.getHandsContainer()).getAutoCacheHands()).getCardNumMap().containsKey(card.get(0))?1:0;
     }
 }

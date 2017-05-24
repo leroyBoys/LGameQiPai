@@ -731,6 +731,10 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
         step++;
     }
 
+    public int getStep() {
+        return step;
+    }
+
     public enum AttributeKey{
         /** 总局数 */
         AllRount,

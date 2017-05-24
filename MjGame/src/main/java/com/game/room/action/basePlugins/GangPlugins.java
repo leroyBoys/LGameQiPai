@@ -33,7 +33,7 @@ public abstract class GangPlugins<T extends MjTable> extends AbstractActionPlugi
     }
 
     @Override
-    public int chickMatch(List<Integer> card, StepGameStatusData stepData) {
+    public int chickMatch(T table,List<Integer> card, StepGameStatusData stepData) {
         return stepData.getCards().get(0) == card.get(0)?1:0;
     }
 }

@@ -17,6 +17,15 @@ public class StepGameStatusData{
     private final int uid;
     private List<Integer> cards = new LinkedList<>();
     private final GameOperateAction action;
+    private boolean isAuto = false;
+
+    public StepGameStatusData(GameOperateAction action,int uid){
+        this.action = action;
+        this.fromId = 0;
+        this.uid = uid;
+        this.iOptPlugin = null;
+        isAuto = true;
+    }
 
     public StepGameStatusData(GameOperateAction action,int fromId,int uid,IOptPlugin iOptPlugin){
         this.action = action;
@@ -52,6 +61,10 @@ public class StepGameStatusData{
 
     public IOptPlugin getiOptPlugin() {
         return iOptPlugin;
+    }
+
+    public boolean isAuto() {
+        return isAuto;
     }
 
     public int getFromId() {

@@ -1,6 +1,8 @@
 package com.game.room;
 
 import com.game.core.room.card.AutoCacheHandContainer;
+import com.game.room.status.StepGameStatusData;
+import com.module.net.NetGame;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -55,6 +57,11 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
         super.check(hands);
     }
 
+    public NetGame.NetOprateData getNetOprateData(StepGameStatusData stepStatus) {
+
+        return null;
+    }
+
     public Map<Integer, List<Integer>> getCardCountMap() {
         return cardCountMap;
     }
@@ -62,4 +69,5 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
     public Map<Integer, Integer> getCardNumMap() {
         return cardNumMap;
     }
+
 }

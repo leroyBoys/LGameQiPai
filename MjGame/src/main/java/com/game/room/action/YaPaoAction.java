@@ -38,6 +38,25 @@ public class YaPaoAction extends BaseAction<MjTable> {
         NetGame.NetOprateData.Builder yaPao = table.getYaPaoNetOprateData();
         yaPao.setUid(roleId);
         yaPao.setDval(netOprateData.getDval());
-        table.addMsgQueueAll(yaPao.build(),response.getSeq());
+        table.addMsgQueueAll(yaPao.build(),response == null?0:response.getSeq());
+    }
+
+    @Override
+    public void tick(MjTable table){
+        NetGame.NetOprateData netOprateData = null;
+
+        for(int i = 0;i<table.getChairs().length;i++){
+            if(table.getChairs()[i] == null || (!table.getChairs()[i].isRobot() && !table.getChairs()[i].isAuto())){
+                continue;
+            }
+            if(netOprateData == null){
+                NetGame.NetOprateData.Builder netOprateData2 = NetGame.NetOprateData.newBuilder();
+                netOprateData2.setUid(table.getChairs()[i].getId());
+                netOprateData2.setDval(1);
+                netOprateData = netOprateData2.build();
+            }
+
+            this.doAction(table,null,table.getChairs()[i].getId(),netOprateData);
+        }
     }
 }

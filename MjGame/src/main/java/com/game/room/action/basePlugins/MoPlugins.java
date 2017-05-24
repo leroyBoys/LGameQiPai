@@ -3,6 +3,8 @@ package com.game.room.action.basePlugins;
 import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
+import com.game.room.MjAutoCacheHandContainer;
+import com.game.room.MjHandCardsContainer;
 import com.game.room.MjTable;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
@@ -38,7 +40,7 @@ public class MoPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
     }
 
     @Override
-    public int chickMatch(List<Integer> card, StepGameStatusData stepData) {
+    public int chickMatch(T table,List<Integer> card, StepGameStatusData stepData) {
         return 1;
     }
 }

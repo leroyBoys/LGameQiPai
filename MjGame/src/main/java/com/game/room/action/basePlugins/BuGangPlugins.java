@@ -49,7 +49,7 @@ public class BuGangPlugins<T extends MjTable> extends GangPlugins<T>{
             }
 
             isMatch = true;
-            gameStatusData.addCanDoDatas(new StepGameStatusData(GangAction.getInstance(),chair.getId(),chair.getId(),cardNum,this));
+            gameStatusData.addCanDoDatas(chair.getTableVo().getStep(),new StepGameStatusData(GangAction.getInstance(),chair.getId(),chair.getId(),cardNum,this));
         }
 
         return isMatch;

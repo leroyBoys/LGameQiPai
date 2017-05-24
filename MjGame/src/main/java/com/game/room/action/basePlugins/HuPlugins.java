@@ -1,12 +1,13 @@
 package com.game.room.action.basePlugins;
 
+import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjCardPoolEngine;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
-import com.game.room.action.GangAction;
+import com.game.room.action.ChiAction;
 import com.game.room.action.SuperGameStatusData;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
@@ -19,21 +20,13 @@ import java.util.Map;
  * Created by leroy:656515489@qq.com
  * 2017/5/11.
  */
-public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
+public class HuPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction{
     @Override
     public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
 
-        MjAutoCacheHandContainer mjAutoCache = (MjAutoCacheHandContainer) chair.getHandsContainer().getAutoCacheHands();
-        Map<Integer, Integer> countMap =  mjAutoCache.getCardNumMap();
-        Integer num = countMap.get(card);
-        if(num == null || num <3){
-            return false;
-        }
-
-        SuperGameStatusData gameStatusData= (SuperGameStatusData) chair.getTableVo().getStatusData();
-        gameStatusData.addCanDoDatas(chair.getTableVo().getStep(),new StepGameStatusData(GangAction.getInstance(),chair.getId(),chair.getId(),card,this));
         return false;
     }
+
 
     @Override
     public void createCanExecuteAction(BaseTableVo room) {
@@ -41,8 +34,8 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
     }
 
     @Override
-    public MingGangPlugins createNew() {
-        return new MingGangPlugins();
+    public HuPlugins createNew() {
+        return new HuPlugins();
     }
 
     @Override
@@ -50,14 +43,26 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
         MjChairInfo chair = table.getChairByUid(roleId);
         StepGameStatusData lastStep = (StepGameStatusData) chair.getTableVo().getStepHistoryManager().getLastStep();
 
+        List<Integer> cards = new LinkedList<>();
+        final int lastCard = lastStep.getCards().get(0);
+        for(Integer card:stepGameStatusData.getCards()){
+            cards.add(card);
+            if(card == lastCard){
+                continue;
+            }
+
+            chair.getHandsContainer().removeCardFromHand(card,1);
+        }
+
         MjCardPoolEngine mjCardPoolEngine = table.getCardPool();
         mjCardPoolEngine.removeLastCard();
 
-        final int lastCard = lastStep.getCards().get(0);
-        chair.getHandsContainer().removeCardFromHand(lastCard,3);
-        List<Integer> cards = new LinkedList<>();
-        cards.add(lastCard);
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
         return true;
+    }
+
+    @Override
+    public int chickMatch(T table,List<Integer> card, StepGameStatusData stepData) {
+        return 1;
     }
 }

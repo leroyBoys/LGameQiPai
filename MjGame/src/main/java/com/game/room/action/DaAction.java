@@ -25,11 +25,6 @@ public class DaAction extends GameOperateAction{
         return GameConst.MJ.ACTION_TYPE_DA;
     }
 
-    @Override
-    public void overAction(MjTable table) {
-
-    }
-
 
     @Override
     public int getWeight() {

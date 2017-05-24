@@ -3,9 +3,14 @@ package com.game.room.action.basePlugins;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.PluginGen;
 import com.game.core.room.BaseTableVo;
+import com.game.core.room.PayDetail;
 import com.game.room.status.StepGameStatusData;
+import com.logger.type.LogType;
 import com.lsocket.message.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +19,7 @@ import java.util.List;
  * 2017/5/11.
  */
 public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOptPlugin<A,StepGameStatusData> {
+    protected Logger playLog = LoggerFactory.getLogger(LogType.Play.getLogName());
     protected PluginGen pluginGen;
 
     @Override
@@ -36,7 +42,19 @@ public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOp
         return false;
     }
 
-    public int chickMatch(List<Integer> card, StepGameStatusData stepData) {
+    public int chickMatch(A table,List<Integer> card, StepGameStatusData stepData) {
         return stepData.getCards().get(0) == card.get(0)?1:0;
+    }
+
+    /**
+     *
+     * 0自摸所有人支付，1点炮的人支付
+     * */
+    public PayDetail payment(StepGameStatusData action) {
+        String str = getPlugin().getEffectStr();
+        if (str == null || str.equals(""))
+            return null;
+        PayDetail ratePay = new PayDetail();
+        return ratePay;
     }
 }

@@ -20,6 +20,7 @@ public class CoreServiceManager extends ICommon {
     public StatisticsMonitor monitor;
 
     private TaskScheduler taskScheduler;
+    private ServiceThreadPool tableThreadPool = new ServiceThreads();
 
     @Override
     protected void initService() {
@@ -28,6 +29,10 @@ public class CoreServiceManager extends ICommon {
         TablePluginManager.getInstance().refresh("RoomSetting.xls","PluginGen.xls");
         TableFactory.getInstance().initGoodNum("");
         this.taskScheduler = new TaskScheduler(1);
+    }
+
+    public ServiceThreadPool getTableThreadPool() {
+        return tableThreadPool;
     }
 
     @Override

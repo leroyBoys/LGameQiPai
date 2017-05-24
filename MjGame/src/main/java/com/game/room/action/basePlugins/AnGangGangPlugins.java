@@ -45,7 +45,7 @@ public class AnGangGangPlugins<T extends MjTable> extends GangPlugins<T>{
         GangAction action = GangAction.getInstance();
         SuperGameStatusData gameStatusData= (SuperGameStatusData) chair.getTableVo().getStatusData();
         for(Integer cardNum:cards){
-            gameStatusData.addCanDoDatas(new StepGameStatusData(action,chair.getId(),chair.getId(),cardNum,this));
+            gameStatusData.addCanDoDatas(chair.getTableVo().getStep(),new StepGameStatusData(action,chair.getId(),chair.getId(),cardNum,this));
         }
         return true;
     }

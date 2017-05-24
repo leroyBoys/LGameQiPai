@@ -33,7 +33,7 @@ public class XuanFengGangPlugins<T extends MjTable> extends AnGangGangPlugins<T>
         SuperGameStatusData gameStatusData= (SuperGameStatusData) chair.getTableVo().getStatusData();
         StepGameStatusData stepGameStatusData = new StepGameStatusData(GangAction.getInstance(),chair.getId(),chair.getId(),0,this);
         stepGameStatusData.setCard(0);//固定的值所以只需要约定，只判定子类型即可，不用判定内容
-        gameStatusData.addCanDoDatas(stepGameStatusData);
+        gameStatusData.addCanDoDatas(chair.getTableVo().getStep(),stepGameStatusData);
         return true;
     }
 
@@ -67,7 +67,7 @@ public class XuanFengGangPlugins<T extends MjTable> extends AnGangGangPlugins<T>
     }
 
     @Override
-    public int chickMatch(List<Integer> card, StepGameStatusData stepData) {
+    public int chickMatch(T table,List<Integer> card, StepGameStatusData stepData) {
         return 1;
     }
 }

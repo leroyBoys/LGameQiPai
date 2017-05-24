@@ -5,7 +5,10 @@ import com.game.core.config.IOptPlugin;
 import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
+import com.game.core.room.BaseChairInfo;
+import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjChairInfo;
+import com.game.room.MjHandCardsContainer;
 import com.game.room.MjTable;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
@@ -41,6 +44,11 @@ public class GameAction extends BaseAction<MjTable> {
             return;
         }
 
+        if(statusData.getFirst().isAuto()){
+           this.doAction(table,null,statusData.getFirst().getUid(),null);
+            return;
+        }
+
         table.sendCanDoActionMsg(0);
         table.flushMsgQueue();
     }
@@ -50,4 +58,19 @@ public class GameAction extends BaseAction<MjTable> {
         table.addRound(); //局数加一
     }
 
+    @Override
+    public void tick(MjTable table){
+        SuperGameStatusData statusData = table.getStatusData();
+        if(statusData.getFirst().isAuto()){
+            return;
+        }
+
+        BaseChairInfo info = table.getChairByUid(statusData.getFirst().getUid());
+        if(!info.isAuto() && !info.isRobot()){
+            return;
+        }
+
+        NetGame.NetOprateData netOprateData = ((MjAutoCacheHandContainer)info.getHandsContainer().getAutoCacheHands()).getNetOprateData(statusData.getFirst());
+        this.doAction(table,null,info.getId(),netOprateData);
+    }
 }
