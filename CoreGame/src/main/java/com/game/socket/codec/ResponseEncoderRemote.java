@@ -1,13 +1,9 @@
-package com.game.codec;
+package com.game.socket.codec;
 
 import com.game.manager.TimeCacheManager;
 import com.game.socket.module.UserVistor;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
-import com.lgame.util.PrintTool;
-import com.lgame.util.comm.Tools;
-import com.lgame.util.encry.MD5Tool;
-import com.lgame.util.encry.ZipTool;
 import com.logger.log.SystemLogger;
 import com.lsocket.codec.ResponseEncoder;
 import com.lsocket.manager.CMDManager;
@@ -18,8 +14,6 @@ import com.module.net.NetParentOld;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolEncoderOutput;
-
-import java.util.Arrays;
 
 /**
  * Created by leroy:656515489@qq.com

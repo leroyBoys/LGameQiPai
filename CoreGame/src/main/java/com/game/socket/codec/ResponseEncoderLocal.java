@@ -1,4 +1,4 @@
-package com.game.codec;
+package com.game.socket.codec;
 
 import com.lsocket.codec.ResponseEncoder;
 import org.apache.mina.core.session.IoSession;

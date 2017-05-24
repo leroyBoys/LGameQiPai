@@ -1,14 +1,12 @@
 package com.game.socket;
 
-import com.game.codec.RequestDecoderRemote;
-import com.game.codec.ResponseEncoderRemote;
-import com.game.control.CoreDispatcherRmote;
-import com.game.listen.GameHeartLinster;
 import com.game.manager.CoreServiceManager;
 import com.game.manager.DBServiceManager;
+import com.game.socket.codec.RequestDecoderRemote;
+import com.game.socket.codec.ResponseEncoderRemote;
+import com.game.socket.control.CoreDispatcherRmote;
+import com.game.socket.listen.GameHeartLinster;
 import com.game.socket.module.UserVistor;
-import com.lgame.util.file.PropertiesTool;
-import com.lgame.util.load.xml.XmlApi;
 import com.lsocket.codec.RequestDecoder;
 import com.lsocket.codec.ResponseEncoder;
 import com.lsocket.config.SocketConfig;
@@ -17,7 +15,6 @@ import com.lsocket.listen.HeartListen;
 import com.lsocket.module.ModuleDispaterInstance;
 import org.apache.mina.core.session.IoSession;
 
-import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -67,7 +64,7 @@ public class GameSocket extends SocketServer<UserVistor>{
     public ModuleDispaterInstance getInnerModuleDispaterConfig() {
         ModuleDispaterInstance ins = new ModuleDispaterInstance();
         List<ModuleDispaterInstance.Obj> objs = new LinkedList<>();
-        objs.add(new ModuleDispaterInstance.Obj("com.game.action"));
+        objs.add(new ModuleDispaterInstance.Obj("com.game.Handler"));
         ins.setObjList(objs);
         return ins;
     }

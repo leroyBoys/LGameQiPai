@@ -1,4 +1,4 @@
-package com.game.codec;
+package com.game.socket.codec;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lsocket.codec.RequestDecoder;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.game.action;
+package com.game.Handler;
 
 
 import com.game.core.constant.GameConst;

@@ -6,7 +6,7 @@
 package com.game.core.chat;
 
 
-import com.game.core.admin.AdminCmdFilter;
+import com.game.admin.AdminCmdFilter;
 import com.game.core.config.GameSwitch;
 import com.game.core.config.GameSwitchManager;
 import com.game.socket.module.UserVistor;

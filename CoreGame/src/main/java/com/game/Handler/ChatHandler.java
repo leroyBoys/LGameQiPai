@@ -1,4 +1,4 @@
-package com.game.action;
+package com.game.Handler;
 
 import com.game.core.constant.GameConst;
 import com.game.core.chat.ChatChannelManager;

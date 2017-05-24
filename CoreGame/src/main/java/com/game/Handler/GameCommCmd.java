@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.game.action;
+package com.game.Handler;
 
 
 import com.game.core.constant.GameConst;
@@ -12,20 +12,46 @@ import com.lsocket.module.HttpRequestType;
 
 /**
  */
-public enum ChatCmd implements ModuleCmd {
+public enum GameCommCmd implements ModuleCmd {
 
     /**
      * 未定义
      */
     NULL(-1,true,HttpRequestType.tcp),
-    Chat(1,true,HttpRequestType.all)
+
+    CREATE_TABLE(1,true,HttpRequestType.tcp),
+    /**
+     * 加入游戏（进入桌子）
+     */
+    ENTER_GAME(2,true,HttpRequestType.tcp),
+    /**
+     * 退出游戏（退出桌子）
+     */
+    EXIT_GAME(3, true,HttpRequestType.tcp),
+    /**
+     * 托管
+     */
+    AUTO_PLAY(4, true,HttpRequestType.tcp),
+    /**
+     * 开始游戏前的准备
+     */
+    READY_NOW(5, true,HttpRequestType.tcp),
+    /**
+     * 投票解散
+     */
+    VoteDestroy(6, true,HttpRequestType.tcp),
+    /**
+     * 玩家状态位1位：是否离线 2位：是否托管 3位:是否准备
+     */
+    UserStatus(7,true,HttpRequestType.tcp)
+
     ;
 
     private final int value;
     private final boolean isRequireOnline;//是否需要登录
     private final HttpRequestType requetType;//请求方式
 
-    ChatCmd(int value, boolean isRequireOnline, HttpRequestType requetType) {
+    GameCommCmd(int value,boolean isRequireOnline,HttpRequestType requetType) {
         this.value = value;
         this.requetType = requetType;
         this.isRequireOnline = isRequireOnline;
@@ -45,6 +71,6 @@ public enum ChatCmd implements ModuleCmd {
 
     @Override
     public int getModule() {
-        return GameConst.MOUDLE_User;
+        return GameConst.MOUDLE_GameComm;
     }
 }

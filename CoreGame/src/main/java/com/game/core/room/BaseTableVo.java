@@ -1,6 +1,6 @@
 package com.game.core.room;
 
-import com.game.action.GameCommCmd;
+import com.game.Handler.GameCommCmd;
 import com.game.core.TableManager;
 import com.game.core.action.BaseAction;
 import com.game.core.constant.GameConst;

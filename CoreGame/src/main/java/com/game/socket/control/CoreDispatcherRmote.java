@@ -1,4 +1,4 @@
-package com.game.control;
+package com.game.socket.control;
 
 import com.game.core.service.UserService;
 import com.game.manager.DBServiceManager;
@@ -8,7 +8,6 @@ import com.logger.log.SystemLogger;
 import com.lsocket.control.impl.CoreDispatcher;
 import com.lsocket.handler.ModuleHandler;
 import com.lsocket.message.Request;
-import com.lsocket.module.Visitor;
 import org.apache.mina.core.session.IdleStatus;
 
 /**

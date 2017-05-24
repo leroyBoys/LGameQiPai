@@ -1,4 +1,4 @@
-package com.game.action;
+package com.game.Handler;
 
 import com.game.core.TableFactory;
 import com.game.core.TableManager;

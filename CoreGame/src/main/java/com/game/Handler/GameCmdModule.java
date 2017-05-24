@@ -1,4 +1,4 @@
-package com.game.action;
+package com.game.Handler;
 
 import com.game.socket.module.UserVistor;
 import com.lsocket.handler.CmdModule;

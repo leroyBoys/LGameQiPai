@@ -1,4 +1,4 @@
-package com.game.core.admin;
+package com.game.admin;
 
 import com.game.socket.module.UserVistor;
 

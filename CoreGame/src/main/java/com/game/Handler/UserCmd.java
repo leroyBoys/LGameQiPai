@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.game.action;
+package com.game.Handler;
 
 
 import com.game.core.constant.GameConst;
@@ -12,22 +12,19 @@ import com.lsocket.module.HttpRequestType;
 
 /**
  */
-public enum SystemCmd implements ModuleCmd {
+public enum UserCmd implements ModuleCmd {
 
     /**
      * 未定义
      */
     NULL(-1,true,HttpRequestType.tcp),
-
-    heart(1,true,HttpRequestType.tcp),
-    firstConnection(2,false,HttpRequestType.tcp),
     ;
 
     private final int value;
     private final boolean isRequireOnline;//是否需要登录
     private final HttpRequestType requetType;//请求方式
 
-    SystemCmd(int value, boolean isRequireOnline, HttpRequestType requetType) {
+    UserCmd(int value, boolean isRequireOnline, HttpRequestType requetType) {
         this.value = value;
         this.requetType = requetType;
         this.isRequireOnline = isRequireOnline;
@@ -47,6 +44,6 @@ public enum SystemCmd implements ModuleCmd {
 
     @Override
     public int getModule() {
-        return GameConst.MOUDLE_System;
+        return GameConst.MOUDLE_User;
     }
 }

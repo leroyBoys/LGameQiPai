@@ -1,8 +1,7 @@
-package com.game.codec;
+package com.game.socket.codec;
 
 import com.game.manager.TimeCacheManager;
 import com.game.socket.module.UserVistor;
-import com.google.protobuf.InvalidProtocolBufferException;
 import com.lgame.util.comm.Tools;
 import com.lgame.util.encry.MD5Tool;
 import com.lgame.util.encry.ZipTool;
@@ -23,7 +22,6 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * Created by leroy:656515489@qq.com

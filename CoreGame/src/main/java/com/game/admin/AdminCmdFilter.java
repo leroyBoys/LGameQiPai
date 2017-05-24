@@ -1,6 +1,6 @@
-package com.game.core.admin;
+package com.game.admin;
 
-import com.game.action.GameCommCmd;
+import com.game.Handler.GameCommCmd;
 import com.game.core.TableManager;
 import com.game.core.chat.ChatChannelManager;
 import com.game.core.chat.ChatFilter;
@@ -13,7 +13,6 @@ import com.lsocket.handler.CmdModule;
 import com.lsocket.manager.CMDManager;
 import com.lsocket.message.Response;
 import com.module.ChannelType;
-import com.module.core.ResponseCode;
 
 /**
  * Created by leroy:656515489@qq.com

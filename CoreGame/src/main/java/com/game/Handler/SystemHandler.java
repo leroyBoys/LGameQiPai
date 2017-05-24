@@ -1,6 +1,6 @@
-package com.game.action;
+package com.game.Handler;
 
-import com.game.codec.ResponseEncoderRemote;
+import com.game.socket.codec.ResponseEncoderRemote;
 import com.game.core.constant.GameConst;
 import com.game.core.service.UserService;
 import com.game.manager.DBServiceManager;

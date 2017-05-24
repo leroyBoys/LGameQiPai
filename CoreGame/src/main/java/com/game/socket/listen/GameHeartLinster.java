@@ -1,4 +1,4 @@
-package com.game.listen;
+package com.game.socket.listen;
 
 import com.lsocket.listen.HeartListen;
 import org.apache.mina.core.session.IoSession;
