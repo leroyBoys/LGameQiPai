@@ -6,6 +6,7 @@ import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
+import com.game.core.room.GameOverType;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjChairInfo;
 import com.game.room.MjHandCardsContainer;
@@ -43,7 +44,19 @@ public class GameAction extends BaseAction<MjTable> {
             return;
         }
 
-        table.sendCanDoActionMsg(0);
+        if(table.getGameOverType() != GameOverType.NULL){
+            table.sendSettlementMsg(roleId);
+        }else {
+            NetGame.NetOprateData.Builder netOprateDataBuild = table.getStatusData().getCanDoDatas(table,0);
+
+            playLog.info("send candoactions to roleId:"+roleId+"   "+netOprateDataBuild.toString());
+            if(netOprateData != null){
+                NetGame.NetKvData.Builder kvData = NetGame.NetKvData.newBuilder();
+                kvData.setK(table.getStatus().getAction().getActionType());
+                netOprateDataBuild.addKvDatas(kvData);
+                table.addMsgQueue(roleId,netOprateDataBuild.build(),0);//可操作集合
+            }
+        }
         table.flushMsgQueue();
     }
 
@@ -55,7 +68,7 @@ public class GameAction extends BaseAction<MjTable> {
     @Override
     public void tick(MjTable table){
         SuperGameStatusData statusData = table.getStatusData();
-        if(statusData.getFirst().isAuto()){
+        if(statusData.isEmpty() || statusData.getFirst().isAuto()){
             return;
         }
 
@@ -64,7 +77,7 @@ public class GameAction extends BaseAction<MjTable> {
             return;
         }
 
-        NetGame.NetOprateData netOprateData = ((MjAutoCacheHandContainer)info.getHandsContainer().getAutoCacheHands()).getNetOprateData(statusData.getFirst());
+        NetGame.NetOprateData netOprateData = ((MjAutoCacheHandContainer)info.getHandsContainer().getAutoCacheHands()).getNetOprateData(info,statusData.getFirst());
         this.doAction(table,null,info.getId(),netOprateData);
     }
 }

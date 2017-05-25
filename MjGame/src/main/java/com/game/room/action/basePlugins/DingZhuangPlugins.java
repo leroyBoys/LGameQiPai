@@ -6,6 +6,8 @@ import com.game.room.MjTable;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
 
+import java.util.Arrays;
+
 /**
  * Created by leroy:656515489@qq.com
  * 2017/4/24.
@@ -25,6 +27,8 @@ public class DingZhuangPlugins<T extends MjTable> extends AbstractStagePlugin<T>
         table.setBankId(table.getNextBankerUid());
 
         table.getStatusData().setOver(true);
+
+        playLog.info("dingzhuang:bankId:"+table.getBankId());
         return true;
     }
 

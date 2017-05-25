@@ -25,6 +25,12 @@ public class BaseGameStateData implements SuperCreateNew{
         return new BaseGameStateData();
     }
 
+    /**
+     *
+     * @param tableVo
+     * @param roleId
+     * @return
+     */
     public NetGame.NetOprateData.Builder getCanDoDatas(BaseTableVo tableVo,int roleId){
         NetGame.NetOprateData.Builder canDoActions = NetGame.NetOprateData.newBuilder();
         canDoActions.setOtype(GameConst.MJ.ACTION_TYPE_CanDoActions);

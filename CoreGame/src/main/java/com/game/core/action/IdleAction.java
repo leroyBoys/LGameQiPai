@@ -3,6 +3,7 @@ package com.game.core.action;
 import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseChairStatus;
+import com.game.core.room.BaseGameStateData;
 import com.game.core.room.BaseTableVo;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
@@ -24,14 +25,15 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
     }
 
     private void ready(T table,int roleId){
-        BaseChairInfo chairInfo = table.getChairByUid(roleId);
-        if(chairInfo.getStatus().getVal() == getReadyStatus().getVal()){
+        BaseGameStateData.DefaultStatusData readyStatus = (BaseGameStateData.DefaultStatusData) table.getStatusData();
+
+        if(readyStatus.contains(roleId)){
             return;
         }
 
-        chairInfo.setStatus(getReadyStatus());
-        if(table.getChairCountByStatus(chairInfo.getStatus()) == table.getChairs().length){
-            table.getStatusData().setOver(true);
+        playLog.info("ready:roleId:"+roleId+"  size:"+readyStatus.getDoneSize());
+        if(readyStatus.addDoneUid(roleId) == table.getChairs().length){
+            readyStatus.setOver(true);
         }
 
         //发送数据

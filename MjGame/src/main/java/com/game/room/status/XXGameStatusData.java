@@ -10,11 +10,16 @@ import com.game.room.action.SuperGameStatusData;
  */
 public class XXGameStatusData extends SuperGameStatusData {
 
+    @Override
+    public XXGameStatusData createNew() {
+        return new XXGameStatusData();
+    }
+
     protected boolean checkCanChi(MjChairInfo chairInfo,int card){
         return false;
     }
 
     protected HuAction.CheckHuType checkCanHu(MjChairInfo chairInfo, int card){
-        return HuAction.CheckHuType.Hu;
+        return HuAction.CheckHuType.NULL;
     }
 }

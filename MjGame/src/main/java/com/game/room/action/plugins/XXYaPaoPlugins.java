@@ -39,6 +39,8 @@ public class XXYaPaoPlugins extends AbstractStagePlugin<MjTable> {
         if(size == table.getChairs().length){
             table.getStatusData().setOver(true);
         }
+
+        playLog.info("yaPao:roleId:"+roleId+":"+oprateData.getDval());
         return true;
     }
 

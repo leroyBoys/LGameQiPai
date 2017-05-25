@@ -1,8 +1,11 @@
 package com.game.core.config;
 
 import com.game.core.room.BaseTableVo;
+import com.logger.type.LogType;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -12,6 +15,7 @@ import java.util.List;
  * 2017/5/11.
  */
 public class AbstractStagePlugin<A extends BaseTableVo> implements IOptPlugin<A,NetGame.NetOprateData > {
+    protected Logger playLog = LoggerFactory.getLogger(LogType.Play.getLogName());
     private PluginGen pluginGen;
 
     @Override

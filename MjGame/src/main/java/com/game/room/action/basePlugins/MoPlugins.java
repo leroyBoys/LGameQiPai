@@ -42,6 +42,10 @@ public class MoPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
         int card = (int) table.getCardPool().getRemainCards().remove(0);
         table.getChairByUid(roleId).getHandsContainer().addHandCards(card);
         stepGameStatusData.setCard(card);
+
+        playLog.info("moPai:roleId:"+roleId+":card:"+card);
+
+        createCanExecuteAction(table);
         return true;
     }
 

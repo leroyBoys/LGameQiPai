@@ -337,7 +337,7 @@ public class UserDao implements Base {
 
         MethodCacheTime ct = monitor.start();
         try {
-            return gamePool.ExecuteUpdate("UPDATE user_info SET is_online=1 ,login_time=NOW()  WHERE id = ? AND is_online=0", new Object[]{uid});
+            return userPool.ExecuteUpdate("UPDATE user_info SET is_online=1 ,login_time=NOW()  WHERE id = ? AND is_online=0", new Object[]{uid});
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {

@@ -12,6 +12,7 @@ import com.game.room.action.SuperGameStatusData;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -77,13 +78,15 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
 
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
         createCanExecuteAction(table);
+
+        playLog.info("chi:roleId:"+roleId+" card:"+Arrays.toString(cards.toArray())+" "+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
         return true;
     }
 
     @Override
     public int chickMatch(T table,List<Integer> card, StepGameStatusData stepData) {
         try{
-            return card.get(0) == stepData.getCards().get(0) && card.get(1) == stepData.getCards().get(1)&&card.get(2) == stepData.getCards().get(2)?1:0;
+            return card.get(0) == stepData.getCards().get(0) && card.get(1) == stepData.getCards().get(1)?1:0;
         }catch (Exception ex){
             ex.printStackTrace();
         }

@@ -22,7 +22,7 @@ public class RobotManager {
     private ConcurrentHashMap<Integer,Integer> robotUseds = new ConcurrentHashMap<>();//uid-roomid
 
     private RobotManager(){
-        for(int i = 1;i<10000;i++){
+        for(int i = 1000;i<10000;i++){
             robots.add(i);
         }
     }

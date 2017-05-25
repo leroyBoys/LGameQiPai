@@ -35,7 +35,7 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
     @Override
     protected void initStatus() {
-        this.setAllStatus(new MjStatus[]{MjStatus.Idle, MjStatus.Pao, MjStatus.FaPai, MjStatus.Game});
+        this.setAllStatus(new MjStatus[]{MjStatus.Idle, MjStatus.Pao, MjStatus.DingZhuang, MjStatus.FaPai, MjStatus.Game});
     }
 
     @Override
@@ -61,6 +61,11 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     @Override
     public int getGameResponseModule() {
         return MjCmd.Game.getModule();
+    }
+
+    @Override
+    protected void initCardPoolEngine() {
+        cardPoolEngine = new MjCardPoolEngine(this.getGameId(),null);
     }
 
     @Override
@@ -218,23 +223,6 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     @Override
     protected void sendSettlementDetailMsg(int roleId) {
 
-    }
-
-    public void sendCanDoActionMsg(int roleId){
-        if(getGameOverType() != GameOverType.NULL){
-            sendSettlementMsg(roleId);
-            return;
-        }
-
-        NetGame.NetOprateData.Builder netOprateData = getStatusData().getCanDoDatas(this,roleId);
-        if(netOprateData != null){
-            NetGame.NetKvData.Builder kvData = NetGame.NetKvData.newBuilder();
-            kvData.setK(getStatus().getAction().getActionType());
-            netOprateData.addKvDatas(kvData);
-            NetGame.NetResponse.Builder res = getNetRespose();
-            res.addOperateDatas(netOprateData);
-            addMsgQueue(roleId,netOprateData.build(),0);//可操作集合
-        }
     }
 
     //////////////////////////////////////////////////////

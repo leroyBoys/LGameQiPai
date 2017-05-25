@@ -12,6 +12,7 @@ import com.game.room.action.SuperGameStatusData;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -77,6 +78,8 @@ public class AnGangGangPlugins<T extends MjTable> extends GangPlugins<T>{
         cards.add(cardNum);
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
         createCanExecuteAction(table);
+
+        playLog.info("angang:roleId:"+roleId+" card:"+cardNum+" "+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
         return true;
     }
 

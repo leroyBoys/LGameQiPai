@@ -10,11 +10,15 @@ import com.game.core.room.card.ICardPoolEngine;
 import com.game.manager.DBServiceManager;
 import com.game.manager.OnlineManager;
 import com.game.manager.TimeCacheManager;
+import com.game.socket.module.RobotVistor;
 import com.game.socket.module.UserVistor;
 import com.logger.log.SystemLogger;
+import com.logger.type.LogType;
 import com.lsocket.message.Response;
 import com.module.core.ResponseCode;
 import com.module.net.NetGame;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
@@ -24,6 +28,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * 2017/4/19.
  */
 public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends BaseChairInfo> implements Runnable{
+    protected Logger playLog = LoggerFactory.getLogger(LogType.Play.getLogName());
+
     protected final Map<Integer,MessageQueue> messageQueue = new HashMap<>();
     public final boolean isMsgCache = false;//是否缓存队列
     private GameOverType gameOverType = GameOverType.NULL;
@@ -49,7 +55,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
      * 当前状态的索引
      */
     private short curStatusIdex = 0;
-    private ICardPoolEngine cardPoolEngine;
+    protected ICardPoolEngine cardPoolEngine;
     /** 当前局数 */
     private int curRount = 1;
     private TableProducer tableProducer;
@@ -111,6 +117,10 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
             chair.setIdx(chairMap.size()-1);
 
             messageQueue.put(visitor.getRoleId(),new MessageQueue(visitor,this));
+
+            if(visitor instanceof RobotVistor){
+                chair.setRobot(true);
+            }
             return true;
         }catch (Exception e){
             e.printStackTrace();
@@ -161,7 +171,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
         try{
             trigger();
         }catch (Exception ex){
-            ex.printStackTrace();
+            SystemLogger.error(this.getClass(),ex);
         }finally {
             isRun = false;
         }
@@ -169,7 +179,9 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
 
     public final void trigger(){
         BaseAction action = status.getAction();
-        if(statusDataMap.get(status).isOver()){
+
+        playLog.info("===>tick:"+getStatus().getAction().getClass().getSimpleName()+" :"+getStatusData().isOver());
+        if(getStatusData().isOver()){
        // if(action.isChangeToNextStatus(this)){
             changeNextStaus();
             action.overAction(this);
@@ -188,12 +200,14 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
     }
 
     private void changeNextStaus(){
+
         if(curStatusIdex >= allStatus.length-1){
             curStatusIdex = 0;
         }else {
             curStatusIdex++;
         }
 
+        playLog.info(this.id+"====changeStatus:"+allStatus[curStatusIdex].getAction().getClass().getSimpleName());
         this.setStatus(allStatus[curStatusIdex]);
     }
 

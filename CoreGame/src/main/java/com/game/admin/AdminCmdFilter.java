@@ -11,8 +11,10 @@ import com.game.socket.module.UserVistor;
 import com.lgame.util.comm.StringTool;
 import com.lsocket.handler.CmdModule;
 import com.lsocket.manager.CMDManager;
+import com.lsocket.message.Request;
 import com.lsocket.message.Response;
 import com.module.ChannelType;
+import com.module.net.NetGame;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -108,23 +110,35 @@ public class AdminCmdFilter implements ChatFilter {
             sendMsg(vistor.getRoleId(),"not exit tableId:"+tableId);
             return;
         }
+        addRobot(num,tableVo);
+    }
 
+    public void addRobot(int num,BaseTableVo tableVo){
         num = Math.min(num,tableVo.getChairs().length);
 
         final CmdModule enteryFunction =CMDManager.getIntance().getCmdModule(GameCommCmd.ENTER_GAME.getModule(),GameCommCmd.ENTER_GAME.getValue());
         Response response = Response.defaultResponse(GameCommCmd.ENTER_GAME.getModule(),GameCommCmd.ENTER_GAME.getValue());
+        Request request = Request.valueOf(GameCommCmd.ENTER_GAME.getModule(),GameCommCmd.ENTER_GAME.getValue());
 
+        NetGame.RPEnterRoom.Builder builder = NetGame.RPEnterRoom.newBuilder();
+        builder.setRoomId(tableVo.getId());
+        request.setObj(builder.build());
         for(int i = 0;i<tableVo.getChairs().length;i++){
-            if(tableVo.getChairs()[i] == null || tableVo.getChairs()[i].getStatus().getVal() != 0){
+            if(tableVo.getChairs()[i] != null){
+
+                tableVo.getChairs()[i].setAuto(true);
                 continue;
             }
 
-            enteryFunction.invoke(RobotManager.getInstance().getRobot(),null,response);
+            try {
+                enteryFunction.invoke(RobotManager.getInstance().getRobot(),request,response);
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
             if(--num == 0){
                 break;
             }
         }
-
     }
 
     public void round(String content, UserVistor vistor) {

@@ -40,6 +40,7 @@
     <!--      <appender-ref ref="AllErrorLog" level="ERROR"/>-->
         <appender-ref ref="AllLog" level="INFO"/>
         <appender-ref ref="STDOUT" level="INFO"/>
+        <appender-ref ref="play" level="INFO"/>
     </root> 
     
 </configuration>

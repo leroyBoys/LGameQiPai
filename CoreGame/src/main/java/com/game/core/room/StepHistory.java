@@ -10,11 +10,8 @@ import java.util.List;
 public class StepHistory<STEP> {
     private List<STEP> actionTypeSteps = new ArrayList<>();
 
-    public List<STEP> getActionTypeSteps() {
-        return actionTypeSteps;
-    }
-
     public void add(STEP data){
+        System.out.println("            addSetp:"+actionTypeSteps.size());
         actionTypeSteps.add(data);
     }
 

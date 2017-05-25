@@ -30,6 +30,9 @@ public class MjCardPoolEngine extends BaseCardPoolEngine<Integer> {
         init();
         RoomSetting roomSetting = TablePluginManager.getInstance().getRoomSetting(gameId);
         cardPool.addAll(roomSetting.getCardNumPools());
+        cardPool.addAll(roomSetting.getCardNumPools());
+        cardPool.addAll(roomSetting.getCardNumPools());
+        cardPool.addAll(roomSetting.getCardNumPools());
 
         if(userSetStaticCardPool != null && !userSetStaticCardPool.isEmpty()){
             cardPool.addAll(userSetStaticCardPool);

@@ -277,7 +277,10 @@ public class GameCommHandler extends ModuleHandler<UserVistor,Request,Response> 
     }
 
     private void joinTable(BaseTableVo baseTableVo, UserVistor vistor, Request request, Response response) {
+
+        System.out.println("==joinTable:"+vistor.getRoleId());
         if(!baseTableVo.addChair(vistor)){
+            System.out.println("===>join fial");
             return;
         }
 
@@ -290,7 +293,7 @@ public class GameCommHandler extends ModuleHandler<UserVistor,Request,Response> 
                 continue;
             }
             //给其他人发送
-            OnlineManager.getIntance().getRoleId(baseTableVo.getChairs()[i].getId()).sendMsg(Response.defaultResponse(this.getModule(),GameCommCmd.ENTER_GAME.getValue(),0,rpEnterRoom.build()));
+            baseTableVo.sendMsgToUid(Response.defaultResponse(this.getModule(),GameCommCmd.ENTER_GAME.getValue(),0,rpEnterRoom.build()),baseTableVo.getChairs()[i].getId());
         }
 
         response.setModule(this.getModule());

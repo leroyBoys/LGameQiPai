@@ -11,6 +11,7 @@ import com.game.room.action.SuperGameStatusData;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +57,8 @@ public class PengPlugins<T extends MjTable> extends ChiPlugins<T>{
         PayDetail pay = payment(stepGameStatusData);
 
         this.createCanExecuteAction(table);
+
+        playLog.info("peng:roleId:"+roleId+" card:"+lastCard+" "+ Arrays.toString(chair.getHandsContainer().getHandCards().toArray()));
         return true;
     }
 

@@ -34,12 +34,11 @@ public class FaPaiPlugins<T extends MjTable> extends AbstractStagePlugin<T> {
             }
 
             MjChairInfo p = table.getChairs()[i];
-            final int curinitHands = initHands + (table.getBankId() == p.getId()?1:0);
-            if (cardPool.size() < curinitHands) {
+            if (cardPool.size() < initHands) {
                 return false;
             }
             ArrayList cards = new ArrayList<>();
-            for (int j = 0; j < curinitHands; j++) {
+            for (int j = 0; j < initHands; j++) {
                 cards.add(cardPool.remove(0));
             }
             p.getHandsContainer().setHandCards(cards);

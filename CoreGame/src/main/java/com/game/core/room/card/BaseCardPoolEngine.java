@@ -35,7 +35,7 @@ public class BaseCardPoolEngine<C> implements ICardPoolEngine<C> {
 
     @Override
     public void shuffle() {
-
+        System.out.println("==========must overwrite this");
     }
 
     @Override
@@ -46,6 +46,10 @@ public class BaseCardPoolEngine<C> implements ICardPoolEngine<C> {
     @Override
     public List<C> getRemainCards() {
         return cardPool;
+    }
+
+    public void setUserSetStaticCardPool(List<C> userSetStaticCardPool) {
+        this.userSetStaticCardPool = userSetStaticCardPool;
     }
 
     @Override

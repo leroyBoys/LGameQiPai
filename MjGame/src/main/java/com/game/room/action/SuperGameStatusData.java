@@ -25,7 +25,12 @@ public class SuperGameStatusData extends BaseGameStateData {
     private volatile int writeStep = -1;
     private volatile int readStep = -1;
 
-    public void addCanDoDatas(int step,StepGameStatusData stepGameStatusData){
+    @Override
+    public SuperGameStatusData createNew() {
+        return new SuperGameStatusData();
+    }
+
+    public void addCanDoDatas(int step, StepGameStatusData stepGameStatusData){
         canDoDatas.add(stepGameStatusData);
 
         if(this.writeStep != step){
@@ -40,7 +45,7 @@ public class SuperGameStatusData extends BaseGameStateData {
 
         int focuxIdx = table.nextFocusIndex(table.getFocusIdex());
         BaseChairInfo info = table.getChairs()[focuxIdx];
-        addCanDoDatas(table.getStep(),new StepGameStatusData(MoAction.getInstance(),info.getId(),info.getId(),null));
+        addCanDoDatas(table.getStep(),new StepGameStatusData(MoAction.getInstance(),info.getId()));
     }
 
     public final void checkCanDo(MjChairInfo chairInfo,int card) {
@@ -125,7 +130,7 @@ public class SuperGameStatusData extends BaseGameStateData {
 
     public void checkDa(MjChairInfo chairInfo, int card) {
         if(canDoDatas.isEmpty()){
-            addCanDoDatas(chairInfo.getTableVo().getStep(),new StepGameStatusData(DaAction.getIntance(),chairInfo.getId(),chairInfo.getId(),null));
+            DaAction.getIntance().check(chairInfo,0,null);
         }
     }
 
@@ -164,6 +169,8 @@ public class SuperGameStatusData extends BaseGameStateData {
     }
 
     public boolean isEmpty(){
+        System.out.println("===========canDoDatasLength:"+canDoDatas.size());
+
         return canDoDatas.isEmpty();
     }
 
@@ -177,9 +184,11 @@ public class SuperGameStatusData extends BaseGameStateData {
             return null;
         }
 
+        roleId = canDoDatas.getFirst().getUid();
         firstActionSet.clear();
         NetGame.NetOprateData.Builder netOprate = super.getCanDoDatas(table,roleId);
 
+        netOprate.setUid(roleId);
         for(StepGameStatusData step:canDoDatas){
             if(netOprate.getUid() != step.getUid()){
                 break;
@@ -283,8 +292,14 @@ public class SuperGameStatusData extends BaseGameStateData {
             }
         }
 
+        System.out.println("===================do action first:"+firstMatch.getAction().getClass().getSimpleName());
+
         table.addStep();
         table.getStepHistoryManager().add(firstMatch);
+
+        if(netOprateData != null){
+            firstMatch.setCards(netOprateData.getDlistList());
+        }
         firstMatch.getAction().doAction(table,response,roleId,firstMatch);
     }
 }

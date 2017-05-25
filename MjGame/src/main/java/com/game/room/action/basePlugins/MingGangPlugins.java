@@ -12,6 +12,7 @@ import com.game.room.action.SuperGameStatusData;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +69,8 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
         PayDetail pay = payment(stepGameStatusData);
 
         this.createCanExecuteAction(table);
+
+        playLog.info("minggang:roleId:"+roleId+" card:"+lastCard+" "+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
         return true;
     }
 }

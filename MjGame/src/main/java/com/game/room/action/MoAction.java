@@ -1,6 +1,7 @@
 package com.game.room.action;
 
 import com.game.core.config.IOptPlugin;
+import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
 import com.game.manager.TimeCacheManager;
@@ -57,4 +58,14 @@ public class MoAction extends GameOperateAction {
     public int getWeight() {
         return 0;
     }
+
+    public void check(MjChairInfo chairInfo, int card, Object parems){
+        IOptPlugin optPlugin = TablePluginManager.getInstance().getOneOptPlugin(chairInfo.getTableVo().getGameId(),this.getActionType());
+        if(optPlugin  == null){
+            return;
+        }
+
+        ((IPluginCheckCanExecuteAction)optPlugin).checkExecute(chairInfo,card,parems);
+    }
+
 }

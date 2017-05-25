@@ -4,8 +4,11 @@ import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
 import com.game.core.room.BaseTableVo;
+import com.logger.type.LogType;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 
@@ -15,6 +18,7 @@ import java.util.ArrayList;
  * 2017/4/19.
  */
 public abstract class BaseAction<T extends BaseTableVo> {
+    protected Logger playLog = LoggerFactory.getLogger(LogType.Play.getLogName());
     public int getActionType(){
         return 0;
     }

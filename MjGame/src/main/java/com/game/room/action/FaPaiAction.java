@@ -10,6 +10,7 @@ import com.game.socket.module.UserVistor;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,7 +47,10 @@ public class FaPaiAction extends BaseAction<MjTable> {
             kvData.setK(chairInfo.getId());
             kvData.setV(chairInfo.getHandsContainer().getHandCards().size());
             handNumList.add(kvData.build());
+
+            playLog.info("fapai:roleId:"+chairInfo.getId()+":"+ Arrays.toString(chairInfo.getHandsContainer().getHandCards().toArray()));
         }
+
 
         for(int i = 0;i<table.getChairs().length;i++){
             MjChairInfo chairInfo = table.getChairs()[i];

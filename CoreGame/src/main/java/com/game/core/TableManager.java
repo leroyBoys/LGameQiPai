@@ -44,7 +44,7 @@ public class TableManager implements Runnable,CheckOutStatus {
      * @param tableId
      */
     public void trigger(int tableId){
-        System.out.println("===trigger=>"+tableId);
+       // System.out.println("===trigger=>"+tableId);
         if(tasks.putIfAbsent(tableId,1) != null){
             return;
         }
@@ -53,7 +53,7 @@ public class TableManager implements Runnable,CheckOutStatus {
             tasks.remove(tableId);
             return;
         }
-        System.out.println("===trigger succ=>"+tableId);
+       // System.out.println("===trigger succ=>"+tableId);
         try {
             taskQeque.put(tableId);
         } catch (InterruptedException e) {
@@ -84,5 +84,9 @@ public class TableManager implements Runnable,CheckOutStatus {
     @Override
     public void print() {
        System.out.println("tasks:"+tasks.size()+" taskQeque:"+taskQeque.size()+"  tableMap:"+tableMap.size());
+    }
+
+    public Map<Integer, BaseTableVo> getTableMap() {
+        return tableMap;
     }
 }

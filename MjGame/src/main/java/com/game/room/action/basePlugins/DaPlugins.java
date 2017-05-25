@@ -12,6 +12,7 @@ import com.game.room.action.SuperGameStatusData;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -55,6 +56,8 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
         MjCardPoolEngine poolEngine = table.getCardPool();
         poolEngine.playOutCard(roleId,removeCard);
         this.createCanExecuteAction(table);
+
+        playLog.info("da:roleId:"+roleId+" card:"+removeCard+" "+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
         return true;
     }
 
@@ -64,7 +67,9 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
     }
 
     public int chickMatch(T table,List<Integer> card, StepGameStatusData stepData) {
-        BaseChairInfo chairInfo = table.getChairs()[table.getFocusIdex()];
+        StepGameStatusData lastStep = (StepGameStatusData)table.getStepHistoryManager().getLastStep();
+        BaseChairInfo chairInfo = table.getChairByUid(lastStep.getUid());
+
         return ((MjAutoCacheHandContainer)(chairInfo.getHandsContainer()).getAutoCacheHands()).getCardNumMap().containsKey(card.get(0))?1:0;
     }
 }
