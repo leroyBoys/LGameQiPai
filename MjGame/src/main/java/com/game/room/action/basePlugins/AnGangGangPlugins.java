@@ -51,8 +51,9 @@ public class AnGangGangPlugins<T extends MjTable> extends GangPlugins<T>{
     }
 
     @Override
-    public void createCanExecuteAction(BaseTableVo room) {
-
+    public void createCanExecuteAction(BaseTableVo table) {
+        SuperGameStatusData statusData = (SuperGameStatusData) table.getStatusData();
+        statusData.checkMo(table);
     }
 
     @Override
@@ -75,6 +76,7 @@ public class AnGangGangPlugins<T extends MjTable> extends GangPlugins<T>{
         List<Integer> cards = new LinkedList<>();
         cards.add(cardNum);
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
+        createCanExecuteAction(table);
         return true;
     }
 

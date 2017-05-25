@@ -40,24 +40,6 @@ public class HuPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
 
     @Override
     public boolean doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
-        MjChairInfo chair = table.getChairByUid(roleId);
-        StepGameStatusData lastStep = (StepGameStatusData) chair.getTableVo().getStepHistoryManager().getLastStep();
-
-        List<Integer> cards = new LinkedList<>();
-        final int lastCard = lastStep.getCards().get(0);
-        for(Integer card:stepGameStatusData.getCards()){
-            cards.add(card);
-            if(card == lastCard){
-                continue;
-            }
-
-            chair.getHandsContainer().removeCardFromHand(card,1);
-        }
-
-        MjCardPoolEngine mjCardPoolEngine = table.getCardPool();
-        mjCardPoolEngine.removeLastCard();
-
-        chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
         return true;
     }
 

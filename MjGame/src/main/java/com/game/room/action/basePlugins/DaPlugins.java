@@ -8,12 +8,10 @@ import com.game.room.MjCardPoolEngine;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.game.room.action.DaAction;
-import com.game.room.action.MoAction;
 import com.game.room.action.SuperGameStatusData;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -33,6 +31,9 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
         SuperGameStatusData statusData = (SuperGameStatusData) table.getStatusData();
 
         for(int i = 0;i<table.getChairs().length;i++){
+            if(i == table.getFocusIdex()){
+                continue;
+            }
             MjChairInfo chairInfo = (MjChairInfo) table.getChairs()[i];
             statusData.checkGang(chairInfo,0);
             statusData.checkChi(chairInfo,0);
@@ -40,11 +41,7 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
             statusData.checkHu(chairInfo,0);
         }
 
-        if(statusData.isEmpty()){
-           int focuxIdx = table.nextFocusIndex(table.getFocusIdex());
-           BaseChairInfo info = table.getChairs()[focuxIdx];
-           statusData.addCanDoDatas(table.getStep(),new StepGameStatusData(MoAction.getInstance(),info.getId(),info.getId(),this));
-        }
+        statusData.checkMo(table);
     }
 
     @Override
@@ -54,6 +51,7 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
 
         MjCardPoolEngine poolEngine = table.getCardPool();
         poolEngine.playOutCard(roleId,removeCard);
+        this.createCanExecuteAction(table);
         return true;
     }
 

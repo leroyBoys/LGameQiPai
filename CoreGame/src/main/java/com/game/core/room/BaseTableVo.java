@@ -180,6 +180,10 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
             }
             return;
         }
+
+       /* if(timeOutTime - TimeCacheManager.getInstance().getCurTime() > 0){
+            return;
+        }*/
         action.tick(this);
     }
 
@@ -473,15 +477,6 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
         return ResponseCode.Error.succ;
     }
 
-    protected final NetGame.NetOprateData getTurnData(){
-        NetGame.NetOprateData.Builder netKvData = NetGame.NetOprateData.newBuilder();
-        netKvData.setUid(focusIdex < 0 ? 0:this.chairs[this.focusIdex].getId());
-        netKvData.setOtype(GameConst.ACTION_TYPE_TURN);
-        netKvData.setDval(Math.max(0,(int) ((timeOutTime - TimeCacheManager.getInstance().getCurTime())/1000)));
-        return netKvData.build();
-    }
-
-
     public void addMsgQueue(int roleId, List<NetGame.NetOprateData> msgs,int seq){
         messageQueue.get(roleId).addMsgList(msgs,seq);
     }
@@ -733,6 +728,14 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
 
     public int getStep() {
         return step;
+    }
+
+    public int getTimeOutRemain() {
+        return Math.max((int) ((timeOutTime - TimeCacheManager.getInstance().getCurTime())/1000),0);
+    }
+
+    public void setTimeOutTime(long timeOutTime) {
+        this.timeOutTime = timeOutTime;
     }
 
     public enum AttributeKey{

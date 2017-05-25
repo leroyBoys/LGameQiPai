@@ -56,8 +56,18 @@ public class BuGangPlugins<T extends MjTable> extends GangPlugins<T>{
     }
 
     @Override
-    public void createCanExecuteAction(BaseTableVo room) {
+    public void createCanExecuteAction(BaseTableVo table) {
+        SuperGameStatusData statusData = (SuperGameStatusData) table.getStatusData();
+        StepGameStatusData lastStep = (StepGameStatusData) table.getStepHistoryManager().getLastStep();
+        int card = lastStep.getCards().get(0);
+        for(int i = 0;i<table.getChairs().length;i++){
+            if(table.getChairs()[i] == null || i == table.getFocusIdex()){
+                continue;
+            }
+            statusData.checkHu((MjChairInfo) table.getChairs()[i],card);
+        }
 
+        statusData.checkMo(table);
     }
 
     @Override

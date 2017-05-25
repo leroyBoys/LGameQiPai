@@ -25,15 +25,9 @@ public class GameAction extends BaseAction<MjTable> {
 
     @Override
     public void initAction(MjTable table) {
-        table.getStepHistoryManager().getActionTypeSteps().add(new StepGameStatusData(MoAction.getInstance(),table.getBankId(),table.getBankId(),null));
-
         SuperGameStatusData statusData = table.getStatusData();
-        MjChairInfo chairInfo = table.getChairByUid(table.getBankId());
-        statusData.checkGang(chairInfo,0);
-        statusData.checkChi(chairInfo,0);
-        statusData.checkPeng(chairInfo,0);
-        statusData.checkHu(chairInfo,0);
-        statusData.checkDa(chairInfo,0);
+        statusData.checkMo(table);
+        this.doAction(table,null,table.getBankId(),null);
     }
 
     @Override

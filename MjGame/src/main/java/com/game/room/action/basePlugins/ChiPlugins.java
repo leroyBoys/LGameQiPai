@@ -41,6 +41,7 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
         if (!countMap.containsKey(cardFirst) || !countMap.containsKey(cardSecond)) {
             return;
         }
+
         StepGameStatusData stepGameStatusData = new StepGameStatusData(ChiAction.getInstance(),fromId,roleId,cardFirst,this);
         stepGameStatusData.setCard(cardSecond);
         stepGameStatusData.setCard(cardThree);
@@ -48,8 +49,13 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
     }
 
     @Override
-    public void createCanExecuteAction(BaseTableVo room) {
-
+    public void createCanExecuteAction(BaseTableVo table) {
+        StepGameStatusData lastStep = (StepGameStatusData) table.getStepHistoryManager().getLastStep();
+        MjChairInfo info = (MjChairInfo) table.getChairByUid(lastStep.getUid());
+        SuperGameStatusData gameStatusData= (SuperGameStatusData)table.getStatusData();
+        gameStatusData.checkGang(info,0);
+        gameStatusData.checkHu(info,0);
+        gameStatusData.checkDa(info,0);
     }
 
     @Override
@@ -60,7 +66,7 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
     @Override
     public boolean doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
         MjChairInfo chair = table.getChairByUid(roleId);
-        StepGameStatusData lastStep = (StepGameStatusData) chair.getTableVo().getStepHistoryManager().getLastStep();
+        StepGameStatusData lastStep = (StepGameStatusData) chair.getTableVo().getStepHistoryManager().getLastStep(-2);
 
         List<Integer> cards = new LinkedList<>();
         final int lastCard = lastStep.getCards().get(0);
@@ -77,6 +83,7 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
         mjCardPoolEngine.removeLastCard();
 
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
+        createCanExecuteAction(table);
         return true;
     }
 

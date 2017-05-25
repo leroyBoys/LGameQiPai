@@ -2,6 +2,7 @@ package com.game.room.action.basePlugins;
 
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
+import com.game.core.room.PayDetail;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjCardPoolEngine;
 import com.game.room.MjChairInfo;
@@ -36,8 +37,9 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
     }
 
     @Override
-    public void createCanExecuteAction(BaseTableVo room) {
-
+    public void createCanExecuteAction(BaseTableVo table) {
+        SuperGameStatusData statusData = (SuperGameStatusData) table.getStatusData();
+        statusData.checkMo(table);
     }
 
     @Override
@@ -47,8 +49,12 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
 
     @Override
     public boolean doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
+        if (stepGameStatusData.getiOptPlugin().getPlugin().getSubType() != this.getPlugin().getSubType()) {
+            return false;
+        }
+
         MjChairInfo chair = table.getChairByUid(roleId);
-        StepGameStatusData lastStep = (StepGameStatusData) chair.getTableVo().getStepHistoryManager().getLastStep();
+        StepGameStatusData lastStep = (StepGameStatusData) chair.getTableVo().getStepHistoryManager().getLastStep(-2);
 
         MjCardPoolEngine mjCardPoolEngine = table.getCardPool();
         mjCardPoolEngine.removeLastCard();
@@ -58,6 +64,10 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
         List<Integer> cards = new LinkedList<>();
         cards.add(lastCard);
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
+
+        PayDetail pay = payment(stepGameStatusData);
+
+        this.createCanExecuteAction(table);
         return true;
     }
 }

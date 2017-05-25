@@ -21,4 +21,8 @@ public class StepHistory<STEP> {
     public STEP getLastStep() {
         return actionTypeSteps.get(actionTypeSteps.size()-1);
     }
+
+    public STEP getLastStep(int lastStep) {
+        return actionTypeSteps.get(actionTypeSteps.size()+lastStep);
+    }
 }

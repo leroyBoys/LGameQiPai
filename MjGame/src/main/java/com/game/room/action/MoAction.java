@@ -3,9 +3,11 @@ package com.game.room.action;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
+import com.game.manager.TimeCacheManager;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.game.room.status.StepGameStatusData;
+import com.game.util.ProbuffTool;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
 
@@ -28,24 +30,27 @@ public class MoAction extends GameOperateAction {
 
     @Override
     protected void doAction(MjTable table, Response response, int roleId,StepGameStatusData stepStatusData) {
+        MjChairInfo chairInfo = table.getChairByUid(roleId);
+        table.setFocusIdex(chairInfo.getIdx());
+        table.setTimeOutTime(GameConst.Time.MJ_WAIT_SECONDS+ TimeCacheManager.getInstance().getCurTime());
+
         IOptPlugin optPlugin = TablePluginManager.getInstance().getOneOptPlugin(table.getGameId(),this.getActionType());
         optPlugin.doOperation(table,response,roleId,stepStatusData);
 
-        NetGame.NetOprateData.Builder retOperaData = NetGame.NetOprateData.newBuilder();
-        retOperaData.setOtype(this.getActionType());
-        retOperaData.setUid(roleId);
-        retOperaData.setDval(table.getChairByUid(roleId).getHandsContainer().getHandCards().size());
-        NetGame.NetOprateData other = retOperaData.build();
+        int handsCount = chairInfo.getHandsContainer().getHandCards().size();
+        NetGame.NetOprateData.Builder turnData = ProbuffTool.getTurnData(roleId,handsCount,table.getTimeOutRemain());
+
+        NetGame.NetOprateData other = turnData.build();
         for(int i = 0;i<table.getChairs().length;i++){
-            MjChairInfo chairInfo = table.getChairs()[i];
+            chairInfo = table.getChairs()[i];
             if(chairInfo.getId() == roleId){
                 continue;
             }
             table.addMsgQueue(chairInfo.getId(),other,0);
         }
 
-        retOperaData.setDval(stepStatusData.getCards().get(0));
-        table.addMsgQueue(roleId,retOperaData.build(),0);
+        turnData.setDval(stepStatusData.getCards().get(0));
+        table.addMsgQueue(roleId,turnData.build(),0);
     }
 
     @Override

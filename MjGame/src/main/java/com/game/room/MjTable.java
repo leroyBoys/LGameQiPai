@@ -6,6 +6,7 @@ import com.game.core.factory.TableProducer;
 import com.game.core.room.GameOverType;
 import com.game.core.room.BaseTableVo;
 import com.game.socket.module.UserVistor;
+import com.game.util.ProbuffTool;
 import com.lgame.util.comm.RandomTool;
 import com.module.core.ResponseCode;
 import com.module.net.NetGame;
@@ -69,7 +70,8 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
         extra.addList(this.getCardPool().getRemainCount());
         extra.addList(this.getCardPool().getAllSize());
 
-        extra.addOperates(this.getTurnData());
+        int uid = getFocusIdex() == -1?0:getChairs()[getFocusIdex()].getId();
+        extra.addOperates(ProbuffTool.getTurnData(uid,0,this.getTimeOutRemain()));
 
         NetGame.NetOprateData.Builder netOprateData = getStatusData().getCanDoDatas(this,roleId);
         if(netOprateData != null){
@@ -78,6 +80,7 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
             netOprateData.addKvDatas(kvData);
             extra.addOperates(netOprateData);
         }
+
         NetGame.NetOprateData.Builder details = getStatusData().getStatusDetail(this);
         if(details!=null){
             details.setOtype(getStatus().getAction().getActionType());

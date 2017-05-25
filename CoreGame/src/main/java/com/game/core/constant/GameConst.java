@@ -100,6 +100,10 @@ public class GameConst {
             return monthNum[num - 1];
         }
 
+
+        /** 麻将游戏内倒计时（毫秒 ） **/
+        public static final int MJ_WAIT_SECONDS = 10*1000;
+
     }
 
     public static class Item {

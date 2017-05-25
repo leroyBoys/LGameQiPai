@@ -5,12 +5,8 @@ import com.game.core.config.PluginGen;
 import com.game.core.room.BaseTableVo;
 import com.game.core.room.PayDetail;
 import com.game.room.status.StepGameStatusData;
-import com.logger.type.LogType;
 import com.lsocket.message.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +15,7 @@ import java.util.List;
  * 2017/5/11.
  */
 public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOptPlugin<A,StepGameStatusData> {
-    protected Logger playLog = LoggerFactory.getLogger(LogType.Play.getLogName());
+  //  protected Logger playLog = LoggerFactory.getLogger(LogType.Play.getLogName());
     protected PluginGen pluginGen;
 
     @Override
@@ -50,7 +46,7 @@ public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOp
      *
      * 0自摸所有人支付，1点炮的人支付
      * */
-    public PayDetail payment(StepGameStatusData action) {
+    public PayDetail payment(StepGameStatusData stepGameStatusData) {
         String str = getPlugin().getEffectStr();
         if (str == null || str.equals(""))
             return null;

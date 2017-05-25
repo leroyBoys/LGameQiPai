@@ -4,8 +4,10 @@ import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
 import com.game.room.MjAutoCacheHandContainer;
+import com.game.room.MjChairInfo;
 import com.game.room.MjHandCardsContainer;
 import com.game.room.MjTable;
+import com.game.room.action.SuperGameStatusData;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
@@ -22,8 +24,12 @@ public class MoPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
     }
 
     @Override
-    public void createCanExecuteAction(BaseTableVo room) {
-
+    public void createCanExecuteAction(BaseTableVo table) {
+        SuperGameStatusData statusData = (SuperGameStatusData) table.getStatusData();
+        MjChairInfo chairInfo = (MjChairInfo) table.getChairs()[table.getFocusIdex()];
+        statusData.checkGang(chairInfo,0);
+        statusData.checkHu(chairInfo,0);
+        statusData.checkDa(chairInfo,0);
     }
 
     @Override
