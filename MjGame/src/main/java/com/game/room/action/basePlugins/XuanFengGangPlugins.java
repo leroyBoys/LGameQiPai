@@ -38,11 +38,6 @@ public class XuanFengGangPlugins<T extends MjTable> extends AnGangGangPlugins<T>
     }
 
     @Override
-    public void createCanExecuteAction(BaseTableVo room) {
-
-    }
-
-    @Override
     public XuanFengGangPlugins createNew() {
         return new XuanFengGangPlugins();
     }

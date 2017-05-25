@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction{
     @Override
-    public boolean checkExecute(BaseChairInfo chair, int cNum, Object parems) {
+    public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
         StepGameStatusData lastStep = (StepGameStatusData) chair.getTableVo().getStepHistoryManager().getLastStep();
         int fromId = lastStep.getUid();
 
@@ -31,20 +31,19 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
         Map<Integer, Integer> countMap =  mjAutoCache.getCardNumMap();
 
         int step = chair.getTableVo().getStep();
-        check(gameStatusData,countMap,cNum-2,cNum - 1,cNum,fromId,chair.getId(),step);
-        check(gameStatusData,countMap,cNum-1,cNum,cNum + 1,fromId,chair.getId(),step);
-        check(gameStatusData,countMap,cNum,cNum + 1,cNum + 2,fromId,chair.getId(),step);
+        check(gameStatusData,countMap,card-2,card - 1,fromId,chair.getId(),step);
+        check(gameStatusData,countMap,card-1,card + 1,fromId,chair.getId(),step);
+        check(gameStatusData,countMap,card + 1,card + 2,fromId,chair.getId(),step);
         return false;
     }
 
-    private void check(SuperGameStatusData gameStatusData,Map<Integer, Integer> countMap,int cardFirst,int cardSecond,int cardThree,int fromId,int roleId,int step){
+    private void check(SuperGameStatusData gameStatusData,Map<Integer, Integer> countMap,int cardFirst,int cardSecond,int fromId,int roleId,int step){
         if (!countMap.containsKey(cardFirst) || !countMap.containsKey(cardSecond)) {
             return;
         }
 
         StepGameStatusData stepGameStatusData = new StepGameStatusData(ChiAction.getInstance(),fromId,roleId,cardFirst,this);
         stepGameStatusData.setCard(cardSecond);
-        stepGameStatusData.setCard(cardThree);
         gameStatusData.addCanDoDatas(step,stepGameStatusData);
     }
 
@@ -66,21 +65,15 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
     @Override
     public boolean doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
         MjChairInfo chair = table.getChairByUid(roleId);
-        StepGameStatusData lastStep = (StepGameStatusData) chair.getTableVo().getStepHistoryManager().getLastStep(-2);
 
         List<Integer> cards = new LinkedList<>();
-        final int lastCard = lastStep.getCards().get(0);
         for(Integer card:stepGameStatusData.getCards()){
             cards.add(card);
-            if(card == lastCard){
-                continue;
-            }
-
             chair.getHandsContainer().removeCardFromHand(card,1);
         }
 
         MjCardPoolEngine mjCardPoolEngine = table.getCardPool();
-        mjCardPoolEngine.removeLastCard();
+        cards.add(mjCardPoolEngine.removeLastCard());
 
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
         createCanExecuteAction(table);

@@ -22,14 +22,12 @@ public abstract class GameOperateAction<T extends MjTable> {
         NetGame.NetOprateData.Builder retOperaData = NetGame.NetOprateData.newBuilder();
         retOperaData.setOtype(this.getActionType());
         retOperaData.setUid(roleId);
-
+        retOperaData.setDval(stepStatusData.getCards().get(0));
         ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),this.getActionType());
         for(int i= 0;i<optPlugins.size();i++){
-            IOptPlugin optPlugin = optPlugins.get(i);
-            if(!optPlugin.doOperation(table,response,roleId,stepStatusData)){
+            if(!optPlugins.get(i).doOperation(table,response,roleId,stepStatusData)){
                 continue;
             }
-            retOperaData.addDlist(optPlugin.getPlugin().getSubType());
         }
 
         table.addMsgQueueAll(retOperaData.build(),response==null?0:response.getSeq());

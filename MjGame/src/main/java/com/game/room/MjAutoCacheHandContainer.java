@@ -50,6 +50,9 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
             }
             cards.add(card);
         }
+
+
+
         super.reLoad(hands);
     }
 

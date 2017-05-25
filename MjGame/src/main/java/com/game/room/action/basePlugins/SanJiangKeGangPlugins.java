@@ -48,11 +48,6 @@ public class SanJiangKeGangPlugins<T extends MjTable> extends AnGangGangPlugins<
     }
 
     @Override
-    public void createCanExecuteAction(BaseTableVo room) {
-
-    }
-
-    @Override
     public SanJiangKeGangPlugins createNew() {
         return new SanJiangKeGangPlugins();
     }

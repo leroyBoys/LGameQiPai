@@ -30,15 +30,18 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
     public void createCanExecuteAction(BaseTableVo table) {
         SuperGameStatusData statusData = (SuperGameStatusData) table.getStatusData();
 
+        StepGameStatusData lastStep = (StepGameStatusData)table.getStepHistoryManager().getLastStep();
+        int card = lastStep.getCards().get(0);
+
         for(int i = 0;i<table.getChairs().length;i++){
             if(i == table.getFocusIdex()){
                 continue;
             }
             MjChairInfo chairInfo = (MjChairInfo) table.getChairs()[i];
-            statusData.checkGang(chairInfo,0);
-            statusData.checkChi(chairInfo,0);
-            statusData.checkPeng(chairInfo,0);
-            statusData.checkHu(chairInfo,0);
+            statusData.checkGang(chairInfo,card);
+            statusData.checkChi(chairInfo,card);
+            statusData.checkPeng(chairInfo,card);
+            statusData.checkHu(chairInfo,card);
         }
 
         statusData.checkMo(table);
