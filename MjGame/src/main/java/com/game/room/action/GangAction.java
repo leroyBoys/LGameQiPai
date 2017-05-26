@@ -5,6 +5,9 @@ import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
 import com.game.room.MjChairInfo;
+import com.game.room.MjTable;
+import com.game.room.status.StepGameStatusData;
+import com.lsocket.message.Response;
 
 import java.util.ArrayList;
 
@@ -39,6 +42,12 @@ public class GangAction extends GameOperateAction {
                 }
             }
         }
+    }
+
+    @Override
+    protected void doAction(MjTable table, Response response, int roleId, StepGameStatusData stepStatusData) {
+        super.doAction(table, response, roleId, stepStatusData);
+        table.getChairByUid(roleId).resetPassCard();
     }
 
     @Override

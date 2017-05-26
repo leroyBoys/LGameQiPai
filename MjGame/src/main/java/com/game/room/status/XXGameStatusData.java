@@ -20,6 +20,26 @@ public class XXGameStatusData extends SuperGameStatusData {
     }
 
     protected HuAction.CheckHuType checkCanHu(MjChairInfo chairInfo, int card){
-        return HuAction.CheckHuType.NULL;
+        if(!chairInfo.isCanDo()){
+            return HuAction.CheckHuType.NULL;
+        }
+        return HuAction.CheckHuType.Hu;
+    }
+
+    @Override
+    protected boolean checkCanPeng(MjChairInfo chairInfo, int card) {
+        if(!chairInfo.isCanDo()){
+            return false;
+        }
+
+        return super.checkCanPeng(chairInfo, card);
+    }
+
+    @Override
+    protected boolean checkCanGang(MjChairInfo chairInfo, int card) {
+        if(!chairInfo.isCanDo()){
+            return false;
+        }
+        return super.checkCanGang(chairInfo, card);
     }
 }

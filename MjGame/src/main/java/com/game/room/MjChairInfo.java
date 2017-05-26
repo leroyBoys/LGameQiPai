@@ -10,6 +10,8 @@ public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContaine
     private int score;
     /** 数值 */
     private int yapaoNum = -1;
+    /** 过牌的对应值，用于过手碰杠胡  */
+    private int passCard;
 
     public MjChairInfo(int uid, MjTable baseTableVo) {
         super(baseTableVo,MjChairStatus.Idle);
@@ -29,6 +31,7 @@ public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContaine
     @Override
     public void clean() {
         yapaoNum = -1;
+        resetPassCard();
         getHandsContainer().cleanHands();
     }
 
@@ -46,6 +49,28 @@ public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContaine
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public int getPassCard() {
+        return passCard;
+    }
+
+    public void setPassCard(int passCard) {
+        this.passCard = passCard;
+    }
+
+    /**
+     * 是否可以吃碰杠胡
+     * @return
+     */
+    public boolean isCanDo(){
+        return passCard == 0;
+    }
+
+    public void resetPassCard(){
+        if(passCard > 0){
+            passCard = 0;
+        }
     }
 
     public void setYapaoNum(int yapaoNum) {

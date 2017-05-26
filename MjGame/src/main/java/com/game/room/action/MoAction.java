@@ -33,6 +33,7 @@ public class MoAction extends GameOperateAction {
     protected void doAction(MjTable table, Response response, int roleId,StepGameStatusData stepStatusData) {
         MjChairInfo chairInfo = table.getChairByUid(roleId);
         table.setFocusIdex(chairInfo.getIdx());
+        chairInfo.resetPassCard();
         table.setTimeOutTime(GameConst.Time.MJ_WAIT_SECONDS+ TimeCacheManager.getInstance().getCurTime());
 
         IOptPlugin optPlugin = TablePluginManager.getInstance().getOneOptPlugin(table.getGameId(),this.getActionType());
