@@ -4,18 +4,20 @@ import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.card.AutoCacheHandContainer;
 import com.game.room.status.StepGameStatusData;
+import com.lgame.util.json.JsonTool;
+import com.logger.type.LogType;
 import com.module.net.NetGame;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by leroy:656515489@qq.com
  * 2017/5/24.
  */
 public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
+
     ////每个单牌最大数量
     private final static int EVERYMAXCOUNT = 4;
 
@@ -112,12 +114,17 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
 
     @Override
     public void removeCard(int card, int num) {
+        playLog.info("remove:card:"+card+"  num:"+num);
+        toJson();
+
         if(!addCards.isEmpty()){
             Iterator<Integer> ites = addCards.iterator();
             while (ites.hasNext()){
                 if(ites.next()==card){
                     ites.remove();
                     if(--num == 0){
+
+                        playLog.info("return:"+num);
                         return;
                     }
                 }
@@ -126,8 +133,11 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
 
         Integer curNum = cardNumMap.get(card);
         if(curNum == null){
+
+            playLog.info("not conain:"+card);
             return;
         }
+
 
         cardCounts[curNum]--;
         curNum = curNum-num;
@@ -137,6 +147,9 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
         }else {
             cardNumMap.remove(card);
         }
+
+        String str = "=====>cache:"+ Arrays.toString(getCardCounts())+" cards-num:"+ JsonTool.getJsonFromBean(getCardNumMap());
+        playLog.info(str);
     }
 
     protected void addNewCard(int card) {
@@ -189,4 +202,14 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
         return num;
     }
 
+
+    public int[] getCardCounts() {
+        return cardCounts;
+    }
+
+    public String toJson(){
+        String str = "cache:"+ Arrays.toString(getCardCounts())+" cards-num:"+ JsonTool.getJsonFromBean(getCardNumMap());
+        playLog.info(str);
+        return str;
+    }
 }

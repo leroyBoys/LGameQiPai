@@ -3,7 +3,11 @@ package com.game.room.status;
 import com.game.core.config.IOptPlugin;
 import com.game.core.room.BaseGameStateData;
 import com.game.room.action.GameOperateAction;
+import com.logger.type.LogType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,6 +16,7 @@ import java.util.List;
  * 2017/4/27.
  */
 public class StepGameStatusData {
+    protected static  final Logger playLog = LoggerFactory.getLogger(LogType.Play.getLogName());
     private final IOptPlugin iOptPlugin;
     private final int fromId;
     private final int uid;
@@ -77,5 +82,9 @@ public class StepGameStatusData {
 
     public int getUid() {
         return uid;
+    }
+
+    public void toJson(){
+        playLog.info(action==null?"":action.getClass().getSimpleName()+":cards:"+ Arrays.toString(cards.toArray())+"  subType:"+(iOptPlugin==null?0:iOptPlugin.getPlugin().getSubType())+" /fromId"+fromId+" uid:"+uid);
     }
 }

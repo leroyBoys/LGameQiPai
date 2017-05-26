@@ -3,6 +3,7 @@ package com.game.room.action.basePlugins;
 import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
+import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjChairInfo;
 import com.game.room.MjHandCardsContainer;
@@ -44,7 +45,7 @@ public class MoPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
         table.getChairByUid(roleId).getHandsContainer().addHandCards(card);
         stepGameStatusData.setCard(card);
 
-        playLog.info("  摸牌:"+card+":roleId:"+roleId+"+ size:"+table.getChairByUid(roleId).getHandsContainer().getHandCards().size()+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
+        MJLog.play("摸牌",card,roleId,table);
 
         createCanExecuteAction(table,stepGameStatusData);
         return true;

@@ -3,6 +3,7 @@ package com.game.room.action.plugins;
 import com.game.core.config.AbstractStagePlugin;
 import com.game.core.config.IOptPlugin;
 import com.game.core.room.BaseGameStateData;
+import com.game.log.MJLog;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.logger.log.SystemLogger;
@@ -40,7 +41,7 @@ public class XXYaPaoPlugins extends AbstractStagePlugin<MjTable> {
             table.getStatusData().setOver(true);
         }
 
-        playLog.info("yaPao:roleId:"+roleId+":"+oprateData.getDval());
+        MJLog.play("压跑",oprateData.getDval(),roleId,table);
         return true;
     }
 

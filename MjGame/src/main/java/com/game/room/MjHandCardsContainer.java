@@ -63,18 +63,19 @@ public class MjHandCardsContainer extends BaseHandCardsContainer {
     }
 
     public boolean removeCardFromHand(int card,int targeNum){
+        int num = targeNum;
         Iterator<Integer> it = this.getHandCards().iterator();
         while (it.hasNext()) {
-            if (it.next() == card && targeNum > 0) {
+            if (it.next() == card && num > 0) {
                 it.remove();
-                if(--targeNum == 0){
+                if(--num == 0){
                     break;
                 }
             }
         }
 
         autoCacheHandContainer.removeCard(card,targeNum);
-        return targeNum == 0;
+        return num == 0;
     }
 
 

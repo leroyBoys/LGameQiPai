@@ -3,6 +3,7 @@ package com.game.room.action.basePlugins;
 import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
+import com.game.log.MJLog;
 import com.game.room.*;
 import com.game.room.action.GangAction;
 import com.game.room.action.SuperGameStatusData;
@@ -96,7 +97,7 @@ public class BuGangPlugins<T extends MjTable> extends GangPlugins<T>{
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
         createCanExecuteAction(table,stepGameStatusData);
 
-        playLog.info("   补杠:"+cardNum+":roleId:"+roleId+" size:"+chair.getHandsContainer().getHandCards().size()+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
+        MJLog.play("补杠",cardNum,roleId,table);
         return true;
     }
 }

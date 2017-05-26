@@ -51,7 +51,6 @@ public abstract class BaseAction<T extends BaseTableVo> {
 
             table.flushMsgQueue();
         }
-
     }
 
     /**

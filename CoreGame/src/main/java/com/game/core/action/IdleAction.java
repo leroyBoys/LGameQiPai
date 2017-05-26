@@ -19,6 +19,13 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
     }
 
     @Override
+    public void initAction(T table) {
+        if(table.getCurChirCount() == 1){
+            super.initAction(table);
+        }
+    }
+
+    @Override
     public void doAction(T table, Response response, int roleId, NetGame.NetOprateData netOprateData) {
         this.ready(table,roleId);
     }
@@ -30,7 +37,6 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
             return;
         }
 
-        playLog.info("ready:roleId:"+roleId+"  size:"+readyStatus.getDoneSize());
         if(readyStatus.addDoneUid(roleId) == table.getChairs().length){
             readyStatus.setOver(true);
         }

@@ -43,8 +43,11 @@
         </encoder> 
     </appender>
 
-    <logger name="play" level="info">
+    <logger name="play" additivity="false" level="info">
         <appender-ref ref="playA" />
+    </logger>
+
+    <logger name="com.zaxxer.hikari.pool.HikariPool" additivity="false" level="info">
     </logger>
 <!--    <include resource="mongolog.xml"/>-->
     <root > 

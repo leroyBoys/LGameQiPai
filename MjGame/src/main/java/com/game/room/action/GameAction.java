@@ -1,5 +1,6 @@
 package com.game.room.action;
 
+import com.game.core.TableManager;
 import com.game.core.action.BaseAction;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.IPluginCheckCanExecuteAction;
@@ -7,6 +8,7 @@ import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.GameOverType;
+import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjChairInfo;
 import com.game.room.MjHandCardsContainer;
@@ -45,11 +47,14 @@ public class GameAction extends BaseAction<MjTable> {
         }
 
         if(table.getGameOverType() != GameOverType.NULL){
-            table.sendSettlementMsg(roleId);
+            table.getStatusData().setOver(true);
+            TableManager.getInstance().trigger(table.getId());
         }else {
             NetGame.NetOprateData.Builder netOprateDataBuild = table.getStatusData().getCanDoDatas(table,0);
 
-            playLog.info("send candoactions to roleId:"+roleId+"   "+netOprateDataBuild.toString());
+            playLog.info("发送操作指令 to roleId:"+roleId+"   "+netOprateDataBuild.toString());
+            MJLog.canDoActions(table);
+
             if(netOprateData != null){
                 NetGame.NetKvData.Builder kvData = NetGame.NetKvData.newBuilder();
                 kvData.setK(table.getStatus().getAction().getActionType());
@@ -62,7 +67,17 @@ public class GameAction extends BaseAction<MjTable> {
 
     @Override
     public void overAction(MjTable table) {
-        table.addRound(); //局数加一
+        if(table.getCurChirCount() == 1){
+            //扣card
+        }
+        //局数加一
+        if(table.addRound()){
+           table.setGameOverType(GameOverType.SingleOver);
+        }else {
+            table.setGameOverType(GameOverType.AllOver);
+        }
+
+        table.sendSettlementMsg(0);
     }
 
     @Override

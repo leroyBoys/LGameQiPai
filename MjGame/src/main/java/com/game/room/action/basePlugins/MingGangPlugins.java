@@ -3,6 +3,7 @@ package com.game.room.action.basePlugins;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
 import com.game.core.room.PayDetail;
+import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjCardPoolEngine;
 import com.game.room.MjChairInfo;
@@ -65,7 +66,7 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
 
         this.createCanExecuteAction(table,stepGameStatusData);
 
-        playLog.info("    明杠:"+lastCard+":roleId:"+roleId+" size:"+chair.getHandsContainer().getHandCards().size()+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
+        MJLog.play("明杠",lastCard,roleId,table);
         return true;
     }
 }

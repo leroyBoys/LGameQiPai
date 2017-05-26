@@ -2,6 +2,7 @@ package com.game.room.action.basePlugins;
 
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.PayDetail;
+import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjCardPoolEngine;
 import com.game.room.MjChairInfo;
@@ -54,7 +55,7 @@ public class PengPlugins<T extends MjTable> extends ChiPlugins<T>{
 
         PayDetail pay = payment(stepGameStatusData);
 
-        playLog.info("    碰:"+lastCard+":roleId:"+roleId+" size:"+chair.getHandsContainer().getHandCards().size()+ Arrays.toString(chair.getHandsContainer().getHandCards().toArray()));
+        MJLog.play("碰",lastCard,roleId,table);
 
         this.createCanExecuteAction(table,stepGameStatusData);
 

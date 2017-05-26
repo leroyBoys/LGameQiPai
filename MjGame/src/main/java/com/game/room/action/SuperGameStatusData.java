@@ -7,6 +7,7 @@ import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseGameStateData;
 import com.game.core.room.BaseTableVo;
+import com.game.core.room.GameOverType;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.game.room.action.*;
@@ -48,6 +49,7 @@ public class SuperGameStatusData extends BaseGameStateData {
 
         if(table.isGameOver()){
             GameOverAction.getInstance().doAction(table,null,0,null);
+            table.setGameOverType(GameOverType.SingleOver);
             return;
         }
 
@@ -148,7 +150,7 @@ public class SuperGameStatusData extends BaseGameStateData {
                     wight1 = getIdexWeight(table,table.getChairByUid(o1.getUid()).getIdx());
                     wight2 = getIdexWeight(table,table.getChairByUid(o2.getUid()).getIdx());
                 }
-                return wight1.compareTo(wight2);
+                return wight2.compareTo(wight1);
             }
         });
     }
@@ -299,5 +301,13 @@ public class SuperGameStatusData extends BaseGameStateData {
             firstMatch.setCards(netOprateData.getDlistList());
         }
         firstMatch.getAction().doAction(table,response,roleId,firstMatch);
+    }
+
+    public void toJson(){
+        Iterator<StepGameStatusData> ites = canDoDatas.iterator();
+        while (ites.hasNext()){
+            StepGameStatusData tmp = ites.next();
+            tmp.toJson();
+        }
     }
 }

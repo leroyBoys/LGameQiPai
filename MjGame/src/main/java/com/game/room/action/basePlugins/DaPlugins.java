@@ -3,6 +3,7 @@ package com.game.room.action.basePlugins;
 import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
+import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjCardPoolEngine;
 import com.game.room.MjChairInfo;
@@ -44,7 +45,7 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
             statusData.checkHu(chairInfo,card);
         }
 
-        statusData.checkMo(table,stepGameStatusData.getUid());
+        statusData.checkMo(table,table.getChairs()[table.nextFocusIndex(table.getFocusIdex())].getId());
     }
 
     @Override
@@ -54,9 +55,10 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
 
         MjCardPoolEngine poolEngine = table.getCardPool();
         poolEngine.playOutCard(roleId,removeCard);
+        MJLog.play("打",removeCard,roleId,table);
+
         this.createCanExecuteAction(table,stepGameStatusData);
 
-        playLog.info("    打:"+removeCard+":roleId:"+roleId+"  size:"+table.getChairByUid(roleId).getHandsContainer().getHandCards().size()+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
         return true;
     }
 

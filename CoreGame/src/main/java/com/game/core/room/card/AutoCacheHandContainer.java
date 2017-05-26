@@ -1,5 +1,9 @@
 package com.game.core.room.card;
 
+import com.logger.type.LogType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 
 /**
@@ -7,6 +11,7 @@ import java.util.*;
  * 2017/5/24.
  */
 public abstract class AutoCacheHandContainer {
+    protected static  final Logger playLog = LoggerFactory.getLogger(LogType.Play.getLogName());
     protected volatile boolean isChange = true;
     protected List<Integer> addCards = new LinkedList<>();
 

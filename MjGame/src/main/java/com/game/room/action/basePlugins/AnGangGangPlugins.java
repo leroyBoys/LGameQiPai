@@ -2,6 +2,7 @@ package com.game.room.action.basePlugins;
 
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
+import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjChairInfo;
 import com.game.room.MjHandCardsContainer;
@@ -80,7 +81,7 @@ public class AnGangGangPlugins<T extends MjTable> extends GangPlugins<T>{
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
         createCanExecuteAction(table,stepGameStatusData);
 
-        playLog.info("   暗杠:"+cardNum+":roleId:"+roleId+" size:"+chair.getHandsContainer().getHandCards().size()+ Arrays.toString(chair.getHandsContainer().getHandCards().toArray()));
+        MJLog.play("暗杠：",cardNum,roleId,table);
         return true;
     }
 

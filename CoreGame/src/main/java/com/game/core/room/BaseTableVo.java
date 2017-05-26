@@ -322,7 +322,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
             return true;
         }
 
-        return all>= curRount;
+        return all> curRount;
     }
 
     public int nextFocusIndex(int focsIndex) {
