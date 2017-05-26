@@ -13,7 +13,6 @@ import java.util.List;
  * 2017/4/21.
  */
 public class MjHandCardsContainer extends BaseHandCardsContainer {
-    private LinkedList<Integer> outCards = new LinkedList<>();
     protected MjAutoCacheHandContainer autoCacheHandContainer = new MjAutoCacheHandContainer();
 
     /** type-groupCard */
@@ -23,14 +22,6 @@ public class MjHandCardsContainer extends BaseHandCardsContainer {
 
     /** 胡 */
     private LinkedList<Integer> huCards = new LinkedList<>();
-
-    public void out(int card){
-        outCards.add(card);
-    }
-
-    public int removeLast(){
-       return outCards.removeLast();
-    }
 
     /**
      * 杠吃
@@ -60,7 +51,6 @@ public class MjHandCardsContainer extends BaseHandCardsContainer {
     @Override
     public void cleanHands() {
         super.cleanHands();
-        outCards.clear();
         chiGangList.clear();
         huCards.clear();
         pengList.clear();
@@ -89,9 +79,6 @@ public class MjHandCardsContainer extends BaseHandCardsContainer {
 
 
     /////////////////////////////////////////
-    public LinkedList<Integer> getOutCards() {
-        return outCards;
-    }
 
     public List<GroupCard> getChiGangList() {
         return chiGangList;

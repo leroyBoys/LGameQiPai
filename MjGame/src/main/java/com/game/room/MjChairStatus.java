@@ -1,6 +1,6 @@
 package com.game.room;
 
-import com.game.core.room.BaseChairStatus;
+import com.game.core.room.interfaces.BaseChairStatus;
 
 /**
  * Created by leroy:656515489@qq.com

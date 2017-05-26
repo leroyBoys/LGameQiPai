@@ -53,12 +53,9 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
         }
 
         MjChairInfo chair = table.getChairByUid(roleId);
-        StepGameStatusData lastStep = (StepGameStatusData) chair.getTableVo().getStepHistoryManager().getLastStep(-2);
-
         MjCardPoolEngine mjCardPoolEngine = table.getCardPool();
-        mjCardPoolEngine.removeLastCard();
 
-        final int lastCard = lastStep.getCards().get(0);
+        final int lastCard = mjCardPoolEngine.removeLastCard();
         chair.getHandsContainer().removeCardFromHand(lastCard,3);
         List<Integer> cards = new LinkedList<>();
         cards.add(lastCard);

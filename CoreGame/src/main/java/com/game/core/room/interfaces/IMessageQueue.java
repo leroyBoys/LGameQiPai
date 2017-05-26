@@ -1,4 +1,4 @@
-package com.game.core.room;
+package com.game.core.room.interfaces;
 
 import java.util.List;
 

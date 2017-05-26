@@ -1,6 +1,7 @@
 package com.game.core.room;
 
 import com.game.core.room.card.BaseHandCardsContainer;
+import com.game.core.room.interfaces.BaseChairStatus;
 
 /**
  * Created by leroy:656515489@qq.com

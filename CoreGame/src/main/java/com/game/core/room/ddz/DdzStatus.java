@@ -3,7 +3,7 @@ package com.game.core.room.ddz;
 import com.game.core.action.BaseAction;
 import com.game.core.action.ddz.DdzIdleAction;
 import com.game.core.action.ddz.FaPaiAction;
-import com.game.core.room.BaseGameState;
+import com.game.core.room.interfaces.BaseGameState;
 import com.game.core.room.BaseGameStateData;
 
 import static com.game.core.room.SuperCreateNew.CreateNewCache.create;

@@ -14,7 +14,7 @@ import java.util.List;
  * Created by leroy:656515489@qq.com
  * 2017/5/11.
  */
-public class AbstractStagePlugin<A extends BaseTableVo> implements IOptPlugin<A,NetGame.NetOprateData > {
+public class AbstractStagePlugin<A extends BaseTableVo> implements IOptPlugin<A,NetGame.NetOprateData> {
     protected Logger playLog = LoggerFactory.getLogger(LogType.Play.getLogName());
     private PluginGen pluginGen;
 

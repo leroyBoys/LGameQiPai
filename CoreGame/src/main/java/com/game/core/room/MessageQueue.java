@@ -1,5 +1,6 @@
 package com.game.core.room;
 
+import com.game.core.room.interfaces.IMessageQueue;
 import com.game.socket.module.UserVistor;
 import com.module.net.NetGame;
 

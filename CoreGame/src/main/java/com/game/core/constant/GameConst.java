@@ -22,6 +22,8 @@ public class GameConst {
     /**  斗地主module */
     public static final int MOUDLE_Ddz = 12;
 
+    /** 游戏结束检测  */
+    public static final int ACTION_TYPE_GAMEOVER = 0;
     /**  准备阶段 */
     public static final int ACTION_TYPE_READY= 4;
     /**  发牌 */
@@ -61,12 +63,21 @@ public class GameConst {
 
     }
 
+    /**
+     * 权重
+     */
     public static class Weight{
         public static final int CHI = 1<<2;
         public static final int PENG = CHI<<1;
         public static final int GANG = PENG<<1;
         public static final int HU_TING = GANG<<1;
     }
+
+    public static class XXMjType{
+        public static final int SIFENG = 1;
+
+    }
+
 
 
     /**

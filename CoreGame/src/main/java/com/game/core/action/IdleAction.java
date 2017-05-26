@@ -1,8 +1,7 @@
 package com.game.core.action;
 
 import com.game.core.constant.GameConst;
-import com.game.core.room.BaseChairInfo;
-import com.game.core.room.BaseChairStatus;
+import com.game.core.room.interfaces.BaseChairStatus;
 import com.game.core.room.BaseGameStateData;
 import com.game.core.room.BaseTableVo;
 import com.lsocket.message.Response;

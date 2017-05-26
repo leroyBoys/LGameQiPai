@@ -1,4 +1,4 @@
-package com.game.core.room.card;
+package com.game.core.room.interfaces;
 
 import java.util.List;
 
@@ -25,4 +25,6 @@ public interface ICardPoolEngine<C> {
      * @return
      */
     public int getAllSize();
+
+    public void setUserSetStaticCardPool(List<C> userSetStaticCardPool);
 }

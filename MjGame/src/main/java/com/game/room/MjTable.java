@@ -5,6 +5,7 @@ import com.game.core.constant.GameConst;
 import com.game.core.factory.TableProducer;
 import com.game.core.room.GameOverType;
 import com.game.core.room.BaseTableVo;
+import com.game.room.util.MJTool;
 import com.game.socket.module.UserVistor;
 import com.game.util.ProbuffTool;
 import com.lgame.util.comm.RandomTool;
@@ -135,7 +136,10 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     protected final NetGame.NetKvData getOutCard(MjChairInfo mjChairInfo){
         NetGame.NetKvData.Builder netKvData = NetGame.NetKvData.newBuilder();
         netKvData.setK(1);
-        netKvData.addAllDlist(mjChairInfo.getHandsContainer().getOutCards());
+        List<Integer> outCards = ((MjCardPoolEngine)this.getCardPool()).getOutPool(mjChairInfo.getId());
+        if(outCards != null && !outCards.isEmpty()){
+            netKvData.addAllDlist(outCards);
+        }
         return netKvData.build();
     }
 
@@ -216,9 +220,22 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
         this.setMaxFan(maxRate);
         this.setType(type);
 
+        if((type & GameConst.XXMjType.SIFENG) == GameConst.XXMjType.SIFENG){
+            cardPoolEngine.setUserSetStaticCardPool(MJTool.SIFENGPOOL);
+        }
 
         return ResponseCode.Error.succ;
     }
+
+
+    public boolean isGameOver() {
+        if((type & GameConst.XXMjType.SIFENG) == GameConst.XXMjType.SIFENG){
+            return getCardPool().getRemainCount() == 10;
+        }
+
+        return getCardPool().getRemainCount() == 0;
+    }
+
 
     @Override
     protected void sendSettlementDetailMsg(int roleId) {
@@ -256,7 +273,13 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
         }
         return yaPao;
     }
-    /////////////////////////////////////////////////////////////
+    ///////////////////胡牌判断//////////////////////////////////////////
+    public boolean checkQYiSe(List<Integer> handCards, List groupCards) {
+        return MJTool.oneCorlor(handCards,groupCards);
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////
     public int getBankId() {
         return bankId;
     }
@@ -289,6 +312,5 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     public void setNextBankerUid(int nextBankerUid) {
         this.nextBankerUid = nextBankerUid;
     }
-
 
 }

@@ -2,7 +2,7 @@ package com.game.core.room.card;
 
 import com.game.core.config.RoomSetting;
 import com.game.core.config.TablePluginManager;
-import com.game.core.room.card.ICardPoolEngine;
+import com.game.core.room.interfaces.ICardPoolEngine;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class BaseCardPoolEngine<C> implements ICardPoolEngine<C> {
 
     @Override
     public void shuffle() {
-        System.out.println("==========must overwrite this");
+        throw new RuntimeException("==========must overwrite this at:"+this.getClass().getName());
     }
 
     @Override

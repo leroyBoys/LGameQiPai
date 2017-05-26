@@ -1,7 +1,7 @@
 package com.game.room;
 
 import com.game.core.action.BaseAction;
-import com.game.core.room.BaseGameState;
+import com.game.core.room.interfaces.BaseGameState;
 import com.game.core.room.BaseGameStateData;
 import com.game.room.action.*;
 import com.game.room.status.XXGameStatusData;

@@ -6,7 +6,9 @@ import com.game.core.action.BaseAction;
 import com.game.core.constant.GameConst;
 import com.game.core.factory.TableProducer;
 import com.game.core.room.card.BaseCardPoolEngine;
-import com.game.core.room.card.ICardPoolEngine;
+import com.game.core.room.interfaces.ICardPoolEngine;
+import com.game.core.room.interfaces.BaseChairStatus;
+import com.game.core.room.interfaces.BaseGameState;
 import com.game.manager.DBServiceManager;
 import com.game.manager.OnlineManager;
 import com.game.manager.TimeCacheManager;
@@ -327,6 +329,11 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
         focsIndex = ++focsIndex == this.getChairs().length ? 0 : focsIndex;
         return focsIndex;
     }
+
+    public boolean isGameOver() {
+        return getCardPool().getRemainCount() == 0;
+    }
+
     ///////////////////////////////////////////////////////////////////////
     public abstract int getGameResponseCmd();
 
