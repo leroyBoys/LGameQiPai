@@ -11,6 +11,7 @@ import com.game.room.action.SuperGameStatusData;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,7 +44,7 @@ public class MoPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
         table.getChairByUid(roleId).getHandsContainer().addHandCards(card);
         stepGameStatusData.setCard(card);
 
-        playLog.info("moPai:roleId:"+roleId+":card:"+card);
+        playLog.info("  摸牌:"+card+":roleId:"+roleId+"+ size:"+table.getChairByUid(roleId).getHandsContainer().getHandCards().size()+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
 
         createCanExecuteAction(table);
         return true;

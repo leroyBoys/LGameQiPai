@@ -34,17 +34,27 @@ public abstract class BaseHandCardsContainer {
 		AutoCacheHandContainer autoCacheHandContainer = getAutoCache();
 		if(autoCacheHandContainer != null){
 			autoCacheHandContainer.clear();
+			autoCacheHandContainer.reLoad(list);
 		}
 	}
 
 	/** 添加一张手牌*/
 	public void addHandCards(int card){
 		hands.add(card);
+		AutoCacheHandContainer autoCacheHandContainer = getAutoCache();
+		if(autoCacheHandContainer != null){
+			autoCacheHandContainer.addCard(card);
+		}
 	}
 
 	/** 添加多张手牌 */
 	public void addHandCards(List<Integer> list){
 		hands.addAll(list);
+
+		AutoCacheHandContainer autoCacheHandContainer = getAutoCache();
+		if(autoCacheHandContainer != null){
+			autoCacheHandContainer.addCard(list);
+		}
 	}
 
 	/** 清空手里的牌 */

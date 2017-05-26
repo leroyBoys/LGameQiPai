@@ -30,6 +30,29 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
         cardNumMap.clear();
     }
 
+    public void reLoad(List<Integer> hands){
+        if(hands.isEmpty()){
+            return;
+        }
+
+        for(int card:hands){
+            addNewCard(card);
+        }
+    }
+
+    private void refreshCardNumMap() {
+        if(addCards.isEmpty()){
+            return;
+        }
+
+        for(int card:addCards){
+            addNewCard(card);
+        }
+
+        addCards.clear();
+    }
+
+
     public void check(List<Integer> hands) {
     //    super.check(hands);
     }
@@ -143,18 +166,6 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
     public Map<Integer, Integer> getCardNumMap() {
         refreshCardNumMap();
         return cardNumMap;
-    }
-
-    private void refreshCardNumMap() {
-        if(addCards.isEmpty()){
-            return;
-        }
-
-        for(int card:addCards){
-            addNewCard(card);
-        }
-
-        addCards.clear();
     }
 
     public boolean containCard(int cardNum){

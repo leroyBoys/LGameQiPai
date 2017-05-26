@@ -15,7 +15,6 @@ public abstract class AutoCacheHandContainer {
     }
 
     public void reLoad(List<Integer> hands){
-
         isChange = false;
     }
 
@@ -27,6 +26,10 @@ public abstract class AutoCacheHandContainer {
 
     public void addCard(int card){
         addCards.add(card);
+    }
+
+    public void addCard(List<Integer> cards){
+        addCards.addAll(cards);
     }
 
     public abstract void removeCard(int card,int num);
