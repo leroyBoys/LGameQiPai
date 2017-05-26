@@ -25,26 +25,31 @@ public class SanJiangKeGangPlugins<T extends MjTable> extends AnGangGangPlugins<
     @Override
     protected boolean checkExecute(BaseChairInfo chair) {
         MjAutoCacheHandContainer mjAutoCache = (MjAutoCacheHandContainer) chair.getHandsContainer().getAutoCacheHands();
-        Map<Integer, Integer> countMap =  mjAutoCache.getCardNumMap();
-        if (!countMap.containsKey(45) || !countMap.containsKey(46) || !countMap.containsKey(47)){
+        if (!mjAutoCache.containCard(45) || !mjAutoCache.containCard(46) || !mjAutoCache.containCard(47)){
             return false;
         }
-        if((countMap.get(45)+countMap.get(46)+countMap.get(47))<4){
+        if((mjAutoCache.getCardCount(45)+mjAutoCache.getCardCount(46)+mjAutoCache.getCardCount(47))<4){
             return false;
         }
 
         SuperGameStatusData gameStatusData= (SuperGameStatusData) chair.getTableVo().getStatusData();
 
-        List<Integer> cards = mjAutoCache.getCardCountMap().get(2);
-        for(Integer card:cards){
-            if (card == 45 || card == 46||card == 47){
-                StepGameStatusData stepGameStatusData = new StepGameStatusData(GangAction.getInstance(),chair.getId(),chair.getId(),card,this);
-                stepGameStatusData.setCard(card);
-                gameStatusData.addCanDoDatas(chair.getTableVo().getStep(),stepGameStatusData);
-                continue;
-            }
-        }
+        final int step = chair.getTableVo().getStep();
+
+        checkCard(mjAutoCache,gameStatusData,45,chair.getId(),step);
+        checkCard(mjAutoCache,gameStatusData,46,chair.getId(),step);
+        checkCard(mjAutoCache,gameStatusData,47,chair.getId(),step);
         return true;
+    }
+
+    private void checkCard(MjAutoCacheHandContainer mjAutoCache,SuperGameStatusData gameStatusData,int card,int roleId,int step){
+        if(mjAutoCache.getCardCount(card) < 2){
+            return;
+        }
+
+        StepGameStatusData stepGameStatusData = new StepGameStatusData(GangAction.getInstance(),roleId,roleId,card,this);
+        stepGameStatusData.setCard(card);
+        gameStatusData.addCanDoDatas(step,stepGameStatusData);
     }
 
     @Override
@@ -58,41 +63,19 @@ public class SanJiangKeGangPlugins<T extends MjTable> extends AnGangGangPlugins<
             return false;
         }
 
-        int extraCardNum = stepGameStatusData.getCards().get(0);
-        int card45 = extraCardNum == 45?2:1;
-        int card46 = extraCardNum == 46?2:1;
-        int card47 = extraCardNum == 47?2:1;
-
         MjChairInfo chair = table.getChairByUid(roleId);
         MjHandCardsContainer handCardsContainer = chair.getHandsContainer();
-        Iterator<Integer> it = handCardsContainer.getHandCards().iterator();
-        while (it.hasNext()) {
-            int cardNum = it.next();
-            if(cardNum < 45){
-                continue;
-            }
 
-            if(cardNum == 45){
-                if(card45 > 0){
-                    it.remove();
-                    card45--;
-                }
-            }else if(cardNum == 46){
-                if(card46 > 0){
-                    it.remove();
-                    card46--;
-                }
-            }else if(cardNum == 47){
-                if(card47 > 0){
-                    it.remove();
-                    card47--;
-                }
-            }
-        }
+        int extraCardNum = stepGameStatusData.getCards().get(0);
+        handCardsContainer.removeCardFromHand(45, extraCardNum == 45?2:1);
+        handCardsContainer.removeCardFromHand(46, extraCardNum == 46?2:1);
+        handCardsContainer.removeCardFromHand(47, extraCardNum == 47?2:1);
 
         List<Integer> cards = new LinkedList<>();
         cards.add(extraCardNum);
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
+
+        createCanExecuteAction(table);
         return true;
     }
 

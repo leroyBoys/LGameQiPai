@@ -48,7 +48,7 @@ public class FaPaiAction extends BaseAction<MjTable> {
             kvData.setV(chairInfo.getHandsContainer().getHandCards().size());
             handNumList.add(kvData.build());
 
-            playLog.info("fapai:roleId:"+chairInfo.getId()+":"+ Arrays.toString(chairInfo.getHandsContainer().getHandCards().toArray()));
+            playLog.info("   发牌:roleId:"+chairInfo.getId()+":size:"+chairInfo.getHandsContainer().getHandCards().size()+ Arrays.toString(chairInfo.getHandsContainer().getHandCards().toArray()));
         }
 
 

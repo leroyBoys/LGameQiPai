@@ -35,13 +35,12 @@ public class BuGangPlugins<T extends MjTable> extends GangPlugins<T>{
         }
 
         MjAutoCacheHandContainer mjAutoCache = (MjAutoCacheHandContainer) mjHandCardsContainer.getAutoCacheHands();
-        Map<Integer, Integer> cardNumMap =  mjAutoCache.getCardNumMap();
 
         SuperGameStatusData gameStatusData= (SuperGameStatusData) chair.getTableVo().getStatusData();
         boolean isMatch = false;
         for(GroupCard goup:pengGoups){
             int cardNum = goup.getCards().get(0);
-            if(!cardNumMap.containsKey(cardNum)){
+            if(!mjAutoCache.containCard(cardNum)){
                 continue;
             }
 
@@ -97,7 +96,7 @@ public class BuGangPlugins<T extends MjTable> extends GangPlugins<T>{
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
         createCanExecuteAction(table);
 
-        playLog.info("bugang:roleId:"+roleId+" card:"+cardNum+" "+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
+        playLog.info("   补杠:"+cardNum+":roleId:"+roleId+" size:"+chair.getHandsContainer().getHandCards().size()+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
         return true;
     }
 }

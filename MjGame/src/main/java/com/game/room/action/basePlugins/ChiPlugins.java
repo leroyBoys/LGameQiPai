@@ -29,17 +29,16 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
 
         MjAutoCacheHandContainer mjAutoCache = (MjAutoCacheHandContainer) chair.getHandsContainer().getAutoCacheHands();
         SuperGameStatusData gameStatusData= (SuperGameStatusData) chair.getTableVo().getStatusData();
-        Map<Integer, Integer> countMap =  mjAutoCache.getCardNumMap();
 
         int step = chair.getTableVo().getStep();
-        check(gameStatusData,countMap,card-2,card - 1,fromId,chair.getId(),step);
-        check(gameStatusData,countMap,card-1,card + 1,fromId,chair.getId(),step);
-        check(gameStatusData,countMap,card + 1,card + 2,fromId,chair.getId(),step);
+        check(gameStatusData,mjAutoCache,card-2,card - 1,fromId,chair.getId(),step);
+        check(gameStatusData,mjAutoCache,card-1,card + 1,fromId,chair.getId(),step);
+        check(gameStatusData,mjAutoCache,card + 1,card + 2,fromId,chair.getId(),step);
         return false;
     }
 
-    private void check(SuperGameStatusData gameStatusData,Map<Integer, Integer> countMap,int cardFirst,int cardSecond,int fromId,int roleId,int step){
-        if (!countMap.containsKey(cardFirst) || !countMap.containsKey(cardSecond)) {
+    private void check(SuperGameStatusData gameStatusData,MjAutoCacheHandContainer mjAutoCache,int cardFirst,int cardSecond,int fromId,int roleId,int step){
+        if (!mjAutoCache.containCard(cardFirst) || !mjAutoCache.containCard(cardSecond)) {
             return;
         }
 
@@ -79,7 +78,7 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
         createCanExecuteAction(table);
 
-        playLog.info("chi:roleId:"+roleId+" card:"+Arrays.toString(cards.toArray())+" "+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
+        playLog.info("   吃:roleId:"+roleId+" card:"+Arrays.toString(cards.toArray())+" size:"+chair.getHandsContainer().getHandCards().size()+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
         return true;
     }
 

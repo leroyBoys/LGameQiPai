@@ -24,9 +24,7 @@ public class PengPlugins<T extends MjTable> extends ChiPlugins<T>{
     @Override
     public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
         MjAutoCacheHandContainer mjAutoCache = (MjAutoCacheHandContainer) chair.getHandsContainer().getAutoCacheHands();
-        Map<Integer, Integer> countMap =  mjAutoCache.getCardNumMap();
-        Integer num = countMap.get(card);
-        if(num == null || num <2){
+        if(mjAutoCache.getCardCount(card) <2){
             return false;
         }
 
@@ -56,9 +54,10 @@ public class PengPlugins<T extends MjTable> extends ChiPlugins<T>{
 
         PayDetail pay = payment(stepGameStatusData);
 
+        playLog.info("    碰:"+lastCard+":roleId:"+roleId+" size:"+chair.getHandsContainer().getHandCards().size()+ Arrays.toString(chair.getHandsContainer().getHandCards().toArray()));
+
         this.createCanExecuteAction(table);
 
-        playLog.info("peng:roleId:"+roleId+" card:"+lastCard+" "+ Arrays.toString(chair.getHandsContainer().getHandCards().toArray()));
         return true;
     }
 

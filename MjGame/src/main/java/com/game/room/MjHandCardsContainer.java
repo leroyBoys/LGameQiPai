@@ -83,6 +83,7 @@ public class MjHandCardsContainer extends BaseHandCardsContainer {
             }
         }
 
+        autoCacheHandContainer.removeCard(card,targeNum);
         return targeNum == 0;
     }
 

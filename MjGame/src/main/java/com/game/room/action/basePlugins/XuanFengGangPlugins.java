@@ -25,8 +25,7 @@ public class XuanFengGangPlugins<T extends MjTable> extends AnGangGangPlugins<T>
     @Override
     protected boolean checkExecute(BaseChairInfo chair) {
         MjAutoCacheHandContainer mjAutoCache = (MjAutoCacheHandContainer) chair.getHandsContainer().getAutoCacheHands();
-        Map<Integer, Integer> countMap =  mjAutoCache.getCardNumMap();
-        if (!countMap.containsKey(41) || !countMap.containsKey(42) || !countMap.containsKey(43)|| !countMap.containsKey(44)){
+        if (!mjAutoCache.containCard(41) || !mjAutoCache.containCard(42) || !mjAutoCache.containCard(43)|| !mjAutoCache.containCard(44)){
             return false;
         }
 

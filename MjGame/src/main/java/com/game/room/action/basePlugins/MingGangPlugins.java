@@ -26,9 +26,7 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
     public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
 
         MjAutoCacheHandContainer mjAutoCache = (MjAutoCacheHandContainer) chair.getHandsContainer().getAutoCacheHands();
-        Map<Integer, Integer> countMap =  mjAutoCache.getCardNumMap();
-        Integer num = countMap.get(card);
-        if(num == null || num <3){
+        if(mjAutoCache.getCardCount(card) <3){
             return false;
         }
 
@@ -70,7 +68,7 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
 
         this.createCanExecuteAction(table);
 
-        playLog.info("minggang:roleId:"+roleId+" card:"+lastCard+" "+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
+        playLog.info("    明杠:"+lastCard+":roleId:"+roleId+" size:"+chair.getHandsContainer().getHandCards().size()+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
         return true;
     }
 }

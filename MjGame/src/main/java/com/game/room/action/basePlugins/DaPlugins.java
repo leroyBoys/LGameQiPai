@@ -57,7 +57,7 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
         poolEngine.playOutCard(roleId,removeCard);
         this.createCanExecuteAction(table);
 
-        playLog.info("da:roleId:"+roleId+" card:"+removeCard+" "+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
+        playLog.info("    打:"+removeCard+":roleId:"+roleId+"  size:"+table.getChairByUid(roleId).getHandsContainer().getHandCards().size()+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
         return true;
     }
 
@@ -70,6 +70,6 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
         StepGameStatusData lastStep = (StepGameStatusData)table.getStepHistoryManager().getLastStep();
         BaseChairInfo chairInfo = table.getChairByUid(lastStep.getUid());
 
-        return ((MjAutoCacheHandContainer)(chairInfo.getHandsContainer()).getAutoCacheHands()).getCardNumMap().containsKey(card.get(0))?1:0;
+        return ((MjAutoCacheHandContainer)(chairInfo.getHandsContainer()).getAutoCacheHands()).containCard(card.get(0))?1:0;
     }
 }

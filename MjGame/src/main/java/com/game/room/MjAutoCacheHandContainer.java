@@ -7,7 +7,7 @@ import com.game.room.status.StepGameStatusData;
 import com.module.net.NetGame;
 
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,50 +16,22 @@ import java.util.Map;
  * 2017/5/24.
  */
 public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
-    ////超过1个的数量映射表:数量-具体牌值
-    protected Map<Integer,List<Integer>> cardCountMap = new HashMap<>();
+    ////每个单牌最大数量
+    private final static int EVERYMAXCOUNT = 4;
 
+    ///不同数量下对应的牌的张数(2包含1,3包含1，2,；4包含1,2,3)
+    protected int[] cardCounts = new int[EVERYMAXCOUNT+1];
     /**  cardNum - 数量 **/
     protected Map<Integer,Integer> cardNumMap = new HashMap<>();
 
     public void clear() {
         super.clear();
-        cardCountMap.clear();
-    }
-
-    public synchronized void reLoad(List<Integer> hands){
-        if(!isChange){
-            return;
-        }
-
+        cardCounts = new int[EVERYMAXCOUNT];
         cardNumMap.clear();
-        for (Integer card : hands) {
-            Integer count = cardNumMap.get(card);
-            if(count == null){
-                count = 0;
-            }
-            count++;
-            cardNumMap.put(card, count);
-
-            if(count == 1 || count > 4){
-                continue;
-            }
-
-            List<Integer> cards = cardCountMap.get(count);
-            if(cards == null){
-                cards = new LinkedList<>();
-                cardCountMap.put(count,cards);
-            }
-            cards.add(card);
-        }
-
-
-
-        super.reLoad(hands);
     }
 
     public void check(List<Integer> hands) {
-        super.check(hands);
+    //    super.check(hands);
     }
 
     public NetGame.NetOprateData getNetOprateData(BaseChairInfo info, StepGameStatusData stepStatus) {
@@ -115,12 +87,95 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
         return retData.build();
     }
 
-    public Map<Integer, List<Integer>> getCardCountMap() {
-        return cardCountMap;
+    @Override
+    public void removeCard(int card, int num) {
+        if(!addCards.isEmpty()){
+            Iterator<Integer> ites = addCards.iterator();
+            while (ites.hasNext()){
+                if(ites.next()==card){
+                    ites.remove();
+                    if(--num == 0){
+                        return;
+                    }
+                }
+            }
+        }
+
+        Integer curNum = cardNumMap.get(card);
+        if(curNum == null){
+            return;
+        }
+
+        cardCounts[curNum]--;
+        curNum = curNum-num;
+        if(curNum > 0){
+            cardCounts[curNum]++;
+            cardNumMap.put(card,curNum);
+        }else {
+            cardNumMap.remove(card);
+        }
+    }
+
+    protected void addNewCard(int card) {
+        Integer curNum = cardNumMap.get(card);
+        if(curNum == null){
+            curNum = 1;
+        }else {
+            cardCounts[curNum]--;
+            curNum = Math.min(++curNum,EVERYMAXCOUNT);
+        }
+
+        cardCounts[curNum]++;
+        cardNumMap.put(card,curNum);
+    }
+
+    @Override
+    public int containCardCount(int num) {
+        num = Math.min(num,EVERYMAXCOUNT);
+        if(addCards.isEmpty()){
+            return cardCounts[num];
+        }
+
+        refreshCardNumMap();
+        return cardCounts[num];
     }
 
     public Map<Integer, Integer> getCardNumMap() {
+        refreshCardNumMap();
         return cardNumMap;
+    }
+
+    private void refreshCardNumMap() {
+        if(addCards.isEmpty()){
+            return;
+        }
+
+        for(int card:addCards){
+            addNewCard(card);
+        }
+
+        addCards.clear();
+    }
+
+    public boolean containCard(int cardNum){
+        if(cardNumMap.containsKey(cardNum)){
+            return true;
+        }
+
+        return addCards.contains(cardNum);
+    }
+
+    public int getCardCount(int cardNum){
+        Integer num = cardNumMap.get(cardNum);
+        num = (num == null?0:num);
+        if(!addCards.isEmpty()){
+            for(int card:addCards){
+                if(card == cardNum){
+                    num++;
+                }
+            }
+        }
+        return num;
     }
 
 }

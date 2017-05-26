@@ -12,10 +12,7 @@ import com.game.room.action.SuperGameStatusData;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -38,15 +35,20 @@ public class AnGangGangPlugins<T extends MjTable> extends GangPlugins<T>{
 
     protected boolean checkExecute(BaseChairInfo chair){
         MjAutoCacheHandContainer mjAutoCache = (MjAutoCacheHandContainer) chair.getHandsContainer().getAutoCacheHands();
-        List<Integer> cards = mjAutoCache.getCardCountMap().get(4);
-        if(cards == null){
+        int targetCount = mjAutoCache.containCardCount(4);
+        if(targetCount == 0){
             return false;
         }
 
         GangAction action = GangAction.getInstance();
+
         SuperGameStatusData gameStatusData= (SuperGameStatusData) chair.getTableVo().getStatusData();
-        for(Integer cardNum:cards){
-            gameStatusData.addCanDoDatas(chair.getTableVo().getStep(),new StepGameStatusData(action,chair.getId(),chair.getId(),cardNum,this));
+        for(Map.Entry<Integer,Integer> entry:mjAutoCache.getCardNumMap().entrySet()){
+            if(entry.getValue() < 4){
+                continue;
+            }
+
+            gameStatusData.addCanDoDatas(chair.getTableVo().getStep(),new StepGameStatusData(action,chair.getId(),chair.getId(),entry.getKey(),this));
         }
         return true;
     }
@@ -79,7 +81,7 @@ public class AnGangGangPlugins<T extends MjTable> extends GangPlugins<T>{
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
         createCanExecuteAction(table);
 
-        playLog.info("angang:roleId:"+roleId+" card:"+cardNum+" "+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
+        playLog.info("   暗杠:"+cardNum+":roleId:"+roleId+" size:"+chair.getHandsContainer().getHandCards().size()+ Arrays.toString(chair.getHandsContainer().getHandCards().toArray()));
         return true;
     }
 

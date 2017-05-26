@@ -38,8 +38,7 @@ public class MoAction extends GameOperateAction {
         IOptPlugin optPlugin = TablePluginManager.getInstance().getOneOptPlugin(table.getGameId(),this.getActionType());
         optPlugin.doOperation(table,response,roleId,stepStatusData);
 
-        int handsCount = chairInfo.getHandsContainer().getHandCards().size();
-        NetGame.NetOprateData.Builder turnData = ProbuffTool.getTurnData(roleId,handsCount,table.getTimeOutRemain());
+        NetGame.NetOprateData.Builder turnData = ProbuffTool.getTurnData(roleId,0,table.getTimeOutRemain());
 
         NetGame.NetOprateData other = turnData.build();
         for(int i = 0;i<table.getChairs().length;i++){
