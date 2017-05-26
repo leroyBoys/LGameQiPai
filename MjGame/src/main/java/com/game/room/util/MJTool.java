@@ -89,12 +89,23 @@ public class MJTool {
         return true;
     }
 
+    public static int[] toCardArray(List<Integer> handCards,int extraLength){
+        int lengthSize = handCards.size()+extraLength;
+
+        int[] cardsTemp = new int[lengthSize];
+        int i = 0;
+        for (int card:handCards) {
+            cardsTemp[i++] = card;
+        }
+        return cardsTemp;
+    }
+
     /**
      * 普通的胡牌（没有任何附加规则限制）
      * @param cardsTemp
      * @return
      */
-    public static boolean isSimpleHu(int[] cardsTemp,HashMap<Integer, Integer> map){
+    public static boolean isSimpleHu(int[] cardsTemp,Map<Integer, Integer> map){
         boolean res = false;
         //int[] cardsTemp = new int[]{11,11,21,21,12,12,14,14,15,15,15,16,17,18};
         if(map == null){
@@ -121,7 +132,7 @@ public class MJTool {
      * @param groupList
      * @return
      */
-    public boolean isHu(int[] cardsTemp, List<GroupCard> groupList) {
+    public static boolean isHu(int[] cardsTemp, List<GroupCard> groupList) {
         boolean openCardHasKan = openCardsHasKan(groupList);
         boolean res = false;
         if (cardsTemp == null || cardsTemp.length == 0) {
@@ -156,7 +167,7 @@ public class MJTool {
     }
 
     //明牌是否有坎子
-    public boolean openCardsHasKan(List<GroupCard> groupList) {
+    public static boolean openCardsHasKan(List<GroupCard> groupList) {
         for (GroupCard group : groupList) {
             List<Integer> list = group.getCards();
 

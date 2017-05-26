@@ -11,7 +11,7 @@ import com.lgame.util.load.annotation.Resource;
 public class PluginGen {
     @Id
     private int tempId = 0;
-    private int gameId;
+    private String gameId;
     private String pluginName;
     /** 哪个操作的插件 */
     private String actionType;
@@ -33,11 +33,11 @@ public class PluginGen {
         this.tempId = tempId;
     }
 
-    public int getGameId() {
+    public String getGameId() {
         return gameId;
     }
 
-    public void setGameId(int gameId) {
+    public void setGameId(String gameId) {
         this.gameId = gameId;
     }
 

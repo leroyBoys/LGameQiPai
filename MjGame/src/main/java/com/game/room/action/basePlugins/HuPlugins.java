@@ -8,8 +8,10 @@ import com.game.room.MjCardPoolEngine;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.game.room.action.ChiAction;
+import com.game.room.action.HuAction;
 import com.game.room.action.SuperGameStatusData;
 import com.game.room.status.StepGameStatusData;
+import com.game.room.util.MJTool;
 import com.lsocket.message.Response;
 
 import java.util.LinkedList;
@@ -23,7 +25,15 @@ import java.util.Map;
 public class HuPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction{
     @Override
     public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
-        return false;
+        HuAction.CheckHuType huType = (HuAction.CheckHuType) parems;
+        if(card == 0){
+            return MJTool.isSimpleHu(MJTool.toCardArray(chair.getHandsContainer().getHandCards(),0),((MjAutoCacheHandContainer)chair.getHandsContainer().getAutoCacheHands()).getCardNumMap());
+        }
+
+        int[] cards = MJTool.toCardArray(chair.getHandsContainer().getHandCards(),1);
+        cards[cards.length-1] = card;
+
+        return MJTool.isSimpleHu(cards,null);
     }
 
 
@@ -38,9 +48,9 @@ public class HuPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
 
     @Override
     public boolean doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
-        if (stepGameStatusData.getiOptPlugin().getPlugin().getSubType() != this.getPlugin().getSubType()) {
+       /* if (stepGameStatusData.getiOptPlugin().getPlugin().getSubType() != this.getPlugin().getSubType()) {
             return false;
-        }
+        }*/
         return true;
     }
 

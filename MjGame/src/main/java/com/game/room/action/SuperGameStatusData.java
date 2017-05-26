@@ -56,14 +56,6 @@ public class SuperGameStatusData extends BaseGameStateData {
         addCanDoDatas(table.getStep(),new StepGameStatusData(MoAction.getInstance(),info.getId()));
     }
 
-    public final void checkCanDo(MjChairInfo chairInfo,int card) {
-        checkGang(chairInfo,0);
-        checkChi(chairInfo,0);
-        checkPeng(chairInfo,0);
-        checkHu(chairInfo,0);
-
-    }
-
     protected boolean checkCanGang(MjChairInfo chairInfo, int card){
         StepGameStatusData last = (StepGameStatusData) chairInfo.getTableVo().getStepHistoryManager().getLastStep();
         if(card>0){

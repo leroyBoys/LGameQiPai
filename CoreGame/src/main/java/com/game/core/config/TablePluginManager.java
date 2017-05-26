@@ -25,6 +25,8 @@ public class TablePluginManager {
 
     /**  游戏id-插件类型-插件集合 */
     private final Map<Integer,Map<Integer,ArrayList<IOptPlugin>>> optPluginMap = new HashMap<>();
+    private final Map<Integer,Map<Integer,ArrayList<IOptPlugin>>> optCheckPluginMap = new HashMap<>();
+
     private final Map<Integer,PluginGen> pluginGenMap = new HashMap<>();
 
     private final Map<Integer,RoomSetting> roomSettingMap = new HashMap<>();
@@ -46,36 +48,55 @@ public class TablePluginManager {
             roomSettingMap.put(sett.getGameId(),sett);
         }
 
-        List<PluginGen> tempList2 = (List<PluginGen>) resourceService.listAll(PluginGen.class);
-        for(PluginGen sett:tempList2){
+        List<PluginGen> pluginGens = (List<PluginGen>) resourceService.listAll(PluginGen.class);
+        for(PluginGen sett:pluginGens){
             if(!roomSettingMap.containsKey(sett.getGameId())){
                 continue;
             }
-
             pluginGenMap.put(sett.getTempId(),sett);
 
-            Map<Integer,ArrayList<IOptPlugin>> tempMap = optPluginMap.get(sett.getGameId());
-            if(tempMap == null){
-                tempMap = new HashMap<>();
-                optPluginMap.put(sett.getGameId(),tempMap);
-            }
+            IOptPlugin optPlugin = createOptPlugin(sett);
+            String[] gameIds = sett.getGameId().split(",");
 
-            String[] actions = sett.getActionType().split(StringTool.SIGN4);
-            for(String at:actions){
-                int actionType = Integer.valueOf(StringTool.isNotNull(at)?at:"0");
-                ArrayList<IOptPlugin> optPlugins = tempMap.get(actionType);
-                if(optPlugins == null){
-                    optPlugins = new ArrayList<>();
-                    tempMap.put(actionType,optPlugins);
+            for(String gameIdStr:gameIds){
+                Integer gameId = Integer.valueOf(gameIdStr);
+
+                if(optPlugin instanceof IPluginCheckCanExecuteAction){
+                    this.addOptPluginMap(optCheckPluginMap,gameId,optPlugin);
                 }
-                optPlugins.add(createOptPlugin(sett));
+
+                this.addOptPluginMap(optPluginMap,gameId,optPlugin);
+
             }
 
         }
 
     }
 
+    private void addOptPluginMap(Map<Integer,Map<Integer,ArrayList<IOptPlugin>>> targetMap,Integer gameId, IOptPlugin optPlugin) {
+        Map<Integer,ArrayList<IOptPlugin>> tempMap = targetMap.get(gameId);
+        if(tempMap == null){
+            tempMap = new HashMap<>();
+            targetMap.put(gameId,tempMap);
+        }
+
+        String[] actions = optPlugin.getPlugin().getActionType().split(StringTool.SIGN4);
+        for(String at:actions){
+            int actionType = Integer.valueOf(StringTool.isNotNull(at)?at:"0");
+            ArrayList<IOptPlugin> optPlugins = tempMap.get(actionType);
+            if(optPlugins == null){
+                optPlugins = new ArrayList<>();
+                tempMap.put(actionType,optPlugins);
+            }
+            optPlugins.add(optPlugin);
+        }
+    }
+
     public ArrayList<IOptPlugin> getOptPlugin(int gameId,int actionType){
+        return optPluginMap.get(gameId).get(actionType);
+    }
+
+    public ArrayList<IOptPlugin> getICheckOptPlugin(int gameId,int actionType){
         return optPluginMap.get(gameId).get(actionType);
     }
 

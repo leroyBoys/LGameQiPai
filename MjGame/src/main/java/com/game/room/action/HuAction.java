@@ -49,7 +49,7 @@ public class HuAction extends GameOperateAction {
 
 
     public void check(MjChairInfo chairInfo, int card, Object parems){
-        ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(chairInfo.getTableVo().getGameId(),this.getActionType());
+        ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getICheckOptPlugin(chairInfo.getTableVo().getGameId(),this.getActionType());
         if(optPlugins == null){
             return;
         }
