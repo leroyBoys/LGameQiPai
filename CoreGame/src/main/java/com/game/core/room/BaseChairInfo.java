@@ -112,4 +112,5 @@ public abstract class BaseChairInfo<Status extends BaseChairStatus,Hands extends
     public String getImage() {
         return image;
     }
+
 }

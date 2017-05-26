@@ -759,6 +759,10 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
         this.timeOutTime = timeOutTime;
     }
 
+    public int getNeedCard() {
+        return 0;
+    }
+
     public enum AttributeKey{
         /** 总局数 */
         AllRount,

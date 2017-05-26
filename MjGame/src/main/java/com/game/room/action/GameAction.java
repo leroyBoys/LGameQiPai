@@ -8,6 +8,8 @@ import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.GameOverType;
+import com.game.core.room.ItemConsumeManager;
+import com.game.core.room.ItemConsumeService;
 import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjChairInfo;
@@ -68,7 +70,7 @@ public class GameAction extends BaseAction<MjTable> {
     @Override
     public void overAction(MjTable table) {
         if(table.getCurChirCount() == 1){
-            //扣card
+            ItemConsumeManager.getIntance().removeCard(table.getOwnerId(),table.getNeedCard());
         }
         //局数加一
         if(table.addRound()){
