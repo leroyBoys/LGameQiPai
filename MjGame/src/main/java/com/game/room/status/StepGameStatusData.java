@@ -11,7 +11,7 @@ import java.util.List;
  * Created by leroy:656515489@qq.com
  * 2017/4/27.
  */
-public class StepGameStatusData{
+public class StepGameStatusData {
     private final IOptPlugin iOptPlugin;
     private final int fromId;
     private final int uid;

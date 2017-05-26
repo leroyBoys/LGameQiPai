@@ -12,6 +12,15 @@
         </layout>   
     </appender>
 
+    <appender name="playA" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${Log.path}/play-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss-SSS}|%msg%n</pattern>
+        </encoder>
+    </appender>
   <!--所有日志文件-->
     <appender name="AllLog" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -33,14 +42,15 @@
             <pattern>%d{HH:mm:ss-SSS} | [%thread] | %-5level | %logger{40} | %msg%n</pattern> 
         </encoder> 
     </appender>
-    
-    
+
+    <logger name="play" level="info">
+        <appender-ref ref="playA" />
+    </logger>
 <!--    <include resource="mongolog.xml"/>-->
     <root > 
     <!--      <appender-ref ref="AllErrorLog" level="ERROR"/>-->
         <appender-ref ref="AllLog" level="INFO"/>
         <appender-ref ref="STDOUT" level="INFO"/>
-        <appender-ref ref="play" level="INFO"/>
-    </root> 
+    </root>
     
 </configuration>

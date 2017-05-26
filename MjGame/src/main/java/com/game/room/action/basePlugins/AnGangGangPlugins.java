@@ -53,9 +53,9 @@ public class AnGangGangPlugins<T extends MjTable> extends GangPlugins<T>{
     }
 
     @Override
-    public void createCanExecuteAction(BaseTableVo table) {
-        SuperGameStatusData statusData = (SuperGameStatusData) table.getStatusData();
-        statusData.checkMo(table);
+    public void createCanExecuteAction(T table,StepGameStatusData stepGameStatusData) {
+        SuperGameStatusData statusData = table.getStatusData();
+        statusData.checkMo(table,stepGameStatusData.getUid());
     }
 
     @Override
@@ -78,7 +78,7 @@ public class AnGangGangPlugins<T extends MjTable> extends GangPlugins<T>{
         List<Integer> cards = new LinkedList<>();
         cards.add(cardNum);
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
-        createCanExecuteAction(table);
+        createCanExecuteAction(table,stepGameStatusData);
 
         playLog.info("   暗杠:"+cardNum+":roleId:"+roleId+" size:"+chair.getHandsContainer().getHandCards().size()+ Arrays.toString(chair.getHandsContainer().getHandCards().toArray()));
         return true;

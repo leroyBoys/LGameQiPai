@@ -18,7 +18,7 @@ public class XXHuPlugins extends HuPlugins<MjTable>{
     }
 
     @Override
-    public void createCanExecuteAction(BaseTableVo room) {
+    public void createCanExecuteAction(MjTable room, StepGameStatusData stepGameStatusData) {
 
     }
 

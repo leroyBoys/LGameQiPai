@@ -41,7 +41,7 @@ public class SuperGameStatusData extends BaseGameStateData {
         }
     }
 
-    public final void checkMo(BaseTableVo table){
+    public final void checkMo(BaseTableVo table,int roleId){
         if(!canDoDatas.isEmpty()){
             return;
         }
@@ -51,9 +51,7 @@ public class SuperGameStatusData extends BaseGameStateData {
             return;
         }
 
-        int focuxIdx = table.nextFocusIndex(table.getFocusIdex());
-        BaseChairInfo info = table.getChairs()[focuxIdx];
-        addCanDoDatas(table.getStep(),new StepGameStatusData(MoAction.getInstance(),info.getId()));
+        addCanDoDatas(table.getStep(),new StepGameStatusData(MoAction.getInstance(),roleId));
     }
 
     protected boolean checkCanGang(MjChairInfo chairInfo, int card){
@@ -239,7 +237,7 @@ public class SuperGameStatusData extends BaseGameStateData {
             clearCanDoDatas(roleId);
             table.addMsgQueue(roleId,netOprateData,response==null?0:response.getSeq());
 
-            checkMo(table);
+            checkMo(table,table.getChairs()[table.nextFocusIndex(table.getFocusIdex())].getId());
             return true;
         }
 

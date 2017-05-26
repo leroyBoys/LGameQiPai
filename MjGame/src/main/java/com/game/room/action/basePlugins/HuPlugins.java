@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by leroy:656515489@qq.com
  * 2017/5/11.
  */
-public class HuPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction{
+public class HuPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction<T,StepGameStatusData>{
     @Override
     public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
         HuAction.CheckHuType huType = (HuAction.CheckHuType) parems;
@@ -38,7 +38,7 @@ public class HuPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
 
 
     @Override
-    public void createCanExecuteAction(BaseTableVo room) {
+    public void createCanExecuteAction(T room,StepGameStatusData stepGameStatusData) {
     }
 
     @Override

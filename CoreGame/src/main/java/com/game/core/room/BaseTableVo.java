@@ -46,7 +46,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
 
     private int step;
     private long timeOutTime;
-    private int focusIdex;
+    private int focusIdex = -1;
     /***
      * 房间属性
      */

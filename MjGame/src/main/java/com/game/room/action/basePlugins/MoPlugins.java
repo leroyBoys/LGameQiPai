@@ -18,16 +18,16 @@ import java.util.List;
  * Created by leroy:656515489@qq.com
  * 2017/5/11.
  */
-public class MoPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction{
+public class MoPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction<T,StepGameStatusData>{
     @Override
     public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
         return false;
     }
 
     @Override
-    public void createCanExecuteAction(BaseTableVo table) {
-        SuperGameStatusData statusData = (SuperGameStatusData) table.getStatusData();
-        MjChairInfo chairInfo = (MjChairInfo) table.getChairs()[table.getFocusIdex()];
+    public void createCanExecuteAction(T table, StepGameStatusData stepGameStatusData) {
+        SuperGameStatusData statusData = table.getStatusData();
+        MjChairInfo chairInfo = table.getChairs()[table.getFocusIdex()];
         statusData.checkGang(chairInfo,0);
         statusData.checkHu(chairInfo,0);
         statusData.checkDa(chairInfo,0);
@@ -46,7 +46,7 @@ public class MoPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
 
         playLog.info("  摸牌:"+card+":roleId:"+roleId+"+ size:"+table.getChairByUid(roleId).getHandsContainer().getHandCards().size()+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
 
-        createCanExecuteAction(table);
+        createCanExecuteAction(table,stepGameStatusData);
         return true;
     }
 

@@ -50,9 +50,6 @@ public class TablePluginManager {
 
         List<PluginGen> pluginGens = (List<PluginGen>) resourceService.listAll(PluginGen.class);
         for(PluginGen sett:pluginGens){
-            if(!roomSettingMap.containsKey(sett.getGameId())){
-                continue;
-            }
             pluginGenMap.put(sett.getTempId(),sett);
 
             IOptPlugin optPlugin = createOptPlugin(sett);
@@ -60,7 +57,9 @@ public class TablePluginManager {
 
             for(String gameIdStr:gameIds){
                 Integer gameId = Integer.valueOf(gameIdStr);
-
+                if(!roomSettingMap.containsKey(gameId)){
+                    continue;
+                }
                 if(optPlugin instanceof IPluginCheckCanExecuteAction){
                     this.addOptPluginMap(optCheckPluginMap,gameId,optPlugin);
                 }
@@ -71,6 +70,7 @@ public class TablePluginManager {
 
         }
 
+        System.out.println("load suc!"+pluginGenMap.size());
     }
 
     private void addOptPluginMap(Map<Integer,Map<Integer,ArrayList<IOptPlugin>>> targetMap,Integer gameId, IOptPlugin optPlugin) {

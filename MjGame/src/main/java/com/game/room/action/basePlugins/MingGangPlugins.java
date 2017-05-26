@@ -36,9 +36,9 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
     }
 
     @Override
-    public void createCanExecuteAction(BaseTableVo table) {
-        SuperGameStatusData statusData = (SuperGameStatusData) table.getStatusData();
-        statusData.checkMo(table);
+    public void createCanExecuteAction(T table, StepGameStatusData stepGameStatusData) {
+        SuperGameStatusData statusData = table.getStatusData();
+        statusData.checkMo(table,stepGameStatusData.getUid());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
 
         PayDetail pay = payment(stepGameStatusData);
 
-        this.createCanExecuteAction(table);
+        this.createCanExecuteAction(table,stepGameStatusData);
 
         playLog.info("    明杠:"+lastCard+":roleId:"+roleId+" size:"+chair.getHandsContainer().getHandCards().size()+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
         return true;

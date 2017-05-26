@@ -26,7 +26,7 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
 
     public void clear() {
         super.clear();
-        cardCounts = new int[EVERYMAXCOUNT];
+        cardCounts = new int[EVERYMAXCOUNT+1];
         cardNumMap.clear();
     }
 

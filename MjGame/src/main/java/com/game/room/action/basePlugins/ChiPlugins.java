@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by leroy:656515489@qq.com
  * 2017/5/11.
  */
-public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction{
+public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction<T,StepGameStatusData>{
     @Override
     public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
         StepGameStatusData lastStep = (StepGameStatusData) chair.getTableVo().getStepHistoryManager().getLastStep();
@@ -48,10 +48,10 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
     }
 
     @Override
-    public void createCanExecuteAction(BaseTableVo table) {
+    public void createCanExecuteAction(T table,StepGameStatusData stepGameStatusData) {
         StepGameStatusData lastStep = (StepGameStatusData) table.getStepHistoryManager().getLastStep();
-        MjChairInfo info = (MjChairInfo) table.getChairByUid(lastStep.getUid());
-        SuperGameStatusData gameStatusData= (SuperGameStatusData)table.getStatusData();
+        MjChairInfo info = table.getChairByUid(lastStep.getUid());
+        SuperGameStatusData gameStatusData= table.getStatusData();
         gameStatusData.checkGang(info,0);
         gameStatusData.checkHu(info,0);
         gameStatusData.checkDa(info,0);
@@ -76,7 +76,7 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
         cards.add(mjCardPoolEngine.removeLastCard());
 
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
-        createCanExecuteAction(table);
+        createCanExecuteAction(table,stepGameStatusData);
 
         playLog.info("   吃:roleId:"+roleId+" card:"+Arrays.toString(cards.toArray())+" size:"+chair.getHandsContainer().getHandCards().size()+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
         return true;

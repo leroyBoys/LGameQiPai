@@ -19,7 +19,7 @@ import java.util.List;
  * Created by leroy:656515489@qq.com
  * 2017/5/11.
  */
-public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction{
+public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction<T, StepGameStatusData>{
     @Override
     public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
         SuperGameStatusData gameStatusData= (SuperGameStatusData) chair.getTableVo().getStatusData();
@@ -28,24 +28,23 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
     }
 
     @Override
-    public void createCanExecuteAction(BaseTableVo table) {
-        SuperGameStatusData statusData = (SuperGameStatusData) table.getStatusData();
+    public void createCanExecuteAction(T table,StepGameStatusData stepGameStatusData) {
+        SuperGameStatusData statusData =  table.getStatusData();
 
-        StepGameStatusData lastStep = (StepGameStatusData)table.getStepHistoryManager().getLastStep();
-        int card = lastStep.getCards().get(0);
+        int card = stepGameStatusData.getCards().get(0);
 
         for(int i = 0;i<table.getChairs().length;i++){
             if(i == table.getFocusIdex()){
                 continue;
             }
-            MjChairInfo chairInfo = (MjChairInfo) table.getChairs()[i];
+            MjChairInfo chairInfo = table.getChairs()[i];
             statusData.checkGang(chairInfo,card);
             statusData.checkChi(chairInfo,card);
             statusData.checkPeng(chairInfo,card);
             statusData.checkHu(chairInfo,card);
         }
 
-        statusData.checkMo(table);
+        statusData.checkMo(table,stepGameStatusData.getUid());
     }
 
     @Override
@@ -55,7 +54,7 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
 
         MjCardPoolEngine poolEngine = table.getCardPool();
         poolEngine.playOutCard(roleId,removeCard);
-        this.createCanExecuteAction(table);
+        this.createCanExecuteAction(table,stepGameStatusData);
 
         playLog.info("    打:"+removeCard+":roleId:"+roleId+"  size:"+table.getChairByUid(roleId).getHandsContainer().getHandCards().size()+ Arrays.toString(table.getChairByUid(roleId).getHandsContainer().getHandCards().toArray()));
         return true;

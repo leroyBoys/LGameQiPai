@@ -75,7 +75,7 @@ public class SanJiangKeGangPlugins<T extends MjTable> extends AnGangGangPlugins<
         cards.add(extraCardNum);
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
 
-        createCanExecuteAction(table);
+        createCanExecuteAction(table,stepGameStatusData);
         return true;
     }
 

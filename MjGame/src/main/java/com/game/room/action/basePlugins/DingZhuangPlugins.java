@@ -28,7 +28,7 @@ public class DingZhuangPlugins<T extends MjTable> extends AbstractStagePlugin<T>
 
         table.getStatusData().setOver(true);
 
-        playLog.info("dingzhuang:bankId:"+table.getBankId());
+        playLog.info("定庄:bankId:"+table.getBankId());
         return true;
     }
 

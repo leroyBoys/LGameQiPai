@@ -1,4 +1,7 @@
 import com.game.room.util.MJTool;
+import com.logger.type.LogType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
@@ -14,10 +17,6 @@ public class Test {
 
     @org.junit.Test
     public void thres(){
-        //MJTool.ArrayRemove()
-
-        boolean res = false;
-        int[] cardsTemp = new int[]{11,11,21,21,12,12,14,14,15,15,15,16,17,18};
     }
 
 }

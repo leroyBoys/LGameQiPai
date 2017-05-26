@@ -27,7 +27,7 @@ public class GameAction extends BaseAction<MjTable> {
     @Override
     public void initAction(MjTable table) {
         SuperGameStatusData statusData = table.getStatusData();
-        statusData.checkMo(table);
+        statusData.checkMo(table,table.getBankId());
         this.doAction(table,null,table.getBankId(),null);
     }
 

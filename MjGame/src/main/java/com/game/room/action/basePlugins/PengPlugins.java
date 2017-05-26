@@ -56,7 +56,7 @@ public class PengPlugins<T extends MjTable> extends ChiPlugins<T>{
 
         playLog.info("    碰:"+lastCard+":roleId:"+roleId+" size:"+chair.getHandsContainer().getHandCards().size()+ Arrays.toString(chair.getHandsContainer().getHandCards().toArray()));
 
-        this.createCanExecuteAction(table);
+        this.createCanExecuteAction(table,stepGameStatusData);
 
         return true;
     }

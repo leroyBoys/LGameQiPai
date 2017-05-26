@@ -13,14 +13,14 @@ import java.util.List;
  * Created by leroy:656515489@qq.com
  * 2017/5/11.
  */
-public abstract class GangPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction{
+public abstract class GangPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction<T,StepGameStatusData>{
     @Override
     public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
         return false;
     }
 
     @Override
-    public void createCanExecuteAction(BaseTableVo room) {
+    public void createCanExecuteAction(T room,StepGameStatusData stepGameStatusData) {
 
     }
 
