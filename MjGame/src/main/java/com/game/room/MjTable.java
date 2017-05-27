@@ -3,8 +3,8 @@ package com.game.room;
 import com.game.Handler.MjCmd;
 import com.game.core.constant.GameConst;
 import com.game.core.factory.TableProducer;
-import com.game.core.room.GameOverType;
 import com.game.core.room.BaseTableVo;
+import com.game.room.calculator.MjCalculator;
 import com.game.room.util.MJTool;
 import com.game.socket.module.UserVistor;
 import com.game.util.ProbuffTool;
@@ -42,6 +42,11 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     @Override
     protected void initChair(int maxSize) {
         chairs = new MjChairInfo[maxSize];
+    }
+
+    @Override
+    protected void initCalculator() {
+        calculator = new MjCalculator(this);
     }
 
     @Override
@@ -129,7 +134,7 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
             }
         }
 
-        extra.addList(mjChairInfo.getScore());
+        extra.addList(mjChairInfo.getTotalScore());
         return extra;
     }
 

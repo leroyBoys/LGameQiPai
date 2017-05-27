@@ -18,6 +18,7 @@ public abstract class BaseChairInfo<Status extends BaseChairStatus,Hands extends
     protected String ip;
     protected Hands handsContainer;
     protected boolean robot = false;
+    protected int totalScore;
 
     public BaseChairInfo(BaseTableVo tableVo,Status status){
         this.status = status;
@@ -99,6 +100,14 @@ public abstract class BaseChairInfo<Status extends BaseChairStatus,Hands extends
 
     public boolean isAuto() {
         return isAuto;
+    }
+
+    public int getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
     }
 
     public void setAuto(boolean auto) {

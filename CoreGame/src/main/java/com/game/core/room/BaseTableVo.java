@@ -5,6 +5,7 @@ import com.game.core.TableManager;
 import com.game.core.action.BaseAction;
 import com.game.core.constant.GameConst;
 import com.game.core.factory.TableProducer;
+import com.game.core.room.calculator.Calculator;
 import com.game.core.room.card.BaseCardPoolEngine;
 import com.game.core.room.interfaces.ICardPoolEngine;
 import com.game.core.room.interfaces.BaseChairStatus;
@@ -62,6 +63,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
     private int curRount = 1;
     private TableProducer tableProducer;
     protected StepHistory stepHistory;
+    protected Calculator calculator;
 
     private final ReentrantLock tableLock = new ReentrantLock();
     private final ReentrantLock statusLock = new ReentrantLock();
@@ -80,8 +82,11 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
         initCardPoolEngine();
         initChair(maxSize);
         initStepHistory();
+        initCalculator();
        // lockKey = Tools.getCharacterAndNumber(6);
     }
+
+    protected abstract void initCalculator();
 
     protected  void initStepHistory(){
         stepHistory = new StepHistory();
@@ -761,6 +766,14 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
 
     public int getNeedCard() {
         return 0;
+    }
+
+    public boolean isHuAgain() {
+        return false;
+    }
+
+    public Calculator getCalculator() {
+        return calculator;
     }
 
     public enum AttributeKey{

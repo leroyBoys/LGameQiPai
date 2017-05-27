@@ -7,7 +7,6 @@ import com.game.core.room.BaseChairInfo;
  * 2017/4/21.
  */
 public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContainer> {
-    private int score;
     /** 数值 */
     private int yapaoNum = -1;
     /** 过牌的对应值，用于过手碰杠胡  */
@@ -39,16 +38,8 @@ public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContaine
         return yapaoNum==-1;
     }
 
-    public int getScore() {
-        return score;
-    }
-
     public int getYapaoNum() {
         return yapaoNum;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public int getPassCard() {

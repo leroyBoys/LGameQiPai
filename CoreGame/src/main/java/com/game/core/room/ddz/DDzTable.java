@@ -34,6 +34,11 @@ public class DDzTable extends BaseTableVo<DdzStatus,BaseChairInfo> {
     }
 
     @Override
+    protected void initCalculator() {
+
+    }
+
+    @Override
     public int getGameResponseCmd() {
         return 0;
     }

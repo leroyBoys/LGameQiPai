@@ -1,7 +1,7 @@
 package com.game.room.action.basePlugins;
 
 import com.game.core.room.BaseChairInfo;
-import com.game.core.room.PayDetail;
+import com.game.core.room.calculator.PayDetail;
 import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjCardPoolEngine;
@@ -12,10 +12,8 @@ import com.game.room.action.SuperGameStatusData;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -53,7 +51,7 @@ public class PengPlugins<T extends MjTable> extends ChiPlugins<T>{
         cards.add(lastCard);
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
 
-        PayDetail pay = payment(stepGameStatusData);
+        PayDetail pay = payment(table,stepGameStatusData);
 
         MJLog.play("碰",lastCard,roleId,table);
 

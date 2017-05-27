@@ -22,6 +22,8 @@ public class PluginGen {
     /** 插件执行的效果 */
     private String effectStr;
 
+    private int[] effectArray;
+
     private int subType = 0;
     private int canDoType = 0; //客户端可做的操作
 
@@ -83,6 +85,25 @@ public class PluginGen {
 
     public int getSubType() {
         return subType;
+    }
+
+    public int[] getEffectArray() {
+        if(effectArray == null){
+            setEffectArray();
+        }
+        return effectArray;
+    }
+
+    public void setEffectArray() {
+        if(effectStr == null|| effectStr.trim().isEmpty()){
+            return;
+        }
+
+        String[] array = effectStr.split(",");
+        this.effectArray = new int[array.length];
+        for(int i=0;i<array.length;i++){
+            this.effectArray[i] = Integer.valueOf(array[i]);
+        }
     }
 
     public void setSubType(int subType) {

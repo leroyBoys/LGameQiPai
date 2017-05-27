@@ -2,14 +2,16 @@ package com.game.room.action.basePlugins;
 
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.PluginGen;
+import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
-import com.game.core.room.PayDetail;
+import com.game.core.room.calculator.PayDetail;
 import com.game.room.status.StepGameStatusData;
 import com.logger.type.LogType;
 import com.lsocket.message.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -49,11 +51,52 @@ public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOp
      *
      * 0自摸所有人支付，1点炮的人支付
      * */
-    public PayDetail payment(StepGameStatusData stepGameStatusData) {
+    public PayDetail payment(A table,StepGameStatusData stepGameStatusData) {
         String str = getPlugin().getEffectStr();
         if (str == null || str.equals(""))
             return null;
         PayDetail ratePay = new PayDetail();
+        int payFromAll = getPlugin().getEffectArray()[0];
+        boolean isAll = payFromAll == 1?true:false;
+        if(!isAll){
+            if (stepGameStatusData.getFromId() == stepGameStatusData.getUid()) {
+                isAll = false;
+            } else {
+                isAll = true;
+            }
+        }
+
+        if(isAll){
+            int toUid = stepGameStatusData.getUid();
+            ratePay.setToUid(toUid);
+            ratePay.setFromUids(getPayUids(table,toUid));
+        }else {
+            int toUid = stepGameStatusData.getUid();
+            ratePay.setToUid(toUid);
+            List<Integer> fromIds = new LinkedList<>();
+            fromIds.add(stepGameStatusData.getFromId());
+            ratePay.setFromUids(fromIds);
+        }
+
+        ratePay.setAddScoreType(getPlugin().getSubType());
+        ratePay.setLostScoreType(this.getLostType());
+        table.getCalculator().addPayDetailed(ratePay);
         return ratePay;
+    }
+
+    protected List<Integer> getPayUids(A table,int roleId){
+        List<Integer> list = new LinkedList<>();
+        for (int i=0;i<table.getChairs().length;i++){
+            BaseChairInfo p = table.getChairs()[i];
+            if((roleId == p.getId())){
+                continue;
+            }
+            list.add(p.getId());
+        }
+        return list;
+    }
+
+    public int getLostType() {
+        return getPlugin().getSubType();
     }
 }
