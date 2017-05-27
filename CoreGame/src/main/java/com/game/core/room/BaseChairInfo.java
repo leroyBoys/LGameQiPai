@@ -1,15 +1,13 @@
 package com.game.core.room;
 
 import com.game.core.room.card.BaseHandCardsContainer;
-import com.game.core.room.interfaces.BaseChairStatus;
 
 /**
  * Created by leroy:656515489@qq.com
  * 2017/4/21.
  */
-public abstract class BaseChairInfo<Status extends BaseChairStatus,Hands extends BaseHandCardsContainer> {
+public abstract class BaseChairInfo<Hands extends BaseHandCardsContainer> {
     protected BaseTableVo tableVo;
-    protected Status status;
     protected int id;
     protected int idx;
     protected String image="bg";
@@ -20,8 +18,7 @@ public abstract class BaseChairInfo<Status extends BaseChairStatus,Hands extends
     protected boolean robot = false;
     protected int totalScore;
 
-    public BaseChairInfo(BaseTableVo tableVo,Status status){
-        this.status = status;
+    public BaseChairInfo(BaseTableVo tableVo){
         handsContainer = initHands();
         this.tableVo = tableVo;
     }
@@ -37,14 +34,6 @@ public abstract class BaseChairInfo<Status extends BaseChairStatus,Hands extends
      * 清除缓存
      */
     public abstract void clean();
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 
     public int getId() {
         return id;

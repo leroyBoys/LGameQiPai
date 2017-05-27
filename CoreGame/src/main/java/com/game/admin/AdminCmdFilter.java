@@ -82,13 +82,13 @@ public class AdminCmdFilter implements ChatFilter {
     public void ready(String content, UserVistor vistor) {
         int tableId = vistor.getGameRole().getRoomId();
         BaseTableVo tableVo = TableManager.getInstance().getTable(tableId);
-        if(tableVo == null){
+        if(tableVo == null || tableVo.getStatus().getValue() != 0){
             sendMsg(vistor.getRoleId(),"not exit tableId:"+tableId);
             return;
         }
 
         for(int i = 0;i<tableVo.getChairs().length;i++){
-            if(tableVo.getChairs()[i] == null || tableVo.getChairs()[i].getStatus().getVal() != 0){
+            if(tableVo.getChairs()[i] == null || tableVo.getStatusData().contains(tableVo.getChairs()[i].getId())){
                 continue;
             }
 

@@ -1,7 +1,6 @@
 package com.game.room.action;
 
 import com.game.core.action.IdleAction;
-import com.game.room.MjChairStatus;
 import com.game.room.MjTable;
 
 /**

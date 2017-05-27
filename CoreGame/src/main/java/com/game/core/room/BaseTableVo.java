@@ -8,7 +8,6 @@ import com.game.core.factory.TableProducer;
 import com.game.core.room.calculator.Calculator;
 import com.game.core.room.card.BaseCardPoolEngine;
 import com.game.core.room.interfaces.ICardPoolEngine;
-import com.game.core.room.interfaces.BaseChairStatus;
 import com.game.core.room.interfaces.BaseGameState;
 import com.game.manager.DBServiceManager;
 import com.game.manager.OnlineManager;
@@ -260,18 +259,6 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
             return null;
         }
         return (TV) obj;
-    }
-
-    public synchronized int getChairCountByStatus(BaseChairStatus status) {
-        int count = 0;
-        for(int i = 0;i<chairs.length;i++){
-            if(chairs[i] == null || chairs[i].getStatus().getVal() != status.getVal()){
-                continue;
-            }
-            count++;
-        }
-
-        return count;
     }
 
     public void cleanTableCache(){

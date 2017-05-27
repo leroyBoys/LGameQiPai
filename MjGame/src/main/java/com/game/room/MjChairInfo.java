@@ -6,14 +6,14 @@ import com.game.core.room.BaseChairInfo;
  * Created by leroy:656515489@qq.com
  * 2017/4/21.
  */
-public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContainer> {
+public class MjChairInfo extends BaseChairInfo<MjHandCardsContainer> {
     /** 数值 */
     private int yapaoNum;
     /** 过牌的对应值，用于过手碰杠胡  */
     private int passCard;
 
     public MjChairInfo(int uid, MjTable baseTableVo) {
-        super(baseTableVo,MjChairStatus.Idle);
+        super(baseTableVo);
         this.setId(uid);
     }
 
@@ -24,7 +24,7 @@ public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContaine
 
     @Override
     public void resetStatus() {
-        this.status = MjChairStatus.Idle;
+
     }
 
     @Override
