@@ -121,12 +121,25 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
             newKvMap.put(kvData.getK(),kvData);
         }
 
-        for(NetGame.NetKvData kvData:allKvs){
-            NetGame.NetKvData newKvdata = newKvMap.get(kvData.getK());
+        List<NetGame.NetKvData> newKvDatas = new LinkedList<>();
 
-            newKvMap.put(kvData.getK(),kvData);
+        Iterator<NetGame.NetKvData> iterators = allKvs.iterator();
+        while (iterators.hasNext()){
+            NetGame.NetKvData cur = iterators.next();
+
+            NetGame.NetKvData newKvdata = newKvMap.get(cur.getK());
+            if(newKvdata == null){
+                newKvDatas.add(newKvdata);
+                continue;
+            }
+
+            NetGame.NetKvData.Builder netKvData = NetGame.NetKvData.newBuilder(cur);
+            netKvData.setV(netKvData.getV()+newKvdata.getV());
+            newKvDatas.add(netKvData.build());
+            iterators.remove();
         }
 
+        allKvs.addAll(newKvDatas);
     }
 
     @Override
