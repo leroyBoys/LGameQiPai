@@ -18,10 +18,14 @@ public class DingZhuangPlugins<T extends MjTable> extends AbstractStagePlugin<T>
         return new DingZhuangPlugins();
     }
 
+    protected int getFirstBankId(T table){
+        return table.getOwnerId()==0?table.getChairs()[0].getId():table.getOwnerId();
+    }
+
     @Override
     public boolean doOperation(T table, Response response,int roleId, NetGame.NetOprateData oprateData) {
         if(table.getNextBankerUid() <= 0){
-            table.setNextBankerUid(table.getChairs()[0].getId());
+            table.setNextBankerUid(this.getFirstBankId(table));
         }else {
             table.setLastBankUid(table.getBankId());
         }

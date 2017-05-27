@@ -3,6 +3,7 @@ package com.game.room.action.basePlugins;
 import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
+import com.game.core.room.calculator.PayDetail;
 import com.game.log.MJLog;
 import com.game.room.*;
 import com.game.room.action.GangAction;
@@ -97,6 +98,8 @@ public class BuGangPlugins<T extends MjTable> extends GangPlugins<T>{
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
         createCanExecuteAction(table,stepGameStatusData);
 
+        PayDetail pay = payment(table,stepGameStatusData);
+        pay.setPayType(PayDetail.PayType.ADD);
         MJLog.play("补杠",cardNum,roleId,table);
         return true;
     }

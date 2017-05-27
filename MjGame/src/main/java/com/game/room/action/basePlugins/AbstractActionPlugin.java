@@ -78,6 +78,7 @@ public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOp
             ratePay.setFromUids(fromIds);
         }
 
+        ratePay.setStep(table.getStep());
         ratePay.setAddScoreType(getPlugin().getSubType());
         ratePay.setLostScoreType(this.getLostType());
         table.getCalculator().addPayDetailed(ratePay);

@@ -44,7 +44,7 @@ public class GameAction extends BaseAction<MjTable> {
         }
 
         if(statusData.getFirst().isAuto()){
-           this.doAction(table,null,statusData.getFirst().getUid(),null);
+            statusData.getFirst().getAction().doAction(table,null,statusData.getFirst().getUid(),null);
             return;
         }
 
@@ -73,11 +73,7 @@ public class GameAction extends BaseAction<MjTable> {
             ItemConsumeManager.getIntance().removeCard(table.getOwnerId(),table.getNeedCard());
         }
         //局数加一
-        if(table.addRound()){
-           table.setGameOverType(GameOverType.SingleOver);
-        }else {
-            table.setGameOverType(GameOverType.AllOver);
-        }
+        table.addRound();
 
         table.sendSettlementMsg();
     }

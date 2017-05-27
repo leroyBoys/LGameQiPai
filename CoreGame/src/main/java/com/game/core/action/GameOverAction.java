@@ -4,6 +4,7 @@ import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
 import com.game.core.room.BaseTableVo;
+import com.game.core.room.GameOverType;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
 
@@ -30,8 +31,14 @@ public class GameOverAction<T extends BaseTableVo> extends BaseAction <T>  {
     @Override
     public void doAction(T table, Response response, int roleId, NetGame.NetOprateData netOprateData) {
         ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),this.getActionType());
-        for(int i= 0;i<optPlugins.size();i++){
-            optPlugins.get(i).doOperation(table,null,0,null);
+        if(optPlugins != null){
+
+            for(int i= 0;i<optPlugins.size();i++){
+                optPlugins.get(i).doOperation(table,null,0,null);
+            }
         }
+
+        GameOverType gameOverType = table.getAttributeValue(BaseTableVo.AttributeKey.AllRount,0)>table.getCurRount()?GameOverType.SingleOver:GameOverType.AllOver;
+        table.setGameOverType(gameOverType);
     }
 }

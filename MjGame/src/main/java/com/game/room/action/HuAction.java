@@ -45,6 +45,7 @@ public class HuAction extends GameOperateAction {
         }
 
         table.addMsgQueueAll(retOperaData.build(),response==null?0:response.getSeq());
+
     }
 
 

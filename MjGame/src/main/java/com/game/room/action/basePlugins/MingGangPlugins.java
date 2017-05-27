@@ -60,7 +60,7 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
 
         PayDetail pay = payment(table,stepGameStatusData);
-
+        pay.setPayType(PayDetail.PayType.ADD);
         this.createCanExecuteAction(table,stepGameStatusData);
 
         MJLog.play("明杠",lastCard,roleId,table);

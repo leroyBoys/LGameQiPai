@@ -18,11 +18,6 @@ public class XXHuPlugins extends HuPlugins<MjTable>{
     }
 
     @Override
-    public void createCanExecuteAction(MjTable room, StepGameStatusData stepGameStatusData) {
-
-    }
-
-    @Override
     public HuPlugins createNew() {
         return new HuPlugins();
     }
@@ -32,6 +27,9 @@ public class XXHuPlugins extends HuPlugins<MjTable>{
         if (stepGameStatusData.getiOptPlugin().getPlugin().getSubType() != this.getPlugin().getSubType()) {
             return false;
         }
+        table.setNextBankerUid(roleId);
+        payment(table,stepGameStatusData);
+        createCanExecuteAction(table,stepGameStatusData);
         return true;
     }
 

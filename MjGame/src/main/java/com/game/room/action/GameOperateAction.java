@@ -1,5 +1,6 @@
 package com.game.room.action;
 
+import com.game.core.action.BaseAction;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.config.TablePluginManager;

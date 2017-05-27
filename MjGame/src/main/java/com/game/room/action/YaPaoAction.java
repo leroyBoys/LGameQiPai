@@ -2,6 +2,7 @@ package com.game.room.action;
 
 import com.game.core.constant.GameConst;
 import com.game.core.room.BaseGameStateData;
+import com.game.room.MjChairInfo;
 import com.game.socket.module.UserVistor;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
@@ -10,6 +11,7 @@ import com.game.core.action.BaseAction;
 import com.game.room.MjTable;
 import com.module.net.NetGame;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,8 +30,14 @@ public class YaPaoAction extends BaseAction<MjTable> {
         if(table.getBankId() == table.getLastBankUid()){
             table.getStatusData().addDoneUid(table.getBankId());
         }
-
-       super.initAction(table);
+        NetGame.NetOprateData netOperate = table.getStatusData().getCanDoDatas(table,0).build();
+        for(int i = 0;i<table.getChairs().length;i++){
+            if(table.getChairs()[i].getId() == table.getBankId()){
+                continue;
+            }
+            table.addMsgQueueAll(netOperate,0);
+        }
+        table.flushMsgQueue();
     }
 
     @Override

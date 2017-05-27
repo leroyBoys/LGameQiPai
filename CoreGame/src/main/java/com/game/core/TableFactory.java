@@ -21,6 +21,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * 2017/4/20.
  */
 public class TableFactory  implements Runnable{
+    private final static String FACTORYPATH="com.game.factory";
     private final static TableFactory factory = new TableFactory();
 
     private Map<Integer,TableProducer> tableFactory = new ConcurrentHashMap<>(10);
@@ -42,7 +43,7 @@ public class TableFactory  implements Runnable{
 
                 PrintTool.info("begin load TableFactory:"+gen.getRoomFactory());
 
-                TableProducer tableProducer = (TableProducer) Class.forName(gen.getRoomFactory()).newInstance();
+                TableProducer tableProducer = (TableProducer) Class.forName(FACTORYPATH+"."+gen.getRoomFactory()).newInstance();
                 tableProducer.setRoomSetting(gen);
                 tableFactory.put(gen.getGameId(),tableProducer );
                 PrintTool.info("end load TableFactory:"+gen.getRoomFactory()+"  suc!");

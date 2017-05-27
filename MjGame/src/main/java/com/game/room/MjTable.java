@@ -234,7 +234,7 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
     public boolean isGameOver() {
         if((type & GameConst.XXMjType.SIFENG) == GameConst.XXMjType.SIFENG){
-            return getCardPool().getRemainCount() == 10;
+            return getCardPool().getRemainCount() == 14;
         }
 
         return getCardPool().getRemainCount() == 0;

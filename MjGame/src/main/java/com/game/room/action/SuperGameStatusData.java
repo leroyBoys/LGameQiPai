@@ -1,8 +1,5 @@
 package com.game.room.action;
 
-import com.game.core.action.GameOverAction;
-import com.game.core.config.IOptPlugin;
-import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseGameStateData;
@@ -48,8 +45,7 @@ public class SuperGameStatusData extends BaseGameStateData {
         }
 
         if(table.isGameOver()){
-            GameOverAction.getInstance().doAction(table,null,0,null);
-            table.setGameOverType(GameOverType.SingleOver);
+            addCanDoDatas(table.getStep(),new StepGameStatusData(com.game.room.action.GameOverAction.getInstance(),roleId));
             return;
         }
 
@@ -295,8 +291,6 @@ public class SuperGameStatusData extends BaseGameStateData {
                 }
             }
         }
-
-        System.out.println("===================do action first:"+firstMatch.getAction().getClass().getSimpleName());
 
         table.addStep();
         table.getStepHistoryManager().add(firstMatch);

@@ -766,6 +766,10 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
         return 0;
     }
 
+    public int getCurRount() {
+        return curRount;
+    }
+
     public boolean isHuAgain() {
         return false;
     }

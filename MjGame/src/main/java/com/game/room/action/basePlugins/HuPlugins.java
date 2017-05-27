@@ -3,6 +3,7 @@ package com.game.room.action.basePlugins;
 import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
+import com.game.core.room.GameOverType;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjCardPoolEngine;
 import com.game.room.MjChairInfo;
@@ -39,6 +40,7 @@ public class HuPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
 
     @Override
     public void createCanExecuteAction(T room,StepGameStatusData stepGameStatusData) {
+        ((SuperGameStatusData)room.getStatusData()).checkMo(room,0);
     }
 
     @Override
@@ -48,9 +50,11 @@ public class HuPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
 
     @Override
     public boolean doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
-       /* if (stepGameStatusData.getiOptPlugin().getPlugin().getSubType() != this.getPlugin().getSubType()) {
+        if (stepGameStatusData.getiOptPlugin().getPlugin().getSubType() != this.getPlugin().getSubType()) {
             return false;
-        }*/
+        }
+        table.setNextBankerUid(roleId);
+        payment(table,stepGameStatusData);
         return true;
     }
 

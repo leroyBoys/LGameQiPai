@@ -2,6 +2,7 @@ package com.game.room.action.basePlugins;
 
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
+import com.game.core.room.calculator.PayDetail;
 import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjChairInfo;
@@ -79,8 +80,11 @@ public class AnGangGangPlugins<T extends MjTable> extends GangPlugins<T>{
         List<Integer> cards = new LinkedList<>();
         cards.add(cardNum);
         chair.getHandsContainer().addOutCard(this.getPlugin().getSubType(), cards);
-        createCanExecuteAction(table,stepGameStatusData);
 
+        PayDetail pay = payment(table,stepGameStatusData);
+        pay.setPayType(PayDetail.PayType.ADD);
+
+        createCanExecuteAction(table,stepGameStatusData);
         MJLog.play("暗杠：",cardNum,roleId,table);
         return true;
     }
