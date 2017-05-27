@@ -43,14 +43,8 @@ public abstract class BaseAction<T extends BaseTableVo> {
      */
     public void initAction(T table){
         NetGame.NetOprateData.Builder netOperate = table.getStatusData().getCanDoDatas(table,0);
-        if(netOperate != null){
-            NetGame.NetKvData.Builder kvData = NetGame.NetKvData.newBuilder();
-            kvData.setK(this.getActionType());
-            netOperate.addKvDatas(kvData);
-            table.addMsgQueueAll(netOperate.build(),0);
-
-            table.flushMsgQueue();
-        }
+        table.addMsgQueueAll(netOperate.build(),0);
+        table.flushMsgQueue();
     }
 
     /**

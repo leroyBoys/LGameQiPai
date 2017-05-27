@@ -10,9 +10,4 @@ import com.game.core.room.ddz.DdzChairStatus;
  * 2017/4/19.
  */
 public class DdzIdleAction extends IdleAction<DDzTable> {
-
-    @Override
-    protected DdzChairStatus getReadyStatus() {
-        return DdzChairStatus.ready;
-    }
 }

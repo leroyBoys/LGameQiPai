@@ -8,7 +8,7 @@ import com.game.core.room.BaseChairInfo;
  */
 public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContainer> {
     /** 数值 */
-    private int yapaoNum = -1;
+    private int yapaoNum;
     /** 过牌的对应值，用于过手碰杠胡  */
     private int passCard;
 
@@ -29,13 +29,9 @@ public class MjChairInfo extends BaseChairInfo<MjChairStatus,MjHandCardsContaine
 
     @Override
     public void clean() {
-        yapaoNum = -1;
+        yapaoNum = 0;
         resetPassCard();
         getHandsContainer().cleanHands();
-    }
-
-    public boolean isCanYaPao() {
-        return yapaoNum==-1;
     }
 
     public int getYapaoNum() {

@@ -5,6 +5,7 @@ import com.game.core.room.interfaces.BaseGameState;
 import com.game.core.room.BaseGameStateData;
 import com.game.room.action.*;
 import com.game.room.status.XXGameStatusData;
+import com.game.room.status.XXYaPaoStatusData;
 
 import static com.game.core.room.SuperCreateNew.CreateNewCache.create;
 
@@ -13,8 +14,8 @@ import static com.game.core.room.SuperCreateNew.CreateNewCache.create;
  * 2017/4/19.
  */
 public enum MjStatus implements BaseGameState {
-    Idle(0,new MjIdleAction(), create(BaseGameStateData.DefaultStatusData.class)),
-    Pao(1,new YaPaoAction(), create(BaseGameStateData.DefaultStatusData.class)),
+    Idle(0,new MjIdleAction(), create(BaseGameStateData.class)),
+    Pao(1,new YaPaoAction(), create(XXYaPaoStatusData.class)),
     DingZhuang(2,new DingZhuangAction(), create(BaseGameStateData.SystemStatusData.class)),
     FaPai(3,new FaPaiAction(), create(BaseGameStateData.SystemStatusData.class)),
     Game(4,new GameAction(), create(XXGameStatusData.class)),

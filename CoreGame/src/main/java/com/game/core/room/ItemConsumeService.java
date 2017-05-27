@@ -50,7 +50,7 @@ public class ItemConsumeService implements ItemConsume {
 
         ///添加
         int logId = (int) (System.currentTimeMillis()/1000);
-        DBServiceManager.getInstance().getUserService().addMoney(roleId,0, LogType.Card,logId);
+        DBServiceManager.getInstance().getUserService().addMoney(roleId,-needCardCount, LogType.Card,logId);
     }
 
     public Set<Integer> getWhiteFilter() {

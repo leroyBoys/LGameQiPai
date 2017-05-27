@@ -10,9 +10,4 @@ import com.game.room.MjTable;
  */
 public class MjIdleAction extends IdleAction<MjTable> {
 
-    @Override
-    protected MjChairStatus getReadyStatus() {
-        return MjChairStatus.ready;
-    }
-
 }

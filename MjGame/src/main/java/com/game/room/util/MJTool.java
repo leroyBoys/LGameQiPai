@@ -14,6 +14,8 @@ public class MJTool {
     /** 中发白 */
     public static final List<Integer> ZHONGFABAI = getList(45,45,45,45,46,46,46,46,47,47,47,47);
 
+    public static final List<Integer> SIFENGZHONGFABAI = getList(1,41,41,41,42,42,42,42,43,43,43,43,44,44,44,44,45,45,45,45,46,46,46,46,47,47,47,47);
+
     private static final List<Integer> getList(Integer... cards){
         List<Integer> list = new LinkedList<>();
         Collections.addAll(list,cards);

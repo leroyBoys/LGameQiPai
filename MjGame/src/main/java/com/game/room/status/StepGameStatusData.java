@@ -16,7 +16,6 @@ import java.util.List;
  * 2017/4/27.
  */
 public class StepGameStatusData {
-    protected static  final Logger playLog = LoggerFactory.getLogger(LogType.Play.getLogName());
     private final IOptPlugin iOptPlugin;
     private final int fromId;
     private final int uid;
@@ -84,7 +83,7 @@ public class StepGameStatusData {
         return uid;
     }
 
-    public void toJson(){
-        playLog.info(action==null?"":action.getClass().getSimpleName()+":cards:"+ Arrays.toString(cards.toArray())+"  subType:"+(iOptPlugin==null?0:iOptPlugin.getPlugin().getSubType())+" /fromId"+fromId+" uid:"+uid);
+    public String toJson(){
+        return action==null?"":action.getClass().getSimpleName()+":cards:"+ Arrays.toString(cards.toArray())+"  subType:"+(iOptPlugin==null?0:iOptPlugin.getPlugin().getSubType())+" /fromId"+fromId+" uid:"+uid;
     }
 }

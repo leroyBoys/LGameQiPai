@@ -4,6 +4,7 @@ import com.game.core.room.BaseChairInfo;
 import com.game.core.room.calculator.DefaultCalculator;
 import com.game.core.room.calculator.PayDetail;
 import com.game.room.MjTable;
+import com.lgame.util.json.JsonUtil;
 import com.module.net.NetGame;
 
 import java.util.*;
@@ -65,6 +66,8 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
                 map.put(payDetail.getStep(),stepPayDetail);
 
                 if(lastPayDetail != null && lastPayDetail.executeCalculator(room)){
+                    logger.info(lastPayDetail.toJson());
+
                     addPayDetails(payList,lastPayDetail.getPayList());
                 }
 
@@ -158,5 +161,7 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
             BaseChairInfo info = room.getChairByUid(entry.getKey());
             info.setTotalScore(info.getTotalScore()+entry.getValue());
         }
+
+        logger.info("gameOver score:"+ JsonUtil.getJsonFromBean(scoreAddDetails));
     }
 }

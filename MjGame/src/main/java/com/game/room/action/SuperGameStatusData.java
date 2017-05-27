@@ -175,6 +175,11 @@ public class SuperGameStatusData extends BaseGameStateData {
     }
 
     @Override
+    public boolean contains(int uid) {
+        return true;
+    }
+
+    @Override
     public synchronized NetGame.NetOprateData.Builder getCanDoDatas(BaseTableVo table, int roleId) {
         if(readStep != writeStep){
             sortCanDoDatas(table);
@@ -187,7 +192,6 @@ public class SuperGameStatusData extends BaseGameStateData {
         roleId = canDoDatas.getFirst().getUid();
         firstActionSet.clear();
         NetGame.NetOprateData.Builder netOprate = super.getCanDoDatas(table,roleId);
-
         netOprate.setUid(roleId);
         for(StepGameStatusData step:canDoDatas){
             if(netOprate.getUid() != step.getUid()){
@@ -303,11 +307,13 @@ public class SuperGameStatusData extends BaseGameStateData {
         firstMatch.getAction().doAction(table,response,roleId,firstMatch);
     }
 
-    public void toJson(){
+    public String toJson(){
+        StringBuilder sb = new StringBuilder();
         Iterator<StepGameStatusData> ites = canDoDatas.iterator();
         while (ites.hasNext()){
             StepGameStatusData tmp = ites.next();
-            tmp.toJson();
+            sb.append(tmp.toJson());
         }
+        return sb.toString();
     }
 }

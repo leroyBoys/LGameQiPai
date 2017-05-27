@@ -1,9 +1,9 @@
 package com.game.core.action;
 
 import com.game.core.constant.GameConst;
-import com.game.core.room.interfaces.BaseChairStatus;
 import com.game.core.room.BaseGameStateData;
 import com.game.core.room.BaseTableVo;
+import com.game.core.room.interfaces.BaseChairStatus;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
 
@@ -12,7 +12,6 @@ import com.module.net.NetGame;
  * 2017/4/19.
  */
 public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
-    protected abstract <S extends BaseChairStatus> S getReadyStatus();
 
     public int getActionType(){
         return GameConst.ACTION_TYPE_READY;
@@ -31,7 +30,7 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
     }
 
     private void ready(T table,int roleId){
-        BaseGameStateData.DefaultStatusData readyStatus = (BaseGameStateData.DefaultStatusData) table.getStatusData();
+        BaseGameStateData readyStatus = table.getStatusData();
 
         if(readyStatus.contains(roleId)){
             return;
@@ -42,7 +41,10 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
         }
 
         //发送数据
-        table.sendChairStatusMsgWithOutUid(roleId);
+        NetGame.NetOprateData.Builder ready = table.getStatusData().getStatusDetail(table);
+        ready.setUid(roleId);
+        table.addMsgQueueAll(ready.build(),0);
+
     }
     
     @Override

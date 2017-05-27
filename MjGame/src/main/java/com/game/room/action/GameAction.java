@@ -79,7 +79,7 @@ public class GameAction extends BaseAction<MjTable> {
             table.setGameOverType(GameOverType.AllOver);
         }
 
-        table.sendSettlementMsg(0);
+        table.sendSettlementMsg();
     }
 
     @Override

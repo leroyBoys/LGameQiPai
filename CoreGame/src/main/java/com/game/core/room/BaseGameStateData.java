@@ -11,6 +11,7 @@ import java.util.Set;
  * 2017/4/19.
  */
 public class BaseGameStateData implements SuperCreateNew{
+    protected Set<Integer> doneUids = new HashSet<>(4);
     private boolean isOver;
 
     public boolean isOver() {
@@ -19,6 +20,9 @@ public class BaseGameStateData implements SuperCreateNew{
 
     public void setOver(boolean over) {
         isOver = over;
+    }
+    public boolean contains(int uid){
+        return doneUids.contains(uid);
     }
 
     public BaseGameStateData createNew(){
@@ -34,76 +38,54 @@ public class BaseGameStateData implements SuperCreateNew{
     public NetGame.NetOprateData.Builder getCanDoDatas(BaseTableVo tableVo,int roleId){
         NetGame.NetOprateData.Builder canDoActions = NetGame.NetOprateData.newBuilder();
         canDoActions.setOtype(GameConst.MJ.ACTION_TYPE_CanDoActions);
+
+        if(!contains(roleId)){
+            NetGame.NetKvData.Builder kvData = NetGame.NetKvData.newBuilder();
+            kvData.setK(tableVo.getStatus().getAction().getActionType());
+            canDoActions.addKvDatas(kvData);
+        }
         return canDoActions;
     }
 
     public NetGame.NetOprateData.Builder getStatusDetail(BaseTableVo tableVo){
         NetGame.NetOprateData.Builder netOpers = NetGame.NetOprateData.newBuilder();
+        netOpers.setOtype(tableVo.getStatus().getAction().getActionType());
+        for(int i = 0;i<tableVo.getChairs().length;i++){
+            if(tableVo.getChairs()[i] == null || !doneUids.contains(tableVo.getChairs()[i].getId())){
+                continue;
+            }
+
+            int id = tableVo.getChairs()[i].getId();
+            NetGame.NetKvData.Builder netKvData = NetGame.NetKvData.newBuilder();
+            netKvData.setK(id);
+            netKvData.setV(1);
+            netOpers.addKvDatas(netKvData);
+        }
+
         return netOpers;
     }
 
-    public static class DefaultStatusData extends BaseGameStateData {
-        private Set<Integer> doneUids = new HashSet<>(4);
-
-        /**
-         * 如果已有则返回-1；否则返回当前的数量
-         * @param uid
-         * @return
-         */
-        public synchronized int addDoneUid(int uid){
-            if(doneUids.contains(uid)){
-                return -1;
-            }
-            doneUids.add(uid);
-            return getDoneSize();
+    /**
+     * 如果已有则返回-1；否则返回当前的数量
+     * @param uid
+     * @return
+     */
+    public synchronized int addDoneUid(int uid){
+        if(doneUids.contains(uid)){
+            return -1;
         }
+        doneUids.add(uid);
+        return getDoneSize();
+    }
 
-        public boolean contains(int uid){
-            return doneUids.contains(uid);
-        }
-
-        public int getDoneSize(){
-            return doneUids.size();
-        }
-
-        public DefaultStatusData createNew(){
-            return new DefaultStatusData();
-        }
-
-        @Override
-        public NetGame.NetOprateData.Builder getCanDoDatas(BaseTableVo tableVo,int roleId) {
-            NetGame.NetOprateData.Builder canDoActions = super.getCanDoDatas(tableVo,roleId);
-            if(!doneUids.contains(roleId)){
-                return canDoActions;
-            }
-
-            return null;
-        }
-
-        @Override
-        public NetGame.NetOprateData.Builder getStatusDetail(BaseTableVo tableVo) {
-            NetGame.NetOprateData.Builder netOpers = super.getStatusDetail(tableVo);
-            for(int i = 0;i<tableVo.getChairs().length;i++){
-                if(tableVo.getChairs()[i] == null){
-                    continue;
-                }
-
-                int id = tableVo.getChairs()[i].getId();
-                NetGame.NetKvData.Builder netKvData = NetGame.NetKvData.newBuilder();
-                netKvData.setK(id);
-                netKvData.setV(doneUids.contains(id)?1:0);
-                netOpers.addKvDatas(netKvData);
-            }
-
-            return netOpers;
-        }
-
+    public int getDoneSize(){
+        return doneUids.size();
     }
 
     public static class SystemStatusData extends BaseGameStateData {
 
-        public DefaultStatusData createNew(){
-            return new DefaultStatusData();
+        public SystemStatusData createNew(){
+            return new SystemStatusData();
         }
 
         @Override

@@ -4,6 +4,7 @@ import com.game.core.dao.mysql.UserDao;
 import com.game.core.dao.redis.UserRedis;
 import com.game.core.service.UserService;
 import com.game.manager.OnlineManager;
+import com.logger.log.GameLog;
 import com.logger.log.SystemLogger;
 import com.logger.type.LogType;
 import com.module.CustomKey;
@@ -186,6 +187,7 @@ public class UserServiceImpl implements UserService {
             updateMoney(uid,money,logFrom,logId);
         }
 
+        GameLog.cardLog(needMoney,uid,0,new Date(),"");
         return money;
     }
 

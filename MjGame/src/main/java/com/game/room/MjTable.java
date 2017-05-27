@@ -9,6 +9,7 @@ import com.game.room.util.MJTool;
 import com.game.socket.module.UserVistor;
 import com.game.util.ProbuffTool;
 import com.lgame.util.comm.RandomTool;
+import com.lsocket.message.Response;
 import com.module.core.ResponseCode;
 import com.module.net.NetGame;
 
@@ -19,12 +20,12 @@ import java.util.*;
  * 2017/4/19.
  */
 public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
-
     /** 庄家id */
     private int bankId;
     ////顺序东北西南->0-3
 
     private int nextBankerUid;
+    protected int lastBankUid;
 
     private final int defaultMaxRate = 10;
     private int maxFan;
@@ -51,7 +52,9 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
     @Override
     public void cleanTableCache() {
-
+        stepHistory.clean();
+        cardPoolEngine.init();
+        calculator.clear();
     }
 
     @Override
@@ -85,16 +88,12 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
         extra.addOperates(ProbuffTool.getTurnData(uid,0,this.getTimeOutRemain()));
 
         NetGame.NetOprateData.Builder netOprateData = getStatusData().getCanDoDatas(this,roleId);
-        if(netOprateData != null){
-            NetGame.NetKvData.Builder kvData = NetGame.NetKvData.newBuilder();
-            kvData.setK(getStatus().getAction().getActionType());
-            netOprateData.addKvDatas(kvData);
+        if(netOprateData.getKvDatasCount() != 0){
             extra.addOperates(netOprateData);
         }
 
         NetGame.NetOprateData.Builder details = getStatusData().getStatusDetail(this);
         if(details!=null){
-            details.setOtype(getStatus().getAction().getActionType());
             extra.addOperates(details);
         }
 
@@ -226,7 +225,7 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
         this.setType(type);
 
         if((type & GameConst.XXMjType.SIFENG) == GameConst.XXMjType.SIFENG){
-            cardPoolEngine.setUserSetStaticCardPool(MJTool.SIFENGPOOL);
+            cardPoolEngine.setUserSetStaticCardPool(MJTool.SIFENGZHONGFABAI);
         }
 
         return ResponseCode.Error.succ;
@@ -243,8 +242,8 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
 
     @Override
-    protected void sendSettlementDetailMsg(int roleId) {
-
+    protected Response getGameOverResult() {
+        return Response.defaultResponse(GameConst.MOUDLE_Mj,MjCmd.Result.getValue(),0, (NetGame.RQREsult) this.getCalculator().executeCalculator());
     }
 
     //////////////////////////////////////////////////////
@@ -260,24 +259,6 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
         return canDoActions;
     }
 
-    /**
-     * h获得压跑数据
-     * @return
-     */
-    public NetGame.NetOprateData.Builder getYaPaoNetOprateData() {
-        NetGame.NetOprateData.Builder yaPao = NetGame.NetOprateData.newBuilder();
-        yaPao.setOtype(GameConst.MJ.ACTION_TYPE_YAPao);
-        for(int i = 0;i<chairs.length;i++){
-            if(chairs[i] == null || chairs[i].isCanYaPao()){
-                continue;
-            }
-            NetGame.NetKvData.Builder netKvData = NetGame.NetKvData.newBuilder();
-            netKvData.setK(chairs[i].getId());
-            netKvData.setV(chairs[i].getYapaoNum());
-            yaPao.addKvDatas(netKvData);
-        }
-        return yaPao;
-    }
     ///////////////////胡牌判断//////////////////////////////////////////
     public boolean checkQYiSe(List<Integer> handCards, List groupCards) {
         return MJTool.oneCorlor(handCards,groupCards);
@@ -304,6 +285,14 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
     public void setMaxFan(int maxFan) {
         this.maxFan = maxFan;
+    }
+
+    public int getLastBankUid() {
+        return lastBankUid;
+    }
+
+    public void setLastBankUid(int lastBankUid) {
+        this.lastBankUid = lastBankUid;
     }
 
     public int getType() {

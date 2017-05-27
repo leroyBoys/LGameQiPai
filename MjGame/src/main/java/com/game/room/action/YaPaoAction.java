@@ -1,6 +1,7 @@
 package com.game.room.action;
 
 import com.game.core.constant.GameConst;
+import com.game.core.room.BaseGameStateData;
 import com.game.socket.module.UserVistor;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
@@ -24,6 +25,10 @@ public class YaPaoAction extends BaseAction<MjTable> {
 
     @Override
     public void initAction(MjTable table) {
+        if(table.getBankId() == table.getLastBankUid()){
+            table.getStatusData().addDoneUid(table.getBankId());
+        }
+
        super.initAction(table);
     }
 
@@ -34,8 +39,7 @@ public class YaPaoAction extends BaseAction<MjTable> {
             return;
         }
         //发送数据
-
-        NetGame.NetOprateData.Builder yaPao = table.getYaPaoNetOprateData();
+        NetGame.NetOprateData.Builder yaPao = table.getStatusData().getStatusDetail(table);
         yaPao.setUid(roleId);
         yaPao.setDval(netOprateData.getDval());
         table.addMsgQueueAll(yaPao.build(),response == null?0:response.getSeq());

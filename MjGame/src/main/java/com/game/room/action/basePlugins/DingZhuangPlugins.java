@@ -22,6 +22,8 @@ public class DingZhuangPlugins<T extends MjTable> extends AbstractStagePlugin<T>
     public boolean doOperation(T table, Response response,int roleId, NetGame.NetOprateData oprateData) {
         if(table.getNextBankerUid() <= 0){
             table.setNextBankerUid(table.getChairs()[0].getId());
+        }else {
+            table.setLastBankUid(table.getBankId());
         }
 
         table.setBankId(table.getNextBankerUid());

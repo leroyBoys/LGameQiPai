@@ -480,7 +480,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
         stats = stats | (chair.isAuto?1>>1:0);
 
         boolean isReady = true;
-        if(status.getValue() == 0 && !((BaseGameStateData.DefaultStatusData)getStatusData()).contains(chair.getId())){
+        if(status.getValue() == 0 && !getStatusData().contains(chair.getId())){
             isReady = false;
         }
 
@@ -639,7 +639,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
     /**
      * 发送结算信息
      */
-    protected abstract void sendSettlementDetailMsg(int roleId);
+    protected abstract Response getGameOverResult();
 
     public void flushMsgQueue() {
         for(int i = 0;i<chairs.length;i++){
@@ -666,7 +666,18 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
         if(getGameOverType() == GameOverType.NULL){
             return;
         }
-        sendSettlementDetailMsg(roleId);
+
+        sendMsgToUid(getGameOverResult(),roleId);
+    }
+
+    /**
+     * 发送结算信息
+     */
+    public void sendSettlementMsg(){
+        if(getGameOverType() == GameOverType.NULL){
+            return;
+        }
+        sendMsgAll(getGameOverResult());
     }
 
     ////////////////////////////////////////////////////////////
