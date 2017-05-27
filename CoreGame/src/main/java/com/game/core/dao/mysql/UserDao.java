@@ -325,7 +325,7 @@ public class UserDao implements Base {
     public void updateCard(int roleId, int card) {
         MethodCacheTime ct = monitor.start();
         try {
-            gamePool.Execute("CALL get_role_by_id(update user_info set card=? where id = ?)",card,roleId);
+            gamePool.Execute("update user_info set card=? where id = ?",card,roleId);
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
@@ -356,5 +356,18 @@ public class UserDao implements Base {
             ct.dbTrace("offLine");
         }
         return false;
+    }
+
+    public int getCardCount(int roleId) {
+        MethodCacheTime ct = monitor.start();
+        try {
+            Integer cardCount = (Integer) gamePool.ExecuteQueryOnlyValue("SELECT card FROM role_info WHERE id = ?", roleId);
+            return cardCount==null?0:cardCount;
+        } catch (Exception ex) {
+            file.ErrorLog(ex, LogType.Error, "db");
+        } finally {
+            ct.dbTrace("getCardCount");
+        }
+        return 0;
     }
 }

@@ -30,6 +30,10 @@ public class CoreDispatcherRmote extends CoreDispatcher<UserVistor,Request> {
                 SystemLogger.error(this.getClass(),e);
             }
 
+            if(visitor.getGameRole() != null){
+                visitor.getGameRole().update();
+            }
+
             UserService userService = DBServiceManager.getInstance().getUserService();
             if(visitor.getRoleInfo() != null){
                 userService.offLine(visitor.getRoleInfo().getUid());

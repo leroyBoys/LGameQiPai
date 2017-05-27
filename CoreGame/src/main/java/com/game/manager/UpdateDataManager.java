@@ -8,7 +8,7 @@ import java.util.Set;
  * Created by leroy:656515489@qq.com
  * 2017/5/10.
  */
-public class UpdateDataManager implements Runnable{
+    public class UpdateDataManager implements Runnable{
     private static UpdateDataManager ourInstance = new UpdateDataManager();
 
     public static UpdateDataManager getInstance() {

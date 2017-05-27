@@ -70,9 +70,9 @@ public interface UserService {
 
     public int addMoney(int uid, int needMoney, LogType logFrom,int logId);
 
-    public void updateRoleInfoRoomid(int roleId, int id);
+    public int updateMoney(int uid, int money, LogType logFrom,int logId);
 
-    public void updateCard(int roleId, int card);
+    public void updateRoleInfoRoomid(int roleId, int id);
 
     public boolean loginConfim(int uid);
 

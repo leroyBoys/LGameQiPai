@@ -1,8 +1,10 @@
 package com.game.core.room;
 
 import com.game.core.room.interfaces.ItemConsume;
+import com.game.manager.DBServiceManager;
 import com.game.manager.OnlineManager;
 import com.game.socket.module.UserVistor;
+import com.logger.type.LogType;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -47,8 +49,8 @@ public class ItemConsumeService implements ItemConsume {
         }
 
         ///添加
-
-        //DBServiceManager.getInstance().getGameRedis()
+        int logId = (int) (System.currentTimeMillis()/1000);
+        DBServiceManager.getInstance().getUserService().addMoney(roleId,0, LogType.Card,logId);
     }
 
     public Set<Integer> getWhiteFilter() {

@@ -4,6 +4,7 @@ import com.game.core.dao.mysql.UserDao;
 import com.game.core.dao.redis.UserRedis;
 import com.game.core.service.UserService;
 import com.game.manager.OnlineManager;
+import com.logger.log.SystemLogger;
 import com.logger.type.LogType;
 import com.module.CustomKey;
 import com.module.ItemData;
@@ -172,22 +173,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int getMoney(int uid) {
-        return 0;
+        return userDao.getCardCount(uid);
     }
 
     @Override
     public int addMoney(int uid, int needMoney, LogType logFrom, int logId) {
-        return getMoney(uid);
+        int money =  getMoney(uid);
+        money+=needMoney;
+        if(money<0 ){
+            updateMoney(uid,0,logFrom,logId);
+        }else {
+            updateMoney(uid,money,logFrom,logId);
+        }
+
+        return money;
+    }
+
+    @Override
+    public int updateMoney(int uid, int money, LogType logFrom, int logId) {
+        userDao.updateCard(uid, money);
+        return money;
     }
 
     @Override
     public void updateRoleInfoRoomid(int roleId, int id) {
 
-    }
-
-    @Override
-    public void updateCard(int roleId, int card) {
-        userDao.updateCard(roleId, card);
     }
 
     @Override

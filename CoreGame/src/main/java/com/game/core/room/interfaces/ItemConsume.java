@@ -1,7 +1,5 @@
 package com.game.core.room.interfaces;
 
-import com.sun.mail.imap.protocol.Item;
-
 /**
  * Created by Administrator on 2017/5/27.
  */
@@ -11,6 +9,14 @@ public interface ItemConsume {
     public void removeCard(int roleId,int needCardCount);
 
     public static class TestItemConsume implements ItemConsume{
+        private static final TestItemConsume intance = new TestItemConsume();
+        private TestItemConsume(){}
+
+        public static final TestItemConsume getIntance(){
+            return intance;
+        }
+
+
         @Override
         public boolean checkCard(int roleId, int needCardCount) {
             return true;

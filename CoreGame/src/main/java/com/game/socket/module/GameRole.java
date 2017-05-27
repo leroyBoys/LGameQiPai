@@ -3,6 +3,7 @@ package com.game.socket.module;
 import com.game.manager.DBServiceManager;
 import com.game.manager.UpdateData;
 import com.game.manager.UpdateDataManager;
+import com.logger.type.LogType;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -62,7 +63,7 @@ public class GameRole extends UpdateData{
 
         if(cardUpdate){
             cardUpdate = false;
-            DBServiceManager.getInstance().getUserService().updateCard(this.roleId,card);
+            DBServiceManager.getInstance().getUserService().updateMoney(this.roleId,card, LogType.Calculator,1);
             DBServiceManager.getInstance().getGameRedis().setCard(this.roleId,card);
         }
     }

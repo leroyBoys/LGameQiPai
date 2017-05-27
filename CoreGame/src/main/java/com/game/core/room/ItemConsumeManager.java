@@ -8,7 +8,7 @@ import com.game.socket.module.UserVistor;
  * Created by Administrator on 2017/5/27.
  */
 public class ItemConsumeManager implements ItemConsume {
-    protected ItemConsumeService itemConsumeService = ItemConsumeService.getIntance();
+    protected ItemConsume itemConsumeService = ItemConsumeService.getIntance();
     private static final ItemConsumeManager intance = new ItemConsumeManager();
     private ItemConsumeManager(){}
 
@@ -28,5 +28,13 @@ public class ItemConsumeManager implements ItemConsume {
 
     public void setItemConsumeService(ItemConsumeService itemConsumeService) {
         this.itemConsumeService = itemConsumeService;
+    }
+
+    public void turnTest(boolean isTest){
+        if(isTest){
+            itemConsumeService =TestItemConsume.getIntance();
+        }else {
+            itemConsumeService =ItemConsumeService.getIntance();
+        }
     }
 }
