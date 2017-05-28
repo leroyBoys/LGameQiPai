@@ -28,7 +28,7 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
         this.ready(table,roleId);
     }
 
-    private void ready(T table,int roleId){
+    protected void ready(T table,int roleId){
         BaseGameStateData readyStatus = table.getStatusData();
 
         if(readyStatus.contains(roleId)){
@@ -57,7 +57,7 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
             if(table.getChairs()[i] == null || (!table.getChairs()[i].isRobot() && !table.getChairs()[i].isAuto())){
                 continue;
             }
-            this.ready(table,table.getChairs()[i].getId());
+            this.doAction(table,null,table.getChairs()[i].getId(),null);
         }
     }
 }
