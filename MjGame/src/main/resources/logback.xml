@@ -22,16 +22,6 @@
         </encoder>
     </appender>
 
-    <appender name="playADetail" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${Log.path}/playADetail-%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>7</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{HH:mm:ss-SSS}|%msg%n</pattern>
-        </encoder>
-    </appender>
-
     <appender name="calculatorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${Log.path}/calculator-%d{yyyy-MM-dd}.log</fileNamePattern>
@@ -79,10 +69,6 @@
         <appender-ref ref="playA" />
     </logger>
 
-    <logger name="playd" additivity="false" level="info">
-        <appender-ref ref="playADetail" />
-    </logger>
-
     <logger name="calculator" additivity="false" level="info">
         <appender-ref ref="calculatorLog" />
     </logger>
@@ -90,7 +76,6 @@
     <logger name="card" additivity="false" level="info">
         <appender-ref ref="cardLog" />
     </logger>
-
 
     <logger name="com.zaxxer.hikari.pool.HikariPool" additivity="false" level="info">
     </logger>
