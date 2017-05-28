@@ -1,5 +1,7 @@
 package com.game.core.config;
 
+import com.lgame.util.comm.StringTool;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,6 +19,13 @@ public class GameSwitch {
     private int switchId;
     private String switchName;
     private boolean isOpen;
+
+    public GameSwitch(){}
+    public GameSwitch(String str){
+        String[] strArray = str.split(StringTool.SIGN3);
+        switchId = Integer.valueOf(strArray[0]);
+        isOpen = strArray.length <2||strArray.equals("0")?false:true;
+    }
 
     @XmlElement(name = "switch")
     public List<GameSwitch> getSwitchList() {

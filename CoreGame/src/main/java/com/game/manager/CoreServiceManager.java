@@ -3,6 +3,8 @@ package com.game.manager;
 import com.game.admin.AdminCmdFilter;
 import com.game.core.TableFactory;
 import com.game.core.TableManager;
+import com.game.core.chat.ChatChannelManager;
+import com.game.core.config.GameSwitchManager;
 import com.game.core.config.TablePluginManager;
 import com.game.core.room.BaseTableVo;
 import com.game.util.TaskScheduler;
@@ -39,6 +41,7 @@ public class CoreServiceManager extends ICommon {
         TablePluginManager.getInstance().refresh("RoomSetting.xls","PluginGen.xls");
         TableFactory.getInstance().initGoodNum("");
         this.taskScheduler = new TaskScheduler(1);
+        GameSwitchManager.getInstance().load(null);
 
         tableThreadPool = new ServiceThreads(4,10);
     }

@@ -1,8 +1,11 @@
 package com.game.core.config;
 
+import com.lgame.util.json.JsonTool;
 import com.lgame.util.load.xml.XmlApi;
 import com.logger.log.SystemLogger;
+import com.mongodb.util.JSON;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -20,16 +23,34 @@ public class GameSwitchManager {
     private GameSwitchManager() {
     }
 
-    public void load(String path ){
-      //  String path = PropertiesTool.getPropertiesPath("gameSwitch.xml");
+    public List<GameSwitch> getSwiths(){
+        String[] arrays = SwithConfig.getInstance().getDetail().split(",");
+        List<GameSwitch> switches = new LinkedList<>();
+        for(String str:arrays){
+            switches.add(new GameSwitch(str));
+        }
+        return switches;
+    }
+
+    public List<GameSwitch> loadXml(String path){
+        //  String path = PropertiesTool.getPropertiesPath("gameSwitch.xml");
         GameSwitch gameSwitch = XmlApi.readObjectFromXml(GameSwitch.class,path);
         if(gameSwitch == null){
+            return null;
+        }
+
+        List<GameSwitch> switches = gameSwitch.getSwitchList();
+        return switches;
+    }
+
+    public void load(String path ){
+        int switchVaule = 0;
+        List<GameSwitch> switches = getSwiths();// loadXml(path);
+        if(switches == null|| switches.isEmpty()){
             SystemLogger.error(this.getClass(),"load GameSwitch faild");
             return;
         }
 
-        int switchVaule = 0;
-        List<GameSwitch> switches = gameSwitch.getSwitchList();
         for(GameSwitch sw:switches){
             if(!sw.isOpen()){
                 continue;
@@ -41,6 +62,7 @@ public class GameSwitchManager {
         }
 
         switchValue = switchVaule;
+        System.out.println(JsonTool.getJsonFromBean(switches));
     }
 
     public boolean isOpen(GameSwitch.Type type){
