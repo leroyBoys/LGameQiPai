@@ -13,7 +13,7 @@ import com.module.net.NetGame;
 public class MjIdleAction extends IdleAction<MjTable> {
     @Override
     public void doAction(MjTable table, Response response, int roleId, NetGame.NetOprateData netOprateData) {
-        if(table.getCurRount() >= table.getAttributeValue(BaseTableVo.AttributeKey.AllRount,0)){
+        if(table.getCurRount() > table.getAttributeValue(BaseTableVo.AttributeKey.AllRount,0)){
             return;
         }
 
