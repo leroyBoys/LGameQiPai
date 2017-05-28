@@ -25,7 +25,6 @@ public class TablePluginManager {
 
     /**  游戏id-插件类型-插件集合 */
     private final Map<Integer,Map<Integer,ArrayList<IOptPlugin>>> optPluginMap = new HashMap<>();
-    private final Map<Integer,Map<Integer,ArrayList<IOptPlugin>>> optCheckPluginMap = new HashMap<>();
 
     private final Map<Integer,PluginGen> pluginGenMap = new HashMap<>();
 
@@ -60,12 +59,7 @@ public class TablePluginManager {
                 if(!roomSettingMap.containsKey(gameId)){
                     continue;
                 }
-                if(optPlugin instanceof IPluginCheckCanExecuteAction){
-                    this.addOptPluginMap(optCheckPluginMap,gameId,optPlugin);
-                }
-
                 this.addOptPluginMap(optPluginMap,gameId,optPlugin);
-
             }
 
         }
@@ -93,10 +87,6 @@ public class TablePluginManager {
     }
 
     public ArrayList<IOptPlugin> getOptPlugin(int gameId,int actionType){
-        return optPluginMap.get(gameId).get(actionType);
-    }
-
-    public ArrayList<IOptPlugin> getICheckOptPlugin(int gameId,int actionType){
         return optPluginMap.get(gameId).get(actionType);
     }
 

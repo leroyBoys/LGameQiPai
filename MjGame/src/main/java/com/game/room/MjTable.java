@@ -52,6 +52,7 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
     @Override
     public void cleanTableCache() {
+        super.cleanTableCache();
         stepHistory.clean();
         cardPoolEngine.init();
         calculator.clear();

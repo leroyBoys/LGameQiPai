@@ -15,11 +15,11 @@ public class XXGameStatusData extends SuperGameStatusData {
         return new XXGameStatusData();
     }
 
-    protected boolean checkCanChi(MjChairInfo chairInfo,int card){
+    protected boolean checkCanChi(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
         return false;
     }
 
-    protected HuAction.CheckHuType checkCanHu(MjChairInfo chairInfo, int card){
+    protected HuAction.CheckHuType checkCanHu(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
         if(!chairInfo.isCanDo()){
             return HuAction.CheckHuType.NULL;
         }
@@ -27,19 +27,19 @@ public class XXGameStatusData extends SuperGameStatusData {
     }
 
     @Override
-    protected boolean checkCanPeng(MjChairInfo chairInfo, int card) {
+    protected boolean checkCanPeng(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
         if(!chairInfo.isCanDo()){
             return false;
         }
 
-        return super.checkCanPeng(chairInfo, card);
+        return super.checkCanPeng(chairInfo,stepGameStatusData, card);
     }
 
     @Override
-    protected boolean checkCanGang(MjChairInfo chairInfo, int card) {
+    protected boolean checkCanGang(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
         if(!chairInfo.isCanDo()){
             return false;
         }
-        return super.checkCanGang(chairInfo, card);
+        return super.checkCanGang(chairInfo, stepGameStatusData,card);
     }
 }

@@ -14,6 +14,10 @@ import java.util.*;
  * 2017/5/27.
  */
 public class MjCalculator extends DefaultCalculator<MjTable> {
+    ////上一个补杠
+    protected PayDetail lastBuGang;
+
+
     /** 每一步的得失分条目列表 */
     private ArrayList<PayDetail> payDetailList = new ArrayList<>();
     private NetGame.RQREsult rqrEsult;
@@ -163,5 +167,13 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
         }
 
         logger.info("gameOver score:"+ JsonUtil.getJsonFromBean(scoreAddDetails));
+    }
+
+    public PayDetail getLastBuGang() {
+        return lastBuGang;
+    }
+
+    public void setLastBuGang(PayDetail lastBuGang) {
+        this.lastBuGang = lastBuGang;
     }
 }

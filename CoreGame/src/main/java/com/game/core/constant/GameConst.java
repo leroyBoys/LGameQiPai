@@ -59,7 +59,20 @@ public class GameConst {
         /** 听牌 */
         public static final int ACTION_TYPE_TING = 240;
         /** 胡牌 */
+        //250：平胡
         public static final int ACTION_TYPE_HU = 250;
+        //251：自摸
+        public static final int ACTION_TYPE_ZIMO = 251;
+        //252:七对
+        public static final int ACTION_TYPE_QIDUI = 252;
+        //253:一色
+        public static final int ACTION_TYPE_YISE = 253;
+        //254:抢杠胡
+        public static final int ACTION_TYPE_QIANGGANGHU = 254;
+        ///255：杠上开花
+        public static final int ACTION_TYPE_GANGSHANGHUA = 255;
+        ///256：杠后胡
+        public static final int ACTION_TYPE_GANGHOUHU = 256;
 
     }
 
@@ -74,7 +87,10 @@ public class GameConst {
     }
 
     public static class XXMjType{
+        ////四风
         public static final int SIFENG = 1;
+        /** 是否自摸 */
+        public static final int ZIMO = 1<<1;
 
     }
 

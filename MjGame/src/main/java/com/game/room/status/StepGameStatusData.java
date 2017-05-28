@@ -84,6 +84,6 @@ public class StepGameStatusData {
     }
 
     public String toJson(){
-        return action==null?"":action.getClass().getSimpleName()+":cards:"+ Arrays.toString(cards.toArray())+"  subType:"+(iOptPlugin==null?0:iOptPlugin.getPlugin().getSubType())+" /fromId"+fromId+" uid:"+uid;
+        return isAuto+"--"+action==null?"":action.getClass().getSimpleName()+":cards:"+ (cards==null?"[]":Arrays.toString(cards.toArray()))+"  subType:"+(iOptPlugin==null?0:iOptPlugin.getPlugin().getSubType())+" /fromId"+fromId+" uid:"+uid;
     }
 }

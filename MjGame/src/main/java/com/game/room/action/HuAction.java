@@ -1,7 +1,7 @@
 package com.game.room.action;
 
 import com.game.core.config.IOptPlugin;
-import com.game.core.config.IPluginCheckCanExecuteAction;
+import com.game.room.action.basePlugins.IPluginCheckCanExecuteAction;
 import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
 import com.game.room.MjChairInfo;
@@ -30,7 +30,7 @@ public class HuAction extends GameOperateAction {
     }
 
     @Override
-    protected void doAction(MjTable table, Response response, int roleId, StepGameStatusData stepStatusData){
+    protected void doAction(MjTable table, Response response, int roleId, StepGameStatusData stepStatusData,NetGame.NetOprateData netOprateData){
         NetGame.NetOprateData.Builder retOperaData = NetGame.NetOprateData.newBuilder();
         retOperaData.setOtype(this.getActionType());
         retOperaData.setUid(roleId);
@@ -48,9 +48,9 @@ public class HuAction extends GameOperateAction {
 
     }
 
-
-    public void check(MjChairInfo chairInfo, int card, Object parems){
-        ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getICheckOptPlugin(chairInfo.getTableVo().getGameId(),this.getActionType());
+    @Override
+    public void check(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card, Object parems){
+        ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(chairInfo.getTableVo().getGameId(),this.getActionType());
         if(optPlugins == null){
             return;
         }
@@ -58,11 +58,15 @@ public class HuAction extends GameOperateAction {
         final CheckHuType checkHuType = (CheckHuType) parems;
 
         for(int i= 0;i<optPlugins.size();i++){
-            if(((IPluginCheckCanExecuteAction)optPlugins.get(i)).checkExecute(chairInfo,card,parems)){
-                if(checkHuType == CheckHuType.Hu){
-                    return;
+            if(optPlugins.get(i) instanceof IPluginCheckCanExecuteAction){
+
+                if(((IPluginCheckCanExecuteAction)optPlugins.get(i)).checkExecute(stepGameStatusData,chairInfo,card,parems)){
+                    if(checkHuType == CheckHuType.Hu){
+                        return;
+                    }
                 }
             }
+
         }
     }
 

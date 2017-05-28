@@ -1,5 +1,6 @@
 package com.game.room.action.plugins;
 
+import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
 import com.game.room.MjTable;
@@ -13,8 +14,13 @@ import com.lsocket.message.Response;
  */
 public class XXHuPlugins extends HuPlugins<MjTable>{
     @Override
-    public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
-        return false;
+    public boolean checkExecute(StepGameStatusData stepGameStatusData,BaseChairInfo chair, int card, Object parems) {
+        if((((MjTable)chair.getTableVo()).getType() & GameConst.XXMjType.ZIMO )== GameConst.XXMjType.ZIMO){
+           if(card != 0){
+               return false;
+           }
+        }
+        return super.checkExecute(stepGameStatusData,chair,card,parems);
     }
 
     @Override

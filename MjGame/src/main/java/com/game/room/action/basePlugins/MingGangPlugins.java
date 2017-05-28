@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
     @Override
-    public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
+    public boolean checkExecute(StepGameStatusData stepGameStatusData,BaseChairInfo chair, int card, Object parems) {
 
         MjAutoCacheHandContainer mjAutoCache = (MjAutoCacheHandContainer) chair.getHandsContainer().getAutoCacheHands();
         if(mjAutoCache.getCardCount(card) <3){
@@ -29,7 +29,7 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
         }
 
         SuperGameStatusData gameStatusData= (SuperGameStatusData) chair.getTableVo().getStatusData();
-        gameStatusData.addCanDoDatas(chair.getTableVo().getStep(),new StepGameStatusData(GangAction.getInstance(),chair.getId(),chair.getId(),card,this));
+        gameStatusData.addCanDoDatas(chair.getTableVo().getStep(),new StepGameStatusData(GangAction.getInstance(),stepGameStatusData.getUid(),chair.getId(),card,this));
         return false;
     }
 

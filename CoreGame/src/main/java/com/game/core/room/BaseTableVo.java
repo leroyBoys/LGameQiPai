@@ -322,6 +322,10 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
         return focsIndex;
     }
 
+    public int nextUid(int uid) {
+        return chairs[nextFocusIndex(getChairByUid(uid).getIdx())].getId();
+    }
+
     public boolean isGameOver() {
         return getCardPool().getRemainCount() == 0;
     }
@@ -331,17 +335,17 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
 
     public abstract int getGameResponseModule();
 
-    public void sendGameResponse(NetGame.NetOprateData hands,UserVistor vistor,int seq) {
+    public void sendGameResponse(NetGame.NetOprateData operates,UserVistor vistor,int seq) {
         Response response = Response.defaultResponse(getGameResponseModule(),getGameResponseCmd(),seq);
         NetGame.NetResponse.Builder netResponse = getNetRespose();
-        netResponse.addOperateDatas(hands);
+        netResponse.addOperateDatas(operates);
         response.setObj(netResponse.build());
         vistor.sendMsg(response);
     }
 
-    public void sendGameResponse(List<NetGame.NetOprateData> hands,UserVistor vistor,int seq) {
+    public void sendGameResponse(List<NetGame.NetOprateData> operates,UserVistor vistor,int seq) {
         Response response = Response.defaultResponse(getGameResponseModule(),getGameResponseCmd(),seq);
-        NetGame.NetResponse netResponse = getNetRespose(hands);
+        NetGame.NetResponse netResponse = getNetRespose(operates);
         response.setObj(netResponse);
         vistor.sendMsg(response);
     }
@@ -350,22 +354,22 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
         return Response.defaultResponse(getGameResponseModule(),getGameResponseCmd(),0);
     }
 
-    public void sendGameResponse(NetGame.NetOprateData hands,int roleId,int seq) {
+    public void sendGameResponse(NetGame.NetOprateData operates,int roleId,int seq) {
         UserVistor v = OnlineManager.getIntance().getRoleId(roleId);
         if(v == null){
             return;
         }
-        sendGameResponse(hands,v,seq);
+        sendGameResponse(operates,v,seq);
     }
 
-    public void sendGameResponse(List<NetGame.NetOprateData> hands,int roleId,int seq) {
+    public void sendGameResponse(List<NetGame.NetOprateData> operates,int roleId,int seq) {
         UserVistor v = OnlineManager.getIntance().getRoleId(roleId);
         if(v == null){
             return;
         }
 
         Response response = getGameResponse();
-        response.setObj(getNetRespose(hands));
+        response.setObj(getNetRespose(operates));
         v.sendMsg(response);
     }
 

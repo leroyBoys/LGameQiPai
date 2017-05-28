@@ -1,8 +1,6 @@
 package com.game.room.action.basePlugins;
 
-import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.room.BaseChairInfo;
-import com.game.core.room.BaseTableVo;
 import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjCardPoolEngine;
@@ -16,7 +14,6 @@ import com.lsocket.message.Response;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -24,9 +21,8 @@ import java.util.Map;
  */
 public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction<T,StepGameStatusData>{
     @Override
-    public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
-        StepGameStatusData lastStep = (StepGameStatusData) chair.getTableVo().getStepHistoryManager().getLastStep();
-        int fromId = lastStep.getUid();
+    public boolean checkExecute(StepGameStatusData stepGameStatusData,BaseChairInfo chair, int card, Object parems) {
+        int fromId = stepGameStatusData.getUid();
 
         MjAutoCacheHandContainer mjAutoCache = (MjAutoCacheHandContainer) chair.getHandsContainer().getAutoCacheHands();
         SuperGameStatusData gameStatusData= (SuperGameStatusData) chair.getTableVo().getStatusData();
@@ -50,12 +46,11 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
 
     @Override
     public void createCanExecuteAction(T table,StepGameStatusData stepGameStatusData) {
-        StepGameStatusData lastStep = (StepGameStatusData) table.getStepHistoryManager().getLastStep();
-        MjChairInfo info = table.getChairByUid(lastStep.getUid());
+        MjChairInfo info = table.getChairByUid(stepGameStatusData.getUid());
         SuperGameStatusData gameStatusData= table.getStatusData();
-        gameStatusData.checkGang(info,0);
-        gameStatusData.checkHu(info,0);
-        gameStatusData.checkDa(info,0);
+        gameStatusData.checkGang(info,stepGameStatusData,0);
+        gameStatusData.checkHu(info,stepGameStatusData,0);
+        gameStatusData.checkDa(info);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.card.AutoCacheHandContainer;
 import com.game.room.status.StepGameStatusData;
+import com.lgame.util.comm.RandomTool;
 import com.lgame.util.json.JsonTool;
 import com.logger.type.LogType;
 import com.module.net.NetGame;
@@ -84,7 +85,7 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
 
     public NetGame.NetOprateData Da( BaseChairInfo info,StepGameStatusData stepStatus) {
         NetGame.NetOprateData.Builder retData = NetGame.NetOprateData.newBuilder();
-        retData.addDlist(info.getHandsContainer().getHandCards().get(0));
+        retData.addDlist(getAutoDaCard(info.getHandsContainer().getHandCards()));
         retData.setOtype(stepStatus.getAction().getActionType());
         return retData.build();
     }
@@ -96,9 +97,13 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
         return retData.build();
     }
 
-    public NetGame.NetOprateData Peng( BaseChairInfo info,StepGameStatusData stepStatus) {
+    public NetGame.NetOprateData Peng(BaseChairInfo info,StepGameStatusData stepStatus) {
         NetGame.NetOprateData.Builder retData = NetGame.NetOprateData.newBuilder();
-        retData.setOtype(stepStatus.getAction().getActionType());
+        if(RandomTool.Next(10)<7){
+            retData.setOtype(GameConst.MJ.ACTION_TYPE_GUO);
+        }else {
+            retData.setOtype(stepStatus.getAction().getActionType());
+        }
         return retData.build();
     }
 
@@ -208,8 +213,88 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
     }
 
     public String toJson(){
-        String str = "cache:"+ Arrays.toString(getCardCounts())+" cards-num:"+ JsonTool.getJsonFromBean(getCardNumMap());
+        String str = "cache:"+" cards-num:"+ JsonTool.getJsonFromBean(getCardNumMap()+ "  "+Arrays.toString(getCardCounts()));
         playLog.info(str);
         return str;
+    }
+
+
+
+    public int getAutoDaCard(List<Integer> hands){
+        Map<Integer,Integer> cardNumMap = new HashMap<>(5);
+        ArrayList<Integer> cardNumLinks = new ArrayList<>(10);
+        for (Integer c : hands) {
+            Integer cardNum = cardNumMap.get(c);
+            if(cardNum == null){
+                cardNum = 0;
+                cardNumLinks.add(c);
+            }
+            cardNumMap.put(c,cardNum+1);
+        }
+
+        Collections.sort(cardNumLinks);
+
+
+        Set<Integer> moreThree = new HashSet<>();
+        ArrayList<Integer> tempLinks = new ArrayList<>(3);
+        List<ArrayList<Integer>> templisks = new ArrayList<>();
+
+        for(Integer cardNum:cardNumLinks){//去单
+            if(cardNumMap.get(cardNum) > 2){
+                moreThree.add(cardNum);
+                continue;
+            }
+
+            if(tempLinks.size() == 0){
+            }else if(Math.abs(tempLinks.get(tempLinks.size()-1) - cardNum) == 1){
+            }else if(tempLinks.size() == 1){
+                if(cardNumMap.get(tempLinks.get(0)) != 2){
+                    return tempLinks.get(0);
+                }
+                tempLinks.clear();
+            }else if(tempLinks.size() == 2){
+
+                for(Integer c:tempLinks){
+                    if(cardNumMap.get(c) != 2){
+                        return c;
+                    }
+                }
+
+                templisks.add(tempLinks);
+                tempLinks= new ArrayList<>(3);
+            }else {
+                if(!tempLinks.isEmpty()){
+                    templisks.add(tempLinks);
+                    tempLinks = new ArrayList<>(3);
+                }
+            }
+            tempLinks.add(cardNum);
+        }
+
+        if(tempLinks.size() == 1){
+            if(cardNumMap.get(tempLinks.get(0)) != 2){
+                return tempLinks.get(0);
+            }
+        }else if(tempLinks.size() == 2){
+            for(Integer c:tempLinks){
+                if(cardNumMap.get(c) != 2){
+                    return c;
+                }
+            }
+            templisks.add(tempLinks);
+        }
+
+        if(!templisks.isEmpty()){
+            return templisks.get(RandomTool.Next(templisks.size())).get(0);
+        }
+
+        for(Integer cardNum:cardNumLinks){
+            if(moreThree.contains(cardNum)){
+                continue;
+            }
+            return cardNum;
+        }
+
+        return hands.get(0);
     }
 }

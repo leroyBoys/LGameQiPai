@@ -5,6 +5,7 @@ import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseGameStateData;
 import com.game.core.room.BaseTableVo;
 import com.game.core.room.GameOverType;
+import com.game.log.MJLog;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.game.room.action.*;
@@ -34,6 +35,8 @@ public class SuperGameStatusData extends BaseGameStateData {
     public void addCanDoDatas(int step, StepGameStatusData stepGameStatusData){
         canDoDatas.add(stepGameStatusData);
 
+        MJLog.canDoActions2("writeStep:"+writeStep+" readStep:"+readStep,step,this);
+
         if(this.writeStep != step){
             this.writeStep = step;
         }
@@ -52,81 +55,70 @@ public class SuperGameStatusData extends BaseGameStateData {
         addCanDoDatas(table.getStep(),new StepGameStatusData(MoAction.getInstance(),roleId));
     }
 
-    protected boolean checkCanGang(MjChairInfo chairInfo, int card){
-        StepGameStatusData last = (StepGameStatusData) chairInfo.getTableVo().getStepHistoryManager().getLastStep();
-        if(card>0){
-            if(last.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_DA){
-                return false;
-            }
-        }else if(last.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_MOPAI){
+    protected boolean checkCanGang(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
+        if(stepGameStatusData.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_DA && stepGameStatusData.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_MOPAI){
             return false;
         }
 
         return true;
     }
 
-    public final void checkGang(MjChairInfo chairInfo,int card) {
-        if(!checkCanGang(chairInfo,card)){
+    public final void checkGang(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData,int card) {
+        if(!checkCanGang(chairInfo,stepGameStatusData,card)){
             return;
         }
 
-        GangAction.getInstance().check(chairInfo,card,null);
+        GangAction.getInstance().check(chairInfo,stepGameStatusData,card,null);
     }
 
-    protected boolean checkCanChi(MjChairInfo chairInfo,int card){
-        StepGameStatusData last = (StepGameStatusData) chairInfo.getTableVo().getStepHistoryManager().getLastStep();
-        if(last.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_DA || card <= 0){
-            return false;
-        }
-        BaseChairInfo lastUserInfo = chairInfo.getTableVo().getChairByUid(last.getUid());
-        if(chairInfo.getIdx() != chairInfo.getTableVo().nextFocusIndex(lastUserInfo.getIdx())){
+    protected boolean checkCanChi(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
+        if(stepGameStatusData.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_DA || card <= 0){
             return false;
         }
         return true;
     }
 
-    public final void checkChi(MjChairInfo chairInfo,int card) {
-        if(!checkCanChi(chairInfo,card)){
+    public final void checkChi(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
+        if(!checkCanChi(chairInfo,stepGameStatusData,card)){
             return;
         }
 
-        ChiAction.getInstance().check(chairInfo,card,null);
+        ChiAction.getInstance().check(chairInfo,stepGameStatusData,card,null);
     }
 
-    protected boolean checkCanPeng(MjChairInfo chairInfo,int card){
-        StepGameStatusData last = (StepGameStatusData) chairInfo.getTableVo().getStepHistoryManager().getLastStep();
-        if(last.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_DA || card <= 0){
+    protected boolean checkCanPeng(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
+        if(stepGameStatusData.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_DA || card <= 0){
             return false;
         }
 
         return true;
     }
 
-    public final void checkPeng(MjChairInfo chairInfo,int card) {
-        if(!checkCanPeng(chairInfo,card)){
+    public final void checkPeng(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
+        if(!checkCanPeng(chairInfo,stepGameStatusData,card)){
             return;
         }
 
-        PengAction.getInstance().check(chairInfo,card,null);
+        PengAction.getInstance().check(chairInfo,stepGameStatusData,card,null);
     }
 
 
-    protected HuAction.CheckHuType checkCanHu(MjChairInfo chairInfo, int card){
+    protected HuAction.CheckHuType checkCanHu(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
         return HuAction.CheckHuType.Hu;
     }
 
-    public final void checkHu(MjChairInfo chairInfo,int card) {
-        HuAction.CheckHuType checkHuType = checkCanHu(chairInfo,card);
+    public final void checkHu(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
+        HuAction.CheckHuType checkHuType = checkCanHu(chairInfo,stepGameStatusData,card);
         if(checkHuType == HuAction.CheckHuType.NULL){
             return;
         }
 
-        HuAction.getInstance().check(chairInfo,card,checkHuType);
+        HuAction.getInstance().check(chairInfo,stepGameStatusData,card,checkHuType);
     }
 
-    public void checkDa(MjChairInfo chairInfo, int card) {
+    public void checkDa(MjChairInfo chairInfo) {
         if(canDoDatas.isEmpty()){
-            DaAction.getIntance().check(chairInfo,0,null);
+            DaAction.getIntance().check(chairInfo,null,0,null);
         }
     }
 
@@ -165,8 +157,8 @@ public class SuperGameStatusData extends BaseGameStateData {
     }
 
     public boolean isEmpty(){
-        System.out.println("===========canDoDatasLength:"+canDoDatas.size());
 
+        System.out.println("========="+(canDoDatas.isEmpty()?0:canDoDatas.getFirst().getAction().getClass().getSimpleName()));
         return canDoDatas.isEmpty();
     }
 
@@ -224,6 +216,12 @@ public class SuperGameStatusData extends BaseGameStateData {
     }
 
     public synchronized boolean checkMatch(MjTable table, int roleId, NetGame.NetOprateData netOprateData, Response response){
+        MJLog.requset(netOprateData,roleId,table);
+
+        if(canDoDatas.isEmpty()){
+            return false;
+        }
+
         if(canDoDatas.getFirst().isAuto()){
             this.next(canDoDatas.getFirst(),table,response,roleId,netOprateData);
             return true;
@@ -231,12 +229,17 @@ public class SuperGameStatusData extends BaseGameStateData {
 
 
         if(netOprateData.getOtype() == GameConst.MJ.ACTION_TYPE_GUO){
+
             if(canDoDatas.isEmpty() || canDoDatas.getFirst().getUid() != roleId){
                 table.sendError(ResponseCode.Error.parmter_error,roleId);
                 return false;
             }
 
             clearCanDoDatas(roleId);
+            if(netOprateData.getDlistCount() != 0){
+                table.getChairByUid(roleId).setPassCard(netOprateData.getDlist(0));
+            }
+
             table.addMsgQueue(roleId,netOprateData,response==null?0:response.getSeq());
 
             checkMo(table,table.getChairs()[table.nextFocusIndex(table.getFocusIdex())].getId());
@@ -279,7 +282,7 @@ public class SuperGameStatusData extends BaseGameStateData {
     }
 
     private void next(StepGameStatusData firstMatch, MjTable table, Response response,int roleId,NetGame.NetOprateData netOprateData){
-        if(firstMatch.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_HU){
+       if(firstMatch.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_HU){
             canDoDatas.clear();
         }else {//如果是胡牌操作，
             Iterator<StepGameStatusData> ites = canDoDatas.iterator();
@@ -292,17 +295,17 @@ public class SuperGameStatusData extends BaseGameStateData {
             }
         }
 
-        table.addStep();
-        table.getStepHistoryManager().add(firstMatch);
-
-        if(netOprateData != null){
-            firstMatch.setCards(netOprateData.getDlistList());
+        if(firstMatch.getAction().getActionType() != 0){
+            table.addStep();
+            table.getStepHistoryManager().add(firstMatch);
         }
-        firstMatch.getAction().doAction(table,response,roleId,firstMatch);
+
+        firstMatch.getAction().doAction(table,response,roleId,firstMatch,netOprateData);
+
     }
 
     public String toJson(){
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(" size:"+canDoDatas.size()+"  ");
         Iterator<StepGameStatusData> ites = canDoDatas.iterator();
         while (ites.hasNext()){
             StepGameStatusData tmp = ites.next();

@@ -1,8 +1,7 @@
 package com.game.room.action;
 
-import com.game.core.action.BaseAction;
 import com.game.core.config.IOptPlugin;
-import com.game.core.config.IPluginCheckCanExecuteAction;
+import com.game.room.action.basePlugins.IPluginCheckCanExecuteAction;
 import com.game.core.config.TablePluginManager;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
@@ -19,34 +18,28 @@ import java.util.ArrayList;
 public abstract class GameOperateAction<T extends MjTable> {
     public abstract int getActionType();
 
-    protected void doAction(T table, Response response, int roleId, StepGameStatusData stepStatusData){
-        NetGame.NetOprateData.Builder retOperaData = NetGame.NetOprateData.newBuilder();
-        retOperaData.setOtype(this.getActionType());
-        retOperaData.setUid(roleId);
-
-        if(!stepStatusData.getCards().isEmpty()){
-            retOperaData.setDval(stepStatusData.getCards().get(0));
-        }
+    protected void doAction(T table, Response response, int roleId, StepGameStatusData stepStatusData,NetGame.NetOprateData netOprateData){
         ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(table.getGameId(),this.getActionType());
         for(int i= 0;i<optPlugins.size();i++){
             if(!optPlugins.get(i).doOperation(table,response,roleId,stepStatusData)){
                 continue;
             }
         }
-
-        table.addMsgQueueAll(retOperaData.build(),response==null?0:response.getSeq());
+        table.addMsgQueueAll(netOprateData,response==null?0:response.getSeq());
     }
 
-    public void check(MjChairInfo chairInfo, int card,Object parems){
-        ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getICheckOptPlugin(chairInfo.getTableVo().getGameId(),this.getActionType());
+    public void check(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card,Object parems){
+        ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(chairInfo.getTableVo().getGameId(),this.getActionType());
         if(optPlugins == null){
             return;
         }
 
         for(int i= 0;i<optPlugins.size();i++){
-           if(((IPluginCheckCanExecuteAction)optPlugins.get(i)).checkExecute(chairInfo,card,parems)){
-               return;
-           }
+            if(optPlugins.get(i) instanceof IPluginCheckCanExecuteAction){
+                if(((IPluginCheckCanExecuteAction)optPlugins.get(i)).checkExecute(stepGameStatusData,chairInfo,card,parems)){
+                    return;
+                }
+            }
         }
     }
 

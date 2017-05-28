@@ -35,7 +35,7 @@ public class PayDetail {
     }
 
     public boolean isValid() {
-        if(!isValid || rate < 1){
+        if(!isValid){
             return false;
         }
 

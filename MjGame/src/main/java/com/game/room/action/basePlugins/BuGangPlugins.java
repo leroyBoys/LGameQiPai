@@ -8,6 +8,7 @@ import com.game.log.MJLog;
 import com.game.room.*;
 import com.game.room.action.GangAction;
 import com.game.room.action.SuperGameStatusData;
+import com.game.room.calculator.MjCalculator;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
@@ -19,10 +20,8 @@ import java.util.*;
  */
 public class BuGangPlugins<T extends MjTable> extends GangPlugins<T>{
     @Override
-    public final boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
-
-        StepGameStatusData lastStep = (StepGameStatusData) chair.getTableVo().getStepHistoryManager().getLastStep();
-        if(lastStep.getUid() != chair.getId() || lastStep.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_MOPAI){
+    public final boolean checkExecute(StepGameStatusData stepGameStatusData,BaseChairInfo chair, int card, Object parems) {
+        if(stepGameStatusData.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_MOPAI){
             return false;
         }
 
@@ -56,13 +55,12 @@ public class BuGangPlugins<T extends MjTable> extends GangPlugins<T>{
     @Override
     public void createCanExecuteAction(T table, StepGameStatusData stepGameStatusData) {
         SuperGameStatusData statusData = table.getStatusData();
-        StepGameStatusData lastStep = (StepGameStatusData) table.getStepHistoryManager().getLastStep();
-        int card = lastStep.getCards().get(0);
+        int card = stepGameStatusData.getCards().get(0);
         for(int i = 0;i<table.getChairs().length;i++){
             if(table.getChairs()[i] == null || i == table.getFocusIdex()){
                 continue;
             }
-            statusData.checkHu(table.getChairs()[i],card);
+            statusData.checkHu(table.getChairs()[i],stepGameStatusData,card);
         }
 
         statusData.checkMo(table,stepGameStatusData.getUid());
@@ -100,6 +98,8 @@ public class BuGangPlugins<T extends MjTable> extends GangPlugins<T>{
 
         PayDetail pay = payment(table,stepGameStatusData);
         pay.setPayType(PayDetail.PayType.ADD);
+
+        ((MjCalculator)table.getCalculator()).setLastBuGang(pay);
         MJLog.play("补杠",cardNum,roleId,table);
         return true;
     }

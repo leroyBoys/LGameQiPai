@@ -4,6 +4,7 @@ import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
+import com.module.net.NetGame;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -23,7 +24,7 @@ public class GameOverAction extends GameOperateAction {
     }
 
     @Override
-    protected void doAction(MjTable table, Response response, int roleId,StepGameStatusData stepStatusData) {
+    protected void doAction(MjTable table, Response response, int roleId,StepGameStatusData stepStatusData,NetGame.NetOprateData netOprateData) {
         com.game.core.action.GameOverAction.getInstance().doAction(table,response,roleId,null);
     }
 
@@ -32,7 +33,8 @@ public class GameOverAction extends GameOperateAction {
         return 0;
     }
 
-    public void check(MjChairInfo chairInfo, int card, Object parems){
+    @Override
+    public void check(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card, Object parems){
     }
 
 }

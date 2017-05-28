@@ -1,18 +1,13 @@
 package com.game.room.action.basePlugins;
 
-import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.room.BaseChairInfo;
-import com.game.core.room.BaseTableVo;
 import com.game.log.MJLog;
-import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjChairInfo;
-import com.game.room.MjHandCardsContainer;
 import com.game.room.MjTable;
 import com.game.room.action.SuperGameStatusData;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,7 +16,7 @@ import java.util.List;
  */
 public class MoPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction<T,StepGameStatusData>{
     @Override
-    public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
+    public boolean checkExecute(StepGameStatusData stepGameStatusData,BaseChairInfo chair, int card, Object parems) {
         return false;
     }
 
@@ -29,9 +24,9 @@ public class MoPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
     public void createCanExecuteAction(T table, StepGameStatusData stepGameStatusData) {
         SuperGameStatusData statusData = table.getStatusData();
         MjChairInfo chairInfo = table.getChairs()[table.getFocusIdex()];
-        statusData.checkGang(chairInfo,0);
-        statusData.checkHu(chairInfo,0);
-        statusData.checkDa(chairInfo,0);
+        statusData.checkGang(chairInfo,stepGameStatusData,0);
+        statusData.checkHu(chairInfo,stepGameStatusData,0);
+        statusData.checkDa(chairInfo);
     }
 
     @Override

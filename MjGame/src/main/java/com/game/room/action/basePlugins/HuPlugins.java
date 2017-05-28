@@ -1,23 +1,16 @@
 package com.game.room.action.basePlugins;
 
-import com.game.core.config.IPluginCheckCanExecuteAction;
 import com.game.core.room.BaseChairInfo;
-import com.game.core.room.BaseTableVo;
-import com.game.core.room.GameOverType;
+import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
-import com.game.room.MjCardPoolEngine;
-import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
-import com.game.room.action.ChiAction;
 import com.game.room.action.HuAction;
 import com.game.room.action.SuperGameStatusData;
 import com.game.room.status.StepGameStatusData;
 import com.game.room.util.MJTool;
 import com.lsocket.message.Response;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -25,7 +18,9 @@ import java.util.Map;
  */
 public class HuPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction<T,StepGameStatusData>{
     @Override
-    public boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
+    public boolean checkExecute(StepGameStatusData stepGameStatusData,BaseChairInfo chair, int card, Object parems) {
+        MJLog.huCheck("card:"+card+" fromId:"+stepGameStatusData.getUid(),chair.getId(), (MjTable) chair.getTableVo());
+
         HuAction.CheckHuType huType = (HuAction.CheckHuType) parems;
         if(card == 0){
             return MJTool.isSimpleHu(MJTool.toCardArray(chair.getHandsContainer().getHandCards(),0),((MjAutoCacheHandContainer)chair.getHandsContainer().getAutoCacheHands()).getCardNumMap());

@@ -24,8 +24,8 @@ public class ChiAction extends GameOperateAction {
     }
 
     @Override
-    protected void doAction(MjTable table, Response response, int roleId, StepGameStatusData stepStatusData) {
-        super.doAction(table, response, roleId, stepStatusData);
+    protected void doAction(MjTable table, Response response, int roleId, StepGameStatusData stepStatusData,NetGame.NetOprateData netOprateData) {
+        super.doAction(table, response, roleId, stepStatusData,netOprateData);
         table.getChairByUid(roleId).resetPassCard();
     }
 

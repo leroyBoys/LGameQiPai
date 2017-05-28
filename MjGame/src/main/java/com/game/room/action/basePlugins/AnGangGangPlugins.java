@@ -1,5 +1,6 @@
 package com.game.room.action.basePlugins;
 
+import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
 import com.game.core.room.calculator.PayDetail;
@@ -21,13 +22,8 @@ import java.util.*;
  */
 public class AnGangGangPlugins<T extends MjTable> extends GangPlugins<T>{
     @Override
-    public final boolean checkExecute(BaseChairInfo chair, int card, Object parems) {
-        if(card != 0){
-            return false;
-        }
-
-        StepGameStatusData lastStep = (StepGameStatusData) chair.getTableVo().getStepHistoryManager().getLastStep();
-        if(lastStep.getUid() != chair.getId()){
+    public final boolean checkExecute(StepGameStatusData stepGameStatusData,BaseChairInfo chair, int card, Object parems) {
+        if(stepGameStatusData.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_MOPAI){
             return false;
         }
 
