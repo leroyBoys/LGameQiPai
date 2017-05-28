@@ -59,6 +59,10 @@ public class StepGameStatusData {
         this.cards = cards;
     }
 
+    public void setAuto(boolean auto) {
+        isAuto = auto;
+    }
+
     public void setCard(int card) {
         this.cards.add(card);
     }

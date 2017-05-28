@@ -24,16 +24,14 @@ public class MJLog {
         MjAutoCacheHandContainer autoCache = (MjAutoCacheHandContainer) info.getHandsContainer().getAutoCacheHands();
 
         List<Integer> hands = info.getHandsContainer().getHandCards();
-        playLogDetail.info("step:"+ table.getStep()+"  roleId:"+roleId+"  "+playerName+">"+card+" handSize:"+hands.size()+">>"+ Arrays.toString(hands.toArray()));
-
-        playLog.info("step:"+ table.getStep()+"  roleId:"+roleId+"  "+playerName+">"+card+" handSize:"+hands.size()+">>"+ Arrays.toString(hands.toArray())+
+        playLog.info("tableId:"+table.getId()+","+"step:"+ table.getStep()+"  roleId:"+roleId+"  "+playerName+">"+card+" handSize:"+hands.size()+">>"+ Arrays.toString(hands.toArray())+
                 "auto:"+autoCache.toJson());
     }
 
     public static void requset(NetGame.NetOprateData netOprateData, int roleId, MjTable table){
-        SuperGameStatusData gameStatusData = table.getStatusData();
-        playLogDetail.info("request===>step:"+ table.getStep()+"  roleId:"+roleId+"  "+gameStatusData.getFirst().getAction().getClass().getSimpleName()+">"+(netOprateData==null?"":netOprateData.toString()));
-        playLogDetail.info("        所有可以操作的列表===>"+gameStatusData.toJson());
+     //   SuperGameStatusData gameStatusData = table.getStatusData();
+       // playLogDetail.info("request===>step:"+ table.getStep()+"  roleId:"+roleId+"  "+gameStatusData.getFirst().getAction().getClass().getSimpleName()+">"+(netOprateData==null?"":netOprateData.toString()));
+        /*playLogDetail.info("        所有可以操作的列表===>"+gameStatusData.toJson());*/
     }
 
     public static void canDoActions(MjTable table){
@@ -53,13 +51,22 @@ public class MJLog {
         }
     }
 
-    public static void huCheck(String tip,int roleId,MjTable table){
+    public static void huCheck(String tip,int card,int roleId,MjTable table){
         BaseChairInfo info = table.getChairByUid(roleId);
         MjAutoCacheHandContainer autoCache = (MjAutoCacheHandContainer) info.getHandsContainer().getAutoCacheHands();
 
         List<Integer> hands = info.getHandsContainer().getHandCards();
+        int size = hands.size();
+        if(card != 0){
+            size++;
+        }
 
-        playLog.info("==hucheck:hands"+Arrays.toString(hands.toArray())+"auto:"+autoCache.toJson()+"  "+tip);
+        String msg ="";
+        if(size%3 != 2){
+            msg = "error=============>>>>";
+        }
+
+        playLog.info(msg+"==hucheck:hands"+hands.size()+Arrays.toString(hands.toArray())+"auto:"+autoCache.toJson()+"  "+tip);
     }
 
 }

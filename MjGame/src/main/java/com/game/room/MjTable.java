@@ -27,9 +27,9 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     private int nextBankerUid;
     protected int lastBankUid;
 
-    private final int defaultMaxRate = 10;
     private int maxFan;
     private int type;
+    protected static List<Integer> maxFanSet = MJTool.getList(4,8,10);
 
     public MjTable(int ownerId,int maxSize,int id,int gameId, TableProducer tableProducer) {
         super(ownerId,maxSize,id, MjStatus.Idle,gameId,tableProducer);
@@ -76,6 +76,59 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     @Override
     protected void initCardPoolEngine() {
         cardPoolEngine = new MjCardPoolEngine(this.getGameId(),null);
+    }
+
+    public Map<Integer,Integer[]> randomChairPosition(int diceCount){
+
+        List<Integer[]> playerScore = new ArrayList<>(chairs.length);
+        Map<Integer,Integer[]> diceDetail = new HashMap<>(chairs.length);
+        for(int i = 0;i<chairs.length;i++){
+            int count = diceCount;
+            Integer[] allCounts = new Integer[diceCount];
+            int allCountVaule = 0;
+            while (count-- > 0){
+                allCounts[count] = RandomTool.Next(6)+1;
+                allCountVaule+=allCounts[count];
+            }
+
+            playerScore.add(new Integer[]{chairs[i].getId(),allCountVaule});
+            diceDetail.put(chairs[i].getId(),allCounts);
+        }
+
+
+        Collections.sort(playerScore, new Comparator<Integer[]>() {
+            @Override
+            public int compare(Integer[] o1, Integer[] o2) {
+                return o2[1] - o1[1] ;
+            }
+        });
+
+        for(int i=0; i<chairs.length; i++){
+            chairs[i] = getChairByUid(playerScore.get(i)[0]);
+            chairs[i].setIdx(i);
+        }
+
+        return diceDetail;
+    }
+
+
+    @Override
+    public ResponseCode.Error setSelected(List<Integer> typeList) {
+        ResponseCode.Error error = super.setSelected(typeList);
+        if(error != ResponseCode.Error.succ){
+            return error;
+        }
+
+        int maxRate = typeList.get(1);
+        int type = typeList.get(2);
+        this.setMaxFan(maxRate);
+        this.setType(type);
+
+        if((type & GameConst.XXMjType.SIFENG) == GameConst.XXMjType.SIFENG){
+            cardPoolEngine.setUserSetStaticCardPool(MJTool.SIFENGZHONGFABAI);
+        }
+
+        return ResponseCode.Error.succ;
     }
 
     @Override
@@ -179,60 +232,6 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
         return chairInfo;
     }
 
-    public Map<Integer,Integer[]> randomChairPosition(int diceCount){
-
-        List<Integer[]> playerScore = new ArrayList<>(chairs.length);
-        Map<Integer,Integer[]> diceDetail = new HashMap<>(chairs.length);
-        for(int i = 0;i<chairs.length;i++){
-            int count = diceCount;
-            Integer[] allCounts = new Integer[diceCount];
-            int allCountVaule = 0;
-            while (count-- > 0){
-                allCounts[count] = RandomTool.Next(6)+1;
-                allCountVaule+=allCounts[count];
-            }
-
-            playerScore.add(new Integer[]{chairs[i].getId(),allCountVaule});
-            diceDetail.put(chairs[i].getId(),allCounts);
-        }
-
-
-        Collections.sort(playerScore, new Comparator<Integer[]>() {
-            @Override
-            public int compare(Integer[] o1, Integer[] o2) {
-                return o2[1] - o1[1] ;
-            }
-        });
-
-        for(int i=0; i<chairs.length; i++){
-            chairs[i] = getChairByUid(playerScore.get(i)[0]);
-            chairs[i].setIdx(i);
-        }
-
-        return diceDetail;
-    }
-
-
-    @Override
-    public ResponseCode.Error setSelected(List<Integer> typeList) {
-        ResponseCode.Error error = super.setSelected(typeList);
-        if(error != ResponseCode.Error.succ){
-            return error;
-        }
-
-        int maxRate = Math.min(typeList.get(1),defaultMaxRate);
-        int type = typeList.get(2);
-        this.setMaxFan(maxRate);
-        this.setType(type);
-
-        if((type & GameConst.XXMjType.SIFENG) == GameConst.XXMjType.SIFENG){
-            cardPoolEngine.setUserSetStaticCardPool(MJTool.SIFENGZHONGFABAI);
-        }
-
-        return ResponseCode.Error.succ;
-    }
-
-
     public boolean isGameOver() {
         if((type & GameConst.XXMjType.SIFENG) == GameConst.XXMjType.SIFENG){
             return getCardPool().getRemainCount() == 14;
@@ -285,6 +284,9 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     }
 
     public void setMaxFan(int maxFan) {
+        if(!maxFanSet.contains(maxFan)){
+            maxFan = maxFanSet.get(0);
+        }
         this.maxFan = maxFan;
     }
 
@@ -308,4 +310,7 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
         this.nextBankerUid = nextBankerUid;
     }
 
+    public boolean isAutoHu() {
+        return false;
+    }
 }

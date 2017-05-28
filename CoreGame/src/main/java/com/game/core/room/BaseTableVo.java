@@ -186,9 +186,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
     public final void trigger(){
         BaseAction action = status.getAction();
 
-        playLog.info("===>tick:"+getStatus().getAction().getClass().getSimpleName()+" :"+getStatusData().isOver());
         if(getStatusData().isOver()){
-       // if(action.isChangeToNextStatus(this)){
             changeNextStaus();
             action.overAction(this);
             this.getStatus().getAction().initAction(this);
@@ -491,6 +489,8 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
             SystemLogger.error(this.getClass(),"config not have rount:"+roundMax);
             return ResponseCode.Error.parmter_error;
         }
+        addAttribute(AttributeKey.AllRount,roundMax);
+
         return ResponseCode.Error.succ;
     }
 

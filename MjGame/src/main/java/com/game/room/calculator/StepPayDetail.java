@@ -1,6 +1,7 @@
 package com.game.room.calculator;
 
-import com.game.core.room.BaseChairInfo;
+import com.game.core.config.TablePluginManager;
+import com.game.core.constant.GameConst;
 import com.game.core.room.calculator.PayDetail;
 import com.game.room.MjTable;
 import com.module.net.NetGame;
@@ -12,10 +13,12 @@ import java.util.*;
  * 2017/5/27.
  */
 public class StepPayDetail {
-    private int toUid;
+    protected int toUid;
+    protected int type;
     protected int gainTotal; //得分汇总
     protected List<Integer> fromUids;
-    protected int multipleRateTotal = 1;//用户支付的乘法的番数汇总
+    protected MjCalculator calculator;
+    protected int multipleRateTotal = 0;//用户支付的乘法的番数汇总
 
     protected int addRateTotal = 0;//用户支付的加法的番数汇总
 
@@ -25,12 +28,16 @@ public class StepPayDetail {
     protected Map<Integer,PayDetail> addDetailType = new HashMap<>(1);
 
     /**  玩家id-玩家得失分详情 */
-    private Map<Integer,List<NetGame.NetKvData>> payList = new HashMap<>();
+    protected Map<Integer,List<NetGame.NetKvData>> payList = new HashMap<>();
 
-    public void addPayDetail(PayDetail payDetail){
+    public void addPayDetail(MjCalculator calculator,PayDetail payDetail){
+        calculator.fomateLog(payDetail.toJson());
+
         if(fromUids == null || payDetail.isFinalFirst()){
+            this.calculator = calculator;
             fromUids = payDetail.getFromUids();
             toUid = payDetail.getToUid();
+            type = payDetail.getType();
         }
 
         if(payDetail.isExtraAdd()){
@@ -62,41 +69,18 @@ public class StepPayDetail {
             }
         }
 
-      if(!addDetailType.containsKey(payDetail.getAddScoreType())){
-          addDetailType.put(payDetail.getAddScoreType(),payDetail);
+      if(!addDetailType.containsKey(payDetail.getSubType())){
+          addDetailType.put(payDetail.getSubType(),payDetail);
       }
-
     }
 
     private boolean isExecute = false;
-    public boolean executeCalculator(MjTable room){
+    public final boolean executeCalculator(MjTable room){
         if(isExecute){
             return false;
         }
         isExecute = true;
-
-        int multiRate = 1<<multipleRateTotal;
-
-        int maxFanObj = room.getMaxFan();
-        if(maxFanObj != 0 && multiRate>maxFanObj){
-            multiRate = maxFanObj;
-        }
-
-        int addRate = addRateTotal;
-        boolean isFirstAdd = true;
-        int every = 0;
-        if(isFirstAdd){//先加再乘
-            every = addRate*multiRate;
-        }else {
-            every = multiRate+addRate;
-        }
-
-        for(int uid : fromUids){
-            room.getCalculator().addScore(uid,-every);
-        }
-
-        this.gainTotal += every*fromUids.size();
-        room.getCalculator().addScore(toUid,gainTotal);
+        execute(room);
 
         for(Map.Entry<Integer,Set<Integer>> entry:lostDetailType.entrySet()){
             for(Integer lostType:entry.getValue()){
@@ -108,16 +92,46 @@ public class StepPayDetail {
             this.addPay(toUid,entry.getKey(),entry.getValue().getRate()*fromUids.size(),entry.getValue().getPayType());
         }
 
+        calculator.fomateLog(toJson());
+        return true;
+    }
+
+    protected boolean execute(MjTable room){
+      /*  int multiRate = 1<<multipleRateTotal;
+
+        int maxFanObj = room.getMaxFan();
+        if(maxFanObj != 0 && multiRate>maxFanObj){
+            multiRate = maxFanObj;
+        }
+*/
+        int addRate = addRateTotal;
+        boolean isFirstAdd = true;
+      /*  int every = 0;
+        if(isFirstAdd){//先加再乘
+            every = addRate*multiRate;
+        }else {
+            every = multiRate+addRate;
+        }*/
+
+        int allScore=0;
+        for(int uid : fromUids){
+            int score = addRate;
+            allScore+=score;
+            room.getCalculator().addScore(uid,-score);
+        }
+
+        this.gainTotal = allScore;
+        room.getCalculator().addScore(toUid,gainTotal);
         return true;
     }
 
     public String toJson(){
         StringBuilder sb = new StringBuilder();
-        sb.append("uid:").append(toUid).append(",");
+        sb.append("toUid:").append(toUid).append(",");
         sb.append("gainScore:").append(gainTotal).append(",");
         sb.append("fromUids:").append(Arrays.toString(fromUids.toArray())).append(",");
-        sb.append("multipleRateTotal:").append(1<<multipleRateTotal).append(",");
-        sb.append("addRateTotal:").append(addRateTotal);
+        sb.append("multipleRateTotal:").append(multipleRateTotal).append(",");
+        sb.append("addRateTotal:").append(addRateTotal).append(",");
         return sb.toString();
     }
 

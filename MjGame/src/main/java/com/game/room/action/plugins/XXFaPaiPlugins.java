@@ -7,4 +7,5 @@ import com.game.room.action.basePlugins.FaPaiPlugins;
  * 2017/5/12.
  */
 public class XXFaPaiPlugins extends FaPaiPlugins {
+
 }

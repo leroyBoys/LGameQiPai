@@ -31,7 +31,7 @@ public abstract class DefaultCalculator<T extends BaseTableVo> implements Calcul
         clearCache();
     }
 
-    public abstract void clearCache();
+    protected abstract void clearCache();
 
     @Override
     public void addRecord(int roleId, RecordType recordType, int count) {

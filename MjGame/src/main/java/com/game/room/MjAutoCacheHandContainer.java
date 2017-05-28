@@ -76,11 +76,20 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
             case GameConst.MJ.ACTION_TYPE_GANG:
                 netOprateData= Gang(info,stepStatus);
                 break;
+            case GameConst.MJ.ACTION_TYPE_HU:
+                netOprateData= Hu(info,stepStatus);
+                break;
         }
 
         System.out.println("----------------->robot:auto:actionType:"+netOprateData.getOtype()+" uid:"+info.getId());
         System.out.println(netOprateData.toString());
         return netOprateData;
+    }
+
+    private NetGame.NetOprateData Hu(BaseChairInfo info, StepGameStatusData stepStatus) {
+        NetGame.NetOprateData.Builder retData = NetGame.NetOprateData.newBuilder();
+        retData.setOtype(stepStatus.getAction().getActionType());
+        return retData.build();
     }
 
     public NetGame.NetOprateData Da( BaseChairInfo info,StepGameStatusData stepStatus) {
@@ -120,7 +129,6 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
     @Override
     public void removeCard(int card, int num) {
         playLog.info("remove:card:"+card+"  num:"+num);
-        toJson();
 
         if(!addCards.isEmpty()){
             Iterator<Integer> ites = addCards.iterator();
@@ -138,8 +146,6 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
 
         Integer curNum = cardNumMap.get(card);
         if(curNum == null){
-
-            playLog.info("not conain:"+card);
             return;
         }
 
@@ -153,8 +159,8 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
             cardNumMap.remove(card);
         }
 
-        String str = "=====>cache:"+ Arrays.toString(getCardCounts())+" cards-num:"+ JsonTool.getJsonFromBean(getCardNumMap());
-        playLog.info(str);
+   /*     String str = "=====>cache:"+ Arrays.toString(getCardCounts())+" cards-num:"+ JsonTool.getJsonFromBean(getCardNumMap());
+        playLog.info(str);*/
     }
 
     protected void addNewCard(int card) {

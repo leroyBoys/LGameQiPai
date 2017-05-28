@@ -16,13 +16,17 @@ public class GangShangHuaPlugins<T extends MjTable> extends AbstractActionPlugin
     @Override
     public boolean doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
 
-        int size = table.getStepHistoryManager().getSize()-1;
+        int size = table.getStepHistoryManager().getSize()-1;//胡
         size--;//摸
+        StepGameStatusData lastStep = (StepGameStatusData) table.getStepHistoryManager().getLastStep(size);
+        if(stepGameStatusData.getUid() != lastStep.getUid() || lastStep.getAction().getActionType() != GameConst.MJ.ACTION_TYPE_MOPAI){
+            return false;
+        }
         size--;//杠
         if(size < 0){
             return false;
         }
-        StepGameStatusData lastStep = (StepGameStatusData) table.getStepHistoryManager().getLastStep(size);
+        lastStep = (StepGameStatusData) table.getStepHistoryManager().getLastStep(size);
         if(lastStep.getiOptPlugin().getPlugin().getSubType() != GameConst.MJ.ACTION_TYPE_GANG_MingGang){
             return false;
         }

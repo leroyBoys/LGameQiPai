@@ -35,7 +35,7 @@ public class SuperGameStatusData extends BaseGameStateData {
     public void addCanDoDatas(int step, StepGameStatusData stepGameStatusData){
         canDoDatas.add(stepGameStatusData);
 
-        MJLog.canDoActions2("writeStep:"+writeStep+" readStep:"+readStep,step,this);
+      //  MJLog.canDoActions2("writeStep:"+writeStep+" readStep:"+readStep,step,this);
 
         if(this.writeStep != step){
             this.writeStep = step;
@@ -48,11 +48,15 @@ public class SuperGameStatusData extends BaseGameStateData {
         }
 
         if(table.isGameOver()){
-            addCanDoDatas(table.getStep(),new StepGameStatusData(com.game.room.action.GameOverAction.getInstance(),roleId));
+            gameOver(table);
             return;
         }
 
         addCanDoDatas(table.getStep(),new StepGameStatusData(MoAction.getInstance(),roleId));
+    }
+
+    public final void gameOver(BaseTableVo table){
+        addCanDoDatas(table.getStep(),new StepGameStatusData(com.game.room.action.GameOverAction.getInstance(),0));
     }
 
     protected boolean checkCanGang(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
@@ -157,8 +161,6 @@ public class SuperGameStatusData extends BaseGameStateData {
     }
 
     public boolean isEmpty(){
-
-        System.out.println("========="+(canDoDatas.isEmpty()?0:canDoDatas.getFirst().getAction().getClass().getSimpleName()));
         return canDoDatas.isEmpty();
     }
 

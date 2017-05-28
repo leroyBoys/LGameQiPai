@@ -1,5 +1,8 @@
 package com.game.core.room.calculator;
 
+import com.game.core.config.IOptPlugin;
+
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -8,6 +11,7 @@ import java.util.List;
 public class PayDetail {
     /** 第几步 */
     private int step;
+    private IOptPlugin iOptPlugin;
     /** 是否有效 */
     private boolean isValid = true;
     /** 支付分数的玩家 */
@@ -22,7 +26,8 @@ public class PayDetail {
     private int rate;
 
     private PayType payType = PayType.Multiple;
-    private int addScoreType;//得分名目一般为actionType或者actionType的子类
+    private int type;
+    private int subType;
     private int lostScoreType;//失分名目
 
 
@@ -87,16 +92,32 @@ public class PayDetail {
         this.payType = payType;
     }
 
-    public int getAddScoreType() {
-        return addScoreType;
+    public int getType() {
+        return type;
     }
 
-    public void setAddScoreType(int addScoreType) {
-        this.addScoreType = addScoreType;
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getSubType() {
+        return subType;
+    }
+
+    public void setSubType(int subType) {
+        this.subType = subType;
     }
 
     public int getLostScoreType() {
         return lostScoreType;
+    }
+
+    public IOptPlugin getiOptPlugin() {
+        return iOptPlugin;
+    }
+
+    public void setiOptPlugin(IOptPlugin iOptPlugin) {
+        this.iOptPlugin = iOptPlugin;
     }
 
     public boolean isExtraAdd() {
@@ -111,6 +132,12 @@ public class PayDetail {
         this.lostScoreType = lostScoreType;
     }
 
+    public String toJson(){
+        StringBuilder sb = new StringBuilder(" payDetail:step:");
+        sb.append(this.getStep()).append(" rate:").append(rate).append(",").append(payType).append(",").append(getiOptPlugin().getPlugin().getPluginName());
+        sb.append("toUid:").append(this.getToUid()).append(" fromids:").append(Arrays.toString(getFromUids().toArray()));
+        return sb.toString();
+    }
     public enum PayType{
         NULL,ADD, Multiple
     }

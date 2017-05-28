@@ -57,13 +57,14 @@ public class GameAction extends BaseAction<MjTable> {
 
     @Override
     public void overAction(MjTable table) {
+        table.sendSettlementMsg();
+
         if(table.getCurChirCount() == 1){
             ItemConsumeManager.getIntance().removeCard(table.getOwnerId(),table.getNeedCard());
         }
         //局数加一
         table.addRound();
 
-        table.sendSettlementMsg();
     }
 
     @Override

@@ -1,8 +1,10 @@
 package com.game.room.calculator;
 
+import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.calculator.DefaultCalculator;
 import com.game.core.room.calculator.PayDetail;
+import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.lgame.util.json.JsonUtil;
 import com.module.net.NetGame;
@@ -32,7 +34,7 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
     }
 
     @Override
-    public void clearCache() {
+    protected void clearCache() {
         payDetailList.clear();
         rqrEsult = null;
     }
@@ -42,47 +44,58 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
         payDetailList.add(ratePay);
     }
 
-    protected StepPayDetail getNewStepPayDetail(){
+    protected StepPayDetail getNewStepPayDetail(int type){
+        if(type == GameConst.MJ.ACTION_TYPE_HU){
+            return new HuStepPayDetail();
+        }
         return new StepPayDetail();
+    }
+
+    public String getLogHead() {
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = 0;i<room.getChairs().length;i++){
+            sb.append(",uid:"+room.getChairs()[i].getId()+"压跑数值:"+(room.getChairs()[i]).getYapaoNum());
+        }
+
+        return sb.toString();
     }
 
     @Override
     public final NetGame.RQREsult executeCalculator() {
-        if(rqrEsult != null){
+        if (rqrEsult != null) {
             return rqrEsult;
         }
-        logger.debug("room [" + room.getId() + "] is calculating ");
+        fomateLog("is calculating "+ this.getLogHead());
 
         /////uid-名目列表
-        Map<Integer,List<NetGame.NetKvData>> payList = new HashMap<>();
+        Map<Integer, List<NetGame.NetKvData>> payList = new HashMap<>();
 
-        Map<Integer,StepPayDetail> map = new HashMap<>();
+        Map<Integer, StepPayDetail> map = new HashMap<>();
         StepPayDetail lastPayDetail = null;
-        for(int i = 0;i<payDetailList.size();i++){
+        for (int i = 0; i < payDetailList.size(); i++) {
             PayDetail payDetail = payDetailList.get(i);
-            if(!payDetail.isValid()){
+            if (!payDetail.isValid()) {
                 continue;
             }
 
             StepPayDetail stepPayDetail = map.get(payDetail.getStep());
-            if(stepPayDetail == null){
-                stepPayDetail = getNewStepPayDetail();
-                map.put(payDetail.getStep(),stepPayDetail);
+            if (stepPayDetail == null) {
+                stepPayDetail = getNewStepPayDetail(payDetail.getType());
+                map.put(payDetail.getStep(), stepPayDetail);
 
-                if(lastPayDetail != null && lastPayDetail.executeCalculator(room)){
-                    logger.info(lastPayDetail.toJson());
-
-                    addPayDetails(payList,lastPayDetail.getPayList());
+                if (lastPayDetail != null && lastPayDetail.executeCalculator(room)) {
+                    addPayDetails(payList, lastPayDetail.getPayList());
                 }
 
                 lastPayDetail = stepPayDetail;
             }
-            stepPayDetail.addPayDetail(payDetail);
+            stepPayDetail.addPayDetail(this, payDetail);
         }
 
-        if(lastPayDetail != null){
+        if (lastPayDetail != null) {
             lastPayDetail.executeCalculator(room);
-            addPayDetails(payList,lastPayDetail.getPayList());
+            addPayDetails(payList, lastPayDetail.getPayList());
         }
 
         ///算分
@@ -91,7 +104,7 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
         NetGame.RQREsult.Builder result = NetGame.RQREsult.newBuilder();
         result.setFlag(room.getGameOverType().ordinal());
 
-        for(Map.Entry<Integer,List<NetGame.NetKvData>> entry:payList.entrySet()){
+        for (Map.Entry<Integer, List<NetGame.NetKvData>> entry : payList.entrySet()) {
             NetGame.NetMjUserResult.Builder netMjResult = NetGame.NetMjUserResult.newBuilder();
             netMjResult.addAllScores(entry.getValue());
             netMjResult.setScore(scoreAddDetails.get(entry.getKey()));
@@ -166,7 +179,11 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
             info.setTotalScore(info.getTotalScore()+entry.getValue());
         }
 
-        logger.info("gameOver score:"+ JsonUtil.getJsonFromBean(scoreAddDetails));
+        fomateLog("final score:"+ JsonUtil.getJsonFromBean(scoreAddDetails));
+    }
+
+    protected void fomateLog(String log){
+        logger.info("tableId:"+room.getId()+",round:"+ room.getCurRount()+log);
     }
 
     public PayDetail getLastBuGang() {
@@ -176,4 +193,6 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
     public void setLastBuGang(PayDetail lastBuGang) {
         this.lastBuGang = lastBuGang;
     }
+
+
 }

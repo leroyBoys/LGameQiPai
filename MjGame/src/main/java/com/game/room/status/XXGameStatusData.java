@@ -15,10 +15,10 @@ public class XXGameStatusData extends SuperGameStatusData {
         return new XXGameStatusData();
     }
 
-    protected boolean checkCanChi(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
+  /*  protected boolean checkCanChi(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
         return false;
     }
-
+*/
     protected HuAction.CheckHuType checkCanHu(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
         if(!chairInfo.isCanDo()){
             return HuAction.CheckHuType.NULL;

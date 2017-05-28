@@ -49,7 +49,7 @@ public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOp
 
     /**
      *
-     * 0自摸所有人支付，1点炮的人支付
+     * 1自摸所有人支付，其它点炮的人支付
      * */
     public PayDetail payment(A table,StepGameStatusData stepGameStatusData) {
         String str = getPlugin().getEffectStr();
@@ -60,9 +60,9 @@ public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOp
         boolean isAll = payFromAll == 1?true:false;
         if(!isAll){
             if (stepGameStatusData.getFromId() == stepGameStatusData.getUid()) {
-                isAll = false;
-            } else {
                 isAll = true;
+            } else {
+                isAll = false;
             }
         }
 
@@ -80,8 +80,10 @@ public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOp
 
         ratePay.setRate(getPlugin().getEffectArray()[1]);
         ratePay.setStep(table.getStep());
-        ratePay.setAddScoreType(getPlugin().getSubType());
+        ratePay.setType(stepGameStatusData.getAction().getActionType());
+        ratePay.setSubType(getPlugin().getSubType());
         ratePay.setLostScoreType(this.getLostType());
+        ratePay.setiOptPlugin(this);
         table.getCalculator().addPayDetailed(ratePay);
         return ratePay;
     }

@@ -4,8 +4,7 @@ import com.game.core.room.BaseChairInfo;
 import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjTable;
-import com.game.room.action.HuAction;
-import com.game.room.action.SuperGameStatusData;
+import com.game.room.action.*;
 import com.game.room.status.StepGameStatusData;
 import com.game.room.util.MJTool;
 import com.lsocket.message.Response;
@@ -19,23 +18,40 @@ import java.util.List;
 public class HuPlugins<T extends MjTable> extends AbstractActionPlugin<T> implements IPluginCheckCanExecuteAction<T,StepGameStatusData>{
     @Override
     public boolean checkExecute(StepGameStatusData stepGameStatusData,BaseChairInfo chair, int card, Object parems) {
-        MJLog.huCheck("card:"+card+" fromId:"+stepGameStatusData.getUid(),chair.getId(), (MjTable) chair.getTableVo());
-
         HuAction.CheckHuType huType = (HuAction.CheckHuType) parems;
         if(card == 0){
-            return MJTool.isSimpleHu(MJTool.toCardArray(chair.getHandsContainer().getHandCards(),0),((MjAutoCacheHandContainer)chair.getHandsContainer().getAutoCacheHands()).getCardNumMap());
+            if(!MJTool.isSimpleHu(MJTool.toCardArray(chair.getHandsContainer().getHandCards(),0),((MjAutoCacheHandContainer)chair.getHandsContainer().getAutoCacheHands()).getCardNumMap())){
+                return false;
+            }
+        }else {
+            int[] cards = MJTool.toCardArray(chair.getHandsContainer().getHandCards(),1);
+            cards[cards.length-1] = card;
+            if(!MJTool.isSimpleHu(cards,null)){
+                return false;
+            }
         }
 
-        int[] cards = MJTool.toCardArray(chair.getHandsContainer().getHandCards(),1);
-        cards[cards.length-1] = card;
-
-        return MJTool.isSimpleHu(cards,null);
+        SuperGameStatusData gameStatusData= (SuperGameStatusData) chair.getTableVo().getStatusData();
+        gameStatusData.addCanDoDatas(chair.getTableVo().getStep(),new StepGameStatusData(HuAction.getInstance(),stepGameStatusData.getUid(),chair.getId(),card,this));
+        return true;
     }
 
 
     @Override
-    public void createCanExecuteAction(T room,StepGameStatusData stepGameStatusData) {
-        ((SuperGameStatusData)room.getStatusData()).checkMo(room,0);
+    public void createCanExecuteAction(T table,StepGameStatusData stepGameStatusData) {
+        SuperGameStatusData gameStatusData= table.getStatusData();
+        if(gameStatusData.isEmpty()){
+            if(!table.isHuAgain()){
+                gameStatusData.gameOver(table);
+                return;
+            }
+
+            gameStatusData.checkMo(table,table.nextUid(stepGameStatusData.getUid()));
+        }else {
+            if(table.isAutoHu()){
+                gameStatusData.getFirst().setAuto(true);
+            }
+        }
     }
 
     @Override

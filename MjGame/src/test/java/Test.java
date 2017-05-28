@@ -55,7 +55,11 @@ public class Test {
 
     @org.junit.Test
     public void thres(){
-        go();
+        int im = 1;
+        System.out.println(im);
+        int a = im<<1;
+        System.out.println(a);
+        System.out.println(im);
     }
 
 }
