@@ -14,10 +14,6 @@ import java.util.*;
  */
 public class HuStepPayDetail extends StepPayDetail{
 
-    protected int getBaseScore(MjTable room){
-        return 0;
-    }
-
     @Override
     protected boolean execute(MjTable room) {
         int multiRate = 1<<multipleRateTotal;
@@ -50,5 +46,14 @@ public class HuStepPayDetail extends StepPayDetail{
 
     private int getYaPao(MjTable room, int uid, int toUid) {
         return room.getChairByUid(uid).getYapaoNum()+room.getChairByUid(toUid).getYapaoNum();
+    }
+
+    @Override
+    public String toJson() {
+        StringBuilder sb = new StringBuilder("roleId:压跑数据:");
+        for(int i = 0;i<calculator.getRoom().getChairs().length;i++){
+            sb.append(calculator.getRoom().getChairs()[i].getId()+","+(calculator.getRoom().getChairs()[i]).getYapaoNum()).append(",");
+        }
+        return super.toJson()+sb.toString();
     }
 }

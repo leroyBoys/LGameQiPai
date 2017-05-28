@@ -1,7 +1,5 @@
 package com.game.room.calculator;
 
-import com.game.core.config.TablePluginManager;
-import com.game.core.constant.GameConst;
 import com.game.core.room.calculator.PayDetail;
 import com.game.room.MjTable;
 import com.module.net.NetGame;
@@ -126,12 +124,12 @@ public class StepPayDetail {
     }
 
     public String toJson(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("toUid:").append(toUid).append(",");
-        sb.append("gainScore:").append(gainTotal).append(",");
-        sb.append("fromUids:").append(Arrays.toString(fromUids.toArray())).append(",");
+        StringBuilder sb = new StringBuilder("stepPayDetail:");
         sb.append("multipleRateTotal:").append(multipleRateTotal).append(",");
         sb.append("addRateTotal:").append(addRateTotal).append(",");
+        sb.append("gainScore:").append(gainTotal).append(",");
+        sb.append("toUid:").append(toUid).append(",");
+        sb.append("fromUids:").append(Arrays.toString(fromUids.toArray())).append(",");
         return sb.toString();
     }
 

@@ -51,22 +51,12 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
         return new StepPayDetail();
     }
 
-    public String getLogHead() {
-        StringBuilder sb = new StringBuilder();
-
-        for(int i = 0;i<room.getChairs().length;i++){
-            sb.append(",uid:"+room.getChairs()[i].getId()+"压跑数值:"+(room.getChairs()[i]).getYapaoNum());
-        }
-
-        return sb.toString();
-    }
-
     @Override
     public final NetGame.RQREsult executeCalculator() {
         if (rqrEsult != null) {
             return rqrEsult;
         }
-        fomateLog("is calculating "+ this.getLogHead());
+        fomateLog("is calculating ");
 
         /////uid-名目列表
         Map<Integer, List<NetGame.NetKvData>> payList = new HashMap<>();

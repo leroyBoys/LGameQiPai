@@ -82,4 +82,8 @@ public abstract class DefaultCalculator<T extends BaseTableVo> implements Calcul
         }
         recordTypeIntegerMap.put(recordType,value);
     }
+
+    public T getRoom() {
+        return room;
+    }
 }

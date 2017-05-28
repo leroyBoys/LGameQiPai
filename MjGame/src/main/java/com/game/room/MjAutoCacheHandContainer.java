@@ -128,7 +128,7 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
 
     @Override
     public void removeCard(int card, int num) {
-        playLog.info("remove:card:"+card+"  num:"+num);
+     //   playLog.info("remove:card:"+card+"  num:"+num);
 
         if(!addCards.isEmpty()){
             Iterator<Integer> ites = addCards.iterator();
@@ -136,7 +136,6 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
                 if(ites.next()==card){
                     ites.remove();
                     if(--num == 0){
-
                         playLog.info("return:"+num);
                         return;
                     }
@@ -148,7 +147,6 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
         if(curNum == null){
             return;
         }
-
 
         cardCounts[curNum]--;
         curNum = curNum-num;
@@ -218,13 +216,11 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
         return cardCounts;
     }
 
-    public String toJson(){
+  /*  public String toJson(){
         String str = "cache:"+" cards-num:"+ JsonTool.getJsonFromBean(getCardNumMap()+ "  "+Arrays.toString(getCardCounts()));
         playLog.info(str);
         return str;
-    }
-
-
+    }*/
 
     public int getAutoDaCard(List<Integer> hands){
         Map<Integer,Integer> cardNumMap = new HashMap<>(5);

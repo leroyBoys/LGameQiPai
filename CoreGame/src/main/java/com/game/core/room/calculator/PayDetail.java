@@ -135,7 +135,7 @@ public class PayDetail {
     public String toJson(){
         StringBuilder sb = new StringBuilder(" payDetail:step:");
         sb.append(this.getStep()).append(" rate:").append(rate).append(",").append(payType).append(",").append(getiOptPlugin().getPlugin().getPluginName());
-        sb.append("toUid:").append(this.getToUid()).append(" fromids:").append(Arrays.toString(getFromUids().toArray()));
+        sb.append(",").append("toUid:").append(this.getToUid()).append(" fromids:").append(Arrays.toString(getFromUids().toArray()));
         return sb.toString();
     }
     public enum PayType{

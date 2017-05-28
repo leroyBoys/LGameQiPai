@@ -24,8 +24,8 @@ public class MJLog {
         MjAutoCacheHandContainer autoCache = (MjAutoCacheHandContainer) info.getHandsContainer().getAutoCacheHands();
 
         List<Integer> hands = info.getHandsContainer().getHandCards();
-        playLog.info("tableId:"+table.getId()+","+"step:"+ table.getStep()+"  roleId:"+roleId+"  "+playerName+">"+card+" handSize:"+hands.size()+">>"+ Arrays.toString(hands.toArray())+
-                "auto:"+autoCache.toJson());
+        playLog.info("tableId:"+table.getId()+","+"step:"+ table.getStep()+"  roleId:"+roleId+"  "+playerName+">"+card+" handSize:"+hands.size()+">>"+ Arrays.toString(hands.toArray()));
+               // "auto:"+autoCache.toJson());
     }
 
     public static void requset(NetGame.NetOprateData netOprateData, int roleId, MjTable table){
@@ -66,7 +66,7 @@ public class MJLog {
             msg = "error=============>>>>";
         }
 
-        playLog.info(msg+"==hucheck:hands"+hands.size()+Arrays.toString(hands.toArray())+"auto:"+autoCache.toJson()+"  "+tip);
+       // playLog.info(msg+"==hucheck:hands"+hands.size()+Arrays.toString(hands.toArray())+"auto:"+autoCache.toJson()+"  "+tip);
     }
 
 }
