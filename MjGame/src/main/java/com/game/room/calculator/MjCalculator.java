@@ -36,6 +36,7 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
     @Override
     protected void clearCache() {
         payDetailList.clear();
+        scoreAddDetails.clear();
         rqrEsult = null;
     }
 
