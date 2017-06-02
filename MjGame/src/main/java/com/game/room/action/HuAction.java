@@ -8,6 +8,7 @@ import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.game.room.action.basePlugins.IPluginHuCheck;
 import com.game.room.status.StepGameStatusData;
+import com.game.room.util.MJTool;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
 
@@ -21,19 +22,19 @@ import java.util.List;
  */
 public class HuAction extends GameOperateAction {
     private final static HuAction instance = new HuAction();
-    private HuAction(){}
+    protected HuAction(){}
 
     public static HuAction getInstance(){
         return instance;
     }
 
     @Override
-    public int getActionType() {
+    public final int getActionType() {
         return GameConst.MJ.ACTION_TYPE_HU;
     }
 
     @Override
-    protected void doAction(MjTable table, Response response, int roleId, StepGameStatusData stepStatusData,NetGame.NetOprateData netOprateData){
+    protected final void doAction(MjTable table, Response response, int roleId, StepGameStatusData stepStatusData,NetGame.NetOprateData netOprateData){
         NetGame.NetOprateData.Builder retOperaData = NetGame.NetOprateData.newBuilder();
         retOperaData.setOtype(this.getActionType());
         retOperaData.setUid(roleId);
@@ -48,31 +49,13 @@ public class HuAction extends GameOperateAction {
         }
 
         table.addMsgQueueAll(retOperaData.build(),response==null?0:response.getSeq());
-
     }
 
     @Override
     public void check(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card, Object parems){
-        ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(chairInfo.getTableVo().getGameId(),this.getActionType());
-        if(optPlugins == null){
-            return;
-        }
-
-        IPluginHuCheck huCheck = null;
-        for(int i= 0;i<optPlugins.size();i++){
-            IOptPlugin plugin = optPlugins.get(i);
-            if(plugin instanceof IPluginHuCheck){
-                IPluginHuCheck huCheckPlugin = (IPluginHuCheck) plugin;
-                if(huCheck != null && huCheck.getWeight()>= huCheckPlugin.getWeight()){
-                    continue;
-                }
-
-                if(!huCheckPlugin.checkExecute(stepGameStatusData,chairInfo,card,parems)){
-                   continue;
-                }
-                huCheck = huCheckPlugin;
-            }
-        }
+        final List<Integer> hands = chairInfo.getHandsContainer().getHandCards();
+        int[][] cardsArray = MJTool.getCardsByType(hands,card);
+        IPluginHuCheck huCheck = getIPluginHuCheck(chairInfo,cardsArray);
 
         if(huCheck == null){
             return;
@@ -85,12 +68,48 @@ public class HuAction extends GameOperateAction {
                 new StepGameStatusData(this,stepGameStatusData.getUid(),chairInfo.getId(),card,huCheck));
     }
 
+    protected IPluginHuCheck getIPluginHuCheck(MjChairInfo chairInfo,int[][] cardsArray){
+        ArrayList<IOptPlugin> optPlugins = TablePluginManager.getInstance().getOptPlugin(chairInfo.getTableVo().getGameId(),this.getActionType());
+        if(optPlugins == null){
+            return null;
+        }
+        HuType huType = null;
+        if(MJTool.isHu(cardsArray)){
+            huType = HuType.PINGHU;
+        }else if(MJTool.isQiDui(cardsArray)){
+            huType = HuType.QIDUI;
+        }else {
+            return null;
+        }
+
+        IPluginHuCheck huCheck = null;
+        for(int i= 0;i<optPlugins.size();i++){
+            IOptPlugin plugin = optPlugins.get(i);
+            if(plugin instanceof IPluginHuCheck){
+                IPluginHuCheck huCheckPlugin = (IPluginHuCheck) plugin;
+                if(huCheck != null && huCheck.getWeight()>= huCheckPlugin.getWeight()){
+                    continue;
+                }
+
+                if(!huCheckPlugin.checkExecute(huType,cardsArray,chairInfo)){
+                    continue;
+                }
+                huCheck = huCheckPlugin;
+            }
+        }
+
+        return huCheck;
+    }
+
     @Override
-    public int getWeight() {
+    public final int getWeight() {
         return GameConst.Weight.HU_TING;
     }
 
-    public enum CheckHuType{
-        NULL,Hu,Ting
+    public enum HuType{
+        //七对
+        QIDUI,
+        //非七对的平胡
+        PINGHU
     }
 }

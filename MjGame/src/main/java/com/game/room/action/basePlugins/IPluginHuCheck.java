@@ -21,18 +21,22 @@ public abstract class IPluginHuCheck extends AbstractActionPlugin<MjTable> imple
      */
     public abstract int getWeight();
 
+    /**
+     *
+     * @param stepGameStatusData
+     * @param chair
+     * @param card
+     * @param hands 手牌
+     * @return
+     */
+    @Deprecated
     @Override
-    public boolean checkExecute(StepGameStatusData stepGameStatusData,BaseChairInfo chair, int card, Object parems) {
-        if(card == 0){
-            if(!MJTool.isHu(MJTool.getCardsByType(chair.getHandsContainer().getHandCards(),0))){
-                return false;
-            }
-        }else {
-            if(!MJTool.isHu(MJTool.getCardsByType(chair.getHandsContainer().getHandCards(),card))){
-                return false;
-            }
-        }
-        return true;
+    public final boolean checkExecute(StepGameStatusData stepGameStatusData,BaseChairInfo chair, int card, Object hands) {
+        return false;
+    }
+
+    public boolean checkExecute(HuAction.HuType huType,int[][] cardsType,BaseChairInfo chair){
+        return huType == HuAction.HuType.PINGHU;
     }
 
     /**

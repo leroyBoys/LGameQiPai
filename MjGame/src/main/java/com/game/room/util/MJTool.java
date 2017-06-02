@@ -252,7 +252,7 @@ public class MJTool {
                 if(j == 0 || cards[i][j] == 0){
                     continue;
                 }
-                if(cards[i][j] == 2 || cards[i][j] == 4){
+                if(cards[i][j]%2 == 0){
                     continue;
                 }
 

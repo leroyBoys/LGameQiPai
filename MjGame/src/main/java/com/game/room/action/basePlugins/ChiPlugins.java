@@ -49,7 +49,7 @@ public class ChiPlugins<T extends MjTable> extends AbstractActionPlugin<T> imple
         MjChairInfo info = table.getChairByUid(stepGameStatusData.getUid());
         SuperGameStatusData gameStatusData= table.getStatusData();
         gameStatusData.checkGang(info,stepGameStatusData,0);
-        gameStatusData.checkHu(info,stepGameStatusData,0);
+        gameStatusData.checkTing(info,stepGameStatusData);
         gameStatusData.checkDa(info);
     }
 

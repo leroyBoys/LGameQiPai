@@ -27,11 +27,6 @@ public class SuperGameStatusData extends BaseGameStateData {
     private volatile int writeStep = -1;
     private volatile int readStep = -1;
 
-    @Override
-    public SuperGameStatusData createNew() {
-        return new SuperGameStatusData();
-    }
-
     public void addCanDoDatas(int step, StepGameStatusData stepGameStatusData){
         canDoDatas.add(stepGameStatusData);
 
@@ -107,17 +102,32 @@ public class SuperGameStatusData extends BaseGameStateData {
     }
 
 
-    protected HuAction.CheckHuType checkCanHu(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
-        return HuAction.CheckHuType.Hu;
+    protected boolean checkCanHu(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
+        return true;
     }
 
     public final void checkHu(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
-        HuAction.CheckHuType checkHuType = checkCanHu(chairInfo,stepGameStatusData,card);
-        if(checkHuType == HuAction.CheckHuType.NULL){
+        if(!checkCanHu(chairInfo,stepGameStatusData,card)){
             return;
         }
 
-        HuAction.getInstance().check(chairInfo,stepGameStatusData,card,checkHuType);
+        getHuAction().check(chairInfo,stepGameStatusData,card,null);
+    }
+
+    public HuAction getHuAction(){
+        return HuAction.getInstance();
+    }
+
+    protected boolean checkCanTing(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData){
+        return true;
+    }
+
+    public final void checkTing(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData){
+        if(!checkCanTing(chairInfo,stepGameStatusData)){
+            return;
+        }
+
+        TingAction.getInstance().check(chairInfo,stepGameStatusData,0,null);
     }
 
     public void checkDa(MjChairInfo chairInfo) {

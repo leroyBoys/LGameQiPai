@@ -17,7 +17,7 @@ import com.module.net.NetGame;
 public class DaAction extends GameOperateAction{
     private final static DaAction intance = new DaAction();
 
-    private DaAction(){}
+    protected DaAction(){}
 
     public static final DaAction getIntance(){
         return intance;

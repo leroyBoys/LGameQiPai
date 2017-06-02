@@ -17,21 +17,22 @@ public class XXGameStatusData extends SuperGameStatusData {
         return new XXGameStatusData();
     }
 
-  /*  protected boolean checkCanChi(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
-        return false;
+    protected boolean checkCanChi(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
+        return true;
+        //return false;
     }
-*/
-    protected HuAction.CheckHuType checkCanHu(MjChairInfo chair,StepGameStatusData stepGameStatusData, int card){
+
+    protected boolean checkCanHu(MjChairInfo chair,StepGameStatusData stepGameStatusData, int card){
         if(!chair.isCanDo()){
-            return HuAction.CheckHuType.NULL;
+            return false;
         }
 
         if((((MjTable)chair.getTableVo()).getType() & GameConst.XXMjType.ZIMO )== GameConst.XXMjType.ZIMO){
             if(card != 0){
-                return HuAction.CheckHuType.NULL;
+                return false;
             }
         }
-        return HuAction.CheckHuType.Hu;
+        return true;
     }
 
     @Override
@@ -49,5 +50,9 @@ public class XXGameStatusData extends SuperGameStatusData {
             return false;
         }
         return super.checkCanGang(chairInfo, stepGameStatusData,card);
+    }
+
+    protected boolean checkCanTing(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData){
+        return false;
     }
 }

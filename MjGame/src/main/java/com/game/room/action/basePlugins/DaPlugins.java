@@ -45,7 +45,7 @@ public class DaPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
             }
             statusData.checkGang(chairInfo,stepGameStatusData,card);
             statusData.checkPeng(chairInfo,stepGameStatusData,card);
-            statusData.checkHu(chairInfo,stepGameStatusData,card);
+            statusData.checkTing(chairInfo,stepGameStatusData);
         }
         statusData.checkMo(table,nextUid);
     }

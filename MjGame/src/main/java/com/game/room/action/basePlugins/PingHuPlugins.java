@@ -4,9 +4,9 @@ package com.game.room.action.basePlugins;
  * Created by leroy:656515489@qq.com
  * 2017/5/11.
  */
-public class HuPlugins extends IPluginHuCheck{
+public class PingHuPlugins extends IPluginHuCheck{
     /**
-     * 用于重叠胡牌的计算优先级
+     *
      * @return
      */
     @Override
@@ -15,7 +15,7 @@ public class HuPlugins extends IPluginHuCheck{
     }
 
     @Override
-    public HuPlugins createNew() {
-        return new HuPlugins();
+    public PingHuPlugins createNew() {
+        return new PingHuPlugins();
     }
 }

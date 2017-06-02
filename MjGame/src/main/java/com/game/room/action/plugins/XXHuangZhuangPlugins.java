@@ -1,10 +1,8 @@
 package com.game.room.action.plugins;
 
-import com.game.core.config.AbstractStagePlugin;
-import com.game.core.room.BaseTableVo;
 import com.game.room.MjTable;
 import com.game.room.action.basePlugins.AbstractActionPlugin;
-import com.game.room.action.basePlugins.HuPlugins;
+import com.game.room.action.basePlugins.PingHuPlugins;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 
@@ -15,8 +13,8 @@ import com.lsocket.message.Response;
 public class XXHuangZhuangPlugins extends AbstractActionPlugin<MjTable> {
 
     @Override
-    public HuPlugins createNew() {
-        return new HuPlugins();
+    public PingHuPlugins createNew() {
+        return new PingHuPlugins();
     }
 
     @Override

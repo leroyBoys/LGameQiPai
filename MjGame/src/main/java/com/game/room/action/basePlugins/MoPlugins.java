@@ -29,6 +29,7 @@ public class MoPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
         MjChairInfo chairInfo = table.getChairs()[table.getFocusIdex()];
         statusData.checkGang(chairInfo,stepGameStatusData,0);
         statusData.checkHu(chairInfo,stepGameStatusData,0);
+        statusData.checkTing(chairInfo,stepGameStatusData);
         statusData.checkDa(chairInfo);
     }
 
