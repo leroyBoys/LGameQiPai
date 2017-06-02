@@ -1,7 +1,6 @@
 package com.game.room.action.basePlugins;
 
 import com.game.core.room.BaseChairInfo;
-import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
 import com.game.room.MjTable;
 import com.game.room.action.*;
@@ -20,13 +19,11 @@ public class HuPlugins<T extends MjTable> extends AbstractActionPlugin<T> implem
     public boolean checkExecute(StepGameStatusData stepGameStatusData,BaseChairInfo chair, int card, Object parems) {
         HuAction.CheckHuType huType = (HuAction.CheckHuType) parems;
         if(card == 0){
-            if(!MJTool.isSimpleHu(MJTool.toCardArray(chair.getHandsContainer().getHandCards(),0),((MjAutoCacheHandContainer)chair.getHandsContainer().getAutoCacheHands()).getCardNumMap())){
+            if(!MJTool.isHu(MJTool.getCardsByType(chair.getHandsContainer().getHandCards(),0))){
                 return false;
             }
         }else {
-            int[] cards = MJTool.toCardArray(chair.getHandsContainer().getHandCards(),1);
-            cards[cards.length-1] = card;
-            if(!MJTool.isSimpleHu(cards,null)){
+            if(!MJTool.isHu(MJTool.getCardsByType(chair.getHandsContainer().getHandCards(),card))){
                 return false;
             }
         }

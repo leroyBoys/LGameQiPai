@@ -102,152 +102,413 @@ public class MJTool {
         return cardsTemp;
     }
 
-    /**
-     * 普通的胡牌（没有任何附加规则限制）
-     * @param cardsTemp
-     * @return
-     */
-    public static boolean isSimpleHu(int[] cardsTemp,Map<Integer, Integer> map){
-        boolean res = false;
-        //int[] cardsTemp = new int[]{11,11,21,21,12,12,14,14,15,15,15,16,17,18};
-        if(map == null){
-            map = ArrayHandsCardCount(cardsTemp);
+    public static void main(String[] args) {
+        List<int[]> hucardMap = new ArrayList<>();
+        hucardMap.add(new int[]{11,11,14,14,21,21,22,22,26,26,27,27,29,29});//七对
+        hucardMap.add(new int[]{11,11,11,11,21,21,21,21,26,26,26,26,29,29});
+        hucardMap.add(new int[]{11,11,11,21,21,21,22,22,22,27,27,27,29,29});
+        hucardMap.add(new int[]{11,12,13,14,15,16,17,18,19,21,22,23,24,24});
+        hucardMap.add(new int[]{14,15,16,16,16,16,17,18,21,22,23,24,25,26});
+        hucardMap.add(new int[]{14,15,15,16,16,17,17,17,21,22,23,24,25,26});
+        hucardMap.add(new int[]{14,14,15,15,15,16,16,16,21,21,21,22,22,22});
+
+        List<List<Integer>> hucardMaps= new ArrayList<>();
+        for(int[] cards :hucardMap){
+            List<Integer> temp = new LinkedList<>();
+            for(int car :cards){
+                temp.add(car);
+            }
+            hucardMaps.add(temp);
         }
 
-        for (Integer cNum : map.keySet()) {
-            if (map.get(cNum) > 1) {
-                int[] rescards = MJTool.ArrayRemove(cardsTemp, cNum, 2);
-                res = MJTool.isSentence(rescards);
-                if (res) {
-                    break;
-                }
+
+        long ss = System.currentTimeMillis();
+        for(int i = 0;i<1;i++){
+
+//            for(int[] cards :hucardMap){
+//                isSimpleHu(cards,null);
+//             //   System.out.println(Arrays.toString(cards)+isSimpleHu(cards,null));
+//            }
+            for(List<Integer> cards :hucardMaps){
+                //isHu(getCardsByType(cards));
+                //System.out.println(Arrays.toString(cards.toArray())+isHu(getCardsByType(cards)));
+                System.out.println(Arrays.toString(cards.toArray())+isHuMustHavThree(checkThreeAndGetCardsByType(cards,0)));
             }
         }
 
-        return res;
+        System.out.println("==>"+(System.currentTimeMillis()-ss)+"ms");
+    }
+
+    public static int[][] getCardsByType(List<Integer> cards,int extraCard){
+        int[][] cardTmp = new int[5][];//0为存放的为总数量
+        for(Integer card:cards){
+            fillArray(cardTmp,card);
+        }
+
+        if(extraCard>0){
+            fillArray(cardTmp,extraCard);
+        }
+        return cardTmp;
+    }
+
+    private static void fillArray(int[][] cardTmp,int card){
+        int type = card/10;
+        if(cardTmp[type] == null){
+            cardTmp[type] = new int[10];
+        }
+        cardTmp[type][0]++;
+        cardTmp[type][card%10]++;
     }
 
     /**
-     * 胡牌判断，每次移除对子后还需要判断是否有坎子
-     * 12333这种牌型不能算坎子
-     * @param cardsTemp
-     * @param groupList
+     * 检测至少有刻字，如果没有则返回null
+     * @param cards
      * @return
      */
-    public static boolean isHu(int[] cardsTemp, List<GroupCard> groupList) {
-        boolean openCardHasKan = openCardsHasKan(groupList);
-        boolean res = false;
-        if (cardsTemp == null || cardsTemp.length == 0) {
-            return res;
-        }
-
-        if ((cardsTemp.length - 2) % 3 != 0) {
-            return res;
-        }
-
-        if(openCardHasKan){ //明牌有坎子,直接判断
-            return isSimpleHu(cardsTemp,null);
-        }
-
-        //把手牌里的坎子移除，再判断是否胡牌，防止123334455这种牌型
-        HashMap<Integer, Integer> map = ArrayHandsCardCount(cardsTemp);
-        for(Map.Entry<Integer,Integer> count : map.entrySet()){
-            if( count.getValue() >=3 && count.getKey() <= 44){
-                //移除坎子，再进行比较
-                int[] rescards = ArrayRemove(cardsTemp, count.getKey(), 3);
-                if(isSimpleHu(rescards,null)){
-                    return true;
-                }
-            }else if(count.getValue() >1 && count.getKey() > 44){ //有中发白的对子
-                if(isSimpleHu(cardsTemp,null)){
-                    return true;
-                }
+    public static int[][] checkThreeAndGetCardsByType(List<Integer> cards,int extraCard){
+        int[][] cardTmp = new int[5][];//0为存放的为总数量
+        boolean isHasThree = false;
+        for(Integer card:cards){
+            if(fillArray(cardTmp,card,isHasThree)){
+                isHasThree = true;
             }
         }
 
-        return false;
+        if(extraCard>0){
+            if(fillArray(cardTmp,extraCard,isHasThree)){
+                isHasThree = true;
+            }
+        }
+
+        if(!isHasThree){
+            return null;
+        }
+        return cardTmp;
     }
 
-    //明牌是否有坎子
-    public static boolean openCardsHasKan(List<GroupCard> groupList) {
-        for (GroupCard group : groupList) {
-            List<Integer> list = group.getCards();
-
-            int firNum = list.get(0);
-            if(firNum > 40){ //三剑客或东南西北都可以
-                return true;
-            }
-
-            int subCount = 0;
-            for (Integer mj : list) {
-                if (mj == firNum) {
-                    subCount++;
-                }
-            }
-            if (subCount > 2) {
-                return true;
-            }
+    private static boolean fillArray(int[][] cardTmp,int card,boolean isHasThree){
+        int type = card/10;
+        if(cardTmp[type] == null){
+            cardTmp[type] = new int[10];
+        }
+        cardTmp[type][0]++;
+        if(++cardTmp[type][card%10]>2 && !isHasThree){
+            return true;
         }
         return false;
     }
 
 
-    // 所有手牌牌计数
-    public static HashMap<Integer, Integer> ArrayHandsCardCount(int[] cardsTemp) {
-        // 计数
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for (int i = 0; i < cardsTemp.length; i++) {
-            if (!map.containsKey(cardsTemp[i])) {
-                map.put(cardsTemp[i], 0);
+    private static boolean checkMatch(int[][] cards){
+        int count;
+        int n3Count = 0;//满足3n+2的个数
+        for (int i = 1;i<cards.length;i++){//检验是否满足3n+2
+            if(cards[i]==null){
+                continue;
             }
-            int count = map.get(cardsTemp[i]) + 1;
-            map.put(cardsTemp[i], count);
-        }
-        return map;
-    }
+            count = cards[i][0];
+            if(count == 0){
+                continue;
+            }
 
-    // 一句牌（顺子）
-    public static boolean isSentence(int[] handCards) {
-        if (handCards != null && handCards.length > 0) {
-            handCards = ArraySort(handCards);
-            while (handCards.length > 0) {
-                int[] temp = ArrayRemove(handCards, handCards[0], 3);
-                if (temp == null) {
-                    // 移除碰失败，移除顺子
-                    int cardTemp = handCards[0];
-                    if (cardTemp > 40)
-                        return false;
-                    for (int i = 0; i < 3; i++) {
-                        temp = ArrayRemove(handCards, cardTemp + i, 1);
-                        if (temp == null)
-                            return false;
-                        handCards = temp;
-                    }
+            count = count%3;
+            if(count == 1){
+                return false;
+            }
+
+            if(count == 2){
+                if(n3Count > 0){
+                    return false;
                 }
-                handCards = temp;
+                n3Count++;
+                continue;
             }
         }
+
+        if(n3Count == 0){
+            return false;
+        }
+
         return true;
     }
 
+    public static boolean isQiDui(int[][] cards){
+        int count;
+        for (int i = 1;i<cards.length;i++){
+            if(cards[i] == null){
+                continue;
+            }
+            count = cards[i][0];
+            if(count == 0){
+                continue;
+            }
 
-    // 排序
-    public static int[] ArraySort(int[] cards) {
-        if (cards != null) {
-            for (int i = 0; i < cards.length; i++) {
-                Integer tmp = cards[i];
-                for (int j = i + 1; j < cards.length; j++) {
-                    if (tmp.intValue() > cards[j]) {
-                        tmp = cards[j];
-                        cards[j] = cards[i];
-                        cards[i] = tmp;
+            count = count%2;
+            if(count != 0){
+               return false;
+            }
+
+            for(int j=0,length=cards[i].length;j<length;j++){
+                if(j == 0 || cards[i][j] == 0){
+                    continue;
+                }
+                if(cards[i][j] == 2 || cards[i][j] == 4){
+                    continue;
+                }
+
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean isHu(int[][] cards){
+        if(cards == null || !checkMatch(cards)){
+            return false;
+        }
+
+        HuData huData = new HuData();
+        int count;
+        for (int i = 1;i<cards.length;i++){//检验是否满足顺子，刻字
+            if(cards[i] == null){
+                continue;
+            }
+            count = cards[i][0];
+            if(count == 0){
+                continue;
+            }
+
+            count = count%3;
+            if(count == 0){
+                if(i > 3){
+                    if(!removeThree(cards[i],huData)){//东西南北中发白，春夏秋冬，梅兰竹菊
+                        return false;
                     }
+                }else if(!removeLink(cards[i],huData)){
+                    return false;
+                }
+                continue;
+            }
+
+            if(!checkRight(cards[i],huData)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 至少含有一个刻字（三张一样的牌）
+     * @param cards
+     * @return
+     */
+    public static boolean isHuMustHavThree(int[][] cards){
+        if(cards == null || !checkMatch(cards)){
+            return false;
+        }
+
+        HuData huData = new HuData();
+        int count;
+        for (int i = 1;i<cards.length;i++){//检验是否满足顺子，刻字
+            if(cards[i] == null){
+                continue;
+            }
+            count = cards[i][0];
+            if(count == 0){
+                continue;
+            }
+
+            count = count%3;
+            if(count == 0){
+                if(i > 3){
+                    if(!removeThree(cards[i],huData)){//东西南北中发白，春夏秋冬，梅兰竹菊
+                        return false;
+                    }
+                    continue;
+                }
+
+                if(!removeLink(cards[i],huData)){
+                    return false;
+                }
+
+                if(!huData.isContanThree()){
+                    checkRemoveThree(cards[i],huData);
+                }
+                continue;
+            }
+
+            if(!checkRight(cards[i],huData)){
+                return false;
+            }
+
+            if(huData.isContanThree()){
+                continue;
+            }
+
+            checkRightFirstCheckThree(cards[i],huData);
+        }
+
+        return huData.isContanThree();
+    }
+
+    private static boolean checkRightFirstCheckThree(int[] cards,HuData huData) {
+        int length = cards.length;
+        boolean isMatch = false;
+        int firstTwo = 0;
+        for(int j=0;j<length;j++){
+            if(j == 0 || cards[j] < 2){
+                continue;
+            }else if(cards[j] < 3){
+                if(firstTwo!=0){
+                    firstTwo = j;
+                }
+                continue;
+            }
+
+            int[] array = Arrays.copyOf(cards,cards.length);
+            array[j] = array[j]-3;
+            array[0] = array[0]-3;
+
+            for(int i = firstTwo;i < array.length;i++){
+                if(cards[i] < 3){
+                    continue;
+                }
+            }
+
+            if(removeLink(getNewInt(cards,j),huData)){
+                isMatch = true;
+                continue;
+            }
+        }
+
+        if(!isMatch){
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * 3n+2是否满足，一对，其他是顺子或者刻字的情况
+     * @param cards
+     * @return
+     */
+    private static boolean checkRight(int[] cards,HuData huData){
+        int length = cards.length;
+        boolean isMatch = false;
+        for(int j=0;j<length;j++){
+            if(j == 0 || cards[j] == 0){
+                continue;
+            }else if(cards[j] > 1){
+                if(removeLink(getNewInt(cards,j),huData)){
+                    isMatch = true;
+                    continue;
                 }
             }
         }
-        return cards;
+
+        if(!isMatch){
+            return false;
+        }
+
+        return true;
     }
 
+    private static int[] getNewInt(int[] array,int i){
+        int[] newArray = new int[10];
+        for(int j=0;j<array.length;j++){
+            if(j == 0 || array[j] == 0){
+                continue;
+            }else if(i == j){
+                newArray[j] = array[j]-2;
+            }else {
+                newArray[j] = array[j];
+            }
+        }
+        newArray[0] = array[0]-2;
+        return newArray;
+    }
+
+    /**
+     * 移除顺子
+     * @param cards
+     * @return
+     */
+    private static boolean removeLink(int[] cards,HuData huData){
+     //   System.out.println("=======removeLink====>"+Arrays.toString(cards));
+        //先判断顺子
+        for(int i=0;i<cards.length;i++){
+            if(i==0 || cards[i] == 0){
+                continue;
+            }
+
+            if(i<8){
+                if(cards[i+1] ==0 || cards[i+2] ==0){
+                    return removeThree(cards,huData);
+                }
+                cards[0] = cards[0]-3;
+                cards[i]--;
+                cards[i+1]--;
+                cards[i+2]--;
+                if(removeLink(cards,huData)){
+                    huData.addLink();
+                    return true;
+                }
+                return false;
+            }
+
+            return removeThree(cards,huData);
+        }
+
+        return true;
+    }
+
+    private static boolean removeThree(int[] cards,HuData huData){
+    //    System.out.println("=======removeThree====>"+Arrays.toString(cards));
+        //刻字
+        for(int i=0;i<cards.length;i++){
+            if(i==0 || cards[i] == 0){
+                continue;
+            }
+
+            if(cards[i] < 3){
+                return false;
+            }
+            cards[0] = cards[0]-3;
+            cards[i] = cards[i]-3;
+            if(removeLink(cards,huData)){
+                huData.addThree();
+                return true;
+            }
+            return false;
+        }
+
+        return false;
+    }
+
+    private static boolean checkRemoveThree(int[] cards,HuData huData){
+        //    System.out.println("=======checkRemoveThree====>"+Arrays.toString(cards));
+        //刻字
+        int[] array = Arrays.copyOf(cards,cards.length);
+        for(int i=0;i<array.length;i++){
+            if(i==0 || array[i] < 3){
+                continue;
+            }
+
+            array[0] = array[0]-3;
+            array[i] = array[i]-3;
+            if(removeLink(array,huData)){
+                huData.addThree();
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    @Deprecated
     /** 移除对应个数牌，失败返回null */
     public static int[] ArrayRemove(int[] cards, int ocard, int countLimit) {
         int count = 0;
@@ -269,4 +530,34 @@ public class MJTool {
         return reCards;
     }
 
+    public static class HuData{
+        public final static int THREE = 1;//刻字（三个一样的）
+        public final static int LINK = THREE<<1;//顺子
+        private int blockId;//胡牌的组成（对，刻字，四张和顺子）
+
+        private void add(final int target){
+            if((blockId&target) == target){
+                return;
+            }
+
+            blockId |= target;
+        }
+
+
+        public void addThree(){
+            add(THREE);
+        }
+
+        public void addLink(){
+            add(LINK);
+        }
+
+        public boolean isContanThree(){
+            return (blockId&THREE) == THREE;
+        }
+
+        public int getBlockId() {
+            return blockId;
+        }
+    }
 }
