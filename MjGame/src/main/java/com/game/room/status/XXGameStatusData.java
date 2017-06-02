@@ -1,6 +1,8 @@
 package com.game.room.status;
 
+import com.game.core.constant.GameConst;
 import com.game.room.MjChairInfo;
+import com.game.room.MjTable;
 import com.game.room.action.HuAction;
 import com.game.room.action.SuperGameStatusData;
 
@@ -19,9 +21,15 @@ public class XXGameStatusData extends SuperGameStatusData {
         return false;
     }
 */
-    protected HuAction.CheckHuType checkCanHu(MjChairInfo chairInfo,StepGameStatusData stepGameStatusData, int card){
-        if(!chairInfo.isCanDo()){
+    protected HuAction.CheckHuType checkCanHu(MjChairInfo chair,StepGameStatusData stepGameStatusData, int card){
+        if(!chair.isCanDo()){
             return HuAction.CheckHuType.NULL;
+        }
+
+        if((((MjTable)chair.getTableVo()).getType() & GameConst.XXMjType.ZIMO )== GameConst.XXMjType.ZIMO){
+            if(card != 0){
+                return HuAction.CheckHuType.NULL;
+            }
         }
         return HuAction.CheckHuType.Hu;
     }

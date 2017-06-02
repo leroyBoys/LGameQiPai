@@ -6,11 +6,14 @@ import com.game.core.config.TablePluginManager;
 import com.game.core.constant.GameConst;
 import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
+import com.game.room.action.basePlugins.IPluginHuCheck;
 import com.game.room.status.StepGameStatusData;
 import com.lsocket.message.Response;
 import com.module.net.NetGame;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -55,19 +58,31 @@ public class HuAction extends GameOperateAction {
             return;
         }
 
-        final CheckHuType checkHuType = (CheckHuType) parems;
-
+        IPluginHuCheck huCheck = null;
         for(int i= 0;i<optPlugins.size();i++){
-            if(optPlugins.get(i) instanceof IPluginCheckCanExecuteAction){
-
-                if(((IPluginCheckCanExecuteAction)optPlugins.get(i)).checkExecute(stepGameStatusData,chairInfo,card,parems)){
-                    if(checkHuType == CheckHuType.Hu){
-                        return;
-                    }
+            IOptPlugin plugin = optPlugins.get(i);
+            if(plugin instanceof IPluginHuCheck){
+                IPluginHuCheck huCheckPlugin = (IPluginHuCheck) plugin;
+                if(huCheck != null && huCheck.getWeight()>= huCheckPlugin.getWeight()){
+                    continue;
                 }
-            }
 
+                if(!huCheckPlugin.checkExecute(stepGameStatusData,chairInfo,card,parems)){
+                   continue;
+                }
+                huCheck = huCheckPlugin;
+            }
         }
+
+        if(huCheck == null){
+            return;
+        }
+
+        //如果大胡重叠，如一色，七对重叠为龙七对，那么一色和七对就不在成立(龙七对(重叠)的优先级更高)
+        SuperGameStatusData gameStatusData= (SuperGameStatusData) chairInfo.getTableVo().getStatusData();
+        gameStatusData.addCanDoDatas(
+                chairInfo.getTableVo().getStep(),
+                new StepGameStatusData(this,stepGameStatusData.getUid(),chairInfo.getId(),card,huCheck));
     }
 
     @Override
