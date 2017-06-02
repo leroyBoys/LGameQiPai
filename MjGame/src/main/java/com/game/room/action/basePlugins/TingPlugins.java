@@ -26,13 +26,12 @@ public class TingPlugins<T extends MjTable> extends DaPlugins<T>{
 
     @Override
     public boolean doOperation(T table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
+
         return true;
     }
 
     @Override
     public int chickMatch(T table, List<Integer> card, StepGameStatusData stepData) {
-        BaseChairInfo chairInfo = table.getChairByUid(stepData.getUid());
-
-        return ((MjAutoCacheHandContainer)(chairInfo.getHandsContainer()).getAutoCacheHands()).containCard(card.get(0))?1:0;
+        return stepData.getCards().contains(card.get(0))?1:0;
     }
 }

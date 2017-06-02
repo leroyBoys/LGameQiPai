@@ -28,6 +28,8 @@ public class TablePluginManager {
 
     private final Map<Integer,PluginGen> pluginGenMap = new HashMap<>();
 
+    private final Map<Integer,IOptPlugin> ioPluginGenMap = new HashMap<>();
+
     private final Map<Integer,RoomSetting> roomSettingMap = new HashMap<>();
     private TablePluginManager() {
     }
@@ -52,6 +54,8 @@ public class TablePluginManager {
             pluginGenMap.put(sett.getTempId(),sett);
 
             IOptPlugin optPlugin = createOptPlugin(sett);
+            ioPluginGenMap.put(sett.getTempId(),optPlugin);
+
             String[] gameIds = sett.getGameId().split(",");
 
             for(String gameIdStr:gameIds){
@@ -92,6 +96,10 @@ public class TablePluginManager {
 
     public IOptPlugin getOneOptPlugin(int gameId,int actionType){
         return optPluginMap.get(gameId).get(actionType).get(0);
+    }
+
+    public IOptPlugin getOptPlugin(int tempId){
+        return ioPluginGenMap.get(tempId);
     }
 
     public RoomSetting getRoomSetting(int gameId){
