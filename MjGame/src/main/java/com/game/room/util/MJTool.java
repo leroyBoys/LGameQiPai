@@ -111,6 +111,7 @@ public class MJTool {
         hucardMap.add(new int[]{14,15,16,16,16,16,17,18,21,22,23,24,25,26});
         hucardMap.add(new int[]{14,15,15,16,16,17,17,17,21,22,23,24,25,26});
         hucardMap.add(new int[]{14,14,15,15,15,16,16,16,21,21,21,22,22,22});
+        hucardMap.add(new int[]{11,21,22,23,24,24,24,25,26,27,12,13,14,11});
 
         List<List<Integer>> hucardMaps= new ArrayList<>();
         for(int[] cards :hucardMap){
@@ -123,7 +124,7 @@ public class MJTool {
 
 
         long ss = System.currentTimeMillis();
-        for(int i = 0;i<1;i++){
+        for(int i = 0;i<10000;i++){
 
 //            for(int[] cards :hucardMap){
 //                isSimpleHu(cards,null);
@@ -131,7 +132,7 @@ public class MJTool {
 //            }
             for(List<Integer> cards :hucardMaps){
                 //isHu(getCardsByType(cards));
-                //System.out.println(Arrays.toString(cards.toArray())+isHu(getCardsByType(cards)));
+                //  System.out.println(Arrays.toString(cards.toArray())+isHu(getCardsByType(cards,0)));
                 System.out.println(Arrays.toString(cards.toArray())+isHuMustHavThree(checkThreeAndGetCardsByType(cards,0)));
             }
         }
@@ -225,7 +226,7 @@ public class MJTool {
             }
         }
 
-        if(n3Count == 0){
+        if(n3Count != 1){
             return false;
         }
 
@@ -245,7 +246,7 @@ public class MJTool {
 
             count = count%2;
             if(count != 0){
-               return false;
+                return false;
             }
 
             for(int j=0,length=cards[i].length;j<length;j++){
@@ -269,6 +270,10 @@ public class MJTool {
         }
 
         HuData huData = new HuData();
+        return huCheck(cards,huData);
+    }
+
+    private static boolean huCheck(int[][] cards, HuData huData){
         int count;
         for (int i = 1;i<cards.length;i++){//检验是否满足顺子，刻字
             if(cards[i] == null){
@@ -282,10 +287,10 @@ public class MJTool {
             count = count%3;
             if(count == 0){
                 if(i > 3){
-                    if(!removeThree(cards[i],huData)){//东西南北中发白，春夏秋冬，梅兰竹菊
+                    if(!removeThreeOnly(cards[i],huData)){//东西南北中发白，春夏秋冬，梅兰竹菊
                         return false;
                     }
-                }else if(!removeLink(cards[i],huData)){
+                }else if(!removeThree(cards[i],huData)){
                     return false;
                 }
                 continue;
@@ -310,47 +315,7 @@ public class MJTool {
         }
 
         HuData huData = new HuData();
-        int count;
-        for (int i = 1;i<cards.length;i++){//检验是否满足顺子，刻字
-            if(cards[i] == null){
-                continue;
-            }
-            count = cards[i][0];
-            if(count == 0){
-                continue;
-            }
-
-            count = count%3;
-            if(count == 0){
-                if(i > 3){
-                    if(!removeThree(cards[i],huData)){//东西南北中发白，春夏秋冬，梅兰竹菊
-                        return false;
-                    }
-                    continue;
-                }
-
-                if(!removeLink(cards[i],huData)){
-                    return false;
-                }
-
-                if(!huData.isContanThree()){
-                    checkRemoveThree(cards[i],huData);
-                }
-                continue;
-            }
-
-            if(!checkRight(cards[i],huData)){
-                return false;
-            }
-
-            if(huData.isContanThree()){
-                continue;
-            }
-
-            checkRightFirstCheckThree(cards[i],huData);
-        }
-
-        return huData.isContanThree();
+        return huCheck(cards,huData)&&huData.isContanThree();
     }
 
     private static boolean checkRightFirstCheckThree(int[] cards,HuData huData) {
@@ -402,7 +367,7 @@ public class MJTool {
             if(j == 0 || cards[j] == 0){
                 continue;
             }else if(cards[j] > 1){
-                if(removeLink(getNewInt(cards,j),huData)){
+                if(removeThree(getNewInt(cards,j),huData)){
                     isMatch = true;
                     continue;
                 }
@@ -437,7 +402,7 @@ public class MJTool {
      * @return
      */
     private static boolean removeLink(int[] cards,HuData huData){
-     //   System.out.println("=======removeLink====>"+Arrays.toString(cards));
+        //   System.out.println("=======removeLink====>"+Arrays.toString(cards));
         //先判断顺子
         for(int i=0;i<cards.length;i++){
             if(i==0 || cards[i] == 0){
@@ -446,27 +411,64 @@ public class MJTool {
 
             if(i<8){
                 if(cards[i+1] ==0 || cards[i+2] ==0){
-                    return removeThree(cards,huData);
+                    return false;
                 }
                 cards[0] = cards[0]-3;
                 cards[i]--;
                 cards[i+1]--;
                 cards[i+2]--;
-                if(removeLink(cards,huData)){
+
+                if(cards[0] == 0){
+                    return true;
+                }
+
+                if(removeThree(cards,huData)){
                     huData.addLink();
                     return true;
                 }
                 return false;
             }
 
-            return removeThree(cards,huData);
+            if(cards[i] < 3){
+                return false;
+            }
+
+            return removeThreeOnly(cards,huData);
         }
 
         return true;
     }
 
     private static boolean removeThree(int[] cards,HuData huData){
-    //    System.out.println("=======removeThree====>"+Arrays.toString(cards));
+        //    System.out.println("=======removeThree====>"+Arrays.toString(cards));
+        //刻字
+        for(int i=0;i<cards.length;i++){
+            if(i==0 || cards[i] == 0){
+                continue;
+            }
+
+            if(cards[i] > 2){
+                cards[0] = cards[0]-3;
+                cards[i] = cards[i]-3;
+
+                if(cards[0] == 0){
+                    return true;
+                }
+                if(removeThree(cards,huData)){
+                    huData.addThree();
+                    return true;
+                }
+
+            }
+
+            return removeLink(cards,huData);
+        }
+
+        return true;
+    }
+
+    private static boolean removeThreeOnly(int[] cards,HuData huData){
+        //    System.out.println("=======removeThree====>"+Arrays.toString(cards));
         //刻字
         for(int i=0;i<cards.length;i++){
             if(i==0 || cards[i] == 0){
@@ -478,7 +480,11 @@ public class MJTool {
             }
             cards[0] = cards[0]-3;
             cards[i] = cards[i]-3;
-            if(removeLink(cards,huData)){
+            if(cards[0] == 0){
+                return true;
+            }
+
+            if(removeThreeOnly(cards,huData)){
                 huData.addThree();
                 return true;
             }
