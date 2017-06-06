@@ -179,14 +179,12 @@ public class SystemHandler extends ModuleHandler {
         //发送连接成功
         RoleInfo info = userService.getRoleInfoByUid(userInfo.getId());
         GameRole gameRole = null;
-        if (info == null) {
+        boolean isNew = info == null;
+        if (isNew) {
             //如果多角色则返回选择页面
             //如果不是自动初始化
             info = initRole(userInfo);
-
             gameRole = new GameRole(info.getId(),0,0);
-            ///初始化创建角色奖励
-            initLoginReward(gameRole);
         }else {
             gameRole = DBServiceManager.getInstance().getGameRedis().getGameRole(info.getId());
         }
@@ -200,9 +198,13 @@ public class SystemHandler extends ModuleHandler {
         vistor.setGameRole(gameRole);
 
         vistor.setRoleInfo(info);
-        OnlineManager.getIntance().putOnlineList(userInfo.getId(), info.getId(), vistor);
+        OnlineManager.getIntance().putOnlineList(info.getId(),userInfo.getId(),  vistor);
         userService.updateUserInfoLoginStatus(userInfo.getId(), true, new Date());
         //发送登陆成功消息
+        if(isNew){
+            ///初始化创建角色奖励
+            initLoginReward(gameRole);
+        }
 
         NetGame.RQConnect.Builder connect = NetGame.RQConnect.newBuilder();
         connect.setRoomId(gameRole.getRoomId());

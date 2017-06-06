@@ -274,7 +274,7 @@ public class UserDao implements Base {
     public RoleInfo getRoleInfoByUid(int uid) {
         MethodCacheTime ct = monitor.start();
         try {
-            return gamePool.ExecuteQueryOne(RoleInfo.instance,"SELECT * FROM role_info WHERE uid = 1?", uid);
+            return gamePool.ExecuteQueryOne(RoleInfo.instance,"SELECT * FROM role_info WHERE uid = ?", uid);
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
@@ -325,7 +325,7 @@ public class UserDao implements Base {
     public void updateCard(int roleId, int card) {
         MethodCacheTime ct = monitor.start();
         try {
-            gamePool.Execute("update user_info set card=? where id = ?",card,roleId);
+            gamePool.Execute("update role_info  set card=? where id = ?",card,roleId);
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {

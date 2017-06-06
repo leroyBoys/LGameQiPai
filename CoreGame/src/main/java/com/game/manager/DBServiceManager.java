@@ -108,7 +108,7 @@ public class DBServiceManager extends ICommon {
         this.userService = new UserServiceImpl(new UserDao(commUserPool,commGamePool),userRedis);
 
         Properties masterProperties = new Properties(redisProperties);
-        masterProperties.setProperty("url",serverGroup.getRedisUrl()+"/"+serverGroup.getRedisPwd());
+        masterProperties.setProperty("url",serverGroup.getRedisUrl()+"/"+(StringTool.isEmpty(serverGroup.getRedisPwd())?"":serverGroup.getRedisPwd()));
         RedisConnectionManager gameRedisConnectionManager = new RedisConnectionManager(masterProperties);
         gameRedis = new GameRedis(gameRedisConnectionManager);
     }

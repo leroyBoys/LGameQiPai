@@ -35,7 +35,7 @@ public class GameRole extends UpdateData{
     }
 
     protected void updateIng(){
-       super.updateIng();
+        super.updateIng();
         UpdateDataManager.getInstance().addUpdataData(roleId);
     }
 
