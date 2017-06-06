@@ -430,7 +430,7 @@ public class MJTool {
             int count = cards[i][0];
             if (count == 0) {
                 continue;
-            } else if (count != 2) {
+            }else if (count != 2) {
                 return false;
             }
 

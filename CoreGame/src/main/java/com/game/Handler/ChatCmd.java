@@ -45,6 +45,6 @@ public enum ChatCmd implements ModuleCmd {
 
     @Override
     public int getModule() {
-        return GameConst.MOUDLE_User;
+        return GameConst.MOUDLE_Chat;
     }
 }

@@ -11,6 +11,7 @@ import com.game.room.MjTable;
 import com.game.room.action.*;
 import com.game.room.action.basePlugins.AbstractActionPlugin;
 import com.game.room.status.StepGameStatusData;
+import com.game.room.util.MJTool;
 import com.lsocket.message.Response;
 import com.module.core.ResponseCode;
 import com.module.net.NetGame;
@@ -112,6 +113,14 @@ public class SuperGameStatusData extends BaseGameStateData {
         }
 
         getHuAction().check(chairInfo,stepGameStatusData,card,null);
+    }
+
+    public boolean isHu(int[][] cardsArray){
+        return MJTool.isHu(cardsArray);
+    }
+
+    public boolean isQiDui(int[][] cardsArray){
+        return MJTool.isQiDui(cardsArray);
     }
 
     public HuAction getHuAction(){

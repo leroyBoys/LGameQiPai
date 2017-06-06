@@ -33,7 +33,6 @@ public class TingAction extends DaAction {
         MjAutoCacheHandContainer autoHandCache = (MjAutoCacheHandContainer) chairInfo.getHandsContainer().getAutoCacheHands();
 
         SuperGameStatusData gameStatusData = (SuperGameStatusData) chairInfo.getTableVo().getStatusData();
-
         Map<String,List<Integer>> tingActionsMap = new HashMap<>();
         int[][] cardArray = MJTool.getCardsByType(hands,0);
         for(Map.Entry<Integer,Integer> entry:autoHandCache.getCardNumMap().entrySet()){

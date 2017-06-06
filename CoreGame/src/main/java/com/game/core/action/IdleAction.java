@@ -42,6 +42,7 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
         //发送数据
         NetGame.NetOprateData.Builder ready = table.getStatusData().getStatusDetail(table);
         ready.setUid(roleId);
+        ready.setDval(1);
         table.addMsgQueueAll(ready.build(),0);
 
     }

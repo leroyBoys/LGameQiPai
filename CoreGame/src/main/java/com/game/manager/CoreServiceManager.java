@@ -61,7 +61,7 @@ public class CoreServiceManager extends ICommon {
                         continue;
                     }
 
-                    AdminCmdFilter.getInstance().addRobot(4,tableVo);
+                   // AdminCmdFilter.getInstance().addRobot(4,tableVo);
                 }
 
 

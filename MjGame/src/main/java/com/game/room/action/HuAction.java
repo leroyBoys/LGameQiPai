@@ -20,7 +20,7 @@ import java.util.List;
  * Created by leroy:656515489@qq.com
  * 2017/4/19.
  */
-public class HuAction extends GameOperateAction {
+public final class HuAction extends GameOperateAction {
     private final static HuAction instance = new HuAction();
     protected HuAction(){}
 
@@ -73,10 +73,11 @@ public class HuAction extends GameOperateAction {
         if(optPlugins == null){
             return null;
         }
+        SuperGameStatusData gameStatusData= (SuperGameStatusData) chairInfo.getTableVo().getStatusData();
         HuType huType = null;
-        if(MJTool.isHu(cardsArray)){
+        if(gameStatusData.isHu(cardsArray)){
             huType = HuType.PINGHU;
-        }else if(MJTool.isQiDui(cardsArray)){
+        }else if(gameStatusData.isQiDui(cardsArray)){
             huType = HuType.QIDUI;
         }else {
             return null;
