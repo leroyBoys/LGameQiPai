@@ -47,9 +47,6 @@ public class GameCommHandler extends ModuleHandler<UserVistor,Request,Response> 
                     return;
                 }
 
-                SystemLogger.info(this.getClass(),vistor.getGameRole().getRoomId() +"=====>"+(TableManager.getInstance().getTable(vistor.getGameRole().getRoomId())==null
-                ?"not exit":"exit!"));
-
                 BaseTableVo baseTableVo = TableFactory.getInstance().createTable(vistor.getRoleId(),rpCreateRoom.getGameId());
                 if(baseTableVo == null){
                     vistor.sendError(ResponseCode.Error.parmter_error);
