@@ -187,8 +187,6 @@ public class UserDao implements Base {
         MethodCacheTime ct = monitor.start();
         try {
             String sql = isOnline?"UPDATE user_info SET is_online = ?,login_time = ? WHERE id = ?":"UPDATE user_info SET is_online = ?,login_off_time = ? WHERE id = ?";
-
-
             userPool.Execute(sql,isOnline, updateTime,uid);
             return true;
         } catch (Exception ex) {
@@ -349,7 +347,7 @@ public class UserDao implements Base {
     public boolean offLine(int uid) {
         MethodCacheTime ct = monitor.start();
         try {
-            return gamePool.ExecuteUpdate("UPDATE user_info SET is_online=2 ,login_off_time = NOW() WHERE id = ? ", new Object[]{uid});
+            return userPool.ExecuteUpdate("UPDATE user_info SET is_online=2 ,login_off_time = NOW() WHERE id = ? ", new Object[]{uid});
         } catch (Exception ex) {
             file.ErrorLog(ex, LogType.Error, "db");
         } finally {
