@@ -9,6 +9,7 @@ import com.game.manager.OnlineManager;
 import com.game.socket.GameSocket;
 import com.game.socket.module.UserVistor;
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.logger.log.SystemLogger;
 import com.lsocket.control.impl.CoreDispatcher;
 import com.lsocket.handler.*;
 import com.lsocket.handler.ModuleCmd;
@@ -40,6 +41,12 @@ public class GameCommHandler extends ModuleHandler<UserVistor,Request,Response> 
             @Override
             public void invoke(UserVistor vistor, Request request, Response response) {
                 NetGame.RPCreateRoom rpCreateRoom = (NetGame.RPCreateRoom) request.getObj();
+                if(vistor.getGameRole().getRoomId() != 0 && TableManager.getInstance().getTable(vistor.getGameRole().getRoomId()) != null){
+                    SystemLogger.error(this.getClass(),vistor.getGameRole().getRoomId() +"is exit,cant create new room");
+                    vistor.sendError(ResponseCode.Error.parmter_error);
+                    return;
+                }
+
                 BaseTableVo baseTableVo = TableFactory.getInstance().createTable(vistor.getRoleId(),rpCreateRoom.getGameId());
                 if(baseTableVo == null){
                     vistor.sendError(ResponseCode.Error.parmter_error);
