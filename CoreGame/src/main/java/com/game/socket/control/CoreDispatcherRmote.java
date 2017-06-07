@@ -18,7 +18,7 @@ public class CoreDispatcherRmote extends CoreDispatcher<UserVistor,Request> {
 
     public void session_closed(UserVistor visitor) {
         try{
-            if(visitor.isSelfOffLine()){
+            if(!visitor.isSelfOffLine()){
                 return;
             }
 

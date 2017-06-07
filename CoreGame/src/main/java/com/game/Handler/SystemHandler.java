@@ -30,6 +30,7 @@ import com.module.db.UserInfo;
 import com.module.net.DB;
 import com.module.net.NetGame;
 import com.module.net.NetParentOld;
+import javafx.scene.control.Tab;
 
 import java.util.Date;
 
@@ -187,6 +188,9 @@ public class SystemHandler extends ModuleHandler {
             gameRole = new GameRole(info.getId(),0,0);
         }else {
             gameRole = DBServiceManager.getInstance().getGameRedis().getGameRole(info.getId());
+            if(gameRole.getRoomId() != 0 && TableManager.getInstance().getTable(gameRole.getRoomId()) != null){
+                gameRole.setRoomId(0);
+            }
         }
 
         UserVistor lastUser = OnlineManager.getIntance().getRoleId(info.getId());
