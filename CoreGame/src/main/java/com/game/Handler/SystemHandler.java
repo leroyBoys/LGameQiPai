@@ -190,7 +190,7 @@ public class SystemHandler extends ModuleHandler {
         }
 
         UserVistor lastUser = OnlineManager.getIntance().getRoleId(info.getId());
-        if(lastUser != null){//如果有在线的，则提示踢掉对方、不能登录
+        if(lastUser != null && lastUser.getIoSession().getId() != vistor.getIoSession().getId()){//如果有在线的，则提示踢掉对方、不能登录
             lastUser.setSelfOffLine(false);
             lastUser.sendError(ResponseCode.Error.other_login);
         }
