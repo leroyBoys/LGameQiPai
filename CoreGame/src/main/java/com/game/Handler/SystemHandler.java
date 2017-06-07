@@ -187,7 +187,7 @@ public class SystemHandler extends ModuleHandler {
             gameRole = new GameRole(info.getId(),0,0);
         }else {
             gameRole = DBServiceManager.getInstance().getGameRedis().getGameRole(info.getId());
-            if(gameRole.getRoomId() != 0 && TableManager.getInstance().getTable(gameRole.getRoomId()) != null){
+            if(gameRole.getRoomId() != 0 && TableManager.getInstance().getTable(gameRole.getRoomId()) == null){
                 gameRole.setRoomId(0);
             }
         }
