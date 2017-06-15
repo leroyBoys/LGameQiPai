@@ -183,7 +183,7 @@ DROP TABLE IF EXISTS `user_info`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `device_id` int(11) DEFAULT '0',
   `user_from_type` tinyint(4) DEFAULT '0',
   `user_from_id` int(100) DEFAULT '0',
   `user_name` varchar(100) COLLATE utf8_bin DEFAULT NULL,
@@ -198,7 +198,7 @@ CREATE TABLE `user_info` (
   `is_online` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:等待登录,1:登录成功:：离线',
   PRIMARY KEY (`id`),
   UNIQUE KEY `userName` (`user_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
 insert  into `game_server`(`id`,`g_v_id`,`key`,`zone_name`,`zone_icon`,`zone_desc`,`server_type`,`zone_num`,`ip`,`udp_port`,`port`,`max_count`,`server_status`) values (2,1,NULL,'本地','sdf','本地','gate',1,'127.0.0.1',4434,4433,3000,1),(5,1,NULL,'test','es','desc','server',4,'192.168.4.179',4434,4439,3000,1),(6,2,NULL,'测试','dfs','测试','server',1,'192.168.4.179',4466,4467,3000,1);
