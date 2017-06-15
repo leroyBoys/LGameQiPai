@@ -2,6 +2,7 @@ package com.game.load;
 
 import com.game.load.xml.ErrorCode;
 import com.lgame.util.load.xml.XmlApi;
+import org.apache.mina.core.session.IdleStatus;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +18,7 @@ import static com.module.core.ResponseCode.initCodeValues;
 public class Load {
 
     public static void main(String[] args){
-        importCodeConfig();
+       importCodeConfig();
     }
 
 

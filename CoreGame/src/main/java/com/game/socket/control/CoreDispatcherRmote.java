@@ -47,6 +47,8 @@ public class CoreDispatcherRmote extends CoreDispatcher<UserVistor,Request> {
     }
 
     public void sessionIdle(UserVistor visitor, IdleStatus idleStatus) {
-
+        if(idleStatus == IdleStatus.BOTH_IDLE){
+            session_closed(visitor);
+        }
     }
 }
