@@ -87,9 +87,9 @@ public class ResponseEncoderRemote extends ResponseEncoder {
         byte[] datas = response.getValue();
         if(datas == null && obj != null){
             datas = obj.toByteArray();
-            SystemLogger.info(ResponseEncoderRemote.class,uid+"---Send-1--cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd())+"  "+obj.toString());
+            SystemLogger.info(ResponseEncoderRemote.class,uid+"---Send-empty child--cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd())+"  "+obj.toString());
         }else {
-            SystemLogger.info(ResponseEncoderRemote.class,uid+"---Send-2--cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd())+com.build().toString());
+            SystemLogger.info(ResponseEncoderRemote.class,uid+"---Send---cmd:"+ CMDManager.getCmd(com.getCmd())+"  module:"+CMDManager.getModule(com.getCmd())+com.build().toString());
         }
 
         if(datas != null){
