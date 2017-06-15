@@ -19,6 +19,7 @@ import java.util.Map;
 public class ResponseCode {
 
     public static enum Error implements ErrorCode<Response>{
+        @ShowTip(Value = ShowTip.Tip.noTip)
         succ(0),
         @Comment("玩家不存在")
         player_no_exit(1),
