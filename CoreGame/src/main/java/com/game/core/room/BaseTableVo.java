@@ -149,6 +149,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
 
             chairs[chair.getIdx()] = null;
             //更新数据库
+            DBServiceManager.getInstance().getGameRedis().setRoomId(charId,0);
 
             if(chairMap.isEmpty()){
                 TableManager.getInstance().destroyTable(this.getId());

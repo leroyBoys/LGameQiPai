@@ -225,15 +225,17 @@ public class GameCommHandler extends ModuleHandler<UserVistor,Request,Response> 
 
     private void exitSelf(UserVistor vistor, BaseTableVo tableVo, Response respons){
         tableVo.removeChair(vistor.getRoleId());
+
         //发送消息
         NetGame.RQExit.Builder rqExit = NetGame.RQExit.newBuilder();
         rqExit.setUid(vistor.getRoleId());
 
         NetGame.RQExit rqExit1 = rqExit.build();
-        respons.setObj(rqExit1);
         if(respons != null){
+            respons.setObj(rqExit1);
             vistor.sendMsg(respons);
         }
+
         if(tableVo.getCurChirCount() == 0){
             return;
         }
