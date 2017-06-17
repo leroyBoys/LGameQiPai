@@ -224,6 +224,7 @@ public class GameCommHandler extends ModuleHandler<UserVistor,Request,Response> 
     }
 
     private void exitSelf(UserVistor vistor, BaseTableVo tableVo, Response respons){
+        System.out.println("==exitSelf:"+vistor.getRoleId());
         tableVo.removeChair(vistor.getRoleId());
 
         //发送消息
@@ -315,7 +316,8 @@ public class GameCommHandler extends ModuleHandler<UserVistor,Request,Response> 
         BaseTableVo table = TableManager.getInstance().getTable(vistor.getGameRole().getRoomId());
 
         if(table == null || table.getStatus().getValue() != 0){
-            vistor.sendError(ResponseCode.Error.key_error);
+            vistor.sendError(ResponseCode.Error.parmter_error);
+            SystemLogger.error(this.getClass(),"roomId:"+vistor.getGameRole().getRoomId()+(table==null?"空":("status:"+table.getStatus().getValue())));
             return;
         }
 
@@ -329,6 +331,10 @@ public class GameCommHandler extends ModuleHandler<UserVistor,Request,Response> 
 
     @Override
     public void session_closed(UserVistor vister) {
+        if(vister.getGameRole() == null){
+            return;
+        }
+
         BaseTableVo table = TableManager.getInstance().getTable(vister.getGameRole().getRoomId());
 
         if(table == null){

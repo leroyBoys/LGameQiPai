@@ -8,8 +8,9 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">   
        <Encoding>UTF-8</Encoding>   
         <layout class="ch.qos.logback.classic.PatternLayout">   
-            <pattern>%d{HH:mm:ss-SSS} | [%thread] | %-5level | %logger{40} | %msg%n</pattern>  
-        </layout>   
+            <!--<pattern>%d{HH:mm:ss-SSS} | [%thread] | %-5level | %logger{40} | %msg%n</pattern>-->
+            <pattern>%d{HH:mm:ss-SSS} | [%thread] | %-5level | %logger{40} | %msg%n</pattern>
+        </layout>
     </appender>
 
     <appender name="playA" class="ch.qos.logback.core.rolling.RollingFileAppender">

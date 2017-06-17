@@ -202,7 +202,7 @@ public class SystemHandler extends ModuleHandler {
         vistor.setGameRole(gameRole);
 
         vistor.setRoleInfo(info);
-        OnlineManager.getIntance().putOnlineList(info.getId(),userInfo.getId(),  vistor);
+        OnlineManager.getIntance().putOnlineList(info.getId(),userInfo.getId(),vistor);
         userService.updateUserInfoLoginStatus(userInfo.getId(), true, new Date());
         //发送登陆成功消息
         if(isNew){
@@ -212,6 +212,7 @@ public class SystemHandler extends ModuleHandler {
 
         NetGame.RQConnect.Builder connect = NetGame.RQConnect.newBuilder();
         connect.setRoomId(gameRole.getRoomId());
+        connect.setRoleId(info.getId());
         response.setObj(connect.build());
         vistor.sendMsg(response);
     }

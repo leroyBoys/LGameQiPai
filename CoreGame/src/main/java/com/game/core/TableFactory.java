@@ -26,8 +26,8 @@ public class TableFactory  implements Runnable{
 
     private Map<Integer,TableProducer> tableFactory = new ConcurrentHashMap<>(10);
 
-    private final int minTableId = 10000000;
-    private final int maxTableId = 90000000;
+    private final int minTableId = 100000;
+    private final int maxTableId = 900000;
     private final int queMaxCount = 200;
     private LinkedBlockingQueue<Integer> tableIdPool = new LinkedBlockingQueue(queMaxCount);
     private LinkedBlockingQueue<Integer> goodTableIdPool = new LinkedBlockingQueue();

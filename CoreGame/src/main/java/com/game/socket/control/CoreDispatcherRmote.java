@@ -21,10 +21,14 @@ public class CoreDispatcherRmote extends CoreDispatcher<UserVistor,Request> {
            /* if(!visitor.isSelfOffLine()){
                 return;
             }*/
+            SystemLogger.info(this.getClass(),"left off for data now uid:"+visitor.getUid()+"roleId:"+visitor.getRoleId());
 
             try{
-                for(ModuleHandler moduleHandler: moduleHandlers.values()){
-                    moduleHandler.session_closed(visitor);
+                if(visitor.getGameRole() != null){
+
+                    for(ModuleHandler moduleHandler: moduleHandlers.values()){
+                        moduleHandler.session_closed(visitor);
+                    }
                 }
             }catch (Exception e){
                 SystemLogger.error(this.getClass(),e);

@@ -44,7 +44,7 @@ public class TableManager implements Runnable,CheckOutStatus {
      * @param tableId
      */
     public void trigger(int tableId){
-       // System.out.println("===trigger=>"+tableId);
+        System.out.println("===trigger=>"+tableId);
         if(tasks.putIfAbsent(tableId,1) != null){
             return;
         }

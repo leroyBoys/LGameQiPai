@@ -36,7 +36,7 @@ public class UserHandler extends ModuleHandler {
 
             @Override
             public Request getRequset(byte[] bytes, int module,int cmd, int sq) throws InvalidProtocolBufferException {
-                return Request.valueOf(module,cmd, NetGame.NetLoginConfirm.parseFrom(bytes),sq);
+                return Request.valueOf(module,cmd, null,sq);
             }
         });
 

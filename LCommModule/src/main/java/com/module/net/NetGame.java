@@ -10586,6 +10586,16 @@ public final class NetGame {
      * <code>optional int32 roomId = 1;</code>
      */
     int getRoomId();
+
+    // optional int32 roleId = 2;
+    /**
+     * <code>optional int32 roleId = 2;</code>
+     */
+    boolean hasRoleId();
+    /**
+     * <code>optional int32 roleId = 2;</code>
+     */
+    int getRoleId();
   }
   /**
    * Protobuf type {@code RQConnect}
@@ -10641,6 +10651,11 @@ public final class NetGame {
             case 8: {
               bitField0_ |= 0x00000001;
               roomId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              roleId_ = input.readInt32();
               break;
             }
           }
@@ -10699,8 +10714,25 @@ public final class NetGame {
       return roomId_;
     }
 
+    // optional int32 roleId = 2;
+    public static final int ROLEID_FIELD_NUMBER = 2;
+    private int roleId_;
+    /**
+     * <code>optional int32 roleId = 2;</code>
+     */
+    public boolean hasRoleId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 roleId = 2;</code>
+     */
+    public int getRoleId() {
+      return roleId_;
+    }
+
     private void initFields() {
       roomId_ = 0;
+      roleId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10717,6 +10749,9 @@ public final class NetGame {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, roomId_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, roleId_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -10729,6 +10764,10 @@ public final class NetGame {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, roomId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, roleId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -10848,6 +10887,8 @@ public final class NetGame {
         super.clear();
         roomId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
+        roleId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -10880,6 +10921,10 @@ public final class NetGame {
           to_bitField0_ |= 0x00000001;
         }
         result.roomId_ = roomId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.roleId_ = roleId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -10898,6 +10943,9 @@ public final class NetGame {
         if (other == RQConnect.getDefaultInstance()) return this;
         if (other.hasRoomId()) {
           setRoomId(other.getRoomId());
+        }
+        if (other.hasRoleId()) {
+          setRoleId(other.getRoleId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -10955,6 +11003,39 @@ public final class NetGame {
       public Builder clearRoomId() {
         bitField0_ = (bitField0_ & ~0x00000001);
         roomId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 roleId = 2;
+      private int roleId_ ;
+      /**
+       * <code>optional int32 roleId = 2;</code>
+       */
+      public boolean hasRoleId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 roleId = 2;</code>
+       */
+      public int getRoleId() {
+        return roleId_;
+      }
+      /**
+       * <code>optional int32 roleId = 2;</code>
+       */
+      public Builder setRoleId(int value) {
+        bitField0_ |= 0x00000002;
+        roleId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 roleId = 2;</code>
+       */
+      public Builder clearRoleId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        roleId_ = 0;
         onChanged();
         return this;
       }
@@ -13487,14 +13568,15 @@ public final class NetGame {
       "\022\r\n\005score\030\004 \001(\005\")\n\013RQEnterRoom\022\032\n\004user\030\001" +
       " \001(\0132\014.NetUserData\"\025\n\006RQExit\022\013\n\003uid\030\001 \001(" +
       "\005\"\031\n\006RPVote\022\017\n\007isagree\030\001 \001(\010\"&\n\006RQVote\022\017" +
-      "\n\007isagree\030\001 \001(\010\022\013\n\003uid\030\002 \001(\005\"\033\n\tRQConnec" +
-      "t\022\016\n\006roomId\030\001 \001(\005\"d\n\013NetResponse\022\016\n\006stat" +
-      "us\030\001 \001(\005\022$\n\014operateDatas\030\002 \003(\0132\016.NetOpra" +
-      "teData\022\021\n\tretStatus\030\003 \002(\005\022\014\n\004step\030\004 \001(\005\"" +
-      "\036\n\017NetLoginConfirm\022\013\n\003uid\030\001 \002(\005\"b\n\007NetCh" +
-      "at\022\021\n\treceiveId\030\001 \001(\005\022\020\n\010userName\030\002 \001(\t\022",
-      "\017\n\007channel\030\003 \001(\005\022\017\n\007content\030\004 \001(\t\022\020\n\010isa" +
-      "ction\030\005 \001(\005B\031\n\016com.module.netB\007NetGame"
+      "\n\007isagree\030\001 \001(\010\022\013\n\003uid\030\002 \001(\005\"+\n\tRQConnec" +
+      "t\022\016\n\006roomId\030\001 \001(\005\022\016\n\006roleId\030\002 \001(\005\"d\n\013Net" +
+      "Response\022\016\n\006status\030\001 \001(\005\022$\n\014operateDatas" +
+      "\030\002 \003(\0132\016.NetOprateData\022\021\n\tretStatus\030\003 \002(" +
+      "\005\022\014\n\004step\030\004 \001(\005\"\036\n\017NetLoginConfirm\022\013\n\003ui" +
+      "d\030\001 \002(\005\"b\n\007NetChat\022\021\n\treceiveId\030\001 \001(\005\022\020\n",
+      "\010userName\030\002 \001(\t\022\017\n\007channel\030\003 \001(\005\022\017\n\007cont" +
+      "ent\030\004 \001(\t\022\020\n\010isaction\030\005 \001(\005B\020\n\016com.modul" +
+      "e.net"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -13590,7 +13672,7 @@ public final class NetGame {
           internal_static_RQConnect_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RQConnect_descriptor,
-              new String[] { "RoomId", });
+              new String[] { "RoomId", "RoleId", });
           internal_static_NetResponse_descriptor =
             getDescriptor().getMessageTypes().get(15);
           internal_static_NetResponse_fieldAccessorTable = new

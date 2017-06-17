@@ -3,6 +3,7 @@ package com.game.core.room;
 import com.game.core.constant.GameConst;
 import com.module.net.NetGame;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -78,10 +79,17 @@ public class BaseGameStateData implements SuperCreateNew{
         return getDoneSize();
     }
 
+    public synchronized boolean removedDoneUid(int uid){
+        return doneUids.remove(uid);
+    }
+
     public int getDoneSize(){
         return doneUids.size();
     }
 
+    public String toJson(){
+        return Arrays.toString(doneUids.toArray())+" isOver:"+isOver();
+    }
     public static class SystemStatusData extends BaseGameStateData {
 
         public SystemStatusData createNew(){

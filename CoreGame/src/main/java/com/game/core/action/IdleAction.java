@@ -44,7 +44,7 @@ public abstract class IdleAction<T extends BaseTableVo> extends BaseAction <T> {
         ready.setUid(roleId);
         ready.setDval(1);
         table.addMsgQueueAll(ready.build(),0);
-
+        table.flushMsgQueue();
     }
     
     @Override

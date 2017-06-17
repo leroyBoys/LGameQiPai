@@ -139,20 +139,28 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
 
     public abstract Chair createChair(UserVistor visitor);
 
-    public void removeChair(int charId){
+    public void removeChair(int roleId){
         addRemoveLock.lock();
         try{
-            Chair chair = chairMap.remove(charId);
+            Chair chair = chairMap.remove(roleId);
             if(chair == null){
                 return;
             }
 
             chairs[chair.getIdx()] = null;
             //更新数据库
-            DBServiceManager.getInstance().getGameRedis().setRoomId(charId,0);
+            DBServiceManager.getInstance().getGameRedis().setRoomId(roleId,0);
 
+            UserVistor vistor = OnlineManager.getIntance().getRoleId(roleId);
+            if(vistor != null){
+                vistor.getGameRole().setRoomId(0);
+            }
             if(chairMap.isEmpty()){
                 TableManager.getInstance().destroyTable(this.getId());
+            }else {
+                if(this.getStatusData() != null){
+                    this.getStatusData().removedDoneUid(roleId);
+                }
             }
         }catch (Exception e){}finally {
             addRemoveLock.unlock();

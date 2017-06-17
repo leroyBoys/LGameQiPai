@@ -22,6 +22,7 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Created by leroy:656515489@qq.com
@@ -72,7 +73,7 @@ public class RequestDecoderRemote extends RequestDecoder {
                     SystemLogger.info(RequestDecoderRemote.class, "module:" + module + "  cmd:" + cmd + " shold be " + cmdModule.getModuleCmd().getRequetType());
                     return input.hasRemaining();
                 }
-                SystemLogger.info(RequestDecoderRemote.class, "============================receiver:" + commond.toString());
+                SystemLogger.info(RequestDecoderRemote.class, "============================receiver:" +"module:" + module + "  cmd:" + cmd+" " + commond.toString());
 
                 TimeCacheManager.getInstance().setCurTime(System.currentTimeMillis());
                 UserVistor vistor = (UserVistor) session.getAttribute(SocketConstant.SessionKey.vistorKey);
@@ -94,11 +95,11 @@ public class RequestDecoderRemote extends RequestDecoder {
                 DB.UK key = vistor.getUk();
 
                 byte[] data = null;
-                if (commond.getObj() != null) {//秘钥验证
+                if (commond.getObj() != null && !commond.getObj().isEmpty()) {//秘钥验证
 
                     data = commond.getObj().toByteArray();
                     if (key == null || !MD5Tool.GetMD5Code(Tools.getByteJoin(data, key.getKey().getBytes())).equals(commond.getSn())) {
-                        SystemLogger.info(RequestDecoderRemote.class, "can not find uid:" + vistor.getUid() + " 的 Key:" + (key == null ? "null" : key.toString()));
+                        SystemLogger.info(RequestDecoderRemote.class, "can not find uid:" + vistor.getUid() + " 的 Key:" + (key == null ? "null" : key.toString())+" data:"+ Arrays.toString(data));
                         session.write(getError(ResponseCode.Error.key_error, commond.getSeq(), module, cmd));
                         session.closeNow();
                         return false;//父类接收新数据
@@ -111,7 +112,7 @@ public class RequestDecoderRemote extends RequestDecoder {
                 Request request = cmdModule.getRequset(data, module, cmd, commond.getSeq());
 
                 if (request.getObj() != null) {
-                    SystemLogger.info(RequestDecoderRemote.class, "====rece222iver:" + request.getObj().toString());
+                    SystemLogger.info(RequestDecoderRemote.class, "real data:" + request.getObj().toString());
                 }
                 out.write(request);
             } catch (Exception e) {
