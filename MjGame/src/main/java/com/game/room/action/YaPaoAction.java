@@ -35,7 +35,7 @@ public class YaPaoAction extends BaseAction<MjTable> {
             if(table.getChairs()[i].getId() == table.getBankId()){
                 continue;
             }
-            table.addMsgQueueAll(netOperate,0);
+            table.addMsgQueue(table.getChairs()[i].getId(),netOperate,0);
         }
         table.flushMsgQueue();
     }

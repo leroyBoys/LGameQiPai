@@ -316,7 +316,7 @@ public class GameCommHandler extends ModuleHandler<UserVistor,Request,Response> 
         BaseTableVo table = TableManager.getInstance().getTable(vistor.getGameRole().getRoomId());
 
         if(table == null || table.getStatus().getValue() != 0){
-            vistor.sendError(ResponseCode.Error.parmter_error);
+          //  vistor.sendError(ResponseCode.Error.parmter_error);
             SystemLogger.error(this.getClass(),"roomId:"+vistor.getGameRole().getRoomId()+(table==null?"空":("status:"+table.getStatus().getValue())));
             return;
         }

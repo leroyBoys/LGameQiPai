@@ -25,7 +25,7 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
     ////顺序东北西南->0-3
 
     private int nextBankerUid;
-    protected int lastBankUid;
+    protected int lastBankUid = -1;
 
     private int maxFan;
     private int type;

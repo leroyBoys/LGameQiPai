@@ -52,7 +52,7 @@ public class CoreServiceManager extends ICommon {
 
     @Override
     protected void check() {
-        taskScheduler.scheduleAtFixedRate(new Runnable() {
+    /*    taskScheduler.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 for(BaseTableVo tableVo:TableManager.getInstance().getTableMap().values()){
@@ -66,6 +66,6 @@ public class CoreServiceManager extends ICommon {
 
 
             }
-        },10,2, TimeUnit.SECONDS);
+        },10,2, TimeUnit.SECONDS);*/
     }
 }
