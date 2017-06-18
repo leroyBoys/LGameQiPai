@@ -57,6 +57,7 @@ public class FaPaiAction extends BaseAction<MjTable> {
 
             NetGame.NetOprateData.Builder hands = NetGame.NetOprateData.newBuilder();
             hands.setUid(chairInfo.getId());
+            hands.setOtype(GameConst.ACTION_TYPE_FAPAI);
             hands.addAllDlist(chairInfo.getHandsContainer().getHandCards());
             hands.addAllKvDatas(handNumList);
 
