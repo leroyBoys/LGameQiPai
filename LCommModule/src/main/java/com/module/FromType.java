@@ -19,9 +19,13 @@ public enum FromType {
      */
     tx(1),
     /**
+     * 微信
+     */
+    wx(2),
+    /**
      * 360
      */
-    safe(2),
+    safe(3),
     ;
     private final int  code;
 
