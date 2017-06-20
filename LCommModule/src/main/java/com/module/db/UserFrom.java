@@ -27,13 +27,14 @@ public class UserFrom extends DbFactory implements java.io.Serializable {
     }
 
     @Override
-    public <T extends DbFactory> T create(ResultSet resultSet) throws Exception {
+    public <T extends DbFactory> T create(ResultSet rs) throws Exception {
+        UserFrom userFrom = createNew();
         return null;
     }
 
     @Override
-    protected <T extends DbFactory> T createNew() {
-        return null;
+    protected UserFrom createNew() {
+        return new UserFrom();
     }
 
     public UserFrom(int id, String userSrc, String serialNum, String info, Date createDate) {
