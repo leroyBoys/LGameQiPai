@@ -47,7 +47,7 @@ public class GameAction extends BaseAction<MjTable> {
         }
 
         NetGame.NetOprateData.Builder netOprateDataBuild = table.getStatusData().getCanDoDatas(table,0);
-        if(netOprateData != null){
+        if(netOprateDataBuild != null){
             NetGame.NetKvData.Builder kvData = NetGame.NetKvData.newBuilder();
             kvData.setK(table.getStatus().getAction().getActionType());
             netOprateDataBuild.addKvDatas(kvData);

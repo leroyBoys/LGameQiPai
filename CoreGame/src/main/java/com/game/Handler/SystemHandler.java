@@ -22,6 +22,7 @@ import com.lsocket.manager.CMDManager;
 import com.lsocket.message.Request;
 import com.lsocket.message.Response;
 import com.lsocket.util.SocketConstant;
+import com.module.CreateRoleRewardData;
 import com.module.FromType;
 import com.module.Status;
 import com.module.core.ResponseCode;
@@ -219,9 +220,10 @@ public class SystemHandler extends ModuleHandler {
 
     private RoleInfo initRole(UserInfo userInfo) {
         int sex = -1;
-        RoleInfo info = new RoleInfo(userInfo.getId(), "", "", sex);
-        if(userInfo.getUserFromType() == FromType.tx.val()){//获取数据
 
+        RoleInfo info = DBServiceManager.getInstance().getUserRedis().getDefaultRoleInfo(userInfo.getId());
+        if(info == null){
+            info = new RoleInfo(userInfo.getId(),userInfo.getId()+"","",1);
         }
 
         int id = DBServiceManager.getInstance().getUserService().createRoleInfo(userInfo.getId(), info.getUserAlise(), info.getHeadImage(), sex, info.getUserLv(), (int) info.getUserExp(), info.getVipLevel());
@@ -230,6 +232,11 @@ public class SystemHandler extends ModuleHandler {
     }
 
     private void initLoginReward(GameRole roleInfo) {
+        CreateRoleRewardData rewardData = DBServiceManager.getInstance().getUserRedis().getCreateRoleRewardData();
+        if(rewardData != null){
+            roleInfo.setCard(rewardData.getCard());
+            return;
+        }
 
         roleInfo.setCard(10);
     }

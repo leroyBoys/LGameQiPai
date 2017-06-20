@@ -3,7 +3,11 @@ package com.game.core.dao.redis;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lgame.util.comm.FormatDataTool;
+import com.lgame.util.json.JsonTool;
+import com.lgame.util.json.JsonUtil;
 import com.lgame.util.time.DateTimeTool;
+import com.module.CreateRoleRewardData;
+import com.module.db.RoleInfo;
 import com.module.net.DB;
 import com.redis.impl.RedisConnectionManager;
 
@@ -41,7 +45,29 @@ public class UserRedis {
         redisConnectionManager.getMaster().set(redisKey,uk.build().toByteArray());
     }
 
-    public RedisConnectionManager getRedisConnectionManager() {
-        return redisConnectionManager;
+    public RoleInfo getDefaultRoleInfo(int uid) {
+        String key = "GameRole"+uid;
+        String obj = redisConnectionManager.getRandomSlave().get(key);
+        if(obj == null){
+            return null;
+        }
+
+        redisConnectionManager.getRandomSlave().del(key);
+        return (RoleInfo) JsonUtil.getBeanFromJson(obj,RoleInfo.class);
     }
+
+    public CreateRoleRewardData getCreateRoleRewardData() {
+        String key = "createRoleReward";
+        String obj = redisConnectionManager.getRandomSlave().get(key);
+        if(obj == null){
+            redisConnectionManager.getRandomSlave().set(key,JsonUtil.getJsonFromBean(new CreateRoleRewardData()));
+            return null;
+        }
+
+        return (CreateRoleRewardData) JsonUtil.getBeanFromJson(obj,CreateRoleRewardData.class);
+    }
+
+   /* public RedisConnectionManager getRedisConnectionManager() {
+        return redisConnectionManager;
+    }*/
 }
