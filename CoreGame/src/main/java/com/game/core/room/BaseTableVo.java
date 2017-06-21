@@ -529,6 +529,42 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
         }
     }
 
+    public final boolean checkVote(){
+        Object obj = attributeMap.get(AttributeKey.VoteTime);
+        if(obj == null || TimeCacheManager.getInstance().getCurTimeNoCache()-(long)obj < 0){
+            return false;
+        }
+
+        dissolution();
+        return true;
+    }
+
+    /**
+     * 解散
+     */
+    public final void dissolution(){
+
+        //发送消息
+        NetGame.RQExit.Builder rqExit = NetGame.RQExit.newBuilder();
+        rqExit.setUid(0);
+        Response response = Response.defaultResponse(GameConst.MOUDLE_GameComm,GameCommCmd.EXIT_GAME.getValue());
+        response.setObj(rqExit.build());
+
+        for(int i = 0;i<getChairs().length;i++){
+            if(getChairs()[i] == null){
+                continue;
+            }
+
+            int chairId = getChairs()[i].getId();
+            removeChair(chairId);
+            //发送
+            UserVistor v = OnlineManager.getIntance().getRoleId(chairId);
+            if(v == null){
+                continue;
+            }
+            v.sendMsg(response);
+        }
+    }
 
     /**
      * 投票解散，返回是否解散
@@ -537,14 +573,15 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
      * @return
      */
     public synchronized boolean vote(UserVistor vistor, boolean isAgree){
-        Set<Integer> votes = getAttributeValue(BaseTableVo.AttributeKey.VoteData);
+        Set<Integer> votes = getAttributeValue(AttributeKey.VoteData);
         if(votes != null){
             if(votes.contains(vistor.getRoleId())){
                 return false;
             }
 
             if(!isAgree){//拒绝
-                attributeMap.remove(BaseTableVo.AttributeKey.VoteData);
+                attributeMap.remove(AttributeKey.VoteData);
+                attributeMap.remove(AttributeKey.VoteTime);
 
                 NetGame.RQVote.Builder netVote = NetGame.RQVote.newBuilder();
                 netVote.setIsagree(false);
@@ -554,10 +591,11 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
             }
         }else {
             votes = new HashSet<>();
-            addAttribute(BaseTableVo.AttributeKey.VoteData,votes);
+            addAttribute(AttributeKey.VoteData,votes);
 
             NetGame.RQVote.Builder netVote = NetGame.RQVote.newBuilder();//发起投票
             netVote.setIsagree(true);
+            addAttribute(AttributeKey.VoteTime,TimeCacheManager.getInstance().getCurTime()+GameConst.Time.VoteTime);
             this.sendMsgWithOutUid(Response.defaultResponse(GameConst.MOUDLE_GameComm,GameCommCmd.VoteDestroy.getValue(),0,netVote.build()),vistor.getRoleId());
         }
 
@@ -797,6 +835,10 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
         /**
          * 投票数据
          */
-        VoteData
+        VoteData,
+        /**
+         * 投票时间
+         */
+        VoteTime,
     }
 }

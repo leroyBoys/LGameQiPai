@@ -121,6 +121,11 @@ public class GameConst {
          */
         public static final int reconnect_time_max = 300;
 
+        /**
+         * 投票解散的最大时间(毫秒)
+         */
+        public static long VoteTime = 1000*60;
+
         private static final char[] monthNum = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'};
 
         public static char getMonthNum(int num) {

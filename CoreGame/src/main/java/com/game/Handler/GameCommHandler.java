@@ -181,7 +181,7 @@ public class GameCommHandler extends ModuleHandler<UserVistor,Request,Response> 
                 }
                 NetGame.RPVote rpVote = (NetGame.RPVote) request.getObj();
                 if(table.vote(vistor,rpVote.getIsagree())){//解散
-                    dissolution(vistor,table,response);
+                    table.dissolution();
                 }
             }
 
@@ -210,13 +210,13 @@ public class GameCommHandler extends ModuleHandler<UserVistor,Request,Response> 
             return;
         }else if(table.getCurChirCount() == table.getChairs().length){//投票
             if(table.vote(vistor,true)){//解散
-                dissolution(vistor,table,response);
+                table.dissolution();
             }
             return;
         }
 
         if(vistor.getRoleId() == table.getOwnerId()){//解散
-            dissolution(vistor,table,response);
+            table.dissolution();
             return;
         }
 
@@ -241,35 +241,6 @@ public class GameCommHandler extends ModuleHandler<UserVistor,Request,Response> 
             return;
         }
         tableVo.sendMsgWithOutUid(Response.defaultResponse(this.getModule(),GameCommCmd.EXIT_GAME.getValue(),0,rqExit1),vistor.getRoleId());
-    }
-
-    /**
-     * 解散
-     * @param vistor
-     * @param tableVo
-     * @param respons
-     */
-    private void dissolution(UserVistor vistor, BaseTableVo tableVo, Response respons){
-
-        //发送消息
-        NetGame.RQExit.Builder rqExit = NetGame.RQExit.newBuilder();
-        rqExit.setUid(0);
-        respons.setObj(rqExit.build());
-
-        for(int i = 0;i<tableVo.getChairs().length;i++){
-            if(tableVo.getChairs()[i] == null){
-                continue;
-            }
-
-            int chairId = tableVo.getChairs()[i].getId();
-            tableVo.removeChair(chairId);
-            //发送
-            UserVistor v = OnlineManager.getIntance().getRoleId(chairId);
-            if(v == null){
-                continue;
-            }
-            v.sendMsg(respons);
-        }
     }
 
 

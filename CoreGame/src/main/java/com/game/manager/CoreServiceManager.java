@@ -52,20 +52,21 @@ public class CoreServiceManager extends ICommon {
 
     @Override
     protected void check() {
-        /*taskScheduler.scheduleAtFixedRate(new Runnable() {
+        taskScheduler.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 for(BaseTableVo tableVo:TableManager.getInstance().getTableMap().values()){
                     if(tableVo.getChairs().length == tableVo.getCurChirCount()){
-                        TableManager.getInstance().trigger(tableVo.getId());
+                        //TableManager.getInstance().trigger(tableVo.getId());
+                        tableVo.checkVote();
                         continue;
                     }
 
-                    AdminCmdFilter.getInstance().addRobot(4,tableVo);
+                    //AdminCmdFilter.getInstance().addRobot(4,tableVo);
                 }
 
 
             }
-        },10,2, TimeUnit.SECONDS);*/
+        },10,2, TimeUnit.SECONDS);
     }
 }
