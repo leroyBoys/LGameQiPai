@@ -126,12 +126,12 @@ DROP TABLE IF EXISTS `user_attribute`;
 CREATE TABLE `user_attribute` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `address` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `email` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `identity_card` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `mobile` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `qq` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `real_name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `sex` int(11) DEFAULT '0',
+  `email` varchar(100) COLLATE utf8_bin NOT NULL,
+  `identity_card` varchar(20) COLLATE utf8_bin NOT NULL,
+  `mobile` int(11) NOT NULL,
+  `qq` int(11) DEFAULT NULL,
+  `real_name` varchar(255) COLLATE utf8_bin NOT NULL,
+  `sex` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
