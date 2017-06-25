@@ -89,6 +89,7 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
     private NetGame.NetOprateData Hu(BaseChairInfo info, StepGameStatusData stepStatus) {
         NetGame.NetOprateData.Builder retData = NetGame.NetOprateData.newBuilder();
         retData.setOtype(stepStatus.getAction().getActionType());
+        retData.setUid(info.getId());
         return retData.build();
     }
 
@@ -96,18 +97,21 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
         NetGame.NetOprateData.Builder retData = NetGame.NetOprateData.newBuilder();
         retData.addDlist(getAutoDaCard(info.getHandsContainer().getHandCards()));
         retData.setOtype(stepStatus.getAction().getActionType());
+        retData.setUid(info.getId());
         return retData.build();
     }
 
     public NetGame.NetOprateData Chi( BaseChairInfo info,StepGameStatusData stepStatus) {
         NetGame.NetOprateData.Builder retData = NetGame.NetOprateData.newBuilder();
         retData.addAllDlist(stepStatus.getCards());
+        retData.setUid(info.getId());
         retData.setOtype(stepStatus.getAction().getActionType());
         return retData.build();
     }
 
     public NetGame.NetOprateData Peng(BaseChairInfo info,StepGameStatusData stepStatus) {
         NetGame.NetOprateData.Builder retData = NetGame.NetOprateData.newBuilder();
+        retData.setUid(info.getId());
         if(RandomTool.Next(10)<7){
             retData.setOtype(GameConst.MJ.ACTION_TYPE_GUO);
         }else {
@@ -121,6 +125,7 @@ public class MjAutoCacheHandContainer extends AutoCacheHandContainer {
         if(stepStatus.getCards() != null && !stepStatus.getCards().isEmpty()){
             retData.addAllDlist(stepStatus.getCards());
         }
+        retData.setUid(info.getId());
         retData.setOtype(stepStatus.getAction().getActionType());
         retData.setDval(stepStatus.getiOptPlugin().getPlugin().getSubType());
         return retData.build();

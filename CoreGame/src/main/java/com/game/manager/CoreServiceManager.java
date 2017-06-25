@@ -57,12 +57,11 @@ public class CoreServiceManager extends ICommon {
             public void run() {
                 for(BaseTableVo tableVo:TableManager.getInstance().getTableMap().values()){
                     if(tableVo.getChairs().length == tableVo.getCurChirCount()){
-                        //TableManager.getInstance().trigger(tableVo.getId());
-                        tableVo.checkVote();
+                        TableManager.getInstance().trigger(tableVo.getId());
                         continue;
                     }
 
-                    //AdminCmdFilter.getInstance().addRobot(4,tableVo);
+                    AdminCmdFilter.getInstance().addRobot(4,tableVo);
                 }
 
 

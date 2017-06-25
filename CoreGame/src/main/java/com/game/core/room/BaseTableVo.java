@@ -210,6 +210,7 @@ public abstract class BaseTableVo<TStatus extends BaseGameState,Chair extends Ba
             return;
         }*/
         action.tick(this);
+        checkVote();
     }
 
     private void changeNextStaus(){

@@ -126,7 +126,7 @@ public class AdminCmdFilter implements ChatFilter {
         for(int i = 0;i<tableVo.getChairs().length;i++){
             if(tableVo.getChairs()[i] != null){
 
-                tableVo.getChairs()[i].setAuto(true);
+              //  tableVo.getChairs()[i].setAuto(true);
                 continue;
             }
 

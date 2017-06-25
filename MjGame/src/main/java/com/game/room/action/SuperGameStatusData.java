@@ -12,6 +12,8 @@ import com.game.room.action.*;
 import com.game.room.action.basePlugins.AbstractActionPlugin;
 import com.game.room.status.StepGameStatusData;
 import com.game.room.util.MJTool;
+import com.lgame.util.json.JsonUtil;
+import com.logger.log.SystemLogger;
 import com.lsocket.message.Response;
 import com.module.core.ResponseCode;
 import com.module.net.NetGame;
@@ -252,10 +254,12 @@ public class SuperGameStatusData extends BaseGameStateData {
         if(netOprateData.getOtype() == GameConst.MJ.ACTION_TYPE_GUO){
 
             if(canDoDatas.isEmpty() || canDoDatas.getFirst().getUid() != roleId){
+                SystemLogger.error(this.getClass(),"cant pass because canDoDataSize:"+canDoDatas.size()+" "+ JsonUtil.getJsonFromBean(canDoDatas.getFirst())+"  roleId:"+roleId);
                 table.sendError(ResponseCode.Error.parmter_error,roleId);
                 return false;
             }
 
+            StepGameStatusData action = canDoDatas.getFirst();
             clearCanDoDatas(roleId);
             if(netOprateData.getDlistCount() != 0){
                 table.getChairByUid(roleId).setPassCard(netOprateData.getDlist(0));
@@ -263,7 +267,13 @@ public class SuperGameStatusData extends BaseGameStateData {
 
             table.addMsgQueue(roleId,netOprateData,response==null?0:response.getSeq());
 
-            checkMo(table,table.getChairs()[table.nextFocusIndex(table.getFocusIdex())].getId());
+            if(isEmpty()){
+                if(action.getFromId() == action.getUid()){
+                    checkDa(table.getChairByUid(roleId));
+                }else {
+                    checkMo(table,table.getChairs()[table.nextFocusIndex(table.getFocusIdex())].getId());
+                }
+            }
             return true;
         }
 

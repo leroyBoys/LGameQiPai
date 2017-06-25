@@ -51,7 +51,7 @@ public class GameAction extends BaseAction<MjTable> {
             NetGame.NetKvData.Builder kvData = NetGame.NetKvData.newBuilder();
             kvData.setK(table.getStatus().getAction().getActionType());
             netOprateDataBuild.addKvDatas(kvData);
-            table.sendGameResponse(netOprateDataBuild.build(),roleId,0);//可操作集合
+            table.sendGameResponse(netOprateDataBuild.build(),netOprateDataBuild.getUid(),0);//可操作集合
         }
     }
 
