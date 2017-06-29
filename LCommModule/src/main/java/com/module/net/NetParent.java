@@ -1990,8 +1990,8 @@ public final class NetParent {
       "\002sn\030\001 \002(\t\022\013\n\003obj\030\002 \002(\014\022\013\n\003seq\030\003 \002(\005\"=\n\010N" +
       "etError\022\021\n\terrorCode\030\001 \002(\005\022\021\n\tparamters\030" +
       "\002 \003(\005\022\013\n\003seq\030\003 \001(\005\"8\n\020NetServerCommond\022\013" +
-      "\n\003uid\030\001 \002(\005\022\013\n\003obj\030\002 \002(\014\022\n\n\002sn\030\003 \001(\tB\033\n\016" +
-      "com.module.netB\tNetParent"
+      "\n\003uid\030\001 \002(\005\022\013\n\003obj\030\002 \002(\014\022\n\n\002sn\030\003 \001(\tB\020\n\016" +
+      "com.module.net"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

@@ -7053,29 +7053,54 @@ public final class NetGame {
      */
     int getFlag();
 
-    // repeated .NetMjUserResult users = 2;
+    // repeated .NetMjUserResult results = 2;
     /**
-     * <code>repeated .NetMjUserResult users = 2;</code>
+     * <code>repeated .NetMjUserResult results = 2;</code>
      */
     java.util.List<NetMjUserResult>
-        getUsersList();
+        getResultsList();
     /**
-     * <code>repeated .NetMjUserResult users = 2;</code>
+     * <code>repeated .NetMjUserResult results = 2;</code>
      */
-    NetMjUserResult getUsers(int index);
+    NetMjUserResult getResults(int index);
     /**
-     * <code>repeated .NetMjUserResult users = 2;</code>
+     * <code>repeated .NetMjUserResult results = 2;</code>
      */
-    int getUsersCount();
+    int getResultsCount();
     /**
-     * <code>repeated .NetMjUserResult users = 2;</code>
+     * <code>repeated .NetMjUserResult results = 2;</code>
      */
     java.util.List<? extends NetMjUserResultOrBuilder>
-        getUsersOrBuilderList();
+        getResultsOrBuilderList();
     /**
-     * <code>repeated .NetMjUserResult users = 2;</code>
+     * <code>repeated .NetMjUserResult results = 2;</code>
      */
-    NetMjUserResultOrBuilder getUsersOrBuilder(
+    NetMjUserResultOrBuilder getResultsOrBuilder(
+            int index);
+
+    // repeated .NetMjFinalResult histroy = 3;
+    /**
+     * <code>repeated .NetMjFinalResult histroy = 3;</code>
+     */
+    java.util.List<NetMjFinalResult>
+        getHistroyList();
+    /**
+     * <code>repeated .NetMjFinalResult histroy = 3;</code>
+     */
+    NetMjFinalResult getHistroy(int index);
+    /**
+     * <code>repeated .NetMjFinalResult histroy = 3;</code>
+     */
+    int getHistroyCount();
+    /**
+     * <code>repeated .NetMjFinalResult histroy = 3;</code>
+     */
+    java.util.List<? extends NetMjFinalResultOrBuilder>
+        getHistroyOrBuilderList();
+    /**
+     * <code>repeated .NetMjFinalResult histroy = 3;</code>
+     */
+    NetMjFinalResultOrBuilder getHistroyOrBuilder(
             int index);
   }
   /**
@@ -7136,10 +7161,18 @@ public final class NetGame {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                users_ = new java.util.ArrayList<NetMjUserResult>();
+                results_ = new java.util.ArrayList<NetMjUserResult>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              users_.add(input.readMessage(NetMjUserResult.PARSER, extensionRegistry));
+              results_.add(input.readMessage(NetMjUserResult.PARSER, extensionRegistry));
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                histroy_ = new java.util.ArrayList<NetMjFinalResult>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              histroy_.add(input.readMessage(NetMjFinalResult.PARSER, extensionRegistry));
               break;
             }
           }
@@ -7151,7 +7184,10 @@ public final class NetGame {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          users_ = java.util.Collections.unmodifiableList(users_);
+          results_ = java.util.Collections.unmodifiableList(results_);
+        }
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          histroy_ = java.util.Collections.unmodifiableList(histroy_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -7201,45 +7237,82 @@ public final class NetGame {
       return flag_;
     }
 
-    // repeated .NetMjUserResult users = 2;
-    public static final int USERS_FIELD_NUMBER = 2;
-    private java.util.List<NetMjUserResult> users_;
+    // repeated .NetMjUserResult results = 2;
+    public static final int RESULTS_FIELD_NUMBER = 2;
+    private java.util.List<NetMjUserResult> results_;
     /**
-     * <code>repeated .NetMjUserResult users = 2;</code>
+     * <code>repeated .NetMjUserResult results = 2;</code>
      */
-    public java.util.List<NetMjUserResult> getUsersList() {
-      return users_;
+    public java.util.List<NetMjUserResult> getResultsList() {
+      return results_;
     }
     /**
-     * <code>repeated .NetMjUserResult users = 2;</code>
+     * <code>repeated .NetMjUserResult results = 2;</code>
      */
     public java.util.List<? extends NetMjUserResultOrBuilder>
-        getUsersOrBuilderList() {
-      return users_;
+        getResultsOrBuilderList() {
+      return results_;
     }
     /**
-     * <code>repeated .NetMjUserResult users = 2;</code>
+     * <code>repeated .NetMjUserResult results = 2;</code>
      */
-    public int getUsersCount() {
-      return users_.size();
+    public int getResultsCount() {
+      return results_.size();
     }
     /**
-     * <code>repeated .NetMjUserResult users = 2;</code>
+     * <code>repeated .NetMjUserResult results = 2;</code>
      */
-    public NetMjUserResult getUsers(int index) {
-      return users_.get(index);
+    public NetMjUserResult getResults(int index) {
+      return results_.get(index);
     }
     /**
-     * <code>repeated .NetMjUserResult users = 2;</code>
+     * <code>repeated .NetMjUserResult results = 2;</code>
      */
-    public NetMjUserResultOrBuilder getUsersOrBuilder(
+    public NetMjUserResultOrBuilder getResultsOrBuilder(
         int index) {
-      return users_.get(index);
+      return results_.get(index);
+    }
+
+    // repeated .NetMjFinalResult histroy = 3;
+    public static final int HISTROY_FIELD_NUMBER = 3;
+    private java.util.List<NetMjFinalResult> histroy_;
+    /**
+     * <code>repeated .NetMjFinalResult histroy = 3;</code>
+     */
+    public java.util.List<NetMjFinalResult> getHistroyList() {
+      return histroy_;
+    }
+    /**
+     * <code>repeated .NetMjFinalResult histroy = 3;</code>
+     */
+    public java.util.List<? extends NetMjFinalResultOrBuilder>
+        getHistroyOrBuilderList() {
+      return histroy_;
+    }
+    /**
+     * <code>repeated .NetMjFinalResult histroy = 3;</code>
+     */
+    public int getHistroyCount() {
+      return histroy_.size();
+    }
+    /**
+     * <code>repeated .NetMjFinalResult histroy = 3;</code>
+     */
+    public NetMjFinalResult getHistroy(int index) {
+      return histroy_.get(index);
+    }
+    /**
+     * <code>repeated .NetMjFinalResult histroy = 3;</code>
+     */
+    public NetMjFinalResultOrBuilder getHistroyOrBuilder(
+        int index) {
+      return histroy_.get(index);
     }
 
     private void initFields() {
       flag_ = 0;
-      users_ = java.util.Collections.emptyList();
+      results_ = java.util.Collections.emptyList();
+      histroy_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7256,8 +7329,11 @@ public final class NetGame {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, flag_);
       }
-      for (int i = 0; i < users_.size(); i++) {
-        output.writeMessage(2, users_.get(i));
+      for (int i = 0; i < results_.size(); i++) {
+        output.writeMessage(2, results_.get(i));
+      }
+      for (int i = 0; i < histroy_.size(); i++) {
+        output.writeMessage(3, histroy_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -7272,9 +7348,13 @@ public final class NetGame {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, flag_);
       }
-      for (int i = 0; i < users_.size(); i++) {
+      for (int i = 0; i < results_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, users_.get(i));
+          .computeMessageSize(2, results_.get(i));
+      }
+      for (int i = 0; i < histroy_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, histroy_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7384,7 +7464,8 @@ public final class NetGame {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getUsersFieldBuilder();
+          getResultsFieldBuilder();
+          getHistroyFieldBuilder();
         }
       }
       private static Builder create() {
@@ -7395,11 +7476,17 @@ public final class NetGame {
         super.clear();
         flag_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (usersBuilder_ == null) {
-          users_ = java.util.Collections.emptyList();
+        if (resultsBuilder_ == null) {
+          results_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
         } else {
-          usersBuilder_.clear();
+          resultsBuilder_.clear();
+        }
+        if (histroyBuilder_ == null) {
+          histroy_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          histroyBuilder_.clear();
         }
         return this;
       }
@@ -7433,14 +7520,23 @@ public final class NetGame {
           to_bitField0_ |= 0x00000001;
         }
         result.flag_ = flag_;
-        if (usersBuilder_ == null) {
+        if (resultsBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            users_ = java.util.Collections.unmodifiableList(users_);
+            results_ = java.util.Collections.unmodifiableList(results_);
             bitField0_ = (bitField0_ & ~0x00000002);
           }
-          result.users_ = users_;
+          result.results_ = results_;
         } else {
-          result.users_ = usersBuilder_.build();
+          result.results_ = resultsBuilder_.build();
+        }
+        if (histroyBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            histroy_ = java.util.Collections.unmodifiableList(histroy_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.histroy_ = histroy_;
+        } else {
+          result.histroy_ = histroyBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -7461,29 +7557,55 @@ public final class NetGame {
         if (other.hasFlag()) {
           setFlag(other.getFlag());
         }
-        if (usersBuilder_ == null) {
-          if (!other.users_.isEmpty()) {
-            if (users_.isEmpty()) {
-              users_ = other.users_;
+        if (resultsBuilder_ == null) {
+          if (!other.results_.isEmpty()) {
+            if (results_.isEmpty()) {
+              results_ = other.results_;
               bitField0_ = (bitField0_ & ~0x00000002);
             } else {
-              ensureUsersIsMutable();
-              users_.addAll(other.users_);
+              ensureResultsIsMutable();
+              results_.addAll(other.results_);
             }
             onChanged();
           }
         } else {
-          if (!other.users_.isEmpty()) {
-            if (usersBuilder_.isEmpty()) {
-              usersBuilder_.dispose();
-              usersBuilder_ = null;
-              users_ = other.users_;
+          if (!other.results_.isEmpty()) {
+            if (resultsBuilder_.isEmpty()) {
+              resultsBuilder_.dispose();
+              resultsBuilder_ = null;
+              results_ = other.results_;
               bitField0_ = (bitField0_ & ~0x00000002);
-              usersBuilder_ = 
+              resultsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getUsersFieldBuilder() : null;
+                   getResultsFieldBuilder() : null;
             } else {
-              usersBuilder_.addAllMessages(other.users_);
+              resultsBuilder_.addAllMessages(other.results_);
+            }
+          }
+        }
+        if (histroyBuilder_ == null) {
+          if (!other.histroy_.isEmpty()) {
+            if (histroy_.isEmpty()) {
+              histroy_ = other.histroy_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureHistroyIsMutable();
+              histroy_.addAll(other.histroy_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.histroy_.isEmpty()) {
+            if (histroyBuilder_.isEmpty()) {
+              histroyBuilder_.dispose();
+              histroyBuilder_ = null;
+              histroy_ = other.histroy_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              histroyBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getHistroyFieldBuilder() : null;
+            } else {
+              histroyBuilder_.addAllMessages(other.histroy_);
             }
           }
         }
@@ -7547,244 +7669,484 @@ public final class NetGame {
         return this;
       }
 
-      // repeated .NetMjUserResult users = 2;
-      private java.util.List<NetMjUserResult> users_ =
+      // repeated .NetMjUserResult results = 2;
+      private java.util.List<NetMjUserResult> results_ =
         java.util.Collections.emptyList();
-      private void ensureUsersIsMutable() {
+      private void ensureResultsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          users_ = new java.util.ArrayList<NetMjUserResult>(users_);
+          results_ = new java.util.ArrayList<NetMjUserResult>(results_);
           bitField0_ |= 0x00000002;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          NetMjUserResult, NetMjUserResult.Builder, NetMjUserResultOrBuilder> usersBuilder_;
+          NetMjUserResult, NetMjUserResult.Builder, NetMjUserResultOrBuilder> resultsBuilder_;
 
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public java.util.List<NetMjUserResult> getUsersList() {
-        if (usersBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(users_);
+      public java.util.List<NetMjUserResult> getResultsList() {
+        if (resultsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(results_);
         } else {
-          return usersBuilder_.getMessageList();
+          return resultsBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public int getUsersCount() {
-        if (usersBuilder_ == null) {
-          return users_.size();
+      public int getResultsCount() {
+        if (resultsBuilder_ == null) {
+          return results_.size();
         } else {
-          return usersBuilder_.getCount();
+          return resultsBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public NetMjUserResult getUsers(int index) {
-        if (usersBuilder_ == null) {
-          return users_.get(index);
+      public NetMjUserResult getResults(int index) {
+        if (resultsBuilder_ == null) {
+          return results_.get(index);
         } else {
-          return usersBuilder_.getMessage(index);
+          return resultsBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public Builder setUsers(
+      public Builder setResults(
           int index, NetMjUserResult value) {
-        if (usersBuilder_ == null) {
+        if (resultsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUsersIsMutable();
-          users_.set(index, value);
+          ensureResultsIsMutable();
+          results_.set(index, value);
           onChanged();
         } else {
-          usersBuilder_.setMessage(index, value);
+          resultsBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public Builder setUsers(
+      public Builder setResults(
           int index, NetMjUserResult.Builder builderForValue) {
-        if (usersBuilder_ == null) {
-          ensureUsersIsMutable();
-          users_.set(index, builderForValue.build());
+        if (resultsBuilder_ == null) {
+          ensureResultsIsMutable();
+          results_.set(index, builderForValue.build());
           onChanged();
         } else {
-          usersBuilder_.setMessage(index, builderForValue.build());
+          resultsBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public Builder addUsers(NetMjUserResult value) {
-        if (usersBuilder_ == null) {
+      public Builder addResults(NetMjUserResult value) {
+        if (resultsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUsersIsMutable();
-          users_.add(value);
+          ensureResultsIsMutable();
+          results_.add(value);
           onChanged();
         } else {
-          usersBuilder_.addMessage(value);
+          resultsBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public Builder addUsers(
+      public Builder addResults(
           int index, NetMjUserResult value) {
-        if (usersBuilder_ == null) {
+        if (resultsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUsersIsMutable();
-          users_.add(index, value);
+          ensureResultsIsMutable();
+          results_.add(index, value);
           onChanged();
         } else {
-          usersBuilder_.addMessage(index, value);
+          resultsBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public Builder addUsers(
+      public Builder addResults(
           NetMjUserResult.Builder builderForValue) {
-        if (usersBuilder_ == null) {
-          ensureUsersIsMutable();
-          users_.add(builderForValue.build());
+        if (resultsBuilder_ == null) {
+          ensureResultsIsMutable();
+          results_.add(builderForValue.build());
           onChanged();
         } else {
-          usersBuilder_.addMessage(builderForValue.build());
+          resultsBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public Builder addUsers(
+      public Builder addResults(
           int index, NetMjUserResult.Builder builderForValue) {
-        if (usersBuilder_ == null) {
-          ensureUsersIsMutable();
-          users_.add(index, builderForValue.build());
+        if (resultsBuilder_ == null) {
+          ensureResultsIsMutable();
+          results_.add(index, builderForValue.build());
           onChanged();
         } else {
-          usersBuilder_.addMessage(index, builderForValue.build());
+          resultsBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public Builder addAllUsers(
+      public Builder addAllResults(
           Iterable<? extends NetMjUserResult> values) {
-        if (usersBuilder_ == null) {
-          ensureUsersIsMutable();
-          super.addAll(values, users_);
+        if (resultsBuilder_ == null) {
+          ensureResultsIsMutable();
+          super.addAll(values, results_);
           onChanged();
         } else {
-          usersBuilder_.addAllMessages(values);
+          resultsBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public Builder clearUsers() {
-        if (usersBuilder_ == null) {
-          users_ = java.util.Collections.emptyList();
+      public Builder clearResults() {
+        if (resultsBuilder_ == null) {
+          results_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
-          usersBuilder_.clear();
+          resultsBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public Builder removeUsers(int index) {
-        if (usersBuilder_ == null) {
-          ensureUsersIsMutable();
-          users_.remove(index);
+      public Builder removeResults(int index) {
+        if (resultsBuilder_ == null) {
+          ensureResultsIsMutable();
+          results_.remove(index);
           onChanged();
         } else {
-          usersBuilder_.remove(index);
+          resultsBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public NetMjUserResult.Builder getUsersBuilder(
+      public NetMjUserResult.Builder getResultsBuilder(
           int index) {
-        return getUsersFieldBuilder().getBuilder(index);
+        return getResultsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public NetMjUserResultOrBuilder getUsersOrBuilder(
+      public NetMjUserResultOrBuilder getResultsOrBuilder(
           int index) {
-        if (usersBuilder_ == null) {
-          return users_.get(index);  } else {
-          return usersBuilder_.getMessageOrBuilder(index);
+        if (resultsBuilder_ == null) {
+          return results_.get(index);  } else {
+          return resultsBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
       public java.util.List<? extends NetMjUserResultOrBuilder>
-           getUsersOrBuilderList() {
-        if (usersBuilder_ != null) {
-          return usersBuilder_.getMessageOrBuilderList();
+           getResultsOrBuilderList() {
+        if (resultsBuilder_ != null) {
+          return resultsBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(users_);
+          return java.util.Collections.unmodifiableList(results_);
         }
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public NetMjUserResult.Builder addUsersBuilder() {
-        return getUsersFieldBuilder().addBuilder(
+      public NetMjUserResult.Builder addResultsBuilder() {
+        return getResultsFieldBuilder().addBuilder(
             NetMjUserResult.getDefaultInstance());
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
-      public NetMjUserResult.Builder addUsersBuilder(
+      public NetMjUserResult.Builder addResultsBuilder(
           int index) {
-        return getUsersFieldBuilder().addBuilder(
+        return getResultsFieldBuilder().addBuilder(
             index, NetMjUserResult.getDefaultInstance());
       }
       /**
-       * <code>repeated .NetMjUserResult users = 2;</code>
+       * <code>repeated .NetMjUserResult results = 2;</code>
        */
       public java.util.List<NetMjUserResult.Builder>
-           getUsersBuilderList() {
-        return getUsersFieldBuilder().getBuilderList();
+           getResultsBuilderList() {
+        return getResultsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
           NetMjUserResult, NetMjUserResult.Builder, NetMjUserResultOrBuilder>
-          getUsersFieldBuilder() {
-        if (usersBuilder_ == null) {
-          usersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          getResultsFieldBuilder() {
+        if (resultsBuilder_ == null) {
+          resultsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               NetMjUserResult, NetMjUserResult.Builder, NetMjUserResultOrBuilder>(
-                  users_,
+                  results_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
-          users_ = null;
+          results_ = null;
         }
-        return usersBuilder_;
+        return resultsBuilder_;
+      }
+
+      // repeated .NetMjFinalResult histroy = 3;
+      private java.util.List<NetMjFinalResult> histroy_ =
+        java.util.Collections.emptyList();
+      private void ensureHistroyIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          histroy_ = new java.util.ArrayList<NetMjFinalResult>(histroy_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          NetMjFinalResult, NetMjFinalResult.Builder, NetMjFinalResultOrBuilder> histroyBuilder_;
+
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public java.util.List<NetMjFinalResult> getHistroyList() {
+        if (histroyBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(histroy_);
+        } else {
+          return histroyBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public int getHistroyCount() {
+        if (histroyBuilder_ == null) {
+          return histroy_.size();
+        } else {
+          return histroyBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public NetMjFinalResult getHistroy(int index) {
+        if (histroyBuilder_ == null) {
+          return histroy_.get(index);
+        } else {
+          return histroyBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public Builder setHistroy(
+          int index, NetMjFinalResult value) {
+        if (histroyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureHistroyIsMutable();
+          histroy_.set(index, value);
+          onChanged();
+        } else {
+          histroyBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public Builder setHistroy(
+          int index, NetMjFinalResult.Builder builderForValue) {
+        if (histroyBuilder_ == null) {
+          ensureHistroyIsMutable();
+          histroy_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          histroyBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public Builder addHistroy(NetMjFinalResult value) {
+        if (histroyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureHistroyIsMutable();
+          histroy_.add(value);
+          onChanged();
+        } else {
+          histroyBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public Builder addHistroy(
+          int index, NetMjFinalResult value) {
+        if (histroyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureHistroyIsMutable();
+          histroy_.add(index, value);
+          onChanged();
+        } else {
+          histroyBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public Builder addHistroy(
+          NetMjFinalResult.Builder builderForValue) {
+        if (histroyBuilder_ == null) {
+          ensureHistroyIsMutable();
+          histroy_.add(builderForValue.build());
+          onChanged();
+        } else {
+          histroyBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public Builder addHistroy(
+          int index, NetMjFinalResult.Builder builderForValue) {
+        if (histroyBuilder_ == null) {
+          ensureHistroyIsMutable();
+          histroy_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          histroyBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public Builder addAllHistroy(
+          Iterable<? extends NetMjFinalResult> values) {
+        if (histroyBuilder_ == null) {
+          ensureHistroyIsMutable();
+          super.addAll(values, histroy_);
+          onChanged();
+        } else {
+          histroyBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public Builder clearHistroy() {
+        if (histroyBuilder_ == null) {
+          histroy_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          histroyBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public Builder removeHistroy(int index) {
+        if (histroyBuilder_ == null) {
+          ensureHistroyIsMutable();
+          histroy_.remove(index);
+          onChanged();
+        } else {
+          histroyBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public NetMjFinalResult.Builder getHistroyBuilder(
+          int index) {
+        return getHistroyFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public NetMjFinalResultOrBuilder getHistroyOrBuilder(
+          int index) {
+        if (histroyBuilder_ == null) {
+          return histroy_.get(index);  } else {
+          return histroyBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public java.util.List<? extends NetMjFinalResultOrBuilder>
+           getHistroyOrBuilderList() {
+        if (histroyBuilder_ != null) {
+          return histroyBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(histroy_);
+        }
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public NetMjFinalResult.Builder addHistroyBuilder() {
+        return getHistroyFieldBuilder().addBuilder(
+            NetMjFinalResult.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public NetMjFinalResult.Builder addHistroyBuilder(
+          int index) {
+        return getHistroyFieldBuilder().addBuilder(
+            index, NetMjFinalResult.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .NetMjFinalResult histroy = 3;</code>
+       */
+      public java.util.List<NetMjFinalResult.Builder>
+           getHistroyBuilderList() {
+        return getHistroyFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          NetMjFinalResult, NetMjFinalResult.Builder, NetMjFinalResultOrBuilder>
+          getHistroyFieldBuilder() {
+        if (histroyBuilder_ == null) {
+          histroyBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              NetMjFinalResult, NetMjFinalResult.Builder, NetMjFinalResultOrBuilder>(
+                  histroy_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          histroy_ = null;
+        }
+        return histroyBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:RQREsult)
@@ -7796,6 +8158,764 @@ public final class NetGame {
     }
 
     // @@protoc_insertion_point(class_scope:RQREsult)
+  }
+
+  public interface NetMjFinalResultOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated .NetKvData records = 1;
+    /**
+     * <code>repeated .NetKvData records = 1;</code>
+     */
+    java.util.List<NetKvData>
+        getRecordsList();
+    /**
+     * <code>repeated .NetKvData records = 1;</code>
+     */
+    NetKvData getRecords(int index);
+    /**
+     * <code>repeated .NetKvData records = 1;</code>
+     */
+    int getRecordsCount();
+    /**
+     * <code>repeated .NetKvData records = 1;</code>
+     */
+    java.util.List<? extends NetKvDataOrBuilder>
+        getRecordsOrBuilderList();
+    /**
+     * <code>repeated .NetKvData records = 1;</code>
+     */
+    NetKvDataOrBuilder getRecordsOrBuilder(
+            int index);
+
+    // optional int32 roldId = 2;
+    /**
+     * <code>optional int32 roldId = 2;</code>
+     */
+    boolean hasRoldId();
+    /**
+     * <code>optional int32 roldId = 2;</code>
+     */
+    int getRoldId();
+  }
+  /**
+   * Protobuf type {@code NetMjFinalResult}
+   */
+  public static final class NetMjFinalResult extends
+      com.google.protobuf.GeneratedMessage
+      implements NetMjFinalResultOrBuilder {
+    // Use NetMjFinalResult.newBuilder() to construct.
+    private NetMjFinalResult(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private NetMjFinalResult(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final NetMjFinalResult defaultInstance;
+    public static NetMjFinalResult getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public NetMjFinalResult getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private NetMjFinalResult(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                records_ = new java.util.ArrayList<NetKvData>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              records_.add(input.readMessage(NetKvData.PARSER, extensionRegistry));
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000001;
+              roldId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          records_ = java.util.Collections.unmodifiableList(records_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return NetGame.internal_static_NetMjFinalResult_descriptor;
+    }
+
+    protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return NetGame.internal_static_NetMjFinalResult_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              NetMjFinalResult.class, Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<NetMjFinalResult> PARSER =
+        new com.google.protobuf.AbstractParser<NetMjFinalResult>() {
+      public NetMjFinalResult parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new NetMjFinalResult(input, extensionRegistry);
+      }
+    };
+
+    @Override
+    public com.google.protobuf.Parser<NetMjFinalResult> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // repeated .NetKvData records = 1;
+    public static final int RECORDS_FIELD_NUMBER = 1;
+    private java.util.List<NetKvData> records_;
+    /**
+     * <code>repeated .NetKvData records = 1;</code>
+     */
+    public java.util.List<NetKvData> getRecordsList() {
+      return records_;
+    }
+    /**
+     * <code>repeated .NetKvData records = 1;</code>
+     */
+    public java.util.List<? extends NetKvDataOrBuilder>
+        getRecordsOrBuilderList() {
+      return records_;
+    }
+    /**
+     * <code>repeated .NetKvData records = 1;</code>
+     */
+    public int getRecordsCount() {
+      return records_.size();
+    }
+    /**
+     * <code>repeated .NetKvData records = 1;</code>
+     */
+    public NetKvData getRecords(int index) {
+      return records_.get(index);
+    }
+    /**
+     * <code>repeated .NetKvData records = 1;</code>
+     */
+    public NetKvDataOrBuilder getRecordsOrBuilder(
+        int index) {
+      return records_.get(index);
+    }
+
+    // optional int32 roldId = 2;
+    public static final int ROLDID_FIELD_NUMBER = 2;
+    private int roldId_;
+    /**
+     * <code>optional int32 roldId = 2;</code>
+     */
+    public boolean hasRoldId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 roldId = 2;</code>
+     */
+    public int getRoldId() {
+      return roldId_;
+    }
+
+    private void initFields() {
+      records_ = java.util.Collections.emptyList();
+      roldId_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < records_.size(); i++) {
+        output.writeMessage(1, records_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(2, roldId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < records_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, records_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, roldId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @Override
+    protected Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static NetMjFinalResult parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static NetMjFinalResult parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static NetMjFinalResult parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static NetMjFinalResult parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static NetMjFinalResult parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static NetMjFinalResult parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static NetMjFinalResult parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static NetMjFinalResult parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static NetMjFinalResult parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static NetMjFinalResult parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(NetMjFinalResult prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @Override
+    protected Builder newBuilderForType(
+        BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code NetMjFinalResult}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements NetMjFinalResultOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return NetGame.internal_static_NetMjFinalResult_descriptor;
+      }
+
+      protected FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return NetGame.internal_static_NetMjFinalResult_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                NetMjFinalResult.class, Builder.class);
+      }
+
+      // Construct using com.module.net.NetGame.NetMjFinalResult.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getRecordsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (recordsBuilder_ == null) {
+          records_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          recordsBuilder_.clear();
+        }
+        roldId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return NetGame.internal_static_NetMjFinalResult_descriptor;
+      }
+
+      public NetMjFinalResult getDefaultInstanceForType() {
+        return NetMjFinalResult.getDefaultInstance();
+      }
+
+      public NetMjFinalResult build() {
+        NetMjFinalResult result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public NetMjFinalResult buildPartial() {
+        NetMjFinalResult result = new NetMjFinalResult(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (recordsBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            records_ = java.util.Collections.unmodifiableList(records_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.records_ = records_;
+        } else {
+          result.records_ = recordsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.roldId_ = roldId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof NetMjFinalResult) {
+          return mergeFrom((NetMjFinalResult)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(NetMjFinalResult other) {
+        if (other == NetMjFinalResult.getDefaultInstance()) return this;
+        if (recordsBuilder_ == null) {
+          if (!other.records_.isEmpty()) {
+            if (records_.isEmpty()) {
+              records_ = other.records_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureRecordsIsMutable();
+              records_.addAll(other.records_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.records_.isEmpty()) {
+            if (recordsBuilder_.isEmpty()) {
+              recordsBuilder_.dispose();
+              recordsBuilder_ = null;
+              records_ = other.records_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              recordsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getRecordsFieldBuilder() : null;
+            } else {
+              recordsBuilder_.addAllMessages(other.records_);
+            }
+          }
+        }
+        if (other.hasRoldId()) {
+          setRoldId(other.getRoldId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        NetMjFinalResult parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (NetMjFinalResult) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated .NetKvData records = 1;
+      private java.util.List<NetKvData> records_ =
+        java.util.Collections.emptyList();
+      private void ensureRecordsIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          records_ = new java.util.ArrayList<NetKvData>(records_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          NetKvData, NetKvData.Builder, NetKvDataOrBuilder> recordsBuilder_;
+
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public java.util.List<NetKvData> getRecordsList() {
+        if (recordsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(records_);
+        } else {
+          return recordsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public int getRecordsCount() {
+        if (recordsBuilder_ == null) {
+          return records_.size();
+        } else {
+          return recordsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public NetKvData getRecords(int index) {
+        if (recordsBuilder_ == null) {
+          return records_.get(index);
+        } else {
+          return recordsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public Builder setRecords(
+          int index, NetKvData value) {
+        if (recordsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRecordsIsMutable();
+          records_.set(index, value);
+          onChanged();
+        } else {
+          recordsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public Builder setRecords(
+          int index, NetKvData.Builder builderForValue) {
+        if (recordsBuilder_ == null) {
+          ensureRecordsIsMutable();
+          records_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          recordsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public Builder addRecords(NetKvData value) {
+        if (recordsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRecordsIsMutable();
+          records_.add(value);
+          onChanged();
+        } else {
+          recordsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public Builder addRecords(
+          int index, NetKvData value) {
+        if (recordsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRecordsIsMutable();
+          records_.add(index, value);
+          onChanged();
+        } else {
+          recordsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public Builder addRecords(
+          NetKvData.Builder builderForValue) {
+        if (recordsBuilder_ == null) {
+          ensureRecordsIsMutable();
+          records_.add(builderForValue.build());
+          onChanged();
+        } else {
+          recordsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public Builder addRecords(
+          int index, NetKvData.Builder builderForValue) {
+        if (recordsBuilder_ == null) {
+          ensureRecordsIsMutable();
+          records_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          recordsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public Builder addAllRecords(
+          Iterable<? extends NetKvData> values) {
+        if (recordsBuilder_ == null) {
+          ensureRecordsIsMutable();
+          super.addAll(values, records_);
+          onChanged();
+        } else {
+          recordsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public Builder clearRecords() {
+        if (recordsBuilder_ == null) {
+          records_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          recordsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public Builder removeRecords(int index) {
+        if (recordsBuilder_ == null) {
+          ensureRecordsIsMutable();
+          records_.remove(index);
+          onChanged();
+        } else {
+          recordsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public NetKvData.Builder getRecordsBuilder(
+          int index) {
+        return getRecordsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public NetKvDataOrBuilder getRecordsOrBuilder(
+          int index) {
+        if (recordsBuilder_ == null) {
+          return records_.get(index);  } else {
+          return recordsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public java.util.List<? extends NetKvDataOrBuilder>
+           getRecordsOrBuilderList() {
+        if (recordsBuilder_ != null) {
+          return recordsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(records_);
+        }
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public NetKvData.Builder addRecordsBuilder() {
+        return getRecordsFieldBuilder().addBuilder(
+            NetKvData.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public NetKvData.Builder addRecordsBuilder(
+          int index) {
+        return getRecordsFieldBuilder().addBuilder(
+            index, NetKvData.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .NetKvData records = 1;</code>
+       */
+      public java.util.List<NetKvData.Builder>
+           getRecordsBuilderList() {
+        return getRecordsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          NetKvData, NetKvData.Builder, NetKvDataOrBuilder>
+          getRecordsFieldBuilder() {
+        if (recordsBuilder_ == null) {
+          recordsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              NetKvData, NetKvData.Builder, NetKvDataOrBuilder>(
+                  records_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          records_ = null;
+        }
+        return recordsBuilder_;
+      }
+
+      // optional int32 roldId = 2;
+      private int roldId_ ;
+      /**
+       * <code>optional int32 roldId = 2;</code>
+       */
+      public boolean hasRoldId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 roldId = 2;</code>
+       */
+      public int getRoldId() {
+        return roldId_;
+      }
+      /**
+       * <code>optional int32 roldId = 2;</code>
+       */
+      public Builder setRoldId(int value) {
+        bitField0_ |= 0x00000002;
+        roldId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 roldId = 2;</code>
+       */
+      public Builder clearRoldId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        roldId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:NetMjFinalResult)
+    }
+
+    static {
+      defaultInstance = new NetMjFinalResult(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:NetMjFinalResult)
   }
 
   public interface NetMjUserResultOrBuilder
@@ -7863,6 +8983,16 @@ public final class NetGame {
      * <code>optional int32 score = 4;</code>
      */
     int getScore();
+
+    // optional int32 roldId = 5;
+    /**
+     * <code>optional int32 roldId = 5;</code>
+     */
+    boolean hasRoldId();
+    /**
+     * <code>optional int32 roldId = 5;</code>
+     */
+    int getRoldId();
   }
   /**
    * Protobuf type {@code NetMjUserResult}
@@ -7936,6 +9066,11 @@ public final class NetGame {
             case 32: {
               bitField0_ |= 0x00000004;
               score_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              roldId_ = input.readInt32();
               break;
             }
           }
@@ -8073,11 +9208,28 @@ public final class NetGame {
       return score_;
     }
 
+    // optional int32 roldId = 5;
+    public static final int ROLDID_FIELD_NUMBER = 5;
+    private int roldId_;
+    /**
+     * <code>optional int32 roldId = 5;</code>
+     */
+    public boolean hasRoldId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 roldId = 5;</code>
+     */
+    public int getRoldId() {
+      return roldId_;
+    }
+
     private void initFields() {
       scores_ = java.util.Collections.emptyList();
       showType_ = 0;
       winType_ = 0;
       score_ = 0;
+      roldId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8103,6 +9255,9 @@ public final class NetGame {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(4, score_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(5, roldId_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -8127,6 +9282,10 @@ public final class NetGame {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, score_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, roldId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8257,6 +9416,8 @@ public final class NetGame {
         bitField0_ = (bitField0_ & ~0x00000004);
         score_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        roldId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -8306,6 +9467,10 @@ public final class NetGame {
           to_bitField0_ |= 0x00000004;
         }
         result.score_ = score_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.roldId_ = roldId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8356,6 +9521,9 @@ public final class NetGame {
         }
         if (other.hasScore()) {
           setScore(other.getScore());
+        }
+        if (other.hasRoldId()) {
+          setRoldId(other.getRoldId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8735,6 +9903,39 @@ public final class NetGame {
       public Builder clearScore() {
         bitField0_ = (bitField0_ & ~0x00000008);
         score_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 roldId = 5;
+      private int roldId_ ;
+      /**
+       * <code>optional int32 roldId = 5;</code>
+       */
+      public boolean hasRoldId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 roldId = 5;</code>
+       */
+      public int getRoldId() {
+        return roldId_;
+      }
+      /**
+       * <code>optional int32 roldId = 5;</code>
+       */
+      public Builder setRoldId(int value) {
+        bitField0_ |= 0x00000010;
+        roldId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 roldId = 5;</code>
+       */
+      public Builder clearRoldId() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        roldId_ = 0;
         onChanged();
         return this;
       }
@@ -13491,6 +14692,11 @@ public final class NetGame {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_RQREsult_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_NetMjFinalResult_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_NetMjFinalResult_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_NetMjUserResult_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -13561,22 +14767,25 @@ public final class NetGame {
       "gameStatus\030\006 \001(\005\022\017\n\007ownerId\030\007 \001(\005\022\034\n\005ext" +
       "ra\030\010 \001(\0132\r.NetExtraData\"*\n\013RPEnterRoom\022\016" +
       "\n\006roomId\030\001 \001(\005\022\013\n\003key\030\002 \001(\t\"\036\n\014RQUserSta" +
-      "tus\022\016\n\006status\030\001 \001(\005\"9\n\010RQREsult\022\014\n\004flag\030" +
-      "\001 \001(\005\022\037\n\005users\030\002 \003(\0132\020.NetMjUserResult\"_" +
-      "\n\017NetMjUserResult\022\032\n\006scores\030\001 \003(\0132\n.NetK",
-      "vData\022\020\n\010showType\030\002 \001(\005\022\017\n\007winType\030\003 \001(\005" +
-      "\022\r\n\005score\030\004 \001(\005\")\n\013RQEnterRoom\022\032\n\004user\030\001" +
-      " \001(\0132\014.NetUserData\"\025\n\006RQExit\022\013\n\003uid\030\001 \001(" +
-      "\005\"\031\n\006RPVote\022\017\n\007isagree\030\001 \001(\010\"&\n\006RQVote\022\017" +
-      "\n\007isagree\030\001 \001(\010\022\013\n\003uid\030\002 \001(\005\"+\n\tRQConnec" +
-      "t\022\016\n\006roomId\030\001 \001(\005\022\016\n\006roleId\030\002 \001(\005\"d\n\013Net" +
-      "Response\022\016\n\006status\030\001 \001(\005\022$\n\014operateDatas" +
-      "\030\002 \003(\0132\016.NetOprateData\022\021\n\tretStatus\030\003 \002(" +
-      "\005\022\014\n\004step\030\004 \001(\005\"\036\n\017NetLoginConfirm\022\013\n\003ui" +
-      "d\030\001 \002(\005\"b\n\007NetChat\022\021\n\treceiveId\030\001 \001(\005\022\020\n",
-      "\010userName\030\002 \001(\t\022\017\n\007channel\030\003 \001(\005\022\017\n\007cont" +
-      "ent\030\004 \001(\t\022\020\n\010isaction\030\005 \001(\005B\020\n\016com.modul" +
-      "e.net"
+      "tus\022\016\n\006status\030\001 \001(\005\"_\n\010RQREsult\022\014\n\004flag\030" +
+      "\001 \001(\005\022!\n\007results\030\002 \003(\0132\020.NetMjUserResult" +
+      "\022\"\n\007histroy\030\003 \003(\0132\021.NetMjFinalResult\"?\n\020",
+      "NetMjFinalResult\022\033\n\007records\030\001 \003(\0132\n.NetK" +
+      "vData\022\016\n\006roldId\030\002 \001(\005\"o\n\017NetMjUserResult" +
+      "\022\032\n\006scores\030\001 \003(\0132\n.NetKvData\022\020\n\010showType" +
+      "\030\002 \001(\005\022\017\n\007winType\030\003 \001(\005\022\r\n\005score\030\004 \001(\005\022\016" +
+      "\n\006roldId\030\005 \001(\005\")\n\013RQEnterRoom\022\032\n\004user\030\001 " +
+      "\001(\0132\014.NetUserData\"\025\n\006RQExit\022\013\n\003uid\030\001 \001(\005" +
+      "\"\031\n\006RPVote\022\017\n\007isagree\030\001 \001(\010\"&\n\006RQVote\022\017\n" +
+      "\007isagree\030\001 \001(\010\022\013\n\003uid\030\002 \001(\005\"+\n\tRQConnect" +
+      "\022\016\n\006roomId\030\001 \001(\005\022\016\n\006roleId\030\002 \001(\005\"d\n\013NetR" +
+      "esponse\022\016\n\006status\030\001 \001(\005\022$\n\014operateDatas\030",
+      "\002 \003(\0132\016.NetOprateData\022\021\n\tretStatus\030\003 \002(\005" +
+      "\022\014\n\004step\030\004 \001(\005\"\036\n\017NetLoginConfirm\022\013\n\003uid" +
+      "\030\001 \002(\005\"b\n\007NetChat\022\021\n\treceiveId\030\001 \001(\005\022\020\n\010" +
+      "userName\030\002 \001(\t\022\017\n\007channel\030\003 \001(\005\022\017\n\007conte" +
+      "nt\030\004 \001(\t\022\020\n\010isaction\030\005 \001(\005B\020\n\016com.module" +
+      ".net"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -13636,57 +14845,63 @@ public final class NetGame {
           internal_static_RQREsult_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RQREsult_descriptor,
-              new String[] { "Flag", "Users", });
-          internal_static_NetMjUserResult_descriptor =
+              new String[] { "Flag", "Results", "Histroy", });
+          internal_static_NetMjFinalResult_descriptor =
             getDescriptor().getMessageTypes().get(9);
+          internal_static_NetMjFinalResult_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_NetMjFinalResult_descriptor,
+              new String[] { "Records", "RoldId", });
+          internal_static_NetMjUserResult_descriptor =
+            getDescriptor().getMessageTypes().get(10);
           internal_static_NetMjUserResult_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_NetMjUserResult_descriptor,
-              new String[] { "Scores", "ShowType", "WinType", "Score", });
+              new String[] { "Scores", "ShowType", "WinType", "Score", "RoldId", });
           internal_static_RQEnterRoom_descriptor =
-            getDescriptor().getMessageTypes().get(10);
+            getDescriptor().getMessageTypes().get(11);
           internal_static_RQEnterRoom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RQEnterRoom_descriptor,
               new String[] { "User", });
           internal_static_RQExit_descriptor =
-            getDescriptor().getMessageTypes().get(11);
+            getDescriptor().getMessageTypes().get(12);
           internal_static_RQExit_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RQExit_descriptor,
               new String[] { "Uid", });
           internal_static_RPVote_descriptor =
-            getDescriptor().getMessageTypes().get(12);
+            getDescriptor().getMessageTypes().get(13);
           internal_static_RPVote_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RPVote_descriptor,
               new String[] { "Isagree", });
           internal_static_RQVote_descriptor =
-            getDescriptor().getMessageTypes().get(13);
+            getDescriptor().getMessageTypes().get(14);
           internal_static_RQVote_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RQVote_descriptor,
               new String[] { "Isagree", "Uid", });
           internal_static_RQConnect_descriptor =
-            getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(15);
           internal_static_RQConnect_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RQConnect_descriptor,
               new String[] { "RoomId", "RoleId", });
           internal_static_NetResponse_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(16);
           internal_static_NetResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_NetResponse_descriptor,
               new String[] { "Status", "OperateDatas", "RetStatus", "Step", });
           internal_static_NetLoginConfirm_descriptor =
-            getDescriptor().getMessageTypes().get(16);
+            getDescriptor().getMessageTypes().get(17);
           internal_static_NetLoginConfirm_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_NetLoginConfirm_descriptor,
               new String[] { "Uid", });
           internal_static_NetChat_descriptor =
-            getDescriptor().getMessageTypes().get(17);
+            getDescriptor().getMessageTypes().get(18);
           internal_static_NetChat_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_NetChat_descriptor,

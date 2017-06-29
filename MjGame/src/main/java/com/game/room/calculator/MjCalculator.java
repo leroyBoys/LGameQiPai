@@ -2,6 +2,7 @@ package com.game.room.calculator;
 
 import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
+import com.game.core.room.GameOverType;
 import com.game.core.room.calculator.DefaultCalculator;
 import com.game.core.room.calculator.PayDetail;
 import com.game.room.MjChairInfo;
@@ -99,7 +100,26 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
             NetGame.NetMjUserResult.Builder netMjResult = NetGame.NetMjUserResult.newBuilder();
             netMjResult.addAllScores(entry.getValue());
             netMjResult.setScore(scoreAddDetails.get(entry.getKey()));
+            netMjResult.setRoldId(entry.getKey());
+            result.addResults(netMjResult);
+        }
 
+        if(room.getGameOverType() == GameOverType.AllOver){
+            if(!records.isEmpty()){
+                for(Map.Entry<Integer,Map<RecordType,Integer>> entry:records.entrySet()){
+                    NetGame.NetMjFinalResult.Builder history = NetGame.NetMjFinalResult.newBuilder();
+                    history.setRoldId(entry.getKey());
+
+                    for(Map.Entry<RecordType,Integer> entry2:entry.getValue().entrySet()){
+                        NetGame.NetKvData.Builder netKvData = NetGame.NetKvData.newBuilder();
+                        netKvData.setK(entry2.getKey().val);
+                        netKvData.setV(entry2.getValue());
+                        history.addRecords(netKvData);
+                    }
+
+                    result.addHistroy(history.build());
+                }
+            }
         }
         rqrEsult = result.build();
         return rqrEsult;

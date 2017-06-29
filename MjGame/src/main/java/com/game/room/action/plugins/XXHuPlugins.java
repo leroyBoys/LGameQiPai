@@ -13,6 +13,7 @@ public class XXHuPlugins extends PingHuPlugins {
 
     @Override
     public void createCanExecuteAction(MjTable table, StepGameStatusData stepGameStatusData) {
+        super.createCanExecuteAction(table,stepGameStatusData);
     }
 
 }

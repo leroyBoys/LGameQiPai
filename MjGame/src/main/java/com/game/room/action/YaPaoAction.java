@@ -6,6 +6,7 @@ import com.game.room.MjChairInfo;
 import com.game.socket.module.UserVistor;
 import com.game.core.config.IOptPlugin;
 import com.game.core.config.TablePluginManager;
+import com.logger.log.SystemLogger;
 import com.lsocket.message.Response;
 import com.game.core.action.BaseAction;
 import com.game.room.MjTable;
@@ -30,6 +31,8 @@ public class YaPaoAction extends BaseAction<MjTable> {
         if(table.getBankId() == table.getLastBankUid()){
             table.getStatusData().addDoneUid(table.getBankId());
         }
+        SystemLogger.warn(this.getClass(),"initAction yapao bankId:"+table.getBankId()+"/"+table.getLastBankUid()+"  size:"+table.getStatusData().getDoneSize());
+
         NetGame.NetOprateData netOperate = table.getStatusData().getCanDoDatas(table,0).build();
         for(int i = 0;i<table.getChairs().length;i++){
             if(table.getChairs()[i].getId() == table.getBankId()){

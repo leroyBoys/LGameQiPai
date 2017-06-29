@@ -17,9 +17,9 @@ public abstract class DefaultCalculator<T extends BaseTableVo> implements Calcul
 
     protected T room;
     ///玩家id--统计类型-内容///
-    private Map<Integer,Map<RecordType,Integer>> records = new HashMap<>();//总统计
+    protected Map<Integer,Map<RecordType,Integer>> records = new HashMap<>();//总统计
 
-    private Map<Integer,Map<RecordType,Integer>> curRecords = new HashMap<>();//当前局的统计
+    protected Map<Integer,Map<RecordType,Integer>> curRecords = new HashMap<>();//当前局的统计
 
     public DefaultCalculator(T room){
         this.room = room;
