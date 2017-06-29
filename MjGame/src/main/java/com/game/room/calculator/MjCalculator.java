@@ -9,6 +9,7 @@ import com.game.room.MjChairInfo;
 import com.game.room.MjTable;
 import com.lgame.util.json.JsonUtil;
 import com.module.net.NetGame;
+import com.module.net.NetResult;
 
 import java.util.*;
 
@@ -23,7 +24,7 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
 
     /** 每一步的得失分条目列表 */
     private ArrayList<PayDetail> payDetailList = new ArrayList<>();
-    private NetGame.RQREsult rqrEsult;
+    private NetResult.RQMjREsult rqrEsult;
     /** 合并得失分项目 */
     private boolean merageItem = false;
 
@@ -54,7 +55,7 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
     }
 
     @Override
-    public final NetGame.RQREsult executeCalculator() {
+    public final NetResult.RQMjREsult executeCalculator() {
         if (rqrEsult != null) {
             return rqrEsult;
         }
@@ -93,36 +94,40 @@ public class MjCalculator extends DefaultCalculator<MjTable> {
         ///算分
         calculatorScore();
 
-        NetGame.RQREsult.Builder result = NetGame.RQREsult.newBuilder();
+        NetResult.RQMjREsult.Builder result = NetResult.RQMjREsult.newBuilder();
         result.setFlag(room.getGameOverType().ordinal());
 
         for (Map.Entry<Integer, List<NetGame.NetKvData>> entry : payList.entrySet()) {
-            NetGame.NetMjUserResult.Builder netMjResult = NetGame.NetMjUserResult.newBuilder();
+            MjChairInfo info = room.getChairByUid(entry.getKey());
+            NetResult.NetMjUserResult.Builder netMjResult = NetResult.NetMjUserResult.newBuilder();
             netMjResult.addAllScores(entry.getValue());
-            netMjResult.setScore(scoreAddDetails.get(entry.getKey()));
+            netMjResult.addAllData(this.getData(info));
+            netMjResult.addAllHands(room.getCardsDetail(info));
+            if(room.getGameOverType() == GameOverType.AllOver){
+
+                Map<RecordType,Integer> recordTypeIntegerMap = records.get(entry.getKey());
+                if(recordTypeIntegerMap != null){
+                    for(Map.Entry<RecordType,Integer> recordEntry:recordTypeIntegerMap.entrySet()){
+                        NetGame.NetKvData.Builder netKvData = NetGame.NetKvData.newBuilder();
+                        netKvData.setK(recordEntry.getKey().val);
+                        netKvData.setV(recordEntry.getValue());
+                        netMjResult.addRecords(netKvData);
+                    }
+                }
+            }
             netMjResult.setRoldId(entry.getKey());
             result.addResults(netMjResult);
         }
-
-        if(room.getGameOverType() == GameOverType.AllOver){
-            if(!records.isEmpty()){
-                for(Map.Entry<Integer,Map<RecordType,Integer>> entry:records.entrySet()){
-                    NetGame.NetMjFinalResult.Builder history = NetGame.NetMjFinalResult.newBuilder();
-                    history.setRoldId(entry.getKey());
-
-                    for(Map.Entry<RecordType,Integer> entry2:entry.getValue().entrySet()){
-                        NetGame.NetKvData.Builder netKvData = NetGame.NetKvData.newBuilder();
-                        netKvData.setK(entry2.getKey().val);
-                        netKvData.setV(entry2.getValue());
-                        history.addRecords(netKvData);
-                    }
-
-                    result.addHistroy(history.build());
-                }
-            }
-        }
         rqrEsult = result.build();
         return rqrEsult;
+    }
+
+    protected List<Integer> getData(MjChairInfo info) {
+        List<Integer> datas = new LinkedList<>();
+        datas.add(scoreAddDetails.get(info.getId()));
+        datas.add(info.getTotalScore());
+        datas.add(info.getYapaoNum());
+        return datas;
     }
 
     public void addPayDetails(Map<Integer,List<NetGame.NetKvData>> allPayList, Map<Integer,List<NetGame.NetKvData>> payList){

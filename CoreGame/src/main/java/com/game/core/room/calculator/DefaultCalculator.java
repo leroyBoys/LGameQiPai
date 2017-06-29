@@ -86,4 +86,5 @@ public abstract class DefaultCalculator<T extends BaseTableVo> implements Calcul
     public T getRoom() {
         return room;
     }
+
 }

@@ -70,4 +70,8 @@ public class MjCardPoolEngine extends BaseCardPoolEngine<Integer> {
     public List<Integer> getOutPool(int uid) {
         return outPool.get(uid);
     }
+
+    public int getLastPlayUid() {
+        return lastPlayUid;
+    }
 }

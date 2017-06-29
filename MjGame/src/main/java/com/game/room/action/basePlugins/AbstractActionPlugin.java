@@ -5,6 +5,7 @@ import com.game.core.config.PluginGen;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
 import com.game.core.room.calculator.PayDetail;
+import com.game.room.MjTable;
 import com.game.room.status.StepGameStatusData;
 import com.logger.type.LogType;
 import com.lsocket.message.Response;
@@ -47,6 +48,10 @@ public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOp
         return stepData.getCards().get(0) == card.get(0)?1:0;
     }
 
+    public void record(A table, StepGameStatusData stepGameStatusData){
+
+    }
+
     /**
      *
      * 1自摸所有人支付，其它点炮的人支付
@@ -85,6 +90,7 @@ public abstract class AbstractActionPlugin<A extends BaseTableVo> implements IOp
         ratePay.setLostScoreType(this.getLostType());
         ratePay.setiOptPlugin(this);
         table.getCalculator().addPayDetailed(ratePay);
+        record(table,stepGameStatusData);
         return ratePay;
     }
 

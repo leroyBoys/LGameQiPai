@@ -1,6 +1,7 @@
 package com.game.room.action.basePlugins;
 
 import com.game.core.room.BaseChairInfo;
+import com.game.core.room.calculator.Calculator;
 import com.game.core.room.calculator.PayDetail;
 import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
@@ -42,6 +43,12 @@ public class MingGangPlugins<T extends MjTable>  extends GangPlugins<T>{
     @Override
     public MingGangPlugins createNew() {
         return new MingGangPlugins();
+    }
+
+    @Override
+    public void record(MjTable table,StepGameStatusData stepGameStatusData){
+        table.getCalculator().addRecord(stepGameStatusData.getFromId(), Calculator.RecordType.dianGang,1);
+        table.getCalculator().addRecord(stepGameStatusData.getUid(), Calculator.RecordType.mingGang,1);
     }
 
     @Override

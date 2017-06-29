@@ -12,6 +12,7 @@ import com.lgame.util.comm.RandomTool;
 import com.lsocket.message.Response;
 import com.module.core.ResponseCode;
 import com.module.net.NetGame;
+import com.module.net.NetResult;
 
 import java.util.*;
 
@@ -168,27 +169,39 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
         return extra.build();
     }
 
-    protected NetGame.NetExtraData.Builder getNetExtraData(MjChairInfo mjChairInfo) {
+    public NetGame.NetExtraData.Builder getNetExtraData(MjChairInfo mjChairInfo) {
         NetGame.NetExtraData.Builder extra = NetGame.NetExtraData.newBuilder();
         extra.addKvDatas(getOutCard(mjChairInfo));
-        extra.addKvDatas(getHu(mjChairInfo));
+        extra.addAllKvDatas(getCardsDetail(mjChairInfo));
+        extra.addList(mjChairInfo.getTotalScore());
+        return extra;
+    }
+
+    /**
+     * 某个玩家的桌面牌数据（含手牌，胡碰等(不含出牌)）
+     * @param mjChairInfo
+     * @return
+     */
+    public List<NetGame.NetKvData> getCardsDetail(MjChairInfo mjChairInfo){
+        List<NetGame.NetKvData> kvDatas = new LinkedList<>();
+        kvDatas.add(getHu(mjChairInfo));
+
 
         List<GroupCard> groupCards = mjChairInfo.getHandsContainer().getChiGangList();
         if(!groupCards.isEmpty()){
             for(GroupCard groupCard:groupCards){
-                extra.addKvDatas(getPengChiGangCardType(groupCard));
+                kvDatas.add(getPengChiGangCardType(groupCard));
             }
         }
 
         groupCards = mjChairInfo.getHandsContainer().getPengList();
         if(!groupCards.isEmpty()){
             for(GroupCard groupCard:groupCards){
-                extra.addKvDatas(getPengChiGangCardType(groupCard));
+                kvDatas.add(getPengChiGangCardType(groupCard));
             }
         }
 
-        extra.addList(mjChairInfo.getTotalScore());
-        return extra;
+        return kvDatas;
     }
 
     protected final NetGame.NetKvData getOutCard(MjChairInfo mjChairInfo){
@@ -243,7 +256,7 @@ public class MjTable extends BaseTableVo<MjStatus,MjChairInfo> {
 
     @Override
     protected Response getGameOverResult() {
-        return Response.defaultResponse(GameConst.MOUDLE_Mj,MjCmd.Result.getValue(),0, (NetGame.RQREsult) this.getCalculator().executeCalculator());
+        return Response.defaultResponse(GameConst.MOUDLE_Mj,MjCmd.Result.getValue(),0, (NetResult.RQMjREsult) this.getCalculator().executeCalculator());
     }
 
     //////////////////////////////////////////////////////

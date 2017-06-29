@@ -3,6 +3,7 @@ package com.game.room.action.basePlugins;
 import com.game.core.constant.GameConst;
 import com.game.core.room.BaseChairInfo;
 import com.game.core.room.BaseTableVo;
+import com.game.core.room.calculator.Calculator;
 import com.game.core.room.calculator.PayDetail;
 import com.game.log.MJLog;
 import com.game.room.MjAutoCacheHandContainer;
@@ -59,6 +60,11 @@ public class AnGangGangPlugins<T extends MjTable> extends GangPlugins<T>{
     @Override
     public AnGangGangPlugins createNew() {
         return new AnGangGangPlugins();
+    }
+
+    @Override
+    public void record(MjTable table,StepGameStatusData stepGameStatusData){
+        table.getCalculator().addRecord(stepGameStatusData.getUid(), Calculator.RecordType.anGang,1);
     }
 
     @Override

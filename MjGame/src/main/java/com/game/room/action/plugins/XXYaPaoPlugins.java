@@ -24,7 +24,6 @@ public class XXYaPaoPlugins extends AbstractStagePlugin<MjTable> {
     public synchronized boolean doOperation(MjTable table, Response response,int roleId, NetGame.NetOprateData oprateData) {
         MjChairInfo info = table.getChairByUid(roleId);
         BaseGameStateData statusData = table.getStatusData();
-        SystemLogger.warn(this.getClass(),"begin yapao roleId:"+roleId+"  size:"+statusData.getDoneSize());
         if(statusData.contains(roleId)){
             SystemLogger.warn(this.getClass(),"yapao fail roleId:"+roleId);
             return false;

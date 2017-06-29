@@ -21,33 +21,33 @@ public interface Calculator {
 
     public enum RecordType{
         /**
-         * 结算得分
+         * 本次得分
          */
         score(0),
         /**
-         * 叫地主次数
+         * 点炮次数
          */
-        gurid(1),
+        dianPaoCount(1),
         /**
-         * 炸弹次数
+         * 自摸次数
          */
-        four(2),
+        ziMoCount(2),
         /**
-         * 火箭次数
+         * 抢杠次数
          */
-        boom(3),
+        qiangGang(3),
         /**
-         * 春天次数
+         * 暗杠次数
          */
-        spring(4),
+        anGang(4),
         /**
-         * 胜利次数
+         * 明杠次数
          */
-        winCount(5),
+        mingGang(5),
         /**
-         * 最高得分
+         * 点杠次数
          */
-        maxAddSocre(6),
+        dianGang(6),
         ;
         public final int val;
         RecordType(int val){

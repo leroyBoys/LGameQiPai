@@ -1,6 +1,9 @@
 package com.game.room.action.basePlugins;
 
 import com.game.core.room.BaseChairInfo;
+import com.game.core.room.calculator.Calculator;
+import com.game.room.MjCardPoolEngine;
+import com.game.room.MjHandCardsContainer;
 import com.game.room.MjTable;
 import com.game.room.action.HuAction;
 import com.game.room.action.SuperGameStatusData;
@@ -8,6 +11,7 @@ import com.game.room.status.StepGameStatusData;
 import com.game.room.util.MJTool;
 import com.lsocket.message.Response;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -63,10 +67,32 @@ public abstract class IPluginHuCheck extends AbstractActionPlugin<MjTable> imple
     }
 
     @Override
+    public void record(MjTable table,StepGameStatusData stepGameStatusData){
+        if(stepGameStatusData.getUid() != stepGameStatusData.getFromId()){//点炮次数
+            table.getCalculator().addRecord(stepGameStatusData.getUid(), Calculator.RecordType.dianPaoCount,1);
+        }else {
+            table.getCalculator().addRecord(stepGameStatusData.getUid(), Calculator.RecordType.ziMoCount,1);
+        }
+    }
+
+    @Override
     public final boolean doOperation(MjTable table, Response response, int roleId, StepGameStatusData stepGameStatusData) {
         if (stepGameStatusData.getiOptPlugin().getPlugin().getSubType() != this.getPlugin().getSubType()) {
             return false;
         }
+
+        BaseChairInfo info = table.getChairByUid(stepGameStatusData.getUid());
+        int card = 0;
+        if(stepGameStatusData.getUid() != stepGameStatusData.getFromId()){//点炮
+            MjCardPoolEngine poolEngine = table.getCardPool();
+            LinkedList<Integer> outCards = (LinkedList<Integer>) poolEngine.getOutPool(poolEngine.getLastPlayUid());
+            card = outCards.removeLast();
+        }else {
+            card = info.getHandsContainer().getHandCards().remove(info.getHandsContainer().getHandCards().size()-1);
+        }
+
+        record(table,stepGameStatusData);
+        ((MjHandCardsContainer)info.getHandsContainer()).addHu(card);
         createNextBankId(table,roleId);
         payment(table,stepGameStatusData);
         createCanExecuteAction(table,stepGameStatusData);
