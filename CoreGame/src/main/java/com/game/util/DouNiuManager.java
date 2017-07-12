@@ -2,38 +2,24 @@ package com.game.util;
 
 import java.util.*;
 
+import com.lgame.util.json.JsonUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 斗牛核心算法
- * ABCDEF
- * 顺序值大小和花色对比权重：speial
- * num:实际值（1-13）
- * A:500*5+花色*100+num[2600,2913]
- * B:500*4+花色*100+num[2100,2513]
- * C:500*3+花色*100+num[1600,1913]
- * D:500*2+花色*100+num[1100,1413]
- * E:500*1+花色*100+num[600,913]
- * F:500*0+花色*100+num[100,413]
  *
- *  牛一到牛九
- * n*10000+speial[10000,93000]
- *
- * 牛牛
- * 100000+speial[100000,103000]
- * 银牛(十和十以上的花牌组成的“斗牛”)
- * 110000+speial[110000,113000]
- *  金牛(五张十(含10)以上的花牌组成的“斗牛”)
- * 120000+speial[120000,123000]
- * 炸弹
- *  130000+炸弹实际数值*3000+speial[130000,200000]
- *小牛(5张牌牌点总数小于10)
- *500000+speial[500000,503000]
- *
- * 小牛>炸弹>金牛>银牛>牛牛>1-9牛>其他
+ * 牛牛：即牛十，例如235 55(含N个10+m个花牌)
+ * 炸弹：有四张一样点数的牌，剩余一张随意
+ * 五花牛：五张牌全部由JQK组成，
+ * 五小牛：五张牌都小于5，并且加起来小于10
+ * 同花顺>炸弹>五花牛>五小牛>葫芦>同花>顺子>牛牛>有牛>没牛
  * Created by leroy:656515489@qq.com
  * 2017/5/12.
  */
 public class DouNiuManager {
     private static DouNiuManager ourInstance = new DouNiuManager();
+    private final Logger logger = LoggerFactory.getLogger("play");
 
     public static DouNiuManager getInstance() {
         return ourInstance;
@@ -49,27 +35,44 @@ public class DouNiuManager {
     private final Map<Integer,NiuType> NiuTypeMap = new HashMap<>();
 
     public NiuCard getNiuCard(List<Integer> cards){
+        Collections.sort(cards, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2-o1;
+            }
+        });
+
         int byteCard = 0;
         int sum = 0;
-        boolean isHavShi = false;//是否有小于等于10
         Map<Integer,Integer> map = new HashMap<>(5);//key:>=10 都为10--- value:num
         Map<Integer,Integer> realMap = new HashMap<>(5);
 
         int specialNum = 0;
         int i = cards.size();
+        int lastColor = 0;
+        boolean isSameColor = true;
+        int max = 0;
+        int min = 99;
+
         for(Integer card:cards){
             int cv = card%100;
+            max = Math.max(max,cv);
+            min = Math.min(min,cv);
+            int color = card/100;
             Integer num = realMap.get(cv);
             if(num == null){
                 num = 0;
             }
             realMap.put(cv,num+1);
 
-            if(cv <= 10){
-                isHavShi = true;
+            if(isSameColor){
+                if(lastColor != 0 && lastColor != color){
+                    isSameColor = false;
+                }else {
+                    lastColor = color;
+                }
             }
-
-            specialNum += i--*500+getValue(card/100)*100+cv;
+            specialNum += i--*500+getValue(color)*100+cv;
             int c = Math.min(10,cv);
             num = map.get(c);
             if(num == null){
@@ -82,16 +85,9 @@ public class DouNiuManager {
         }
 
         NiuCard niuCard = new NiuCard();
+        LinkedList<NiuType> niuTypes = new LinkedList<>();
 
-        int sumNum = sum%10;//sum的余数
-        if(sum < 10){//小牛
-            specialNum += 500000;
-            niuCard.setSpecialNum(specialNum);
-            niuCard.setNiuType(NiuType.XiaoNiu);
-            return niuCard;
-        }
-
-        if(realMap.size() <= 2){//查询是否是炸弹
+        if(realMap.size() == 2){//查询是否是炸弹
             int four = 0;
             for(Map.Entry<Integer,Integer> entry:realMap.entrySet()){
                 if(entry.getValue() != 1 && entry.getValue() != 4){
@@ -102,59 +98,108 @@ public class DouNiuManager {
             }
 
             if(four != 0){
-                specialNum += 130000+four*3000;
-                niuCard.setSpecialNum(specialNum);
-                niuCard.setNiuType(NiuType.BoomNiu);
-                return niuCard;
+                niuTypes.add(NiuType.BoomNiu);
+            }else {
+                niuTypes.add(NiuType.HuLu);
             }
+        }else if(realMap.size() == 5){
+            if(max - min == 4){
+                if(isSameColor){
+                    niuTypes.add(NiuType.TongHuaShun);
+                }else {
+                    niuTypes.add(NiuType.Link);
+                }
+            }else if(isSameColor){
+                niuTypes.add(NiuType.SameColor);
+            }
+        }
+
+        boolean isHavNiu = false;
+        int sumNum = sum%10;//sum的余数
+        if(sum < 10){//小牛
+            niuTypes.add(NiuType.XiaoNiu);
         }
 
         if(sumNum == 0){
-            if(!isHavShi){//金牛
-                specialNum += 120000;
-                niuCard.setSpecialNum(specialNum);
-                niuCard.setNiuType(NiuType.JinNiu);
-                return niuCard;
+            if(min > 10){//五花牛
+                niuTypes.add(NiuType.JinNiu);
+                isHavNiu = true;
             }
 
             Integer tenNums = map.get(10);
-            if(tenNums != null && tenNums == cards.size()){//银牛
-                specialNum += 110000;
-                niuCard.setSpecialNum(specialNum);
-                niuCard.setNiuType(NiuType.YinNiu);
-                return niuCard;
-            }
-        }
-
-        niuCard.setSpecialNum(specialNum);
-        if(sumNum % 2 == 0){
-            Integer nums = map.get(sumNum/2);
-            if(nums != null && nums >= 2){//有牛
-            }else{
+            if(tenNums != null){//牛牛
+                if(tenNums == cards.size() || (tenNums == 2 || tenNums == 3)){
+                    niuTypes.add(NiuType.NiuNiu);
+                    isHavNiu = true;
+                }
+            }else {
                 StaticNiuCard staticNiuCard = getNiuType(sumNum,byteCard);
                 if(staticNiuCard == null){//无牛
-                    return niuCard;
+                    isHavNiu = false;
+                }else {
+                    niuTypes.add(NiuType.NiuNiu);
+                    isHavNiu = true;
                 }
             }
 
-            if(sumNum == 0){//牛牛
-                specialNum += 100000;
-                niuCard.setSpecialNum(specialNum);
-                niuCard.setNiuType(NiuType.NiuNiu);
-                return niuCard;
+        }else if(sumNum % 2 == 0){
+            Integer nums = map.get(sumNum/2);
+            if(nums != null && nums >= 2){//有牛
+                isHavNiu = true;
+            }else{
+                nums = map.get((sumNum+10)/2);
+                if(nums != null && nums >= 2){//有牛
+                    isHavNiu = true;
+                }else {
+                    StaticNiuCard staticNiuCard = getNiuType(sumNum,byteCard);
+                    if(staticNiuCard == null){//无牛
+                        isHavNiu = false;
+                    }else {
+                        isHavNiu = true;
+                    }
+                }
             }
         }else {
             StaticNiuCard staticNiuCard = getNiuType(sumNum,byteCard);
             if(staticNiuCard == null){//无牛
-                return niuCard;
+                isHavNiu = false;
+            }else {
+                isHavNiu = true;
             }
         }
 
-        specialNum += sumNum*10000;
-        niuCard.setSpecialNum(specialNum);
-        niuCard.setNiuType(NiuType.getNiuType(sumNum));
-        return niuCard;
+        if(isHavNiu && sumNum > 0){
+            niuTypes.add(NiuType.getNiuType(sumNum));
+        }
 
+        NiuType maxNiuType = NiuType.Null;
+        if(!niuTypes.isEmpty()){
+            if(niuTypes.size() != 1){
+                Collections.sort(niuTypes, new Comparator<NiuType>() {
+                    @Override
+                    public int compare(NiuType o1, NiuType o2) {
+                        return o2.getTypeNum() - o1.getTypeNum();
+                    }
+                });
+            }
+
+            int speialWeight = 0;
+            for(NiuType nt:niuTypes){
+                speialWeight |= nt.getTypeNum();
+            }
+            specialNum += speialWeight*10000;
+
+            maxNiuType = niuTypes.getFirst();
+        }
+
+        String log = "cards:"+ JsonUtil.getJsonFromBean(cards)+" niuTypes:"+ JsonUtil.getJsonFromBean(niuTypes)+"  maxNiuType:"+maxNiuType+" specialNum:"+specialNum+" isHavNiu:"+isHavNiu;
+        System.out.println(log);
+        logger.info(log);
+
+        niuCard.setSpecialNum(specialNum);
+        niuCard.setNiuType(maxNiuType);
+        niuCard.setHavNiu(isHavNiu);
+        return niuCard;
     }
 
     private StaticNiuCard getNiuType(int target,int byteCard){
@@ -173,15 +218,20 @@ public class DouNiuManager {
         return null;
     }
 
+    /**
+     * 黑桃>红桃>梅花>方片
+     * @param color
+     * @return
+     */
     private int getValue(int color){
-        if(color == 1){
+        if(color == 1){//黑桃
             return 4;
-        }else if(color == 2){
-            return 3;
-        }else if(color == 3){
-            return 2;
-        }else if(color == 4){
+        }else if(color == 2){//方砖
             return 1;
+        }else if(color == 3){//梅花
+            return 2;
+        }else if(color == 4){//红条
+            return 3;
         }
         return 1;
     }
@@ -210,7 +260,6 @@ public class DouNiuManager {
             }
 
         }
-
 
         for(NiuType niuType: NiuType.values()){
             NiuTypeMap.put(niuType.getNiu(),niuType);
@@ -247,7 +296,8 @@ public class DouNiuManager {
     public final static class NiuCard{
         /** 权重值 */
         private int specialNum;
-        private NiuType niuType = NiuType.Null;
+        private NiuType niuType = NiuType.Null;//最大牌型
+        private boolean isHavNiu;//是否有牛
 
         public int getSpecialNum() {
             return specialNum;
@@ -264,42 +314,70 @@ public class DouNiuManager {
         public void setNiuType(NiuType niuType) {
             this.niuType = niuType;
         }
+
+        public boolean isHavNiu() {
+            return isHavNiu;
+        }
+
+        public void setHavNiu(boolean havNiu) {
+            isHavNiu = havNiu;
+        }
     }
 
     public enum NiuType{
-        Null(0,1),
-        Niu1(1,2),
-        Niu2(2,2),
-        Niu3(3,2),
-        Niu4(4,2),
-        Niu5(5,2),
-        Niu6(6,2),
-        Niu7(7,2),
-        Niu8(8,2),
+        Null(0,0,1,1),
+        Niu1(1,1,1,1),
+        Niu2(2,2,1,2),
+        Niu3(3,3,1,3),
+        Niu4(4,4,1,4),
+        Niu5(5,5,1,5),
+        Niu6(6,6,1,6),
+        Niu7(7,7,2,7),
+        Niu8(8,8,2,8),
+        Niu9(9,9,2,9),
         /**
-         * 金牛：五张十以上的花牌组成的“斗牛”
+         * 牛牛
          */
-        JinNiu(10,2),
+        NiuNiu(10,10,3,10),
         /**
-         * 银牛：十和十以上的花牌组成的“斗牛”
+         * 金牛(五花牛)：五张十以上的花牌组成的“斗牛”
          */
-        YinNiu(11,2),
+        JinNiu(11,15,5,19),
         /**
          * 五小：5张牌牌点总数小于或者等于10
          */
-        XiaoNiu(12,2),
+        XiaoNiu(12,14,5,18),
         /**
          * 炸弹
          */
-        BoomNiu(13,2),
-        NiuNiu(14,2),
+        BoomNiu(13,19,5,20),
+        /**
+         * 顺子
+         */
+        Link(14,11,5,15),
+        /**
+         * 同花
+         */
+        SameColor(15,12,5,16),
+        /**
+         * 葫芦
+         */
+        HuLu(16,13,5,17),
+        /**
+         * 同花顺
+         */
+        TongHuaShun(17,20,5,25)
         ;
 
         private final int niu;
+        private final int typeNum;//类型权重
         private final int rate;
-        NiuType(int niu,int rate){
+        private final int fKRate;//疯狂斗牛倍数
+        NiuType(int niu,int typeNum,int rate,int fKRate){
             this.niu = niu;
+            this.typeNum = typeNum;
             this.rate = rate;
+            this.fKRate = fKRate;
         }
 
         public static final NiuType getNiuType(int niu){
@@ -310,8 +388,22 @@ public class DouNiuManager {
             return niu;
         }
 
+        public int getfKRate() {
+            return fKRate;
+        }
+
+        public int getTypeNum() {
+            return typeNum;
+        }
+
         public int getRate() {
             return rate;
         }
+    }
+
+    public static void main(String[] args){
+        List<Integer> cars = new ArrayList<>();
+        Collections.addAll(cars,new Integer[]{113,106,111,111,106});
+        DouNiuManager.getInstance().getNiuCard(cars);
     }
 }
