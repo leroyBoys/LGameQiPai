@@ -38,16 +38,18 @@ public class DouNiuManager {
         Collections.sort(cards, new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
-                return o2-o1;
+                return o2%100-o1%100;
             }
         });
+
+        System.out.println("===cards:"+ JsonUtil.getJsonFromBean(cards));
 
         int byteCard = 0;
         int sum = 0;
         Map<Integer,Integer> map = new HashMap<>(5);//key:>=10 都为10--- value:num
         Map<Integer,Integer> realMap = new HashMap<>(5);
 
-        int specialNum = 0;
+        double specialNum = 0;
         int i = cards.size();
         int lastColor = 0;
         boolean isSameColor = true;
@@ -72,7 +74,7 @@ public class DouNiuManager {
                     lastColor = color;
                 }
             }
-            specialNum += i--*500+getValue(color)*100+cv;
+            specialNum += i--*500+((double)(getValue(color)+i*5)/100)+cv;
             int c = Math.min(10,cv);
             num = map.get(c);
             if(num == null){
@@ -131,12 +133,16 @@ public class DouNiuManager {
                 if(tenNums == cards.size() || (tenNums == 2 || tenNums == 3)){
                     niuTypes.add(NiuType.NiuNiu);
                     isHavNiu = true;
+                }else if(tenNums == 1){
+                    StaticNiuCard staticNiuCard = getNiuType(sumNum,byteCard);
+                    if(staticNiuCard != null){//牛
+                        niuTypes.add(NiuType.NiuNiu);
+                        isHavNiu = true;
+                    }
                 }
             }else {
                 StaticNiuCard staticNiuCard = getNiuType(sumNum,byteCard);
-                if(staticNiuCard == null){//无牛
-                    isHavNiu = false;
-                }else {
+                if(staticNiuCard != null){//牛
                     niuTypes.add(NiuType.NiuNiu);
                     isHavNiu = true;
                 }
@@ -295,15 +301,15 @@ public class DouNiuManager {
 
     public final static class NiuCard{
         /** 权重值 */
-        private int specialNum;
+        private double specialNum;
         private NiuType niuType = NiuType.Null;//最大牌型
         private boolean isHavNiu;//是否有牛
 
-        public int getSpecialNum() {
+        public double getSpecialNum() {
             return specialNum;
         }
 
-        public void setSpecialNum(int specialNum) {
+        public void setSpecialNum(double specialNum) {
             this.specialNum = specialNum;
         }
 
@@ -403,7 +409,13 @@ public class DouNiuManager {
 
     public static void main(String[] args){
         List<Integer> cars = new ArrayList<>();
-        Collections.addAll(cars,new Integer[]{113,106,111,111,106});
-        DouNiuManager.getInstance().getNiuCard(cars);
+        Collections.addAll(cars,new Integer[]{108, 402, 310, 405, 405});
+        NiuCard niuCard = DouNiuManager.getInstance().getNiuCard(cars);
+
+
+        List<Integer> cars2 = new ArrayList<>();
+        Collections.addAll(cars2,new Integer[]{108, 402, 310, 405, 405});
+        NiuCard niuCard2 = DouNiuManager.getInstance().getNiuCard(cars2);
+        System.out.println(niuCard.getSpecialNum() > niuCard2.getSpecialNum());
     }
 }
