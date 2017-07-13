@@ -48,6 +48,7 @@ public class DouNiuManager {
         int sum = 0;
         Map<Integer,Integer> map = new HashMap<>(5);//key:>=10 都为10--- value:num
         Map<Integer,Integer> realMap = new HashMap<>(5);
+        final Map<Integer,Integer> sortWeightMap = new HashMap<>(5);//数值--排序时候的权重值
 
         double specialNum = 0;
         int i = cards.size();
@@ -66,6 +67,7 @@ public class DouNiuManager {
                 num = 0;
             }
             realMap.put(cv,num+1);
+            sortWeightMap.put(cv,1);
 
             if(isSameColor){
                 if(lastColor != 0 && lastColor != color){
@@ -101,8 +103,20 @@ public class DouNiuManager {
 
             if(four != 0){
                 niuTypes.add(NiuType.BoomNiu);
+
+                for(Map.Entry<Integer,Integer> entry:realMap.entrySet()){
+                    if(entry.getValue() == 4){
+                        sortWeightMap.put(entry.getKey(),2);
+                    }
+                }
             }else {
                 niuTypes.add(NiuType.HuLu);
+
+                for(Map.Entry<Integer,Integer> entry:realMap.entrySet()){
+                    if(entry.getValue() == 3){
+                        sortWeightMap.put(entry.getKey(),2);
+                    }
+                }
             }
         }else if(realMap.size() == 5){
             if(max - min == 4){
@@ -123,6 +137,7 @@ public class DouNiuManager {
         }
 
         if(sumNum == 0){
+
             if(min > 10){//五花牛
                 niuTypes.add(NiuType.JinNiu);
                 isHavNiu = true;
@@ -133,11 +148,29 @@ public class DouNiuManager {
                 if(tenNums == cards.size() || (tenNums == 2 || tenNums == 3)){
                     niuTypes.add(NiuType.NiuNiu);
                     isHavNiu = true;
+
+                    if(tenNums == 2){
+                        for(Map.Entry<Integer,Integer> entry:realMap.entrySet()){
+                            if(entry.getKey() < 10){
+                                sortWeightMap.put(entry.getKey(),2);
+                            }
+                        }
+                    }else if(tenNums == 3){
+                        for(Map.Entry<Integer,Integer> entry:realMap.entrySet()){
+                            if(entry.getKey() >= 10){
+                                sortWeightMap.put(entry.getKey(),2);
+                            }
+                        }
+                    }
                 }else if(tenNums == 1){
                     StaticNiuCard staticNiuCard = getNiuType(sumNum,byteCard);
                     if(staticNiuCard != null){//牛
                         niuTypes.add(NiuType.NiuNiu);
                         isHavNiu = true;
+
+                        for(int card:staticNiuCard.getCards()){
+                            sortWeightMap.put(card,0);
+                        }
                     }
                 }
             }else {
@@ -145,32 +178,53 @@ public class DouNiuManager {
                 if(staticNiuCard != null){//牛
                     niuTypes.add(NiuType.NiuNiu);
                     isHavNiu = true;
+
+                    for(int card:staticNiuCard.getCards()){
+                        sortWeightMap.put(card,0);
+                    }
                 }
             }
-
         }else if(sumNum % 2 == 0){
-            Integer nums = map.get(sumNum/2);
+            int targetCard = sumNum/2;
+            Integer nums = map.get(targetCard);
             if(nums != null && nums >= 2){//有牛
                 isHavNiu = true;
+
+                for(Map.Entry<Integer,Integer> entry:realMap.entrySet()){
+                    if(entry.getKey() != targetCard){
+                        sortWeightMap.put(entry.getKey(),2);
+                    }
+                }
             }else{
-                nums = map.get((sumNum+10)/2);
+                targetCard = (sumNum+10)/2;
+                nums = map.get(targetCard);
                 if(nums != null && nums >= 2){//有牛
                     isHavNiu = true;
+
+                    for(Map.Entry<Integer,Integer> entry:realMap.entrySet()){
+                        if(entry.getKey() != targetCard){
+                            sortWeightMap.put(entry.getKey(),2);
+                        }
+                    }
                 }else {
                     StaticNiuCard staticNiuCard = getNiuType(sumNum,byteCard);
-                    if(staticNiuCard == null){//无牛
-                        isHavNiu = false;
-                    }else {
+                    if(staticNiuCard != null){//牛
                         isHavNiu = true;
+
+                        for(int card:staticNiuCard.getCards()){
+                            sortWeightMap.put(card,0);
+                        }
                     }
                 }
             }
         }else {
             StaticNiuCard staticNiuCard = getNiuType(sumNum,byteCard);
-            if(staticNiuCard == null){//无牛
-                isHavNiu = false;
-            }else {
+            if(staticNiuCard != null){//牛
                 isHavNiu = true;
+
+                for(int card:staticNiuCard.getCards()){
+                    sortWeightMap.put(card,0);
+                }
             }
         }
 
@@ -196,6 +250,15 @@ public class DouNiuManager {
             specialNum += speialWeight*10000;
 
             maxNiuType = niuTypes.getFirst();
+        }
+
+        if(isHavNiu){
+            Collections.sort(cards, new Comparator<Integer>() {
+                @Override
+                public int compare(Integer o1, Integer o2) {
+                    return sortWeightMap.get(Math.min(10,o2%100))-sortWeightMap.get(Math.min(10,o1%100));
+                }
+            });
         }
 
         String log = "cards:"+ JsonUtil.getJsonFromBean(cards)+" niuTypes:"+ JsonUtil.getJsonFromBean(niuTypes)+"  maxNiuType:"+maxNiuType+" specialNum:"+specialNum+" isHavNiu:"+isHavNiu;
@@ -409,13 +472,13 @@ public class DouNiuManager {
 
     public static void main(String[] args){
         List<Integer> cars = new ArrayList<>();
-        Collections.addAll(cars,new Integer[]{108, 402, 310, 405, 405});
+        Collections.addAll(cars,new Integer[]{111, 402, 401, 305, 107});
         NiuCard niuCard = DouNiuManager.getInstance().getNiuCard(cars);
 
-
+/*
         List<Integer> cars2 = new ArrayList<>();
         Collections.addAll(cars2,new Integer[]{108, 402, 310, 405, 405});
         NiuCard niuCard2 = DouNiuManager.getInstance().getNiuCard(cars2);
-        System.out.println(niuCard.getSpecialNum() > niuCard2.getSpecialNum());
+        System.out.println(niuCard.getSpecialNum() > niuCard2.getSpecialNum());*/
     }
 }
