@@ -5,7 +5,7 @@ import com.lsocket.codec.RequestDecoder;
 import com.lsocket.handler.CmdModule;
 import com.lsocket.manager.CMDManager;
 import com.lsocket.util.ReceiveData;
-import com.net.NetParent;
+import com.game.net.NetParent;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 
