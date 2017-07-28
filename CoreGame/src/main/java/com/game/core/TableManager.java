@@ -13,7 +13,8 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class TableManager implements Runnable,CheckOutStatus {
     private final static TableManager tableManager = new TableManager();
-    private Map<Integer,BaseTableVo> tableMap = new ConcurrentHashMap<>(10);
+    /** 当前的table内存映射tableId-table  */
+    private Map<Integer,BaseTableVo> tableMap = new ConcurrentHashMap<>(100);
 
     /**  table的守护线程检测  */
     private ConcurrentHashMap<Integer,Integer> tasks = new ConcurrentHashMap<>();
