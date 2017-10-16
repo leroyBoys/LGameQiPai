@@ -53,6 +53,8 @@ public class DouNiuManager {
         int max = 0;
         int min = 99;
 
+        Set<Integer> noSingleSet = new HashSet<>(2);
+
         boolean isHavA = false;//是否包含1（1不参与最大最小值）
         for(Integer card:cards){
             int cv = card%100;
@@ -86,6 +88,8 @@ public class DouNiuManager {
             num = map.get(c);
             if(num == null){
                 num = 0;
+            }else if(c < 10){
+                noSingleSet.add(c);
             }
             map.put(c,num+1);
 
@@ -158,17 +162,27 @@ public class DouNiuManager {
                     niuTypes.add(new NiuCard(NiuType.NiuNiu,0));
                     isHavNiu = true;
                 }else if(tenNums == 1){
+                    if(noSingleSet.contains(5)){
+                        niuTypes.add(new NiuCard(NiuType.NiuNiu,0));
+                        isHavNiu = true;
+                    }else {
+                        staticNiuCard = getNiuType(sumNum,byteCard);
+                        if(staticNiuCard != null){//牛
+                            niuTypes.add(new NiuCard(NiuType.NiuNiu,0));
+                            isHavNiu = true;
+                        }
+                    }
+                }
+            }else {
+                if(noSingleSet.contains(5)){
+                    niuTypes.add(new NiuCard(NiuType.NiuNiu,0));
+                    isHavNiu = true;
+                }else {
                     staticNiuCard = getNiuType(sumNum,byteCard);
                     if(staticNiuCard != null){//牛
                         niuTypes.add(new NiuCard(NiuType.NiuNiu,0));
                         isHavNiu = true;
                     }
-                }
-            }else {
-                staticNiuCard = getNiuType(sumNum,byteCard);
-                if(staticNiuCard != null){//牛
-                    niuTypes.add(new NiuCard(NiuType.NiuNiu,0));
-                    isHavNiu = true;
                 }
             }
         }else if(sumNum % 2 == 0){
